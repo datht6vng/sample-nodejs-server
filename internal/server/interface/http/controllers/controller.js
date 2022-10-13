@@ -1,5 +1,3 @@
-const Response = require("../entities/response");
-
 class Controller {
   constructor() {
     this.Success = this.Success.bind(this);

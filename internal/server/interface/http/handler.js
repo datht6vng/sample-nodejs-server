@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const healthController = require("./controllers/health_controller");
 const metricsController = require("./controllers/metrics_controller");
+const errorController = require("./controllers/error_controller");
 
 const healthSerivce = require("../../service/health_service");
 
@@ -13,6 +14,7 @@ class Handleler {
     // Controllers
     this.healthContronller = null;
     this.metricsController = null;
+    this.errorController = null;
   }
 
   // Middlewares
@@ -25,6 +27,7 @@ function NewHandler() {
     healthSerivce.NewHealthService()
   );
   h.metricsController = metricsController.NewMetricsController(null);
+  h.errorController = errorController.NewErrorController();
 
   h.app = express();
   h.app.use(
