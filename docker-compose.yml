@@ -1,0 +1,13 @@
+version: "3.98"
+services:
+  server:
+    image: node:alpine
+    volumes:
+      - .:/server
+    working_dir: /server
+
+    command: >
+      sh -c "node cmd/server/main.js"
+    restart: unless-stopped
+    ports:
+      - "8080:8080"

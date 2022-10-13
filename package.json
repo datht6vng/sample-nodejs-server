@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node cmd/server/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.6.0",
+    "fs": "^0.0.1-security",
+    "http-status": "^1.5.3",
+    "prom-client": "^14.1.0",
+    "toml": "^3.0.0"
+  }
+}
