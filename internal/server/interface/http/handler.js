@@ -2,6 +2,7 @@ const express = require("express");
 const limitter = require("express-rate-limit");
 const compression = require("compression");
 const helmet = require("helmet");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const healthController = require("./controllers/health_controller");
@@ -47,6 +48,9 @@ function NewHandler() {
       legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     })
   );
+  h.app.use(helmet());
+  h.app.use(bodyParser.json());
+  h.app.use(bodyParser.urlencoded({ extended: false }));
   h.app.use(
     compression({
       filter: function (req, res) {
@@ -60,7 +64,7 @@ function NewHandler() {
       },
     })
   );
-  h.app.use(helmet());
+
   return h;
 }
 
