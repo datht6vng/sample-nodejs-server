@@ -1,11 +1,12 @@
-FROM node:alpine as builder
+FROM node:alpine
 WORKDIR /service/app/server
+
 COPY . .
+COPY ./configs /configs
+
+
 RUN npm install
 
-FROM alpine
-ENV CONFIG_PATH="./configs/server.toml"
-WORKDIR /service/app/server
 RUN  apk add --no-cache bash \
         \
         && apk add --no-cache tzdata \
@@ -15,6 +16,7 @@ RUN  apk add --no-cache bash \
         && echo "Asia/Ho_Chi_Minh" > /etc/timezone
 
 RUN apk --no-cache add ca-certificates && apk --no-cache add curl
-COPY --from=builder /service/app/server/configs /configs
+
+ENV CONFIG_PATH="./configs/server.toml"
 
 CMD ["node", "cmd/server/main.js"]

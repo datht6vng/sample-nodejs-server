@@ -8,6 +8,8 @@ services:
 
     command: >
       sh -c "node cmd/server/main.js"
-    restart: unless-stopped
+
+    restart: always
+
     ports:
       - "8080:8080"
