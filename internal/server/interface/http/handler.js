@@ -11,7 +11,7 @@ const errorController = require("./controllers/error_controller");
 
 const healthSerivce = require("../../service/health_service");
 
-class Handleler {
+class Handler {
   constructor() {
     this.app = null; // HTTP App
     // Controllers
@@ -24,7 +24,7 @@ class Handleler {
 }
 
 function NewHandler() {
-  let h = new Handleler();
+  let h = new Handler();
 
   h.healthContronller = healthController.NewHealthController(
     healthSerivce.NewHealthService()
@@ -68,5 +68,5 @@ function NewHandler() {
   return h;
 }
 
-module.exports.Handleler = Handleler;
+module.exports.Handler = Handler;
 module.exports.NewHandler = NewHandler;
