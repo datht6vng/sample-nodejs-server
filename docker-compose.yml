@@ -1,15 +1,36 @@
 version: "3.98"
 services:
-  server:
-    image: node:alpine
-    volumes:
-      - .:/server
-    working_dir: /server
 
-    command: >
-      sh -c "node cmd/server/main.js"
-
-    restart: always
-
+  message-broker-server:
+    build:
+      context: message-broker-server
+      dockerfile: Dockerfile
+    container_name: 'rabbitmq'
     ports:
-      - "8080:8080"
+        - 5672:5672
+        - 15672:15672
+        - 1883:1883
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  node-api-server:
+    build:
+      context: node-api-server
+      dockerfile: Dockerfile
+    environment:
+      - BROKER_HOST=rabbitmq
+    volumes:
+      - ./node-api-server:/usr/app
+      - api_node_modules:/usr/app/node_modules
+    working_dir: /usr/app
+    command: >
+      sh -c "npm run dev"
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - message-broker-server
+
+volumes:
+  api_node_modules:

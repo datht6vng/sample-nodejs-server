@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  node_soup:
+    container_name: node_soup
+    build:
+      context: ./node
+    command: "npm run start"
+    volumes:
+      - ./src:/usr/code
+      - mediasoup_test:/usr/code/node_modules
+    ports:
+      - "8080:8080"
+      - "2000-2020:2000-2020"    
+volumes:
+  mediasoup_test:
