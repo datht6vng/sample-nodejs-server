@@ -1,15 +1,34 @@
 version: "3.98"
 services:
-  server:
-    image: node:alpine
+  # server:
+  #   image: node:alpine
+  #   volumes:
+  #     - ./node-api-server:/service/node-api-server
+  #   working_dir: /service/node-api-server
+  #   command: >
+  #     sh -c "node cmd/server/main.js"
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  
+  sfu:
+    image: golang:alpine
     volumes:
-      - ./node-api-server:/server
-    working_dir: /server
-
-    command: >
-      sh -c "node cmd/server/main.js"
-
+      - ./ion-sfu:/service/ion-sfu
+      - ./ion-sfu/config.toml:/configs/sfu.toml
+    working_dir: /service/ion-sfu
     restart: always
-
+    command: >
+      sh -c "go run ./cmd/signal/allrpc/main.go -c /configs/sfu.toml"
+    environment:
+      - gaddr=:50051
+      - jaddr=:7000
     ports:
-      - "8080:8080"
+      - 7000:7000
+      - 50051:50051
+      - 5000-5300:5000-5300/udp
+    networks:
+      - ionnet 
+
+networks:
+  ionnet:
