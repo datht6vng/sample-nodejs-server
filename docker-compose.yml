@@ -1,15 +1,15 @@
 version: "3.98"
 services:
-  # server:
-  #   image: node:alpine
-  #   volumes:
-  #     - ./node-api-server:/service/node-api-server
-  #   working_dir: /service/node-api-server
-  #   command: >
-  #     sh -c "node cmd/server/main.js"
-  #   restart: always
-  #   ports:
-  #     - "8080:8080"
+  server:
+    image: node:alpine
+    volumes:
+      - ./node-api-server:/service/node-api-server
+    working_dir: /service/node-api-server
+    command: >
+      sh -c "node cmd/server/main.js"
+    restart: always
+    ports:
+      - "8080:8080"
   
   sfu:
     image: golang:alpine
@@ -21,14 +21,21 @@ services:
     command: >
       sh -c "go run ./cmd/signal/allrpc/main.go -c /configs/sfu.toml"
     environment:
-      - gaddr=:50051
+      - gaddr=:5551
       - jaddr=:7000
     ports:
       - 7000:7000
-      - 50051:50051
+      - 5551:5551
       - 5000-5300:5000-5300/udp
     networks:
       - ionnet 
+    
+    gstreamer-sender:
+      build:
+        dockerfile: ../videocall-avp/Dockerfile.avp-local
+        context: .
+      environment:
+      - GST_DEBUG=1
 
 networks:
   ionnet:
