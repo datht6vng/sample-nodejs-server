@@ -3,7 +3,7 @@ services:
   server:
     image: node:alpine
     volumes:
-      - .:/server
+      - ./node-api-server:/server
     working_dir: /server
 
     command: >
