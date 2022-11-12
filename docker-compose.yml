@@ -30,12 +30,12 @@ services:
     networks:
       - ionnet 
     
-    gstreamer-sender:
-      build:
-        dockerfile: ../videocall-avp/Dockerfile.avp-local
-        context: .
-      environment:
-      - GST_DEBUG=1
+  # gstreamer-sender:
+  #   build:
+  #     dockerfile: ../videocall-avp/Dockerfile.avp-local
+  #     context: .
+  #   environment:
+  #   - GST_DEBUG=1
 
 networks:
   ionnet:
