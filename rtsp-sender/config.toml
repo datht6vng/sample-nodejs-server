@@ -1,0 +1,9 @@
+[sfu]
+sfu_address = "localhost:5551"
+
+[log]
+level = "info"
+filePath= "logs/rtsp-sender.log"
+maxSize=50
+maxBackups=10
+maxAge=28
