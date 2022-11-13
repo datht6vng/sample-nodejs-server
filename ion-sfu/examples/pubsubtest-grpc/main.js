@@ -54,7 +54,7 @@ const join = async () => {
             const remoteVideo = document.createElement("video");
             remoteVideo.srcObject = stream;
             remoteVideo.autoplay = true;
-            remoteVideo.muted = true;
+            remoteVideo.muted = false;
             remoteVideo.addEventListener("loadedmetadata", function () {
               sizeTag.innerHTML = `${remoteVideo.videoWidth}x${remoteVideo.videoHeight}`;
             });

@@ -91,3 +91,29 @@
 2022-11-13T21:12:56.803  INFO rtsp-sender [gKgh] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00068a600 0xc0003958c8 <nil>} 
 2022-11-13T21:12:57.049  INFO rtsp-sender gather candidate done 
 2022-11-13T21:12:57.117  INFO rtsp-sender Connection state changed: connected 
+2022-11-13T21:14:49.707  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-13T21:14:49.709  INFO rtsp-sender [C=>S] sid=ion uid=PquX 
+2022-11-13T21:14:49.741  INFO rtsp-sender [C=>S] [PquX] sid=ion 
+2022-11-13T21:14:49.760 ERROR rtsp-sender id=PquX err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2022-11-13T21:14:49.811  INFO rtsp-sender [PquX] [join] success 
+2022-11-13T21:14:49.812  INFO rtsp-sender Connection state changed: checking 
+2022-11-13T21:14:49.812  INFO rtsp-sender [PquX] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00010d120 0xc0006aabb0 <nil>} 
+2022-11-13T21:14:49.817 ERROR rtsp-sender id=PquX err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T21:14:49.817 ERROR rtsp-sender [PquX] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T21:14:49.993  INFO rtsp-sender gather candidate done 
+2022-11-13T21:14:50.084  INFO rtsp-sender [PquX] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000350940 0xc000486f08 <nil>} 
+2022-11-13T21:14:50.333  INFO rtsp-sender gather candidate done 
+2022-11-13T21:14:50.399  INFO rtsp-sender Connection state changed: connected 
+2022-11-13T21:58:48.075  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-13T21:58:48.077  INFO rtsp-sender [C=>S] sid=ion uid=HL9e 
+2022-11-13T21:58:48.116  INFO rtsp-sender [C=>S] [HL9e] sid=ion 
+2022-11-13T21:58:48.141 ERROR rtsp-sender id=HL9e err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2022-11-13T21:58:48.216  INFO rtsp-sender [HL9e] [join] success 
+2022-11-13T21:58:48.216  INFO rtsp-sender Connection state changed: checking 
+2022-11-13T21:58:48.217  INFO rtsp-sender [HL9e] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000354b70 0xc000580490 <nil>} 
+2022-11-13T21:58:48.222 ERROR rtsp-sender id=HL9e err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T21:58:48.222 ERROR rtsp-sender [HL9e] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T21:58:48.478  INFO rtsp-sender [HL9e] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00007f230 0xc0001c6638 <nil>} 
+2022-11-13T21:58:48.479  INFO rtsp-sender gather candidate done 
+2022-11-13T21:58:48.815  INFO rtsp-sender gather candidate done 
+2022-11-13T21:58:48.903  INFO rtsp-sender Connection state changed: connected 

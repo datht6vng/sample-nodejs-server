@@ -11,6 +11,7 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/improbable-eng/grpc-web v0.14.1
+	github.com/kr/text v0.2.0 // indirect
 	github.com/lucsky/cuid v1.2.1
 	github.com/pion/dtls/v2 v2.1.3
 	github.com/pion/ice/v2 v2.2.2
@@ -31,4 +32,5 @@ require (
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	google.golang.org/grpc v1.41.0
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
