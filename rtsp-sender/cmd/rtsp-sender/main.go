@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/client"
+	client "github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp-sender"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
 )

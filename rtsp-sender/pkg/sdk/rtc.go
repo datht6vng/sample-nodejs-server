@@ -362,7 +362,7 @@ func (r *RTC) trickle(candidate webrtc.ICECandidateInit, target Target) {
 
 // negotiate sub negotiate
 func (r *RTC) negotiate(sdp webrtc.SessionDescription) error {
-	//log.Debugf("[S=>C] id=%v Negotiate sdp=%v", r.uid, sdp)
+	log.Debugf("[S=>C] id=%v Negotiate sdp=%v", r.uid, sdp)
 	// 1.sub set remote sdp
 	err := r.sub.pc.SetRemoteDescription(sdp)
 	if err != nil {
@@ -373,7 +373,7 @@ func (r *RTC) negotiate(sdp webrtc.SessionDescription) error {
 	// 2. safe to send candiate to sfu after join ok
 	if len(r.sub.SendCandidates) > 0 {
 		for _, cand := range r.sub.SendCandidates {
-			log.Debugf("[C=>S] id=%v send sub.SendCandidates r.uid, r.rtc.trickle cand=%v", r.uid, cand)
+			log.Infof("[C=>S] id=%v send sub.SendCandidates r.uid, r.rtc.trickle cand=%v", r.uid, cand)
 			r.SendTrickle(cand, Target_SUBSCRIBER)
 		}
 		r.sub.SendCandidates = []*webrtc.ICECandidate{}

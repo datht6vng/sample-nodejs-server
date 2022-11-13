@@ -22,10 +22,10 @@ const (
 
 var (
 	videoRTCPFeedback = []webrtc.RTCPFeedback{
-		{Type: webrtc.TypeRTCPFBGoogREMB, Parameter: ""},
-		{Type: webrtc.TypeRTCPFBCCM, Parameter: "fir"},
-		{Type: webrtc.TypeRTCPFBNACK, Parameter: ""},
-		{Type: webrtc.TypeRTCPFBNACK, Parameter: "pli"},
+		// {Type: webrtc.TypeRTCPFBGoogREMB, Parameter: ""},
+		// {Type: webrtc.TypeRTCPFBCCM, Parameter: "fir"},
+		// {Type: webrtc.TypeRTCPFBNACK, Parameter: ""},
+		// {Type: webrtc.TypeRTCPFBNACK, Parameter: "pli"},
 	}
 	videoRTPCodecParameters = []webrtc.RTPCodecParameters{
 		{
