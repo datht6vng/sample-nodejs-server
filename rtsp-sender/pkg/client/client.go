@@ -2,7 +2,7 @@ package client
 
 import (
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
-	sdk "github.com/pion/ion-sdk-go"
+	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
 	"github.com/pion/webrtc/v3"
 )
 
@@ -20,6 +20,7 @@ func NewClient(sfuAddress, sessionName string) *Client {
 	return &Client{sfuAddress: sfuAddress, sessionName: sessionName}
 }
 func (c *Client) Connect() error {
+	var err error
 	config := sdk.RTCConfig{
 		WebRTC: sdk.WebRTCTransportConfig{
 			VideoMime: sdk.MimeTypeH264, // Fuck this! use sdk.MimeTypeH264 = "video/h264" because webrtc.MimeTypeH264 = "video/H264"
@@ -33,7 +34,10 @@ func (c *Client) Connect() error {
 		},
 	}
 	c.connector = sdk.NewConnector(c.sfuAddress)
-	c.rtc = sdk.NewRTC(c.connector, config)
+
+	if c.rtc, err = sdk.NewRTC(c.connector, config); err != nil {
+		return err
+	}
 
 	if err := c.rtc.Join(c.sessionName, sdk.RandomKey(4)); err != nil {
 		return err
@@ -61,3 +65,5 @@ func (c *Client) Connect() error {
 	_, _ = c.rtc.Publish(c.videoTrack, c.audioTrack)
 	return nil
 }
+
+func (c *Client) startSenderLoop() {}

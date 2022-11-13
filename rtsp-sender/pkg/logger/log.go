@@ -115,6 +115,7 @@ func Init(level string, prefix string, sentryDsn string) {
 		FullTimestamp:   true,
 		TimestampFormat: timeFormat,
 		ForceFormatting: true,
+		colorScheme:     defaultCompiledColorScheme,
 	})
 
 	if sentryDsn != "" {
@@ -152,6 +153,7 @@ func InitFileLogger(prefix string, conf LogConf, sentryDsn string) {
 		FullTimestamp:   true,
 		TimestampFormat: timeFormat,
 		ForceFormatting: true,
+		colorScheme:     defaultCompiledColorScheme,
 	})
 
 	// file, e := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
@@ -243,6 +245,7 @@ func NewLoggerWithConfig(level Level, conf LogConf, prefix string) *logrus.Logge
 		FullTimestamp:   true,
 		TimestampFormat: timeFormat,
 		ForceFormatting: true,
+		colorScheme:     defaultCompiledColorScheme,
 	})
 
 	loggers[prefix] = &MyLogger{

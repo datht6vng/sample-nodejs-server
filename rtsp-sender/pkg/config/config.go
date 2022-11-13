@@ -6,11 +6,18 @@ import (
 )
 
 type AppConfig struct {
-	SFUConfig *SFUConfig      `mapstructure:"sfu"`
-	LogConfig *logger.LogConf `mapstructure:"log"`
+	SFUConfig     *SFUConfig      `mapstructure:"sfu"`
+	LogConfig     *logger.LogConf `mapstructure:"log"`
+	NetworkConfig *NetworkConfig  `mapstructure:"network"`
 }
 type SFUConfig struct {
 	SFUAddres string `mapstructure:"sfu_address"`
+}
+
+type NetworkConfig struct {
+	MaxBitrate   int `mapstructure:"max_bitrate"`
+	MinBitrate   int `mapstructure:"min_bitrate"`
+	TWCCInterval int `mapstructure:"twcc_interval"`
 }
 
 var (
