@@ -23,7 +23,6 @@ func (c *Client) Connect() error {
 	var err error
 	config := sdk.RTCConfig{
 		WebRTC: sdk.WebRTCTransportConfig{
-			VideoMime: sdk.MimeTypeH264, // Fuck this! use sdk.MimeTypeH264 = "video/h264" because webrtc.MimeTypeH264 = "video/H264"
 			Configuration: webrtc.Configuration{
 				ICEServers: []webrtc.ICEServer{
 					{
@@ -45,25 +44,45 @@ func (c *Client) Connect() error {
 	c.rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
 		logger.Infof("Connection state changed: %v", state)
 	})
+	c.rtc.OnTrack = func(track *webrtc.TrackRemote, receiver *webrtc.RTPReceiver) {
+		// go func() {
+		// 	for {
+		// 		_, _, _ = track.ReadRTP()
+		// 	}
+		// }()
 
-	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: sdk.MimeTypeH264}, "video", "TEST_STREAM")
-	if err != nil {
-		return err
+		// Always Read RTCP to ensure interceptor do their job
+		go func() {
+			for {
+				_, _, _ = receiver.ReadRTCP()
+			}
+		}()
 	}
+	// videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: sdk.MimeTypeH264}, "video", "TEST_STREAM")
+	// if err != nil {
+	// 	return err
+	// }
 
-	audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: sdk.MimeTypeH264}, "audio", "TEST_STREAM")
-	if err != nil {
-		return err
-	}
+	// audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: sdk.MimeTypeH264}, "audio", "TEST_STREAM")
+	// if err != nil {
+	// 	return err
+	// }
 
-	c.videoTrack = videoTrack
-	c.audioTrack = audioTrack
+	// c.videoTrack = videoTrack
+	// c.audioTrack = audioTrack
 
-	if err != nil {
-		return err
-	}
-	_, _ = c.rtc.Publish(c.videoTrack, c.audioTrack)
+	// if err != nil {
+	// 	return err
+	// }
+	// _, _ = c.rtc.Publish(c.videoTrack, c.audioTrack)
+	c.rtc.PublishFile("./a.webm", true, true)
 	return nil
 }
 
-func (c *Client) startSenderLoop() {}
+// func (c *Client) startSenderLoop() {
+// 	ticker := time.NewTicker(100 * time.Millisecond)
+// 	for range ticker.C {
+// 		c.videoTrack.WriteSample(media.Sample{})
+// 		c.audioTrack.WriteSample(media.Sample{})
+// 	}
+// }

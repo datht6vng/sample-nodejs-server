@@ -1,39 +1,13 @@
-2022-11-13T13:27:58.103  INFO rtsp-sender gRPC connected: localhost:5551 
-2022-11-13T13:27:58.105  INFO rtsp-sender [C=>S] sid=ion uid=jPIF 
-2022-11-13T13:27:58.131  INFO rtsp-sender [C=>S] [jPIF] sid=ion 
-2022-11-13T13:27:58.135 ERROR rtsp-sender id=jPIF err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
-2022-11-13T13:27:58.149  INFO rtsp-sender [jPIF] [join] success 
-2022-11-13T13:27:58.150  INFO rtsp-sender Connection state changed: checking 
-2022-11-13T13:27:58.150  INFO rtsp-sender [jPIF] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000420630 0xc000037390 <nil>} 
-2022-11-13T13:27:58.151 ERROR rtsp-sender id=jPIF err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
-2022-11-13T13:27:58.151 ERROR rtsp-sender [jPIF] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
-2022-11-13T13:27:58.410  INFO rtsp-sender gather candidate done 
-2022-11-13T13:27:58.422  INFO rtsp-sender [jPIF] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000420cd0 0xc0005922e8 <nil>} 
-2022-11-13T13:27:58.700  INFO rtsp-sender gather candidate done 
-2022-11-13T13:27:58.826  INFO rtsp-sender Connection state changed: connected 
-2022-11-13T13:28:47.817  INFO rtsp-sender gRPC connected: localhost:5551 
-2022-11-13T13:28:47.818  INFO rtsp-sender [C=>S] sid=ion uid=yw30 
-2022-11-13T13:28:47.842  INFO rtsp-sender [C=>S] [yw30] sid=ion 
-2022-11-13T13:28:47.844 ERROR rtsp-sender id=yw30 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
-2022-11-13T13:28:47.868  INFO rtsp-sender [yw30] [join] success 
-2022-11-13T13:28:47.868  INFO rtsp-sender Connection state changed: checking 
-2022-11-13T13:28:47.868  INFO rtsp-sender [yw30] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc0004829e0 0xc000788468 <nil>} 
-2022-11-13T13:28:47.869 ERROR rtsp-sender id=yw30 err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
-2022-11-13T13:28:47.870 ERROR rtsp-sender [yw30] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
-2022-11-13T13:28:48.094  INFO rtsp-sender gather candidate done 
-2022-11-13T13:28:48.142  INFO rtsp-sender [yw30] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000483540 0xc000789038 <nil>} 
-2022-11-13T13:28:48.415  INFO rtsp-sender gather candidate done 
-2022-11-13T13:28:48.514  INFO rtsp-sender Connection state changed: connected 
-2022-11-13T13:30:21.582  INFO rtsp-sender gRPC connected: localhost:5551 
-2022-11-13T13:30:21.583  INFO rtsp-sender [C=>S] sid=ion uid=rVw9 
-2022-11-13T13:30:21.607  INFO rtsp-sender [C=>S] [rVw9] sid=ion 
-2022-11-13T13:30:21.611 ERROR rtsp-sender id=rVw9 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
-2022-11-13T13:30:21.630  INFO rtsp-sender [rVw9] [join] success 
-2022-11-13T13:30:21.631  INFO rtsp-sender Connection state changed: checking 
-2022-11-13T13:30:21.631  INFO rtsp-sender [rVw9] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000689580 0xc00050b360 <nil>} 
-2022-11-13T13:30:21.634 ERROR rtsp-sender id=rVw9 err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
-2022-11-13T13:30:21.634 ERROR rtsp-sender [rVw9] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
-2022-11-13T13:30:21.865  INFO rtsp-sender gather candidate done 
-2022-11-13T13:30:21.902  INFO rtsp-sender [rVw9] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00010c8c0 0xc00038ed68 <nil>} 
-2022-11-13T13:30:22.181  INFO rtsp-sender gather candidate done 
-2022-11-13T13:30:22.281  INFO rtsp-sender Connection state changed: connected 
+2022-11-13T20:46:15.833  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-13T20:46:15.835  INFO rtsp-sender [C=>S] sid=ion uid=Z3Se 
+2022-11-13T20:46:15.858  INFO rtsp-sender [C=>S] [Z3Se] sid=ion 
+2022-11-13T20:46:15.877 ERROR rtsp-sender id=Z3Se err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2022-11-13T20:46:15.910  INFO rtsp-sender [Z3Se] [join] success 
+2022-11-13T20:46:15.910  INFO rtsp-sender Connection state changed: checking 
+2022-11-13T20:46:15.910  INFO rtsp-sender [Z3Se] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00038c860 0xc000036960 <nil>} 
+2022-11-13T20:46:15.913 ERROR rtsp-sender id=Z3Se err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T20:46:15.913 ERROR rtsp-sender [Z3Se] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T20:46:16.142  INFO rtsp-sender gather candidate done 
+2022-11-13T20:46:16.202  INFO rtsp-sender [Z3Se] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000608260 0xc00029ad98 <nil>} 
+2022-11-13T20:46:16.458  INFO rtsp-sender gather candidate done 
+2022-11-13T20:46:16.556  INFO rtsp-sender Connection state changed: connected 

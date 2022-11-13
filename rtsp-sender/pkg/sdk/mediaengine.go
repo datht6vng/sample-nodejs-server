@@ -29,7 +29,7 @@ var (
 	}
 	videoRTPCodecParameters = []webrtc.RTPCodecParameters{
 		{
-			RTPCodecCapability: webrtc.RTPCodecCapability{MimeType: MimeTypeVP8, ClockRate: 90000, RTCPFeedback: videoRTCPFeedback},
+			RTPCodecCapability: webrtc.RTPCodecCapability{MimeType: MimeTypeVP8, ClockRate: 90000, RTCPFeedback: nil},
 			PayloadType:        96,
 		},
 		{
@@ -93,7 +93,6 @@ func getPublisherMediaEngine(mime string) (*webrtc.MediaEngine, error) {
 	for _, extension := range []string{
 		sdp.SDESMidURI,
 		sdp.SDESRTPStreamIDURI,
-		sdp.TransportCCURI,
 		frameMarking,
 	} {
 		if err := me.RegisterHeaderExtension(webrtc.RTPHeaderExtensionCapability{URI: extension}, webrtc.RTPCodecTypeVideo); err != nil {
@@ -120,24 +119,8 @@ func getSubscriberMediaEngine() (*webrtc.MediaEngine, error) {
 }
 func ConfigureREMB(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interceptor.Registry, networkConfig config.NetworkConfig) error {
 	// NOT CONTROL REMB
-
-	// var maxBitrate, minBitrate float32
-	// if networkConfig.MaxBitrate == 0 {
-	// 	maxBitrate = 10 * 1000 * 1000
-	// } else {
-	// 	maxBitrate = float32(networkConfig.MaxBitrate * 1000)
-	// }
-	// minBitrate = 100 * 1000
 	mediaEngine.RegisterFeedback(webrtc.RTCPFeedback{Type: webrtc.TypeRTCPFBGoogREMB}, webrtc.RTPCodecTypeVideo)
 	mediaEngine.RegisterFeedback(webrtc.RTCPFeedback{Type: webrtc.TypeRTCPFBGoogREMB}, webrtc.RTPCodecTypeAudio)
-	// rembInterceptor, err := remb.NewREMBInterceptor(
-	// 	remb.MaxBitrate(maxBitrate),
-	// 	remb.MinBitrate(minBitrate),
-	// )
-	// if err != nil {
-	// 	return err
-	// }
-	// interceptorRegistry.Add(rembInterceptor)
 	return nil
 }
 
@@ -165,7 +148,6 @@ func ConfigureTWCC(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interce
 	if err != nil {
 		return err
 	}
-
 	interceptorRegistry.Add(sender)
 	interceptorRegistry.Add(extension)
 	return nil
@@ -182,7 +164,7 @@ func ConfigureGoogleCongestionControl(mediaEngine *webrtc.MediaEngine, intercept
 	gccInterceptor, err := cc.NewInterceptor(func() (cc.BandwidthEstimator, error) {
 		return gcc.NewSendSideBWE(
 			gcc.SendSideBWEInitialBitrate(maxBitrate),
-			gcc.SendSideBWEMaxBitrate(maxBitrate*3/2),
+			gcc.SendSideBWEMaxBitrate(maxBitrate),
 			gcc.SendSideBWEMinBitrate(minBitrate),
 			gcc.SendSideBWEPacer(gcc.NewLeakyBucketPacer((maxBitrate+minBitrate)/2)), // Send engine
 		)
@@ -200,18 +182,18 @@ func RegisterInterceptors(mediaEngine *webrtc.MediaEngine, interceptorRegistry *
 	// 	return err
 	// }
 
+	// GCC - This Congestion Control is not completed - Use later
+	if err := ConfigureGoogleCongestionControl(mediaEngine, interceptorRegistry, networkConfig); err != nil {
+		return err
+	}
+
 	// REMB
 	if err := ConfigureREMB(mediaEngine, interceptorRegistry, networkConfig); err != nil {
 		return err
 	}
 
-	// TWCC
+	// // TWCC
 	if err := ConfigureTWCC(mediaEngine, interceptorRegistry, networkConfig); err != nil {
-		return err
-	}
-
-	// GCC - This Congestion Control is not completed - Use later
-	if err := ConfigureGoogleCongestionControl(mediaEngine, interceptorRegistry, networkConfig); err != nil {
 		return err
 	}
 
