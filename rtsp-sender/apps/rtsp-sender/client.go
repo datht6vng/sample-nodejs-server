@@ -44,20 +44,6 @@ func (c *Client) Connect() error {
 	c.rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
 		logger.Infof("Connection state changed: %v", state)
 	})
-	c.rtc.OnTrack = func(track *webrtc.TrackRemote, receiver *webrtc.RTPReceiver) {
-		// go func() {
-		// 	for {
-		// 		_, _, _ = track.ReadRTP()
-		// 	}
-		// }()
-
-		// Always Read RTCP to ensure interceptor do their job
-		go func() {
-			for {
-				_, _, _ = receiver.ReadRTCP()
-			}
-		}()
-	}
 	// videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: sdk.MimeTypeH264}, "video", "TEST_STREAM")
 	// if err != nil {
 	// 	return err

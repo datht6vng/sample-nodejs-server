@@ -496,11 +496,16 @@ func (r *RTC) PublishFile(file string, video, audio bool) error {
 			log.Debugf("error: %v", err)
 			return err
 		}
-		_, err = r.pub.pc.AddTrack(videoTrack)
+		rtcpReader, err := r.pub.pc.AddTrack(videoTrack)
 		if err != nil {
 			log.Debugf("error: %v", err)
 			return err
 		}
+		go func() {
+			for {
+				_, _, _ = rtcpReader.ReadRTCP()
+			}
+		}()
 	}
 	if audio {
 		audioTrack, err := r.producer.GetAudioTrack()
@@ -508,11 +513,16 @@ func (r *RTC) PublishFile(file string, video, audio bool) error {
 			log.Debugf("error: %v", err)
 			return err
 		}
-		_, err = r.pub.pc.AddTrack(audioTrack)
+		rtcpReader, err := r.pub.pc.AddTrack(audioTrack)
 		if err != nil {
 			log.Debugf("error: %v", err)
 			return err
 		}
+		go func() {
+			for {
+				_, _, _ = rtcpReader.ReadRTCP()
+			}
+		}()
 	}
 	r.producer.Start()
 	//trigger by hand
