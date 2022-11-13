@@ -503,7 +503,9 @@ func (r *RTC) PublishFile(file string, video, audio bool) error {
 		}
 		go func() {
 			for {
-				_, _, _ = rtcpReader.ReadRTCP()
+				if _, _, err = rtcpReader.ReadRTCP(); err != nil {
+					return
+				}
 			}
 		}()
 	}
@@ -520,7 +522,9 @@ func (r *RTC) PublishFile(file string, video, audio bool) error {
 		}
 		go func() {
 			for {
-				_, _, _ = rtcpReader.ReadRTCP()
+				if _, _, err = rtcpReader.ReadRTCP(); err != nil {
+					return
+				}
 			}
 		}()
 	}

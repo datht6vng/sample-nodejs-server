@@ -154,13 +154,17 @@ func ConfigureTWCC(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interce
 }
 
 func ConfigureGoogleCongestionControl(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interceptor.Registry, networkConfig config.NetworkConfig) error {
-	var maxBitrate int
+	var maxBitrate, minBitrate int
 	if networkConfig.MaxBitrate == 0 {
 		maxBitrate = 500 * 1000
 	} else {
 		maxBitrate = networkConfig.MaxBitrate * 1000
 	}
-	minBitrate := 100 * 1000
+	if networkConfig.MinBitrate == 0 {
+		minBitrate = 50 * 1000
+	} else {
+		minBitrate = networkConfig.MinBitrate * 1000
+	}
 	gccInterceptor, err := cc.NewInterceptor(func() (cc.BandwidthEstimator, error) {
 		return gcc.NewSendSideBWE(
 			gcc.SendSideBWEInitialBitrate(maxBitrate),

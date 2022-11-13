@@ -117,3 +117,17 @@
 2022-11-13T21:58:48.479  INFO rtsp-sender gather candidate done 
 2022-11-13T21:58:48.815  INFO rtsp-sender gather candidate done 
 2022-11-13T21:58:48.903  INFO rtsp-sender Connection state changed: connected 
+2022-11-13T23:46:39.222  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-13T23:46:39.226  INFO rtsp-sender [C=>S] sid=ion uid=88wL 
+2022-11-13T23:46:39.324  INFO rtsp-sender [C=>S] [88wL] sid=ion 
+2022-11-13T23:46:39.414 ERROR rtsp-sender id=88wL err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2022-11-13T23:46:39.524  INFO rtsp-sender [88wL] [join] success 
+2022-11-13T23:46:39.524  INFO rtsp-sender Connection state changed: checking 
+2022-11-13T23:46:39.524  INFO rtsp-sender [88wL] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000484840 0xc00048c710 <nil>} 
+2022-11-13T23:46:39.533 ERROR rtsp-sender id=88wL err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T23:46:39.534 ERROR rtsp-sender [88wL] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2022-11-13T23:46:39.586  INFO rtsp-sender gather candidate done 
+2022-11-13T23:46:39.818  INFO rtsp-sender [88wL] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000112700 0xc0001147f8 <nil>} 
+2022-11-13T23:46:40.065  INFO rtsp-sender gather candidate done 
+2022-11-13T23:46:40.227  INFO rtsp-sender Connection state changed: connected 
+2022-11-13T23:46:48.191 ERROR rtsp-sender [88wL] Error receiving RTC response: rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:52904->[::1]:5551: wsarecv: An existing connection was forcibly closed by the remote host. 
