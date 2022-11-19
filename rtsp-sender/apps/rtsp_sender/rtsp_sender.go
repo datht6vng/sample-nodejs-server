@@ -25,8 +25,7 @@ func NewRTSPSender() (*RTSPSender, error) {
 
 func (r *RTSPSender) Start() error {
 	// Test code
-	r.AddClient("ABC")
-	r.AddClient("XYZ")
+	r.AddClient("rtsp://171.25.232.136/5090ea43a82340e0b6ee75a5c41e08c4")
 	// =================
 	return nil
 }
@@ -40,9 +39,9 @@ func (r *RTSPSender) AddClient(url string) error {
 		return nil
 	}
 
-	client := NewClient(url, config.Config.SFUConfig.SFUAddres, "ion")
+	client := NewClient(url, config.Config.SFUConfig.SFUAddres, "ion", true)
 	if err := client.Connect(); err != nil {
-		logger.Errorf("Error sfu connect: %v", err)
+		logger.Errorf("Error when new client: %v", err)
 		return err
 	}
 	// =================
@@ -53,6 +52,7 @@ func (r *RTSPSender) AddClient(url string) error {
 func (r *RTSPSender) GetClient(url string) (*Client, error) {
 	r.rtspSenderLock.RLock()
 	defer r.rtspSenderLock.RUnlock()
+
 	if client, ok := r.clients[url]; ok {
 		return client, nil
 	}

@@ -95,3 +95,61 @@
 2022-11-19T21:46:32.359  INFO rtsp-sender Restart media 
 2022-11-19T21:48:49.456  INFO rtsp-sender interrupt 
 2022-11-19T21:48:49.456  INFO rtsp-sender Exiting 
+2022-11-19T23:11:56.809  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-19T23:11:56.811  INFO rtsp-sender [C=>S] sid=ion uid=qVqH 
+2022-11-19T23:11:56.832  INFO rtsp-sender [C=>S] [qVqH] sid=ion 
+2022-11-19T23:11:56.891  INFO rtsp-sender [qVqH] [join] success 
+2022-11-19T23:11:56.891  INFO rtsp-sender Connection state changed: checking 
+2022-11-19T23:11:56.891  INFO rtsp-sender [qVqH] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00030da80 0xc00029aa90 <nil>} 
+2022-11-19T23:11:57.157  INFO rtsp-sender [qVqH] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000114030 0xc000116058 <nil>} 
+2022-11-19T23:11:57.538  INFO rtsp-sender Connection state changed: connected 
+2022-11-19T23:13:03.591  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-19T23:13:03.593  INFO rtsp-sender [C=>S] sid=ion uid=ksZR 
+2022-11-19T23:13:03.618  INFO rtsp-sender [C=>S] [ksZR] sid=ion 
+2022-11-19T23:13:03.676  INFO rtsp-sender [ksZR] [join] success 
+2022-11-19T23:13:03.676  INFO rtsp-sender Connection state changed: checking 
+2022-11-19T23:13:03.676  INFO rtsp-sender [ksZR] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc0004ee840 0xc000374440 <nil>} 
+2022-11-19T23:13:03.948  INFO rtsp-sender [ksZR] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000114630 0xc000382488 <nil>} 
+2022-11-19T23:13:04.289  INFO rtsp-sender Connection state changed: connected 
+2022-11-19T23:13:05.673 ERROR rtsp-sender Cannot connect to RTSP Client: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:05.674 ERROR rtsp-sender Error sfu connect: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:05.676  INFO rtsp-sender gRPC connected: localhost:5551 
+2022-11-19T23:13:05.677  INFO rtsp-sender [C=>S] sid=ion uid=l0l3 
+2022-11-19T23:13:05.706  INFO rtsp-sender [C=>S] [l0l3] sid=ion 
+2022-11-19T23:13:05.769  INFO rtsp-sender [l0l3] [join] success 
+2022-11-19T23:13:05.769  INFO rtsp-sender Connection state changed: checking 
+2022-11-19T23:13:05.769  INFO rtsp-sender [l0l3] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00078db50 0xc000414760 <nil>} 
+2022-11-19T23:13:06.032  INFO rtsp-sender [l0l3] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000598170 0xc000374038 <nil>} 
+2022-11-19T23:13:06.373  INFO rtsp-sender Connection state changed: connected 
+2022-11-19T23:13:07.758 ERROR rtsp-sender Cannot connect to RTSP Client: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:07.759 ERROR rtsp-sender Error sfu connect: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:07.759  INFO rtsp-sender Server Start Awaiting Signal 
+2022-11-19T23:13:08.629  INFO rtsp-sender gather candidate done 
+2022-11-19T23:13:08.952  INFO rtsp-sender gather candidate done 
+2022-11-19T23:13:10.711  INFO rtsp-sender gather candidate done 
+2022-11-19T23:13:11.038  INFO rtsp-sender gather candidate done 
+2022-11-19T23:13:39.337  INFO rtsp-sender interrupt 
+2022-11-19T23:13:39.337  INFO rtsp-sender Exiting 
+2022-11-19T23:13:45.014 ERROR rtsp-sender Cannot connect to RTSP Client: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:45.016 ERROR rtsp-sender Error sfu connect: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:47.073 ERROR rtsp-sender Cannot connect to RTSP Client: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:47.074 ERROR rtsp-sender Error sfu connect: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:13:47.074  INFO rtsp-sender Server Start Awaiting Signal 
+2022-11-19T23:13:57.674  INFO rtsp-sender interrupt 
+2022-11-19T23:13:57.674  INFO rtsp-sender Exiting 
+2022-11-19T23:14:13.961 ERROR rtsp-sender Cannot connect to RTSP Client: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:14:13.963 ERROR rtsp-sender Error sfu connect: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:14:15.982 ERROR rtsp-sender Cannot connect to RTSP Client: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:14:15.982 ERROR rtsp-sender Error sfu connect: dial tcp :554: connectex: No connection could be made because the target machine actively refused it. 
+2022-11-19T23:14:15.982  INFO rtsp-sender Server Start Awaiting Signal 
+2022-11-19T23:14:24.433  INFO rtsp-sender interrupt 
+2022-11-19T23:14:24.433  INFO rtsp-sender Exiting 
+2022-11-19T23:14:53.864 ERROR rtsp-sender Cannot connect to RTSP Client: Camera send statusRTSP/1.0 404 Not Found 
+2022-11-19T23:14:53.866 ERROR rtsp-sender Error sfu connect: Camera send statusRTSP/1.0 404 Not Found 
+2022-11-19T23:14:53.866  INFO rtsp-sender Server Start Awaiting Signal 
+2022-11-19T23:15:31.573  INFO rtsp-sender interrupt 
+2022-11-19T23:15:31.573  INFO rtsp-sender Exiting 
+2022-11-19T23:15:36.592 ERROR rtsp-sender Error when new client: Camera send statusRTSP/1.0 404 Not Found 
+2022-11-19T23:15:36.594  INFO rtsp-sender Server Start Awaiting Signal 
+2022-11-19T23:15:43.767  INFO rtsp-sender interrupt 
+2022-11-19T23:15:43.767  INFO rtsp-sender Exiting 
