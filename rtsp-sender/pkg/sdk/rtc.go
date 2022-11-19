@@ -696,7 +696,7 @@ func (r *RTC) onSingalHandle() error {
 			r.trickle(candidate, Target(payload.Trickle.Target))
 		case *rtc.Reply_TrackEvent:
 			if r.OnTrackEvent == nil {
-				log.Errorf("s.OnTrackEvent == nil")
+				// log.Errorf("s.OnTrackEvent == nil")
 				continue
 			}
 			var TrackInfos []*TrackInfo

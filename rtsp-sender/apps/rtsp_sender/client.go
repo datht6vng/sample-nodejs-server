@@ -1,4 +1,4 @@
-package client
+package rtsp_sender
 
 import (
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
@@ -7,17 +7,18 @@ import (
 )
 
 type Client struct {
-	sfuAddress  string
-	sessionName string
-	codec       string
-	connector   *sdk.Connector
-	rtc         *sdk.RTC
+	clientAddress string
+	sfuAddress    string
+	sessionName   string
+	codec         string
+	connector     *sdk.Connector
+	rtc           *sdk.RTC
 
 	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
 }
 
-func NewClient(sfuAddress, sessionName string) *Client {
-	return &Client{sfuAddress: sfuAddress, sessionName: sessionName}
+func NewClient(clientAddress, sfuAddress, sessionName string) *Client {
+	return &Client{clientAddress: clientAddress, sfuAddress: sfuAddress, sessionName: sessionName}
 }
 func (c *Client) Connect() error {
 	var err error
@@ -38,7 +39,7 @@ func (c *Client) Connect() error {
 		return err
 	}
 
-	if err := c.rtc.Join(c.sessionName, sdk.RandomKey(4)); err != nil {
+	if err := c.rtc.Join(c.sessionName, sdk.RandomKey(4), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
 		return err
 	}
 	c.rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
@@ -60,7 +61,16 @@ func (c *Client) Connect() error {
 	// if err != nil {
 	// 	return err
 	// }
-	// _, _ = c.rtc.Publish(c.videoTrack, c.audioTrack)
+	rtcpReaderList, _ := c.rtc.Publish(c.videoTrack, c.audioTrack)
+	for _, rtcpReader := range rtcpReaderList {
+		go func(rtcpReader *webrtc.RTPSender) {
+			for {
+				if _, _, err = rtcpReader.ReadRTCP(); err != nil {
+					return
+				}
+			}
+		}(rtcpReader)
+	}
 	c.rtc.PublishFile("./a.webm", true, true)
 	return nil
 }

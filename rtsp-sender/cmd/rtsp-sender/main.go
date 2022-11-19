@@ -3,12 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	client "github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp-sender"
+	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
 )
@@ -45,23 +44,22 @@ func main() {
 	logger.InitFileLogger("rtsp-sender", *config.Config.LogConfig, "")
 	// go http.ServeHTTP()
 	// go streamer.ServeStreams()
-
-	// Test code
-	client := client.NewClient(config.Config.SFUConfig.SFUAddres, "ion")
-	if err := client.Connect(); err != nil {
-		logger.Errorf("Error sfu connect: %v", err)
+	rtspSender, err := rtsp_sender.NewRTSPSender()
+	if err != nil {
+		logger.Errorf("Error when creating rtsp-sender: %v", err)
+		return
 	}
-	// =================
+	rtspSender.Start()
 
 	sigs := make(chan os.Signal, 1)
 	done := make(chan bool, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
 		sig := <-sigs
-		log.Println(sig)
+		logger.Infof("%v", sig)
 		done <- true
 	}()
-	log.Println("Server Start Awaiting Signal")
+	logger.Infof("Server Start Awaiting Signal")
 	<-done
-	log.Println("Exiting")
+	logger.Infof("Exiting")
 }
