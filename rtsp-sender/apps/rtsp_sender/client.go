@@ -171,3 +171,8 @@ func (c *Client) WritePacket(pkt *av.Packet) (err error) {
 	}
 	return nil
 }
+
+func (c *Client) Close() {
+	c.rtc.Close()
+	c.connector.Close()
+}

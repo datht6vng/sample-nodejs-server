@@ -153,3 +153,7 @@
 2022-11-19T23:15:36.594  INFO rtsp-sender Server Start Awaiting Signal 
 2022-11-19T23:15:43.767  INFO rtsp-sender interrupt 
 2022-11-19T23:15:43.767  INFO rtsp-sender Exiting 
+2022-12-01T15:30:12.751 ERROR rtsp-sender Error when new client: Camera send statusRTSP/1.0 404 Not Found 
+2022-12-01T15:30:12.752  INFO rtsp-sender Server Start Awaiting Signal 
+2022-12-01T15:30:23.944  INFO rtsp-sender interrupt 
+2022-12-01T15:30:23.945  INFO rtsp-sender Exiting 

@@ -65,6 +65,7 @@ func (r *RTSPSender) RemoveClient(url string) error {
 	if _, ok := r.clients[url]; !ok {
 		return ErrNotFound
 	}
+	r.clients[url].Close()
 	delete(r.clients, url)
 	return nil
 }
