@@ -1,8 +1,6 @@
 package sdk
 
 import (
-	"time"
-
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/juju/errors"
 	"github.com/pion/interceptor"
@@ -135,12 +133,13 @@ func ConfigureTWCC(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interce
 		return err
 	}
 
-	sender, err := twcc.NewSenderInterceptor(
-		twcc.SendInterval(time.Duration(networkConfig.TWCCInterval) * time.Millisecond),
-	)
-	if err != nil {
-		return err
-	}
+	// ION HAS OWN TWCC
+	// sender, err := twcc.NewSenderInterceptor(
+	// 	twcc.SendInterval(time.Duration(networkConfig.TWCCInterval) * time.Millisecond),
+	// )
+	// if err != nil {
+	// 	return err
+	// }
 
 	// Extension will rebase sequenceNumber for each peer connection
 	// Only turn it on with gcc, otherwise it will effect the twcc of remote brower
@@ -148,7 +147,7 @@ func ConfigureTWCC(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interce
 	if err != nil {
 		return err
 	}
-	interceptorRegistry.Add(sender)
+	//interceptorRegistry.Add(sender)
 	interceptorRegistry.Add(extension)
 	return nil
 }
@@ -187,9 +186,9 @@ func RegisterInterceptors(mediaEngine *webrtc.MediaEngine, interceptorRegistry *
 	// }
 
 	// GCC - This Congestion Control is not completed - Use later
-	if err := ConfigureGoogleCongestionControl(mediaEngine, interceptorRegistry, networkConfig); err != nil {
-		return err
-	}
+	// if err := ConfigureGoogleCongestionControl(mediaEngine, interceptorRegistry, networkConfig); err != nil {
+	// 	return err
+	// }
 
 	// REMB
 	if err := ConfigureREMB(mediaEngine, interceptorRegistry, networkConfig); err != nil {

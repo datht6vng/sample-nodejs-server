@@ -25,7 +25,7 @@ func NewRTSPSender() (*RTSPSender, error) {
 
 func (r *RTSPSender) Start() error {
 	// Test code
-	r.AddClient("rtsp://171.25.232.136/5090ea43a82340e0b6ee75a5c41e08c4")
+	r.AddClient("rtsp://192.168.0.107:8554/test")
 	// =================
 	return nil
 }
