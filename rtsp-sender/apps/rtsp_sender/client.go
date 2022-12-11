@@ -6,7 +6,7 @@ import (
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
-	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk/gstreamer-src"
+	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk/rtsp-to-webrtc"
 	"github.com/deepch/vdk/av"
 	"github.com/deepch/vdk/format/rtspv2"
 	"github.com/pion/webrtc/v3"
@@ -43,14 +43,15 @@ func (c *Client) Connect() error {
 	c.codecs = rtspClient.CodecData
 	rtspClient.Close()
 
-	AudioOnly := true
+	audioOnly := true
 
 	var videoCodec, audioCodec string
 	var videoDepay, audioDepay string
 	var videoDecoder, audioDecoder string
+
 	for _, codec := range c.codecs {
 		if codec.Type().IsAudio() {
-			AudioOnly = false
+			audioOnly = false
 		}
 		switch codec.Type() {
 		case av.H264:
@@ -67,10 +68,12 @@ func (c *Client) Connect() error {
 			audioDecoder = "avdec_opus"
 		}
 	}
-	logger.Infof("Audio only %v", AudioOnly)
-	videoSrc := fmt.Sprintf("rtspsrc location=%v ! application/x-rtp ! %v ! %v ! videoconvert", c.clientAddress, videoDepay, videoDecoder)
+	logger.Infof("Audio only %v", audioOnly)
+	rtspSrc := fmt.Sprintf("rtspsrc location=%v name=demux", c.clientAddress)
+
+	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", videoDepay, videoDecoder)
 	// Need mux here
-	audioSrc := fmt.Sprintf("rtspsrc location=%v ! application/x-rtp ! %v ! %v ! audioconvert", c.clientAddress, audioDepay, audioDecoder)
+	audioSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", audioDepay, audioDecoder)
 	// keyTest := time.NewTimer(20 * time.Second)
 	// go func() {
 	// 	for {
@@ -126,17 +129,21 @@ func (c *Client) Connect() error {
 	c.videoTrack = videoTrack
 	publishTrack = append(publishTrack, c.videoTrack)
 
-	gst.CreatePipeline("h264", []*webrtc.TrackLocalStaticSample{videoTrack}, videoSrc).Start()
-
-	if !AudioOnly {
+	if !audioOnly {
 		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", c.clientAddress)
 		if err != nil {
 			return err
 		}
 		c.audioTrack = audioTrack
 		publishTrack = append(publishTrack, c.audioTrack)
-		gst.CreatePipeline("opus", []*webrtc.TrackLocalStaticSample{audioTrack}, audioSrc).Start()
 	}
+
+	gst.CreatePipeline(
+		rtspSrc,
+		audioSrc, videoSrc,
+		audioCodec, videoCodec,
+		c.audioTrack, c.videoTrack,
+	).Start()
 
 	if len(publishTrack) > 0 {
 		rtcpReaderList, _ := c.rtc.Publish(publishTrack...)
