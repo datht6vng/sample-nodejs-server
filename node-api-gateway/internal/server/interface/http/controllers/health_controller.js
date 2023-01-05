@@ -10,7 +10,6 @@ class HealthController extends controller.Controller {
 }
 
 HealthController.prototype.GetHealth = function (req, res, next) {
-  let message = null;
   try {
     message = this.healthService.GetHealth();
   } catch (err) {

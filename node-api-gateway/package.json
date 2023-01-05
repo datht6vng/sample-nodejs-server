@@ -20,6 +20,7 @@
     "http-status": "^1.5.3",
     "mqtt": "^4.3.7",
     "prom-client": "^14.1.0",
+    "request": "^2.88.2",
     "toml": "^3.0.0"
   },
   "devDependencies": {

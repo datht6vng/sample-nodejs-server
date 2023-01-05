@@ -29,8 +29,28 @@ services:
     restart: always
     ports:
       - "3000:3000"
+      - "50051:50051"
     depends_on:
       - message-broker-server
 
+  node-api-gateway:
+    build:
+      context: node-api-gateway
+      dockerfile: Dockerfile
+    # environment:
+    #   - BROKER_HOST=rabbitmq
+    volumes:
+      - ./node-api-gateway:/usr/app
+      - gateway_node_modules:/usr/app/node_modules
+    working_dir: /usr/app
+    command: >
+      sh -c "npm run dev"
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - node-api-server
+
 volumes:
   api_node_modules:
+  gateway_node_modules:

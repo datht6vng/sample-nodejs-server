@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service Example {
+    rpc Get (Empty) returns (ExampleMessage) {}
+}
+
+message Empty {
+
+}
+
+message ExampleMessage {
+    string name = 1;
+    int32 num = 2;
+}
