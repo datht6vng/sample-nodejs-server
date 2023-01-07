@@ -118,6 +118,6 @@ grpcServer.start();
 
 const server = httpApp.listen(config.config.server.port, () =>
   console.log(
-    `Server is running at http://127.0.0.1:${config.config.server.port}`
+    `Server is running on http://127.0.0.1:${config.config.server.port}`
   )
 );

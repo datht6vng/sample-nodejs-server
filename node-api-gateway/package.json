@@ -17,6 +17,7 @@
     "express-rate-limit": "^6.6.0",
     "fs": "^0.0.1-security",
     "helmet": "^6.0.0",
+    "http-proxy-middleware": "^2.0.6",
     "http-status": "^1.5.3",
     "mqtt": "^4.3.7",
     "prom-client": "^14.1.0",

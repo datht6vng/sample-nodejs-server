@@ -1,5 +1,5 @@
 const grpc = require("@grpc/grpc-js");
-const { ProtoLoader } = require("./proto/ProtoLoader");
+const { ProtoLoader } = require("./proto/proto_loader");
 
 const { ExampleHandler } = require("./handler/example");
 
