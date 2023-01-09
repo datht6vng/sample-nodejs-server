@@ -9,7 +9,7 @@ let defaultClientConfig = {
   reconnectPeriod: 1000
 }
 
-let defaultTopics = ['airasoul']
+let defaultTopics = ['home/alarm/zone_open', 'home/alarm/zone_ok']
 
 // var client = mqtt.connect(url, { 
 //   clientId: 'mqtt-sub-test-4-', 
@@ -46,6 +46,7 @@ class MQTTSubscriber {
       console.log('________________Receive data from MQTT broker_____________');
       console.log("Topic: ", topic);
       console.log('Received message: ',  message.toString());
+      console.log('Received message JSON: ',  JSON.parse(message));
     });
   }
 }
