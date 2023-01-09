@@ -26,6 +26,12 @@ clientStub.retrievePasswords({}, (error, passwords) => {
 
 
 
+const { createProxyMiddleware } = require('http-proxy-middleware');
+createProxyMiddleware('/', { target: 'node-api-server', ws: true });
+
+
+
+
 
 // const grpc = require("@grpc/grpc-js");
 // var protoLoader = require("@grpc/proto-loader");

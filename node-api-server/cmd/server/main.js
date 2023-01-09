@@ -12,6 +12,21 @@ grpcServer.start();
 
 
 
+const { MongoDb } = require("../../internal/server/database/mongodb");
+const mongo = new MongoDb();
+mongo.start();
+
+
+
+
+const { MQTTSubscriber } = require("../../internal/server/interface/mqtt/subcriber");
+const subscriber = new MQTTSubscriber();
+subscriber.start();
+
+
+
+
+
 
 // var PROTO_PATH = __dirname + '/../../protos/example/example.proto';
 // var grpc = require('@grpc/grpc-js');
@@ -115,8 +130,12 @@ grpcServer.start();
 
 
 
+const server = require('http').createServer(httpApp);
+const io = require('socket.io')(server);
+io.on('connection', () => { /* … */ });
 
-const server = httpApp.listen(config.config.server.port, () =>
+
+server.listen(config.config.server.port, () =>
   console.log(
     `Server is running on http://127.0.0.1:${config.config.server.port}`
   )

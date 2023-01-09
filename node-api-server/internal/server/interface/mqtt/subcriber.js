@@ -1,7 +1,7 @@
 let mqtt = require('mqtt');
-let defaultUrl = `mqtt://${process.env.BROKER_HOST}:1883`;
+let defaultUrl = `mqtt://message-broker-server:1883`;
 let defaultClientConfig = { 
-  clientId: 'mqtt-sub-test-4-', 
+  clientId: 'mqtt-sub-test-project-', 
   clean: false,
   connectTimeout: 4000,
   username: 'guest',
@@ -28,23 +28,27 @@ let defaultTopics = ['airasoul']
 // });
 
 
-class MQTTSubcriber {
+class MQTTSubscriber {
   constructor(URL=defaultUrl, config=defaultClientConfig, topics=defaultTopics) {
     this.URL = URL;
     this.config = config;
     this.topics = topics;
     this.client = null;
   }
-  start() {
-    this.client = mqtt.connect(this.URL, this.config);
+  async start() {
+    this.client = await mqtt.connect(this.URL, this.config);
+    const client = this.client;
+    const topics = this.topics;
     this.client.on('connect', function () {
-      client.subscribe(this.topics, { qos: 1 });
+      client.subscribe(topics, { qos: 1 });
     });
     this.client.on('message', function (topic, message) {
-      console.log('received message ',  message.toString());
+      console.log('________________Receive data from MQTT broker_____________');
+      console.log("Topic: ", topic);
+      console.log('Received message: ',  message.toString());
     });
   }
 }
 
-module.exports.MQTTSubcriber = MQTTSubcriber;
+module.exports.MQTTSubscriber = MQTTSubscriber;
 

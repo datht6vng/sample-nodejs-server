@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Area = new Schema ({
-    name: {
-        type: String,
-        required: true
+    area_name: {
+        type: String
     },
     address: String
     

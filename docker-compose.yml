@@ -10,7 +10,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongodb:/data/db
+      - mongodb_data:/data/db
 
   message-broker-server:
     build:
@@ -43,6 +43,7 @@ services:
       - "50051:50051"
     depends_on:
       - message-broker-server
+      - mongodb
 
   node-api-gateway:
     build:
@@ -65,4 +66,4 @@ services:
 volumes:
   api_node_modules:
   gateway_node_modules:
-  mongodb:
+  mongodb_data:

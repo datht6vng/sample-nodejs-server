@@ -21,6 +21,7 @@
     "mongoose": "^6.8.3",
     "mqtt": "^4.3.7",
     "prom-client": "^14.1.0",
+    "socket.io": "^4.5.4",
     "toml": "^3.0.0"
   },
   "devDependencies": {

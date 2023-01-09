@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var url  = 'mqtt://192.168.1.37:1883';
+var url  = 'mqtt://message-broker-server:1883';
 
 var payload = {
   deviceId : '8675309'

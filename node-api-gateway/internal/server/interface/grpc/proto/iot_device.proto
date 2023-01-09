@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+message CameraDetail {
+    string _id = 1;
+    string camera_name = 2;
+}
+
+message AreaDetail {
+    string _id = 1;
+    string area_name = 2;
+}
+
+message IotDeviceDetail {
+    string _id = 1;
+    string device_name = 2;
+    string config_zone = 3;
+    string status = 4;
+    CameraDetail camera_id = 5;
+    AreaDetail area_id = 6;
+}
+
+message GetDeviceRequest {
+    string _id = 1;
+}
+
+message CreateDeviceRequest {
+    string _id = 1;
+    string device_name = 2;
+    string config_zone = 3;
+    string status = 4;
+    string camera_id = 5;
+    string area_id = 6;
+}
+
+
+
+service IotDeviceService {
+    rpc GetAllDevices (Empty) returns (IotDeviceList) {}
+    rpc GetDevice (GetDeviceRequest) returns (IotDeviceDetail) {}
+    rpc CreateDevice (CreateDeviceRequest) returns (IotDeviceDetail) {}
+}
+
+message Empty {}
+
+message IotDeviceList {
+    repeated IotDeviceDetail iot_devices = 1;
+}
+
+
+
+

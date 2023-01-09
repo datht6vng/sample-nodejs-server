@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const Area = require("./area");
+
 const Camera = new Schema ({
     serial_number: {
-        type: String,
-        required: true
+        type: String
     },
+    camera_name: String,
     status: String,
-    iot_device_id: {
-        type: Schema.Types.ObjectId,
-        ref: IotDevice
-    },
     area_id: {
-        type: Schema.Types.Objectid,
+        type: Schema.Types.ObjectID,
         ref: Area
     }
     

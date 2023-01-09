@@ -33,6 +33,16 @@ function NewHandler() {
   h.errorController = errorController.NewErrorController();
 
   h.app = express();
+
+
+
+
+
+  
+
+
+
+
   h.app.use(
     cors({
       origin: "*",

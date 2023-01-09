@@ -1,9 +1,15 @@
 syntax = "proto3";
+
+message Test {
+    string test = 1;
+}
+
 message PasswordDetails {
     string id = 1;
     string password = 2;
     string hashValue = 3;
     string saltValue = 4;
+    Test test_message = 5;
 }
 service ExampleService {
     rpc RetrievePasswords (Empty) returns (PasswordList) {}
