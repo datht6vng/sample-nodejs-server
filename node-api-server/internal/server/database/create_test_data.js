@@ -8,14 +8,17 @@ const camera = require("../models/camera");
 function createTestArea() {
     const areas = [
         {
+            _id: "63bba2c30953043cd7d792a3",
             area_name: "Tang 1",
             address: "Dia chi tang 1"
         },
         {
+            _id: "63bba2c30953043cd7d792a4",
             area_name: "Tang 2",
             address: "Dia chi tang 2"
         },
         {
+            _id: "63bba2c30953043cd7d792a5",
             area_name: "Tang 3"
         }
     ]

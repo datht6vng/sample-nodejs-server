@@ -1,0 +1,103 @@
+    
+Iot device
+
+
+
+GET /api/iot_devices/
+    [
+    {
+        _id: ObjectId,
+        device_name: String,
+        device_type: String,
+        config_zone: String,
+        status: String,
+        camera_id: {
+            type: Schema.Types.ObjectID,
+            ref: Camera
+        },
+        area_id: {
+            type: Schema.Types.ObjectID,
+            ref: Area
+        },
+        event_name: String,
+        created_at: Date,
+        updated_at: Date
+
+    },
+    ]
+
+
+
+GET /api/iot_devices/:id
+    {
+        _id: ObjectId,
+        device_name: String,
+        device_type: String,
+        config_zone: String,
+        status: String,
+        camera_id: {
+            type: Schema.Types.ObjectID,
+            ref: Camera
+        },
+        area_id: {
+            type: Schema.Types.ObjectID,
+            ref: Area
+        },
+        event_name: String,
+        created_at: Date,
+        updated_at: Date
+
+    }
+
+POST
+    {
+        device_name: String,
+        device_type: String,
+        config_zone: String,
+        event_name: String,
+    },
+
+
+
+Event
+GET /api/events
+[
+    {
+        _id: ObjectID,
+        iot_device_id: {
+            type: Schema.Types.ObjectID,
+            ref: IotDevice
+        },
+        area_id: {
+            type: Schema.Types.ObjectID,
+            ref: Area
+        },
+        true_alarm: Boolean,
+        status: String,
+        image_link: String,
+        event_time: Date
+    
+    }
+]
+
+GET /api/events/:id
+    {
+        _id: ObjectID,
+        iot_device_id: {
+            type: Schema.Types.ObjectID,
+            ref: IotDevice
+        },
+        area_id: {
+            type: Schema.Types.ObjectID,
+            ref: Area
+        },
+        true_alarm: Boolean,
+        status: String,
+        image_link: String,
+        event_time: Date
+    }
+
+
+
+
+docker exec -it 871c73b7bcf9 mongosh -u root -p '12345' --authenticationDatabase admin iot_security_app
