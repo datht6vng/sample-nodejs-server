@@ -129,7 +129,8 @@ mongo.start();
 
 
 const server = require('http').createServer(httpApp);
-const io = require('socket.io')(server);
+const { Server } = require("socket.io");
+const io = new Server(server);
 io.on('connection', () => { /* … */ });
 
 
