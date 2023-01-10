@@ -126,12 +126,15 @@ mongo.start();
 // );
 
 
-
-
-const server = require('http').createServer(httpApp);
+const http = require('http');
+const server = http.createServer(httpApp);
 const { Server } = require("socket.io");
 const io = new Server(server);
-io.on('connection', () => { /* … */ });
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+
 
 
 const { MQTTSubscriber } = require("../../internal/server/interface/mqtt/subcriber");
