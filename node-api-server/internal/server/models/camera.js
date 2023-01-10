@@ -5,6 +5,7 @@ const Area = require("./area");
 
 const Camera = new Schema (
     {
+        _id: Schema.Types.ObjectID,
         serial_number: {
             type: String
         },

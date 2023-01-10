@@ -20,7 +20,8 @@ const IotDevice = new Schema (
         area_id: {
             type: Schema.Types.ObjectID,
             ref: Area
-        }
+        },
+        event_name: String,
     
     },
     { 

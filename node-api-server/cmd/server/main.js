@@ -19,9 +19,7 @@ mongo.start();
 
 
 
-const { MQTTSubscriber } = require("../../internal/server/interface/mqtt/subcriber");
-const subscriber = new MQTTSubscriber();
-subscriber.start();
+
 
 
 
@@ -133,6 +131,11 @@ subscriber.start();
 const server = require('http').createServer(httpApp);
 const io = require('socket.io')(server);
 io.on('connection', () => { /* … */ });
+
+
+const { MQTTSubscriber } = require("../../internal/server/interface/mqtt/subcriber");
+const subscriber = new MQTTSubscriber(io);
+subscriber.start();
 
 
 server.listen(config.config.server.port, () =>

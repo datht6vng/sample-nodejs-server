@@ -15,8 +15,13 @@ const Event = new Schema (
             type: Schema.Types.ObjectID,
             ref: Area
         },
+        true_alarm: Boolean,
+        status: String,
+        image_link: String,
+        event: String,
+        zone: String,
+        area: String,
         event_time: Date
-    
     },
     { 
         timestamps: { 

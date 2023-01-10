@@ -12,10 +12,10 @@ const grpc = require("@grpc/grpc-js");
 const { ProtoLoader } = require("../../internal/server/interface/grpc/proto/ProtoLoader");
 const protoLoader = new ProtoLoader();
 
-const packageDef = protoLoader.loadPackage("example.proto");
+let packageDef = protoLoader.loadPackage("example.proto");
 
 const ExampleService = packageDef.ExampleService;
-const clientStub = new ExampleService(    
+let clientStub = new ExampleService(    
     "node-api-server:50051",
     grpc.credentials.createInsecure()
 );
@@ -23,6 +23,13 @@ clientStub.retrievePasswords({}, (error, passwords) => {
   //implement your error logic here
   console.log(passwords);
 });
+
+
+
+
+
+
+
 
 
 

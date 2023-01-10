@@ -75,6 +75,9 @@ GET /api/events
         true_alarm: Boolean,
         status: String,
         image_link: String,
+        event: String,
+        area: String,
+        zone: String,
         event_time: Date
     
     }
@@ -94,6 +97,9 @@ GET /api/events/:id
         true_alarm: Boolean,
         status: String,
         image_link: String,
+        event: String,
+        area: String,
+        zone: String,
         event_time: Date
     }
 

@@ -21,14 +21,31 @@ message IotDeviceDetail {
     string device_name = 2;
     string config_zone = 3;
     string status = 4;
-    CameraDetail camera_id = 5;
-    AreaDetail area_id = 6;
+    string camera_id = 5;
+    string area_id = 6;
     string event_name = 7;
     string created_at = 8;
     string updated_at = 9;
 }
 
-message GetDeviceRequest {
+message EventDetail {
+    string _id = 1;
+    string name = 2;
+    IotDeviceDetail iot_device_id = 3;
+    AreaDetail area_id = 4;
+    bool true_alarm = 5;
+    string status = 6;
+    string image_link = 7;
+    string event = 8;
+    string zone = 9;
+    string area = 10;
+    string event_time = 11;
+    string created_at = 12;
+    string updated_at = 13;
+
+}
+
+message GetEventRequest {
     string _id = 1;
 }
 
@@ -41,14 +58,13 @@ message CreateDeviceRequest {
 
 
 
-service IotDeviceService {
-    rpc GetAllDevices (Empty) returns (IotDeviceList) {}
-    rpc GetDevice (GetDeviceRequest) returns (IotDeviceDetail) {}
-    rpc CreateDevice (CreateDeviceRequest) returns (IotDeviceDetail) {}
+service EventService {
+    rpc GetAllEvents (Empty) returns (EventList) {}
+    rpc GetEvent (GetEventRequest) returns (EventDetail) {}
 }
 
 message Empty {}
 
-message IotDeviceList {
-    repeated IotDeviceDetail iot_devices = 1;
+message EventList {
+    repeated EventDetail events = 1;
 }

@@ -9,22 +9,23 @@ function createTestArea() {
     const areas = [
         {
             _id: "63bba2c30953043cd7d792a3",
-            area_name: "Tang 1",
-            address: "Dia chi tang 1"
+            area_name: "Khu vực 1",
+            address: "Địa chỉ khu vực 1"
         },
         {
             _id: "63bba2c30953043cd7d792a4",
-            area_name: "Tang 2",
-            address: "Dia chi tang 2"
+            area_name: "Khu vực 2",
+            address: "Địa chỉ khu vực 2"
         },
         {
             _id: "63bba2c30953043cd7d792a5",
-            area_name: "Tang 3"
+            area_name: "Khu vực 3",
+            address: "Địa chỉ khu vực 3"
         }
     ]
     
     Area.insertMany(areas).then(function(){
-        console.log("Area data inserted")  // Success
+        console.log("Area test datas are inserted successfully")  // Success
     }).catch(function(error){
         console.log(error)      // Failure
     });
@@ -40,16 +41,26 @@ async function getTestArea() {
 function createTestCamera() {
     const cameras = [
         {
-            camera_name: "Camera 1",
-            area_id: "63bba194752979d4dc630f24"
+            _id: "73bba2c30953043cd7d792a3",
+            camera_name: "Camera 101",
+            status: "Đang hoạt động",
+            area_id: "63bba2c30953043cd7d792a3"
         },
         {
-            camera_name: "Camera 2",
-            area_id: "63bba194752979d4dc630f24"
-        }
+            _id: "73bba2c30953043cd7d792a4",
+            camera_name: "Camera 102",
+            status: "Đang hoạt động",
+            area_id: "63bba2c30953043cd7d792a4"
+        },
+        {
+            _id: "73bba2c30953043cd7d792a5",
+            camera_name: "Camera 102",
+            status: "Đang hoạt động",
+            area_id: "63bba2c30953043cd7d792a4"
+        },
     ]
     Camera.insertMany(cameras).then(function(){
-        console.log("Camera data inserted")  // Success
+        console.log("Camera test datas are inserted successfully")  // Success
     }).catch(function(error){
         console.log(error)      // Failure
     });
