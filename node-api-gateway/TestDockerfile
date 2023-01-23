@@ -1,0 +1,22 @@
+FROM node:14-alpine
+WORKDIR /usr/app
+
+COPY . .
+COPY ./configs /configs
+
+
+RUN npm install
+
+RUN  apk add --no-cache bash \
+        \
+        && apk add --no-cache tzdata \
+        \
+        && cp /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime \
+        \
+        && echo "Asia/Ho_Chi_Minh" > /etc/timezone
+
+RUN apk --no-cache add ca-certificates && apk --no-cache add curl
+
+ENV CONFIG_PATH="./configs/server.toml"
+
+CMD ["npm", "run", "dev"]

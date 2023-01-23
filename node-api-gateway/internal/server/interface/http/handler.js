@@ -11,6 +11,10 @@ const errorController = require("./controllers/error_controller");
 
 const healthSerivce = require("../../service/health_service");
 
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+
 class Handler {
   constructor() {
     this.app = null; // HTTP App
@@ -37,7 +41,16 @@ function NewHandler() {
 
 
 
-
+  
+  const testProxy = createProxyMiddleware({ 
+    target: 'http://' + 'node-api-server:3000', 
+    changeOrigin: true, 
+    ws: true,
+    logger: console
+  
+  });
+  // const testProxy = createProxyMiddleware({ target: 'http://' + 'node-api-server:3000', changeOrigin: true });
+  h.app.use(testProxy);
   
 
 
@@ -61,6 +74,11 @@ function NewHandler() {
   h.app.use(helmet());
   h.app.use(bodyParser.json());
   h.app.use(bodyParser.urlencoded({ extended: false }));
+
+
+
+
+  
   h.app.use(
     compression({
       filter: function (req, res) {

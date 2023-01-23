@@ -129,7 +129,7 @@ mongo.start();
 const http = require('http');
 const server = http.createServer(httpApp);
 const { Server } = require("socket.io");
-const io = new Server(server);
+const io = new Server(server, { cors: { origin: "*" } });
 
 io.on('connection', (socket) => {
   console.log('a user connected');

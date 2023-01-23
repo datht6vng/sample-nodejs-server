@@ -13,9 +13,11 @@ handler.Handler.prototype.InitRoute = function () {
   this.app.get("/api/health", this.healthContronller.GetHealth);
 
 
-  this.app.get("/api/test", (req, res) => {
+  this.app.get("/users", (req, res) => {
     console.log('Request received ////////////////////////');
-    return res.send('1234');
+    return res.json({
+      test: "success"
+    });
   })
 
 
