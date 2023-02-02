@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func NewGRPCRTSPSenderServer() grpc.RTSPSenderServer {
+func NewGRPCRTSPSenderServer(rtspClientService *rtsp_client_service.RTSPClientService) grpc.RTSPSenderServer {
 	return &rtspSender{
-		rtspClientService: nil,
+		rtspClientService: rtspClientService,
 	}
 }
 
@@ -25,6 +25,7 @@ type rtspSender struct {
 func (r *rtspSender) Connect(context.Context, *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Connect not implemented")
 }
+
 func (r *rtspSender) Disconnect(context.Context, *grpc.DisconnectRequest) (*grpc.DisconnectReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disconnect not implemented")
 }

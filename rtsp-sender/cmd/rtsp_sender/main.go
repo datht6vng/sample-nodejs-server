@@ -3,16 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"net"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
+	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
-	grpc_pb "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
-	"google.golang.org/grpc"
 )
 
 var (
@@ -40,24 +37,21 @@ func parse() bool {
 }
 
 func main() {
+	nodeID := fmt.Sprintf("rtsp-sender-%v", os.Getenv("HOSTNAME"))
 	fmt.Println("------------ Start RTSP Sender ------------")
 	if !parse() {
 		return
 	}
-	logger.InitFileLogger("rtsp-sender", *config.Config.LogConfig, "")
+	logger.InitFileLogger(nodeID, *config.Config.LogConfig, "")
 
-	// gRPC Interface
-	grpcAddress := fmt.Sprintf("localhost:%d", *&config.Config.RTSPSenderConfig.Port)
-	listen, err := net.Listen("tcp", grpcAddress)
+	handler, err := rtsp_sender.NewHandler(nodeID)
 	if err != nil {
-		logger.Infof("Cannot listen on address: %v", grpcAddress)
+		logger.Infof("Cannot init rtsp sender handler with error: %v", nodeID, err)
 	}
 
-	var opts []grpc.ServerOption
-	grpcServer := grpc.NewServer(opts...)
-	grpcRTSPSenderServer := grpc_interface.NewGRPCRTSPSenderServer()
-	grpc_pb.RegisterRTSPSenderServer(grpcServer, grpcRTSPSenderServer)
-	grpcServer.Serve(listen)
+	if err := handler.Start(); err != nil {
+		logger.Infof("Cannot start rtsp sender handler with error: %v", err)
+	}
 
 	sigs := make(chan os.Signal, 1)
 	done := make(chan bool, 1)
@@ -67,7 +61,7 @@ func main() {
 		logger.Infof("%v", sig)
 		done <- true
 	}()
-	logger.Infof("Server Start Awaiting Signal")
+	logger.Infof("Server is running and awaiting signal for shutdown ...")
 	<-done
 	logger.Infof("Exiting")
 }

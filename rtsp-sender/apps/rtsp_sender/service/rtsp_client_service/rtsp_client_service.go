@@ -17,7 +17,7 @@ type RTSPClientService struct {
 	clients        map[string]*Client
 }
 
-func NewRTSPSender() (*RTSPClientService, error) {
+func NewRTSPClientService() (*RTSPClientService, error) {
 	return &RTSPClientService{
 		clients: map[string]*Client{},
 	}, nil
