@@ -1,4 +1,4 @@
-package rtsp_sender
+package rtsp_client_service
 
 import (
 	"errors"
@@ -12,25 +12,18 @@ var (
 	ErrNotFound = errors.New("Not found")
 )
 
-type RTSPSender struct {
+type RTSPClientService struct {
 	rtspSenderLock sync.RWMutex
 	clients        map[string]*Client
 }
 
-func NewRTSPSender() (*RTSPSender, error) {
-	return &RTSPSender{
+func NewRTSPSender() (*RTSPClientService, error) {
+	return &RTSPClientService{
 		clients: map[string]*Client{},
 	}, nil
 }
 
-func (r *RTSPSender) Start() error {
-	// Test code
-	r.AddClient("rtsp://192.168.0.107:8554/test")
-	// =================
-	return nil
-}
-
-func (r *RTSPSender) AddClient(url string) error {
+func (r *RTSPClientService) AddClient(url string) error {
 	// Test code
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
@@ -49,7 +42,7 @@ func (r *RTSPSender) AddClient(url string) error {
 	return nil
 }
 
-func (r *RTSPSender) GetClient(url string) (*Client, error) {
+func (r *RTSPClientService) GetClient(url string) (*Client, error) {
 	r.rtspSenderLock.RLock()
 	defer r.rtspSenderLock.RUnlock()
 
@@ -59,7 +52,7 @@ func (r *RTSPSender) GetClient(url string) (*Client, error) {
 	return nil, ErrNotFound
 }
 
-func (r *RTSPSender) RemoveClient(url string) error {
+func (r *RTSPClientService) RemoveClient(url string) error {
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 	if _, ok := r.clients[url]; !ok {

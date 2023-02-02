@@ -3,13 +3,16 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
+	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
+	grpc_pb "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"google.golang.org/grpc"
 )
 
 var (
@@ -42,14 +45,19 @@ func main() {
 		return
 	}
 	logger.InitFileLogger("rtsp-sender", *config.Config.LogConfig, "")
-	// go http.ServeHTTP()
-	// go streamer.ServeStreams()
-	rtspSender, err := rtsp_sender.NewRTSPSender()
+
+	// gRPC Interface
+	grpcAddress := fmt.Sprintf("localhost:%d", *&config.Config.RTSPSenderConfig.Port)
+	listen, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
-		logger.Errorf("Error when creating rtsp-sender: %v", err)
-		return
+		logger.Infof("Cannot listen on address: %v", grpcAddress)
 	}
-	rtspSender.Start()
+
+	var opts []grpc.ServerOption
+	grpcServer := grpc.NewServer(opts...)
+	grpcRTSPSenderServer := grpc_interface.NewGRPCRTSPSenderServer()
+	grpc_pb.RegisterRTSPSenderServer(grpcServer, grpcRTSPSenderServer)
+	grpcServer.Serve(listen)
 
 	sigs := make(chan os.Signal, 1)
 	done := make(chan bool, 1)

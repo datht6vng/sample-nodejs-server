@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc";
+
+// The greeting service definition.
+service RTSPSender {
+  // Sends a greeting
+  rpc Connect (ConnectRequest) returns (ConnectReply) {}
+  rpc Disconnect (DisconnectRequest) returns (DisconnectReply) {}
+}
+
+// Connect Request from client
+message ConnectRequest {
+  string clientID = 1;
+  string connectClientAddress = 2;
+}
+
+// Connect Reply from server
+message ConnectReply {
+  int32 code = 1;
+  string message = 2;
+}
+
+// Disconnect Request from client
+message DisconnectRequest {
+  string clientID = 1;
+  string connectClientAddress = 2;
+}
+
+// Disconnect Reply from server
+message DisconnectReply {
+  int32 code = 1;
+  string message = 2;
+}

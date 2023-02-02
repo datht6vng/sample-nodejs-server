@@ -6,9 +6,14 @@ import (
 )
 
 type AppConfig struct {
-	SFUConfig     *SFUConfig      `mapstructure:"sfu"`
-	LogConfig     *logger.LogConf `mapstructure:"log"`
-	NetworkConfig *NetworkConfig  `mapstructure:"network"`
+	RTSPSenderConfig *RTSPSenderConfig
+	SFUConfig        *SFUConfig      `mapstructure:"sfu"`
+	LogConfig        *logger.LogConf `mapstructure:"log"`
+	NetworkConfig    *NetworkConfig  `mapstructure:"network"`
+}
+
+type RTSPSenderConfig struct {
+	Port int `mapstructure:"port"`
 }
 type SFUConfig struct {
 	SFUAddres string `mapstructure:"sfu_address"`

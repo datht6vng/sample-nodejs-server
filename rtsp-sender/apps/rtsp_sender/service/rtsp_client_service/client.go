@@ -1,18 +1,21 @@
-package rtsp_sender
+package rtsp_client_service
 
 import (
 	"fmt"
+	"io"
+	"sync"
 	"time"
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
-	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk/rtsp-to-webrtc"
+	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk/rtsp_to_webrtc"
 	"github.com/deepch/vdk/av"
 	"github.com/deepch/vdk/format/rtspv2"
 	"github.com/pion/webrtc/v3"
 )
 
 type Client struct {
+	mu            sync.RWMutex
 	clientAddress string
 	sfuAddress    string
 	sessionName   string
@@ -23,6 +26,8 @@ type Client struct {
 
 	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
 	codecs                 []av.CodecData
+	pipeline               *gst.Pipeline
+	closed                 chan bool
 }
 
 func NewClient(clientAddress, sfuAddress, sessionName string, enableAudio bool) *Client {
@@ -34,6 +39,9 @@ func NewClient(clientAddress, sfuAddress, sessionName string, enableAudio bool) 
 	}
 }
 func (c *Client) Connect() error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
 	var err error
 	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: c.clientAddress, DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
 	if err != nil {
@@ -68,40 +76,23 @@ func (c *Client) Connect() error {
 			audioDecoder = "avdec_opus"
 		}
 	}
-	logger.Infof("Audio only %v", audioOnly)
+
+	logger.Infof("[%v] Audio Only: %v, Video Codec: %v, Audio Codec: %v", c.clientAddress, videoCodec, audioCodec)
+
 	rtspSrc := fmt.Sprintf("rtspsrc location=%v name=demux", c.clientAddress)
 
 	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", videoDepay, videoDecoder)
-	// Need mux here
 	audioSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", audioDepay, audioDecoder)
-	// keyTest := time.NewTimer(20 * time.Second)
-	// go func() {
-	// 	for {
-	// 		select {
-	// 		case <-keyTest.C:
-	// 			return
-	// 		case signals := <-rtspClient.Signals:
-	// 			switch signals {
-	// 			case rtspv2.SignalCodecUpdate:
-	// 				c.codecs = rtspClient.CodecData
-	// 			case rtspv2.SignalStreamRTPStop:
-	// 				return
-	// 			}
-	// 		case packetAV := <-rtspClient.OutgoingPacketQueue:
-	// 			if AudioOnly || packetAV.IsKeyFrame {
-	// 				keyTest.Reset(20 * time.Second)
-	// 			}
-	// 			c.WritePacket(packetAV)
-	// 		}
-	// 	}
-	// }()
 
 	config := sdk.RTCConfig{
 		WebRTC: sdk.WebRTCTransportConfig{
 			Configuration: webrtc.Configuration{
 				ICEServers: []webrtc.ICEServer{
 					{
-						URLs: []string{"stun:stun.stunprotocol.org:3478", "stun:stun.l.google.com:19302"},
+						URLs: []string{
+							"stun:stun.l.google.com:19302",
+							"stun:stun.stunprotocol.org:3478",
+						},
 					},
 				},
 			},
@@ -116,11 +107,16 @@ func (c *Client) Connect() error {
 	if err := c.rtc.Join(c.sessionName, sdk.RandomKey(4), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
 		return err
 	}
+
 	c.rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
-		logger.Infof("Connection state changed: %v", state)
+		logger.Infof("ICE connection state changed: %v", state)
+	})
+	c.rtc.GetPubTransport().GetPeerConnection().OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
+		logger.Infof("Peer connection state changed: %v", state)
 	})
 
 	publishTrack := []webrtc.TrackLocal{}
+
 	// Choose track codec here
 	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", c.clientAddress)
 	if err != nil {
@@ -138,76 +134,65 @@ func (c *Client) Connect() error {
 		publishTrack = append(publishTrack, c.audioTrack)
 	}
 
-	gst.CreatePipeline(
+	c.pipeline = gst.CreatePipeline(
 		rtspSrc,
 		audioSrc, videoSrc,
 		audioCodec, videoCodec,
 		c.audioTrack, c.videoTrack,
-	).Start()
+	)
+	c.pipeline.Start()
 
 	if len(publishTrack) > 0 {
+		// Read RTCP from each track to make sure the interceptors work
 		rtcpReaderList, _ := c.rtc.Publish(publishTrack...)
 		for _, rtcpReader := range rtcpReaderList {
-			go func(rtcpReader *webrtc.RTPSender) {
-				for {
-					if _, _, err = rtcpReader.ReadRTCP(); err != nil {
-						return
-					}
-				}
-			}(rtcpReader)
+			c.startRTCPHandler(rtcpReader)
 		}
 	}
 	return nil
 }
 
-// func (c *Client) WritePacket(pkt *av.Packet) (err error) {
-// 	//log.Println("WritePacket", pkt.Time, element.stop, webrtc.ICEConnectionStateConnected, pkt.Idx, element.streams[pkt.Idx])
-// 	packetCodec := c.codecs[pkt.Idx]
-// 	switch packetCodec.Type() {
-// 	case av.H264:
-// 		nalus, _ := h264parser.SplitNALUs(pkt.Data)
-// 		for _, nalu := range nalus {
-// 			naltype := nalu[0] & 0x1f
-// 			if naltype == 5 {
-// 				codec := packetCodec.(h264parser.CodecData)
-// 				err = c.videoTrack.WriteSample(media.Sample{Data: append([]byte{0, 0, 0, 1}, bytes.Join([][]byte{codec.SPS(), codec.PPS(), nalu}, []byte{0, 0, 0, 1})...), Duration: pkt.Duration})
-// 				if err != nil {
-// 					return err
-// 				}
-// 			} else if naltype == 1 {
-// 				err = c.videoTrack.WriteSample(media.Sample{Data: append([]byte{0, 0, 0, 1}, nalu...), Duration: pkt.Duration})
-// 				if err != nil {
-// 					return err
-// 				}
-// 			}
-// 		}
-// 		return
-// 		/*
+func (c *Client) startRTCPHandler(rtcpReader *webrtc.RTPSender) {
+	go func(rtcpReader *webrtc.RTPSender) {
+		for {
+			rtcpReader.SetReadDeadline(time.Now().Add(5 * time.Second))
+			if _, _, err := rtcpReader.ReadRTCP(); err != nil {
+				if err == io.EOF {
+					return
+				}
+				if c.IsClosed() {
+					return
+				}
+			}
+		}
+	}(rtcpReader)
+}
 
-// 			if pkt.IsKeyFrame {
-// 				pkt.Data = append([]byte{0, 0, 0, 1}, bytes.Join([][]byte{codec.SPS(), codec.PPS(), pkt.Data[4:]}, []byte{0, 0, 0, 1})...)
-// 			} else {
-// 				pkt.Data = pkt.Data[4:]
-// 			}
+func (c *Client) IsClosed() bool {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 
-// 		*/
-// 	case av.PCM_ALAW:
-// 	case av.OPUS:
-// 		return c.audioTrack.WriteSample(media.Sample{Data: pkt.Data, Duration: pkt.Duration})
-// 	case av.PCM_MULAW:
-// 	case av.AAC:
-// 		//TODO: NEED ADD DECODER AND ENCODER
-// 		return webrtc.ErrUnsupportedCodec
-// 	case av.PCM:
-// 		//TODO: NEED ADD ENCODER
-// 		return webrtc.ErrUnsupportedCodec
-// 	default:
-// 		return webrtc.ErrUnsupportedCodec
-// 	}
-// 	return nil
-// }
+	select {
+	case <-c.closed:
+		return true
+	default:
+		return false
+	}
+}
 
 func (c *Client) Close() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.closed != nil {
+		select {
+		case <-c.closed:
+		default:
+			close(c.closed)
+		}
+	}
+
 	c.rtc.Close()
 	c.connector.Close()
+	c.pipeline.Stop()
 }
