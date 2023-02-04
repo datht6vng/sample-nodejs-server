@@ -2,3 +2,30 @@
 2023-02-04T19:04:01.287  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
 2023-02-04T19:04:05.158  INFO rtsp-sender interrupt 
 2023-02-04T19:04:05.158  INFO rtsp-sender Exiting 
+2023-02-04T20:33:36.643  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-04T20:33:36.649  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-04T20:38:12.910  INFO rtsp-sender interrupt 
+2023-02-04T20:38:12.910  INFO rtsp-sender Exiting 
+2023-02-04T20:38:14.333  INFO rtsp-sender Serve gRPC on: :5551 
+2023-02-04T20:38:14.333  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-04T20:38:18.480  INFO rtsp-sender interrupt 
+2023-02-04T20:38:18.480  INFO rtsp-sender Exiting 
+2023-02-04T20:38:40.903  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-04T20:40:49.316  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-04T20:40:49.317  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-04T20:40:50.835 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:40:51.495 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:41:03.134 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:41:27.918 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:41:28.543 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:41:28.733 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:41:28.871 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:41:29.035 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:42:01.896 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:42:04.113  INFO rtsp-sender interrupt 
+2023-02-04T20:42:04.114  INFO rtsp-sender Exiting 
+2023-02-04T20:42:05.412  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-04T20:42:05.413  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-04T20:42:05.855 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
+2023-02-04T20:42:09.825  INFO rtsp-sender interrupt 
+2023-02-04T20:42:09.825  INFO rtsp-sender Exiting 

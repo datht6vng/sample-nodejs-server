@@ -27,7 +27,7 @@ func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) 
 		return &grpc.ConnectReply{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
-		}, err
+		}, nil
 	}
 	return &grpc.ConnectReply{
 		Code:    http.StatusOK,
@@ -40,7 +40,7 @@ func (r *rtspSender) Disconnect(ctx context.Context, request *grpc.DisconnectReq
 		return &grpc.DisconnectReply{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
-		}, err
+		}, nil
 	}
 	return &grpc.DisconnectReply{
 		Code:    http.StatusOK,
