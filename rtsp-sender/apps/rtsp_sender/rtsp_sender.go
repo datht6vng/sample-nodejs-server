@@ -48,7 +48,7 @@ func (h *Handler) Start() error {
 }
 
 func (h *Handler) ServceGRPC() error {
-	grpcAddress := fmt.Sprintf("localhost:%d", *&config.Config.RTSPSenderConfig.Port)
+	grpcAddress := fmt.Sprintf("localhost:%d", config.Config.RTSPSenderConfig.Port)
 	grpcListener, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
 		return errors.Annotate(err, fmt.Sprintf("cannot listen on %s", grpcAddress))
@@ -58,9 +58,10 @@ func (h *Handler) ServceGRPC() error {
 	grpcServer := grpc.NewServer(opts...)
 	grpc_pb.RegisterRTSPSenderServer(grpcServer, h.grpcRTSPSenderServer)
 
+	logger.Infof("Serve gRPC on: %v", grpcAddress)
 	go func() {
 		if err := grpcServer.Serve(grpcListener); err != nil {
-			logger.Infof("gRPC Server runtime error: %v", err)
+			logger.Infof("gRPC server runtime error: %v", err)
 		}
 	}()
 	return nil

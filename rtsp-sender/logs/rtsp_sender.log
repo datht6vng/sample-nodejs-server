@@ -1,0 +1,4 @@
+2023-02-04T19:04:01.287  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-04T19:04:01.287  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-04T19:04:05.158  INFO rtsp-sender interrupt 
+2023-02-04T19:04:05.158  INFO rtsp-sender Exiting 

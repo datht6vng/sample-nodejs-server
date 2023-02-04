@@ -9,12 +9,12 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/juju/errors v1.0.0
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
-	github.com/pion/ice/v2 v2.2.13
+	github.com/pion/ice/v2 v2.2.16
 	github.com/pion/interceptor v0.1.12
 	github.com/pion/ion v1.10.0
 	github.com/pion/ion-sdk-go v0.7.0
 	github.com/pion/sdp/v3 v3.0.6
-	github.com/pion/webrtc/v3 v3.1.51
+	github.com/pion/webrtc/v3 v3.1.53
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.15.0
 	golang.org/x/crypto v0.5.0
@@ -39,7 +39,7 @@ require (
 	github.com/pion/datachannel v1.5.5 // indirect
 	github.com/pion/dtls/v2 v2.1.5 // indirect
 	github.com/pion/logging v0.2.2 // indirect
-	github.com/pion/mdns v0.0.6 // indirect
+	github.com/pion/mdns v0.0.7 // indirect
 	github.com/pion/randutil v0.1.0 // indirect
 	github.com/pion/rtcp v1.2.10 // indirect
 	github.com/pion/rtp v1.7.13 // indirect
@@ -61,7 +61,7 @@ require (
 	golang.org/x/sys v0.4.0 // indirect
 	golang.org/x/term v0.4.0 // indirect
 	golang.org/x/text v0.6.0 // indirect
-	google.golang.org/genproto v0.0.0-20230131230820-1c016267d619 // indirect
+	google.golang.org/genproto v0.0.0-20230202175211-008b39050e57 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

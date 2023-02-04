@@ -6,10 +6,10 @@ import (
 )
 
 type AppConfig struct {
-	RTSPSenderConfig *RTSPSenderConfig
-	SFUConfig        *SFUConfig      `mapstructure:"sfu"`
-	LogConfig        *logger.LogConf `mapstructure:"log"`
-	NetworkConfig    *NetworkConfig  `mapstructure:"network"`
+	RTSPSenderConfig *RTSPSenderConfig `mapstructure:"rtsp_sender"`
+	SFUConfig        *SFUConfig        `mapstructure:"sfu"`
+	LogConfig        *logger.LogConf   `mapstructure:"log"`
+	NetworkConfig    *NetworkConfig    `mapstructure:"network"`
 }
 
 type RTSPSenderConfig struct {

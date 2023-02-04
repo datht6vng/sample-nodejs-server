@@ -3,3 +3,15 @@ sfu_address = "localhost:5551"
 
 [rtsp_sender]
 port = "5551"
+
+[log]
+level = "info"
+filePath= "logs/rtsp_sender.log"
+maxSize=50
+maxBackups=10
+maxAge=28
+
+[network]
+max_bitrate = "1000"
+min_bitrate = "50"
+twcc_interval = "100" #Miliseconds

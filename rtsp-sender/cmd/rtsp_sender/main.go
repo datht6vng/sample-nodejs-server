@@ -37,8 +37,12 @@ func parse() bool {
 }
 
 func main() {
-	nodeID := fmt.Sprintf("rtsp-sender-%v", os.Getenv("HOSTNAME"))
 	fmt.Println("------------ Start RTSP Sender ------------")
+
+	nodeID := "rtsp-sender"
+	if hostName := os.Getenv("HOSTNAME"); hostName != "" {
+		nodeID += hostName
+	}
 	if !parse() {
 		return
 	}
