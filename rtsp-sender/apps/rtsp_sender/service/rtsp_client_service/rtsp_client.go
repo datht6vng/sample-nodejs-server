@@ -19,7 +19,6 @@ type Client struct {
 	clientAddress string
 	sfuAddress    string
 	sessionName   string
-	codec         string
 	enableAudio   bool
 	connector     *sdk.Connector
 	rtc           *sdk.RTC

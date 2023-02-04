@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	ErrNotFound = errors.New("Not found")
+	ErrNotFound = errors.New("not found")
 )
 
 type RTSPClientService struct {
@@ -23,42 +23,43 @@ func NewRTSPClientService() (*RTSPClientService, error) {
 	}, nil
 }
 
-func (r *RTSPClientService) AddClient(url string) error {
-	// Test code
+func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress string) error {
+	if _, err := r.GetRTSPClient(connectClientAddress); err == nil {
+		return err
+	}
+
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 
-	if _, ok := r.clients[url]; ok {
-		return nil
-	}
-
-	client := NewClient(url, config.Config.SFUConfig.SFUAddres, "ion", true)
+	client := NewClient(connectClientAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true)
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
 		return err
 	}
-	// =================
-	r.clients[url] = client
+
+	r.clients[connectClientAddress] = client
 	return nil
 }
 
-func (r *RTSPClientService) GetClient(url string) (*Client, error) {
+func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client, error) {
 	r.rtspSenderLock.RLock()
 	defer r.rtspSenderLock.RUnlock()
 
-	if client, ok := r.clients[url]; ok {
+	if client, ok := r.clients[connectClientAddress]; ok {
 		return client, nil
 	}
 	return nil, ErrNotFound
 }
 
-func (r *RTSPClientService) RemoveClient(url string) error {
+func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress string) error {
+	if _, err := r.GetRTSPClient(connectClientAddress); err != nil {
+		return err
+	}
+
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
-	if _, ok := r.clients[url]; !ok {
-		return ErrNotFound
-	}
-	r.clients[url].Close()
-	delete(r.clients, url)
+
+	r.clients[connectClientAddress].Close()
+	delete(r.clients, connectClientAddress)
 	return nil
 }

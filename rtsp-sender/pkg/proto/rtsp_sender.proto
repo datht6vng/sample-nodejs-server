@@ -4,8 +4,9 @@ option go_package = "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc";
 
 // The greeting service definition.
 service RTSPSender {
-  // Sends a greeting
+  // Tell RTSPSender to connect to rtsp server and join sfu
   rpc Connect (ConnectRequest) returns (ConnectReply) {}
+    // Tell RTSPSender to disconnect to rtsp server
   rpc Disconnect (DisconnectRequest) returns (DisconnectReply) {}
 }
 

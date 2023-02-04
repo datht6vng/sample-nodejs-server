@@ -3,11 +3,11 @@ package grpc_interface
 
 import (
 	"context"
+	"fmt"
+	"net/http"
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 func NewGRPCRTSPSenderServer(rtspClientService *rtsp_client_service.RTSPClientService) grpc.RTSPSenderServer {
@@ -22,10 +22,28 @@ type rtspSender struct {
 	rtspClientService *rtsp_client_service.RTSPClientService
 }
 
-func (r *rtspSender) Connect(context.Context, *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Connect not implemented")
+func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
+	if err := r.rtspClientService.ConnectRTSPClient(request.ClientID, request.ConnectClientAddress); err != nil {
+		return &grpc.ConnectReply{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+		}, err
+	}
+	return &grpc.ConnectReply{
+		Code:    http.StatusOK,
+		Message: fmt.Sprintf("Connect successfully to %v", request.ConnectClientAddress),
+	}, nil
 }
 
-func (r *rtspSender) Disconnect(context.Context, *grpc.DisconnectRequest) (*grpc.DisconnectReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Disconnect not implemented")
+func (r *rtspSender) Disconnect(ctx context.Context, request *grpc.DisconnectRequest) (*grpc.DisconnectReply, error) {
+	if err := r.rtspClientService.DisconnectRTSPClient(request.ClientID, request.ConnectClientAddress); err != nil {
+		return &grpc.DisconnectReply{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+		}, err
+	}
+	return &grpc.DisconnectReply{
+		Code:    http.StatusOK,
+		Message: fmt.Sprintf("Disconnect successfully to %v", request.ConnectClientAddress),
+	}, nil
 }
