@@ -16,17 +16,12 @@ var (
 	configFile string
 )
 
-func showHelp() {
-	fmt.Printf("Usage:%s {params}\n", os.Args[0])
-	fmt.Println("      -c {config file}")
-	fmt.Println("      -h (show help info)")
-}
 func parse() bool {
 	flag.StringVar(&configFile, "c", "./config.toml", "config file")
 	help := flag.Bool("h", false, "help info")
 	flag.Parse()
 	if _, err := os.Stat(configFile); os.IsNotExist(err) || *help {
-		showHelp()
+		fmt.Println("Cannot find config file:", configFile)
 		return false
 	}
 	if err := config.ReadConfig(configFile); err != nil {
