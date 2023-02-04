@@ -40,14 +40,14 @@ func NewHandler(nodeID string) (*Handler, error) {
 
 func (h *Handler) Start() error {
 	// gRPC Interface
-	if err := h.ServceGRPC(); err != nil {
+	if err := h.ServeGRPC(); err != nil {
 		return errors.Annotate(err, "cannot start handler")
 	}
 	// HTTP Interface
 	return nil
 }
 
-func (h *Handler) ServceGRPC() error {
+func (h *Handler) ServeGRPC() error {
 	grpcAddress := fmt.Sprintf("localhost:%d", config.Config.RTSPSenderConfig.Port)
 	grpcListener, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
