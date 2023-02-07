@@ -1,8 +1,10 @@
 package rtsp_sender
 
 import (
+	"bytes"
 	"fmt"
 	"net"
+	"os/exec"
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
@@ -19,7 +21,7 @@ type Handler struct {
 	// gRPC interface
 	grpcRTSPSenderServer grpc_pb.RTSPSenderServer
 	// HTTP interface
-
+	// RTSP interface
 	// Repository
 }
 
@@ -41,9 +43,14 @@ func NewHandler(nodeID string) (*Handler, error) {
 func (h *Handler) Start() error {
 	// gRPC Interface
 	if err := h.ServeGRPC(); err != nil {
-		return errors.Annotate(err, "cannot start handler")
+		return errors.Annotate(err, "cannot start gRPC service")
 	}
 	// HTTP Interface
+
+	// RTSP Interface
+	if err := h.ServeRTSP(); err != nil {
+		return errors.Annotate(err, "cannot start RTSP service")
+	}
 	return nil
 }
 
@@ -64,5 +71,16 @@ func (h *Handler) ServeGRPC() error {
 			logger.Infof("gRPC server runtime error: %v", err)
 		}
 	}()
+	return nil
+}
+
+func (h *Handler) ServeRTSP() error {
+	logger.Infof("Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk")
+	var out bytes.Buffer
+	cmd := exec.Command("./rtsp-simple-server")
+	cmd.Stdout = &out
+	cmd.Dir = "./pkg/rtsp-server-sdk"
+	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
+	go cmd.Run()
 	return nil
 }

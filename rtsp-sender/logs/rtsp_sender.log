@@ -29,3 +29,95 @@
 2023-02-04T20:42:05.855 ERROR rtsp-sender Error when new client: dial tcp :554: connect: connection refused 
 2023-02-04T20:42:09.825  INFO rtsp-sender interrupt 
 2023-02-04T20:42:09.825  INFO rtsp-sender Exiting 
+2023-02-07T10:22:32.126  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:22:32.133  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:22:35.267  INFO rtsp-sender interrupt 
+2023-02-07T10:22:35.267  INFO rtsp-sender Exiting 
+2023-02-07T10:23:25.401  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:23:25.401  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:23:25.401  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:23:31.189  INFO rtsp-sender interrupt 
+2023-02-07T10:23:31.189  INFO rtsp-sender Exiting 
+2023-02-07T10:23:36.946  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:23:36.946  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:23:36.947  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:23:38.658  INFO rtsp-sender interrupt 
+2023-02-07T10:23:38.658  INFO rtsp-sender Exiting 
+2023-02-07T10:23:53.722  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:23:53.722  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:23:53.722  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:23:54.444  INFO rtsp-sender interrupt 
+2023-02-07T10:23:54.445  INFO rtsp-sender Exiting 
+2023-02-07T10:24:01.040  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:24:01.040  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:24:01.040  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:24:01.553  INFO rtsp-sender interrupt 
+2023-02-07T10:24:01.553  INFO rtsp-sender Exiting 
+2023-02-07T10:24:12.394  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:24:12.394  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:24:12.395  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:24:18.752  INFO rtsp-sender interrupt 
+2023-02-07T10:24:18.752  INFO rtsp-sender Exiting 
+2023-02-07T10:24:20.008  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:24:20.008  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:24:20.009  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:24:23.741  INFO rtsp-sender interrupt 
+2023-02-07T10:24:23.741  INFO rtsp-sender Exiting 
+2023-02-07T10:24:47.712  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:24:47.712  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:24:47.713  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:24:49.222  INFO rtsp-sender interrupt 
+2023-02-07T10:24:49.223  INFO rtsp-sender Exiting 
+2023-02-07T10:24:57.122  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:24:57.122  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:24:57.123  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:24:58.551  INFO rtsp-sender interrupt 
+2023-02-07T10:24:58.552  INFO rtsp-sender Exiting 
+2023-02-07T10:25:45.186  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:25:45.186  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:25:45.187  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:26:59.953  INFO rtsp-sender interrupt 
+2023-02-07T10:26:59.959  INFO rtsp-sender Exiting 
+2023-02-07T10:27:01.190  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:27:01.190  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:27:01.190  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:27:07.635  INFO rtsp-sender interrupt 
+2023-02-07T10:27:07.635  INFO rtsp-sender Exiting 
+2023-02-07T10:27:13.722  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:27:13.722  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:27:13.723  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:27:21.010  INFO rtsp-sender interrupt 
+2023-02-07T10:27:21.010  INFO rtsp-sender Exiting 
+2023-02-07T10:27:25.522  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:27:25.522  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:27:25.522  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:27:26.800  INFO rtsp-sender interrupt 
+2023-02-07T10:27:26.800  INFO rtsp-sender Exiting 
+2023-02-07T10:27:31.351  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:27:31.352  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:27:31.353  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:28:03.299  INFO rtsp-sender interrupt 
+2023-02-07T10:28:03.299  INFO rtsp-sender Exiting 
+2023-02-07T10:28:04.462  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:28:04.462  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:28:04.462  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:28:47.169  INFO rtsp-sender interrupt 
+2023-02-07T10:28:47.169  INFO rtsp-sender Exiting 
+2023-02-07T10:28:48.427  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:28:48.427  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:28:48.427  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:29:29.426  INFO rtsp-sender interrupt 
+2023-02-07T10:29:29.426  INFO rtsp-sender Exiting 
+2023-02-07T10:29:30.563  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:29:30.563  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:29:30.563  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:29:31.739  INFO rtsp-sender interrupt 
+2023-02-07T10:29:31.740  INFO rtsp-sender Exiting 
+2023-02-07T10:29:39.711  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:29:39.711  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:30:42.956  INFO rtsp-sender Serve gRPC on: localhost:5551 
+2023-02-07T10:30:42.956  INFO rtsp-sender Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-07T10:30:42.956  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-07T10:30:42.957  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-02-07T10:30:54.436  INFO rtsp-sender interrupt 
+2023-02-07T10:30:54.436  INFO rtsp-sender Exiting 
