@@ -3,6 +3,7 @@ sfu_address = "localhost:5551"
 
 [rtsp_sender]
 port = "5551"
+rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server_sdk
 
 [log]
 level = "info"

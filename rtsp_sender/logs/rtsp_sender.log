@@ -121,3 +121,7 @@
 2023-02-07T10:30:42.957  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
 2023-02-07T10:30:54.436  INFO rtsp-sender interrupt 
 2023-02-07T10:30:54.436  INFO rtsp-sender Exiting 
+2023-02-11T15:20:49.490  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:20:49.495  INFO rtsp-sender7698bd803e93 Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:20:49.496  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:20:49.497  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 

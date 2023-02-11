@@ -1,0 +1,26 @@
+FROM golang:alpine
+ENV GO111MODULE=on
+ENV CGO_ENABLED=1
+ENV GOOS=linux
+
+RUN apk add --no-cache bash \
+        && apk add --no-cache tzdata \
+        && cp /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime \
+        && echo "Asia/Ho_Chi_Minh" > /etc/timezone
+
+RUN apk --no-cache add ca-certificates && apk --no-cache add curl
+
+RUN apk add \
+    gstreamer \
+    gstreamer-dev \
+    gst-plugins-base-dev \
+    gst-plugins-good \
+    gst-plugins-bad \
+    gst-plugins-ugly \
+    gstreamer-tools \
+    gst-libav \
+    ffmpeg
+
+RUN apk add \
+build-base \
+pkgconfig

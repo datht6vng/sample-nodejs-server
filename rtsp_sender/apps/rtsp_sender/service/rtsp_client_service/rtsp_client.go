@@ -15,13 +15,15 @@ import (
 )
 
 type Client struct {
-	mu            sync.RWMutex
-	clientAddress string
-	sfuAddress    string
-	sessionName   string
-	enableAudio   bool
-	connector     *sdk.Connector
-	rtc           *sdk.RTC
+	mu               sync.RWMutex
+	clientAddress    string
+	rtspRelayAddress string
+	sfuAddress       string
+	sessionName      string
+	enableAudio      bool
+	ennableRTSPRelay bool
+	connector        *sdk.Connector
+	rtc              *sdk.RTC
 
 	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
 	codecs                 []av.CodecData
@@ -29,12 +31,14 @@ type Client struct {
 	closed                 chan bool
 }
 
-func NewClient(clientAddress, sfuAddress, sessionName string, enableAudio bool) *Client {
+func NewClient(clientAddress, rtspRelayAddress, sfuAddress, sessionName string, enableAudio bool, ennableRTSPRelay bool) *Client {
 	return &Client{
-		clientAddress: clientAddress,
-		sfuAddress:    sfuAddress,
-		sessionName:   sessionName,
-		enableAudio:   enableAudio,
+		clientAddress:    clientAddress,
+		rtspRelayAddress: rtspRelayAddress,
+		sfuAddress:       sfuAddress,
+		sessionName:      sessionName,
+		enableAudio:      enableAudio,
+		ennableRTSPRelay: ennableRTSPRelay,
 	}
 }
 func (c *Client) Connect() error {
@@ -80,6 +84,10 @@ func (c *Client) Connect() error {
 
 	rtspSrc := fmt.Sprintf("rtspsrc location=%v name=demux", c.clientAddress)
 
+	if c.ennableRTSPRelay {
+		logger.Infof("Relay RTSP Stream on %v", c.rtspRelayAddress)
+		rtspSrc = fmt.Sprintf("rtspsrc location=%v ! tee name=demux ! queue !  rtspclientsink location=%v", c.clientAddress, c.rtspRelayAddress)
+	}
 	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", videoDepay, videoDecoder)
 	audioSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", audioDepay, audioDecoder)
 

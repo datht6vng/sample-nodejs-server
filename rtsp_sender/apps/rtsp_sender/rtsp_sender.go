@@ -75,11 +75,11 @@ func (h *Handler) ServeGRPC() error {
 }
 
 func (h *Handler) ServeRTSP() error {
-	logger.Infof("Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk")
+	logger.Infof("Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk")
 	var out bytes.Buffer
 	cmd := exec.Command("./rtsp-simple-server")
 	cmd.Stdout = &out
-	cmd.Dir = "./pkg/rtsp-server-sdk"
+	cmd.Dir = "./pkg/rtsp_server_sdk"
 	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
 	go cmd.Run()
 	return nil

@@ -13,7 +13,8 @@ type AppConfig struct {
 }
 
 type RTSPSenderConfig struct {
-	Port int `mapstructure:"port"`
+	Port          int `mapstructure:"port"`
+	RTSPRelayPort int `mapstructure:"rtsp_relay_port"`
 }
 type SFUConfig struct {
 	SFUAddres string `mapstructure:"sfu_address"`

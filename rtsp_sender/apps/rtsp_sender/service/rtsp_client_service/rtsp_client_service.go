@@ -2,7 +2,9 @@ package rtsp_client_service
 
 import (
 	"errors"
+	"fmt"
 	"sync"
+	"sync/atomic"
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
@@ -15,6 +17,7 @@ var (
 type RTSPClientService struct {
 	rtspSenderLock sync.RWMutex
 	clients        map[string]*Client
+	autoDomain     atomic.Int64
 }
 
 func NewRTSPClientService() (*RTSPClientService, error) {
@@ -31,7 +34,16 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress str
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 
-	client := NewClient(connectClientAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true)
+	// TODO: add option for rtsp relay on - off, current auto on
+	ennableRTSPRelay := true
+	//
+
+	rtspRelayAddress := fmt.Sprintf("rtsp://localhost:%v/")
+	if ennableRTSPRelay {
+		rtspRelayAddress += fmt.Sprint(r.autoDomain.Add(1))
+	}
+
+	client := NewClient(connectClientAddress, rtspRelayAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, true)
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
 		return err
@@ -59,6 +71,7 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 
+	r.autoDomain.Add(-1)
 	r.clients[connectClientAddress].Close()
 	delete(r.clients, connectClientAddress)
 	return nil
