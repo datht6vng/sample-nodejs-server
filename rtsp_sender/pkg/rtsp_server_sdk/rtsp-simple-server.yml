@@ -7,7 +7,7 @@ logLevel: info
 # destinations of log messages; available values are "stdout", "file" and "syslog".
 logDestinations: [file]
 # if "file" is in logDestinations, this is the file which will receive the logs.
-logFile: rtsp-simple-server.log
+logFile: "../../logs/rtsp-server.log"
 
 # timeout of read operations.
 readTimeout: 10s

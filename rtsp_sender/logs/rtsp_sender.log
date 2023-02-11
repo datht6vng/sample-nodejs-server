@@ -125,3 +125,55 @@
 2023-02-11T15:20:49.495  INFO rtsp-sender7698bd803e93 Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
 2023-02-11T15:20:49.496  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
 2023-02-11T15:20:49.497  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:26:18.545  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:26:18.551  INFO rtsp-sender7698bd803e93 Serve gRPC with rtsp-simple-server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:26:18.551  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:26:18.552  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:27:22.509  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:27:22.518  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:27:22.519  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:27:22.521  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:28:08.398  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:28:08.404  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:28:08.404  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:28:08.406  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:29:47.163  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:29:47.171  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:29:47.172  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:29:47.173  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:29:59.531  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:29:59.536  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:29:59.537  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:29:59.539  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:31:22.103  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:31:22.108  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:31:22.108  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:31:22.109  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:31:44.683  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:31:44.688  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:31:44.688  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:31:44.690  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:31:57.823  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:31:57.828  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:31:57.828  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:31:57.830  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:32:11.730  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:32:11.736  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:32:11.736  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:32:11.737  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:32:28.305  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:32:28.311  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:32:28.311  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:32:28.318  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:32:48.507  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:32:48.511  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:32:48.511  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:32:48.513  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:33:03.837  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:33:03.842  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:33:03.842  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:33:03.843  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
+2023-02-11T15:33:54.206  INFO rtsp-sender7698bd803e93 Serve gRPC on: localhost:5551 
+2023-02-11T15:33:54.212  INFO rtsp-sender7698bd803e93 Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk 
+2023-02-11T15:33:54.212  INFO rtsp-sender7698bd803e93 Start rtsp-simple-server with command: ./rtsp-simple-server 
+2023-02-11T15:33:54.215  INFO rtsp-sender7698bd803e93 Server is running and awaiting signal for shutdown ... 
