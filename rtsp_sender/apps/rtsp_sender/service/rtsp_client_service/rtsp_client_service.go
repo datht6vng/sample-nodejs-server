@@ -26,9 +26,9 @@ func NewRTSPClientService() (*RTSPClientService, error) {
 	}, nil
 }
 
-func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress string, ennableRTSPRelay bool) error {
-	if _, err := r.GetRTSPClient(connectClientAddress); err == nil {
-		return err
+func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress string, ennableRTSPRelay bool) (string, error) {
+	if client, err := r.GetRTSPClient(connectClientAddress); err == nil {
+		return client.rtspRelayAddress, err
 	}
 
 	r.rtspSenderLock.Lock()
@@ -42,11 +42,11 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress str
 	client := NewClient(connectClientAddress, rtspRelayAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, ennableRTSPRelay)
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
-		return err
+		return "", err
 	}
 
 	r.clients[connectClientAddress] = client
-	return nil
+	return rtspRelayAddress, nil
 }
 
 func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client, error) {

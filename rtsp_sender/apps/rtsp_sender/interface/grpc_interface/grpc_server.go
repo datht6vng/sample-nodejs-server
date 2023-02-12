@@ -23,7 +23,9 @@ type rtspSender struct {
 }
 
 func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
-	if err := r.rtspClientService.ConnectRTSPClient(request.ClientID, request.ConnectClientAddress, request.EnableRTSPRelay); err != nil {
+	var rtspRelayAddress string
+	var err error
+	if rtspRelayAddress, err = r.rtspClientService.ConnectRTSPClient(request.ClientID, request.ConnectClientAddress, request.EnableRTSPRelay); err != nil {
 		return &grpc.ConnectReply{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
@@ -32,6 +34,9 @@ func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) 
 	return &grpc.ConnectReply{
 		Code:    http.StatusOK,
 		Message: fmt.Sprintf("Connect successfully to %v", request.ConnectClientAddress),
+		Data: &grpc.ConnectReplyData{
+			RelayAddress: rtspRelayAddress,
+		},
 	}, nil
 }
 

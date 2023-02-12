@@ -17,11 +17,15 @@ message ConnectRequest {
   bool enableRTSPRelay = 3;
 }
 
+message ConnectReplyData {
+  string relayAddress = 1;
+}
+
 // Connect Reply from server
 message ConnectReply {
   int32 code = 1;
   string message = 2;
-  string data = 3;
+  ConnectReplyData data = 3;
 }
 
 // Disconnect Request from client
