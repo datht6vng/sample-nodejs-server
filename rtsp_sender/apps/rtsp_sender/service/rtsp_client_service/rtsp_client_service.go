@@ -26,7 +26,7 @@ func NewRTSPClientService() (*RTSPClientService, error) {
 	}, nil
 }
 
-func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress string) error {
+func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress string, ennableRTSPRelay bool) error {
 	if _, err := r.GetRTSPClient(connectClientAddress); err == nil {
 		return err
 	}
@@ -34,16 +34,12 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress str
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 
-	// TODO: add option for rtsp relay on - off, current auto on
-	ennableRTSPRelay := true
-	//
-
 	rtspRelayAddress := fmt.Sprintf("rtsp://localhost:%v/")
 	if ennableRTSPRelay {
 		rtspRelayAddress += fmt.Sprint(r.autoDomain.Add(1))
 	}
 
-	client := NewClient(connectClientAddress, rtspRelayAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, true)
+	client := NewClient(connectClientAddress, rtspRelayAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, ennableRTSPRelay)
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
 		return err

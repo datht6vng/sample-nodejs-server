@@ -22,8 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RTSPSenderClient interface {
-	// Sends a greeting
+	// Tell RTSPSender to connect to rtsp server and join sfu
 	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectReply, error)
+	// Tell RTSPSender to disconnect to rtsp server
 	Disconnect(ctx context.Context, in *DisconnectRequest, opts ...grpc.CallOption) (*DisconnectReply, error)
 }
 
@@ -57,8 +58,9 @@ func (c *rTSPSenderClient) Disconnect(ctx context.Context, in *DisconnectRequest
 // All implementations must embed UnimplementedRTSPSenderServer
 // for forward compatibility
 type RTSPSenderServer interface {
-	// Sends a greeting
+	// Tell RTSPSender to connect to rtsp server and join sfu
 	Connect(context.Context, *ConnectRequest) (*ConnectReply, error)
+	// Tell RTSPSender to disconnect to rtsp server
 	Disconnect(context.Context, *DisconnectRequest) (*DisconnectReply, error)
 	mustEmbedUnimplementedRTSPSenderServer()
 }

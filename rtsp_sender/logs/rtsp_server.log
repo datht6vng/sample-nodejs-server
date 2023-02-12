@@ -10,3 +10,4 @@
 2023/02/11 15:33:54 I [0/0] [RTSP] TCP listener opened on :8554
 2023/02/11 15:33:54 I [0/0] [RTMP] listener opened on :1935
 2023/02/11 15:33:54 I [0/0] [HLS] listener opened on :8888
+2023/02/11 15:36:12 I [0/0] rtsp-simple-server v0.16.0

@@ -14,12 +14,14 @@ service RTSPSender {
 message ConnectRequest {
   string clientID = 1;
   string connectClientAddress = 2;
+  bool enableRTSPRelay = 3;
 }
 
 // Connect Reply from server
 message ConnectReply {
   int32 code = 1;
   string message = 2;
+  string data = 3;
 }
 
 // Disconnect Request from client
