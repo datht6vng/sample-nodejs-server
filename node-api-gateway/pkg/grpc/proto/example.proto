@@ -10,6 +10,7 @@ message PasswordDetails {
     string hashValue = 3;
     string saltValue = 4;
     Test test_message = 5;
+    optional string extra = 6;
 }
 service ExampleService {
     rpc RetrievePasswords (Empty) returns (PasswordList) {}

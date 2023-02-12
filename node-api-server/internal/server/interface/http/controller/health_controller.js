@@ -24,8 +24,8 @@ HealthController.prototype.GetHealth = function (req, res, next) {
   return this.Success(res, status.OK, message, null);
 };
 
-function NewHealthController(healthService = null) {
+function newHealthController(healthService = null) {
   return new HealthController(healthService);
 }
 
-module.exports.NewHealthController = NewHealthController;
+module.exports.newHealthController = newHealthController;

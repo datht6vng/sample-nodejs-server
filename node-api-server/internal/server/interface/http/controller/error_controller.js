@@ -18,7 +18,7 @@ ErrorController.prototype.ErrorController = function (err, req, res, next) {
   return this.Failure(res, err.status || status.INTERNAL_SERVER_ERROR, err);
 };
 
-function NewErrorController() {
+function newErrorController() {
   return new ErrorController();
 }
-module.exports.NewErrorController = NewErrorController;
+module.exports.newErrorController = newErrorController;

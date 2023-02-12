@@ -8,7 +8,7 @@ const { createTestCamera, getTestCamera } = require("../../database/create_test_
 
 
 
-handler.Handler.prototype.InitRoute = function () {
+handler.Handler.prototype.initRoute = function () {
   this.app.get("/metrics", this.metricsController.GetMetrics);
   this.app.get("/api/health", this.healthContronller.GetHealth);
 

@@ -12,8 +12,8 @@ MetricsController.prototype.GetMetrics = async function (req, res) {
   return res.send(await client.register.metrics());
 };
 
-function NewMetricsController(service = null) {
+function newMetricsController(service = null) {
   return new MetricsController(service);
 }
 
-module.exports.NewMetricsController = NewMetricsController;
+module.exports.newMetricsController = newMetricsController;

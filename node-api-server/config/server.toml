@@ -1,0 +1,23 @@
+[server]
+    [server.http]
+        url = "http://localhost"
+        port = "3000"
+
+    [server.grpc]
+        url = "http://localhost"
+        binding_ip_address = "0.0.0.0"
+        port = "50051"
+
+[database]
+    [database.mongodb]
+        user = "root"
+        password = "12345"
+        host = "mongodb"
+        port = "27017"
+        db_name = "iot_security_app"
+        options = { auth_source = "admin", use_new_url_parser = true, use_unified_topology = true }
+
+[cors]
+    [cors.websocket]
+        origin = "*"
+

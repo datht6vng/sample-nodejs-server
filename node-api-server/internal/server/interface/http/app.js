@@ -1,8 +1,8 @@
 const handleler = require("./handler");
 const route = require("./route");
 
-module.exports.NewHTTPApp = function NewHTTPApp() {
-  let h = handleler.NewHandler();
-  h.InitRoute();
+module.exports.newHTTPApp = function newHTTPApp() {
+  let h = handleler.newHandler();
+  h.initRoute();
   return h.app;
 };

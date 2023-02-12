@@ -1,4 +1,5 @@
-const Area = require("../../../models/area");
+const { newAreaService } = require("../../../service/area_service");
+const { newErrorHandler } = require("../../../util/error/error_handler");
 
 class AreaHandler {
     constructor() {
@@ -7,14 +8,38 @@ class AreaHandler {
 }
 
 AreaHandler.prototype.getAllAreas = async function(_, callback) {
-    let areas = await Area.find();
-    callback(null, areas);
+    const areaService = newAreaService();
+    const response = {
+        data: areaService.getAllAreas(),
+        message: "success",
+        status: "temp"
+    }
+    callback(null, response);
 }
 
 AreaHandler.prototype.createArea = async function(area, callback) {
-    let newArea = await IotDevice.create(area);
-    callback(null, newArea);
+
+    const areaService = newAreaService();
+    areaService.createArea(area.request.area_detail)
+    .then(area => {
+        console.log(area);
+        const response = {
+            data: {
+                area_detail: area
+            },
+            message: "success",
+            status: "temp"
+        }
+        callback(null, response);
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
 }
 
-module.exports.AreaHandler = AreaHandler;
+function newAreaHandler() {
+    return new AreaHandler();
+}
+
+module.exports.newAreaHandler = newAreaHandler;

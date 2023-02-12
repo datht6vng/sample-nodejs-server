@@ -1,7 +1,7 @@
-const app = require("../../internal/server/interface/http/app");
-const config = require("../../pkg/configs/configs");
+// const app = require("../../internal/server/interface/http/app");
+const config = require("../../pkg/config/config");
 
-const httpApp = app.NewHTTPApp();
+// const httpApp = app.NewHTTPApp();
 
 
 const { GRPCServer } = require("../../internal/server/interface/grpc/server");
@@ -126,24 +126,31 @@ mongo.start();
 // );
 
 
-const http = require('http');
-const server = http.createServer(httpApp);
-const { Server } = require("socket.io");
-const io = new Server(server, { cors: { origin: "*" } });
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-});
 
 
 
-const { MQTTSubscriber } = require("../../internal/server/interface/mqtt/subcriber");
-const subscriber = new MQTTSubscriber(io);
-subscriber.start();
 
 
-server.listen(config.config.server.port, () =>
-  console.log(
-    `Server is running on http://127.0.0.1:${config.config.server.port}`
-  )
-);
+
+
+// const http = require('http');
+// const server = http.createServer(httpApp);
+// const { Server } = require("socket.io");
+// const io = new Server(server, { cors: { origin: "*" } });
+
+// io.on('connection', (socket) => {
+//   console.log('a user connected');
+// });
+
+
+
+// const { MQTTSubscriber } = require("../../internal/server/interface/mqtt/subcriber");
+// const subscriber = new MQTTSubscriber(io);
+// subscriber.start();
+
+
+// server.listen(config.config.server.port, () =>
+//   console.log(
+//     `Server is running on http://127.0.0.1:${config.config.server.port}`
+//   )
+// );

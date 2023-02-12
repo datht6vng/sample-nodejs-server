@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+message AreaDetail {
+    optional string _id = 1;
+    optional string area_name = 2;
+    optional string address = 3;
+    optional string map_uri = 4;
+    repeated string children = 5;
+    optional string parent = 6;
+}
+
+message GetAllAreasResponseData {
+    repeated AreaDetail areas = 1;
+}
+
+message GetAllAreasResponse {
+    GetAllAreasResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateAreaRequest {
+    AreaDetail area_detail = 1;
+}
+
+message CreateAreaResponseData {
+    AreaDetail area_detail = 1;
+}
+
+message CreateAreaResponse {
+    CreateAreaResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service AreaService {
+    rpc GetAllAreas (Empty) returns (GetAllAreasResponse) {};
+    rpc CreateArea (CreateAreaRequest) returns (CreateAreaResponse) {};
+}
+
+message Empty {}
+
+message AreaList {
+    repeated AreaDetail areas = 1;
+}

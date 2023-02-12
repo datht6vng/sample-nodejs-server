@@ -1,9 +1,0 @@
-
-class IotDeviceService {
-
-    constructor() {
-
-    }
-
-    
-}

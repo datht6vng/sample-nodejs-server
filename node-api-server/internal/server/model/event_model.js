@@ -1,27 +1,30 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const IotDevice = require("./iot_device");
-const Area = require("./area");
-
-const Event = new Schema (
+const eventSchema = new Schema (
     {
-        name: String,
+        event_name: String,
         iot_device_id: {
             type: Schema.Types.ObjectID,
-            ref: IotDevice
+            ref: 'IotDevice'
+        },
+        camera_id: {
+            type: Schema.Types.ObjectID,
+            ref: 'Camera'
         },
         area_id: {
             type: Schema.Types.ObjectID,
-            ref: Area
+            ref: 'Area'
         },
         true_alarm: Boolean,
         status: String,
-        image_link: String,
+        image_uri: String,
+        video_uri: String,
         event: String,
         zone: String,
         area: String,
-        event_time: Date
+        start_time: Date,
+        end_time: Date
     },
     { 
         timestamps: { 
@@ -31,5 +34,5 @@ const Event = new Schema (
     }
 )
 
-module.exports = mongoose.model('Event', Event);
+module.exports = mongoose.model('Event', eventSchema);
 
