@@ -20,7 +20,7 @@ let localDataChannel;
 let trackEvent;
 
 const url = 'http://localhost:5551';
-const uid = 123456;
+const uid = Math.random().toString();
 const sid = "ion";
 let room;
 let rtc;
