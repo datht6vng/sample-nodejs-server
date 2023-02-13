@@ -4,7 +4,9 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"fmt"
 	"io/ioutil"
+	"time"
 
 	"github.com/pion/ion/proto/rtc"
 
@@ -12,6 +14,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
@@ -48,7 +51,7 @@ type Connector struct {
 }
 
 // NewConnector create a ion connector
-func NewConnector(addr string, config ...ConnectorConfig) *Connector {
+func NewConnector(addr string, config ...ConnectorConfig) (*Connector, error) {
 	c := &Connector{
 		services: make(map[string]Service),
 		Metadata: make(metadata.MD),
@@ -60,8 +63,7 @@ func NewConnector(addr string, config ...ConnectorConfig) *Connector {
 	}
 
 	if addr == "" {
-		log.Errorf("error: %v", errInvalidAddr)
-		return nil
+		return nil, fmt.Errorf("error: %v", errInvalidAddr)
 	}
 
 	if c.config != nil && c.config.Token != "" {
@@ -69,14 +71,16 @@ func NewConnector(addr string, config ...ConnectorConfig) *Connector {
 	}
 
 	var err error
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 	if c.config != nil && c.config.SSL {
 		var config *tls.Config
 		if c.config.Cafile != "" {
 			b, _ := ioutil.ReadFile(c.config.Cafile)
 			cp := x509.NewCertPool()
 			if !cp.AppendCertsFromPEM(b) {
-				log.Errorf("credentials: failed to append certificates")
-				return nil
+				return nil, fmt.Errorf("credentials: failed to append certificates")
 			}
 
 			config = &tls.Config{
@@ -89,23 +93,22 @@ func NewConnector(addr string, config ...ConnectorConfig) *Connector {
 			}
 		}
 
-		c.grpcConn, err = grpc.Dial(addr, grpc.WithTransportCredentials(credentials.NewTLS(config)), grpc.WithBlock())
+		c.grpcConn, err = grpc.DialContext(ctx, addr, grpc.WithTransportCredentials(credentials.NewTLS(config)), grpc.WithBlock())
 		if err != nil {
 			log.Errorf("did not connect: %v", err)
-			return nil
+			return nil, fmt.Errorf("did not connect: %v", err)
 		}
 	} else {
-		c.grpcConn, err = grpc.Dial(addr, grpc.WithInsecure(), grpc.WithBlock())
+		c.grpcConn, err = grpc.DialContext(ctx, addr, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
 	}
 
 	if err != nil {
-		log.Errorf("did not connect: %v", err)
-		return nil
+		return nil, fmt.Errorf("did not connect: %v", err)
 	}
 
 	log.Infof("gRPC connected: %s", addr)
 
-	return c
+	return c, nil
 }
 
 func (c *Connector) Signal(r *RTC) (Signaller, error) {

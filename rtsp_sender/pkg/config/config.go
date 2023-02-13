@@ -13,9 +13,19 @@ type AppConfig struct {
 }
 
 type RTSPSenderConfig struct {
-	Port          int `mapstructure:"port"`
-	RTSPRelayPort int `mapstructure:"rtsp_relay_port"`
+	GRPCConfig      RTSPSenderGRPCConfig      `mapstructure:"grpc"`
+	RTSPRelayConfig RTSPSenderRTSPRelayConfig `mapstructure:"rtsp_relay"`
 }
+type RTSPSenderGRPCConfig struct {
+	Port int `mapstructure:"port"`
+}
+type RTSPSenderRTSPRelayConfig struct {
+	RTSPRelayServerPath       string `mapstructure:"rtsp_relay_server_path"`
+	RTSPRelayServerConfigPath string `mapstructure:"rtsp_relay_server_config_path"`
+	RTSPRelayIP               string `mapstructure:"rtsp_relay_ip"`
+	RTSPRelayPort             int    `mapstructure:"rtsp_relay_port"`
+}
+
 type SFUConfig struct {
 	SFUAddres string `mapstructure:"sfu_address"`
 }

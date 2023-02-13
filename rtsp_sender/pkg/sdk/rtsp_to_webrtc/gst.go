@@ -49,7 +49,10 @@ func CreatePipeline(
 	rtspSrc string,
 	audioSrc, videoSrc string,
 	audioCodec, videoCodec string,
-	audioTrack, videoTrack *webrtc.TrackLocalStaticSample) *Pipeline {
+	audioTrack, videoTrack *webrtc.TrackLocalStaticSample,
+	enableRTSPRelay bool,
+	rtspRelayAddress string,
+) *Pipeline {
 	var clockRate float32
 
 	pipelineStr := rtspSrc
@@ -66,6 +69,10 @@ func CreatePipeline(
 
 	if videoCodec != "" {
 		videoSink := " ! appsink name=videosink "
+		if enableRTSPRelay {
+			videoSink = fmt.Sprintf("tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=%v", rtspRelayAddress)
+		}
+
 		switch videoCodec {
 		case webrtc.MimeTypeVP8:
 			pipelineStr += videoSrc + " ! vp8enc error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 " + videoSink
@@ -114,7 +121,6 @@ func (p *Pipeline) Start() {
 	if p.videoCodec != "" {
 		videoEnable = true
 	}
-	fmt.Println(audioEnable, videoEnable)
 	C.gstreamer_send_start_pipeline(p.Pipeline, C.bool(audioEnable), C.bool(videoEnable), C.int(p.id))
 }
 

@@ -26,20 +26,25 @@ func NewRTSPClientService() (*RTSPClientService, error) {
 	}, nil
 }
 
-func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress string, ennableRTSPRelay bool) (string, error) {
+func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, username, password string, enableRTSPRelay bool) (string, error) {
 	if client, err := r.GetRTSPClient(connectClientAddress); err == nil {
-		return client.rtspRelayAddress, err
+		if client.enableRTSPRelay && enableRTSPRelay || !client.enableRTSPRelay && !enableRTSPRelay {
+			return client.rtspRelayAddress, err
+		} else {
+			client.Close()
+		}
 	}
 
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 
-	rtspRelayAddress := fmt.Sprintf("rtsp://localhost:%v/")
-	if ennableRTSPRelay {
-		rtspRelayAddress += fmt.Sprint(r.autoDomain.Add(1))
+	rtspRelayAddress := ""
+	rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort)
+	if enableRTSPRelay {
+		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, r.autoDomain.Add(1))
 	}
 
-	client := NewClient(connectClientAddress, rtspRelayAddress, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, ennableRTSPRelay)
+	client := NewClient(connectClientAddress, rtspRelayAddress, username, password, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, enableRTSPRelay)
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
 		return "", err

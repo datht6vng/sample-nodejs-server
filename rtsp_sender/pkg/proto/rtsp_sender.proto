@@ -12,9 +12,11 @@ service RTSPSender {
 
 // Connect Request from client
 message ConnectRequest {
-  string clientID = 1;
+  string clientID = 1; 
   string connectClientAddress = 2;
-  bool enableRTSPRelay = 3;
+  string username = 3;
+  string password = 4;
+  bool enableRTSPRelay = 5;
 }
 
 message ConnectReplyData {

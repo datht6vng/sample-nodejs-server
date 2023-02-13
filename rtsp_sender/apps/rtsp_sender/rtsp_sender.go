@@ -55,7 +55,7 @@ func (h *Handler) Start() error {
 }
 
 func (h *Handler) ServeGRPC() error {
-	grpcAddress := fmt.Sprintf("localhost:%d", config.Config.RTSPSenderConfig.Port)
+	grpcAddress := fmt.Sprintf("0.0.0.0:%d", config.Config.RTSPSenderConfig.GRPCConfig.Port)
 	grpcListener, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
 		return errors.Annotate(err, fmt.Sprintf("cannot listen on %s", grpcAddress))
@@ -75,12 +75,16 @@ func (h *Handler) ServeGRPC() error {
 }
 
 func (h *Handler) ServeRTSP() error {
-	logger.Infof("Serve RTSP with rtsp simple server, config in /pkg/rtsp-server-sdk")
+	logger.Infof("Serve RTSP with rtsp simple server, config path:%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
 	var out bytes.Buffer
-	cmd := exec.Command("./rtsp-simple-server")
+	cmd := exec.Command("./rtsp-simple-server", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
 	cmd.Stdout = &out
-	cmd.Dir = "./pkg/rtsp_server_sdk"
+	cmd.Dir = fmt.Sprintf("%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerPath)
 	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
-	go cmd.Run()
+	go func() {
+		if err := cmd.Run(); err != nil {
+			logger.Errorf("RTSP Relay Server Error: %v", err)
+		}
+	}()
 	return nil
 }

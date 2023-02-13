@@ -1,0 +1,41 @@
+2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Serve gRPC on: 0.0.0.0:5551 
+2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Server is running and awaiting signal for shutdown ... 
+2023-02-13T14:48:48.124 ERROR rtsp-sender3e6d7558f911 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Serve gRPC on: 0.0.0.0:5551 
+2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Server is running and awaiting signal for shutdown ... 
+2023-02-13T14:58:23.923 ERROR rtsp-sender5d7378f06515 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-02-13T14:58:24.514 ERROR rtsp-sender5d7378f06515 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-02-13T15:05:51.562  INFO rtsp-sender4c02ca248482 Serve gRPC on: 0.0.0.0:5551 
+2023-02-13T15:05:51.563  INFO rtsp-sender4c02ca248482 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-13T15:05:51.563  INFO rtsp-sender4c02ca248482 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-13T15:05:51.563  INFO rtsp-sender4c02ca248482 Server is running and awaiting signal for shutdown ... 
+2023-02-13T15:06:52.985 ERROR rtsp-sender4c02ca248482 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-02-13T15:23:51.720 ERROR rtsp-sender4c02ca248482 Error when new client: dial tcp :554: connect: connection refused 
+2023-02-13T15:24:07.990  INFO rtsp-sender4c02ca248482 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-13T15:24:07.990  INFO rtsp-sender4c02ca248482 gRPC connected: 127.0.0.1:5551 
+2023-02-13T15:24:07.991 ERROR rtsp-sender4c02ca248482 [] Error receiving RTC response: rpc error: code = Unimplemented desc = unknown service rtc.RTC 
+2023-02-13T15:24:07.991  INFO rtsp-sender4c02ca248482 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=4SCz 
+2023-02-13T15:24:07.991  INFO rtsp-sender4c02ca248482 [C=>S] [4SCz] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-13T15:24:07.992 ERROR rtsp-sender4c02ca248482 [C=>S] [4SCz] err=EOF 
+2023-02-13T15:24:07.992 ERROR rtsp-sender4c02ca248482 Error when new client: EOF 
+2023-02-13T15:24:12.993  INFO rtsp-sender4c02ca248482 gather candidate done 
+2023-02-13T15:24:42.115  INFO rtsp-sender4c02ca248482 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-13T15:24:42.115  INFO rtsp-sender4c02ca248482 gRPC connected: 127.0.0.1:5551 
+2023-02-13T15:24:42.116 ERROR rtsp-sender4c02ca248482 [] Error receiving RTC response: rpc error: code = Unimplemented desc = unknown service rtc.RTC 
+2023-02-13T15:24:42.116  INFO rtsp-sender4c02ca248482 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=PLeR 
+2023-02-13T15:24:42.116  INFO rtsp-sender4c02ca248482 [C=>S] [PLeR] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-13T15:24:42.117 ERROR rtsp-sender4c02ca248482 [C=>S] [PLeR] err=EOF 
+2023-02-13T15:24:42.117 ERROR rtsp-sender4c02ca248482 Error when new client: EOF 
+2023-02-13T15:24:47.117  INFO rtsp-sender4c02ca248482 gather candidate done 
+2023-02-13T15:24:55.427  INFO rtsp-sender4c02ca248482 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-13T15:24:55.428  INFO rtsp-sender4c02ca248482 gRPC connected: 127.0.0.1:5551 
+2023-02-13T15:24:55.429 ERROR rtsp-sender4c02ca248482 [] Error receiving RTC response: rpc error: code = Unimplemented desc = unknown service rtc.RTC 
+2023-02-13T15:24:55.429  INFO rtsp-sender4c02ca248482 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=WomM 
+2023-02-13T15:24:55.429  INFO rtsp-sender4c02ca248482 [C=>S] [WomM] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-13T15:24:55.429 ERROR rtsp-sender4c02ca248482 [C=>S] [WomM] err=EOF 
+2023-02-13T15:24:55.429 ERROR rtsp-sender4c02ca248482 Error when new client: EOF 
+2023-02-13T15:25:00.431  INFO rtsp-sender4c02ca248482 gather candidate done 
