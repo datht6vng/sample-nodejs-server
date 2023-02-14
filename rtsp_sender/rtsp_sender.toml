@@ -1,5 +1,5 @@
 [sfu]
-sfu_address = "127.0.0.1:5551"
+sfu_address = "sfu:5551"
 
 [rtsp_sender]
 

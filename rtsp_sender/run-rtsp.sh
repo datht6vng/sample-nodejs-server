@@ -23,8 +23,8 @@ video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1
 
 
 gst-launch-1.0 -v rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id=admin user-pw=Dientoan@123 name=demux \
-	demux. ! queue ! application/x-rtp ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink sync=false \
-	demux. ! queue ! application/x-rtp ! rtpopusdepay ! opusparse ! opusdec ! audioconvert ! audioresample ! autoaudiosink sync=false
+	demux. ! queue ! application/x-rtp ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! queue ! autovideosink sync=false \
+	demux. ! queue ! application/x-rtp ! rtpopusdepay ! opusparse ! opusdec ! audioconvert ! audioresample ! queue ! autoaudiosink sync=false
 
 
 

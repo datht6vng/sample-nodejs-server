@@ -70,7 +70,7 @@ func CreatePipeline(
 	if videoCodec != "" {
 		videoSink := " ! appsink name=videosink "
 		if enableRTSPRelay {
-			videoSink = fmt.Sprintf("tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=%v", rtspRelayAddress)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=%v", rtspRelayAddress)
 		}
 
 		switch videoCodec {

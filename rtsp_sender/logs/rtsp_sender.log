@@ -1,41 +1,205 @@
-2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Serve gRPC on: 0.0.0.0:5551 
-2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
-2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
-2023-02-13T14:48:42.250  INFO rtsp-sender3e6d7558f911 Server is running and awaiting signal for shutdown ... 
-2023-02-13T14:48:48.124 ERROR rtsp-sender3e6d7558f911 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
-2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Serve gRPC on: 0.0.0.0:5551 
-2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
-2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
-2023-02-13T14:56:57.619  INFO rtsp-sender5d7378f06515 Server is running and awaiting signal for shutdown ... 
-2023-02-13T14:58:23.923 ERROR rtsp-sender5d7378f06515 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
-2023-02-13T14:58:24.514 ERROR rtsp-sender5d7378f06515 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
-2023-02-13T15:05:51.562  INFO rtsp-sender4c02ca248482 Serve gRPC on: 0.0.0.0:5551 
-2023-02-13T15:05:51.563  INFO rtsp-sender4c02ca248482 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
-2023-02-13T15:05:51.563  INFO rtsp-sender4c02ca248482 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
-2023-02-13T15:05:51.563  INFO rtsp-sender4c02ca248482 Server is running and awaiting signal for shutdown ... 
-2023-02-13T15:06:52.985 ERROR rtsp-sender4c02ca248482 Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
-2023-02-13T15:23:51.720 ERROR rtsp-sender4c02ca248482 Error when new client: dial tcp :554: connect: connection refused 
-2023-02-13T15:24:07.990  INFO rtsp-sender4c02ca248482 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
-2023-02-13T15:24:07.990  INFO rtsp-sender4c02ca248482 gRPC connected: 127.0.0.1:5551 
-2023-02-13T15:24:07.991 ERROR rtsp-sender4c02ca248482 [] Error receiving RTC response: rpc error: code = Unimplemented desc = unknown service rtc.RTC 
-2023-02-13T15:24:07.991  INFO rtsp-sender4c02ca248482 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=4SCz 
-2023-02-13T15:24:07.991  INFO rtsp-sender4c02ca248482 [C=>S] [4SCz] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
-2023-02-13T15:24:07.992 ERROR rtsp-sender4c02ca248482 [C=>S] [4SCz] err=EOF 
-2023-02-13T15:24:07.992 ERROR rtsp-sender4c02ca248482 Error when new client: EOF 
-2023-02-13T15:24:12.993  INFO rtsp-sender4c02ca248482 gather candidate done 
-2023-02-13T15:24:42.115  INFO rtsp-sender4c02ca248482 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
-2023-02-13T15:24:42.115  INFO rtsp-sender4c02ca248482 gRPC connected: 127.0.0.1:5551 
-2023-02-13T15:24:42.116 ERROR rtsp-sender4c02ca248482 [] Error receiving RTC response: rpc error: code = Unimplemented desc = unknown service rtc.RTC 
-2023-02-13T15:24:42.116  INFO rtsp-sender4c02ca248482 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=PLeR 
-2023-02-13T15:24:42.116  INFO rtsp-sender4c02ca248482 [C=>S] [PLeR] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
-2023-02-13T15:24:42.117 ERROR rtsp-sender4c02ca248482 [C=>S] [PLeR] err=EOF 
-2023-02-13T15:24:42.117 ERROR rtsp-sender4c02ca248482 Error when new client: EOF 
-2023-02-13T15:24:47.117  INFO rtsp-sender4c02ca248482 gather candidate done 
-2023-02-13T15:24:55.427  INFO rtsp-sender4c02ca248482 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
-2023-02-13T15:24:55.428  INFO rtsp-sender4c02ca248482 gRPC connected: 127.0.0.1:5551 
-2023-02-13T15:24:55.429 ERROR rtsp-sender4c02ca248482 [] Error receiving RTC response: rpc error: code = Unimplemented desc = unknown service rtc.RTC 
-2023-02-13T15:24:55.429  INFO rtsp-sender4c02ca248482 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=WomM 
-2023-02-13T15:24:55.429  INFO rtsp-sender4c02ca248482 [C=>S] [WomM] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
-2023-02-13T15:24:55.429 ERROR rtsp-sender4c02ca248482 [C=>S] [WomM] err=EOF 
-2023-02-13T15:24:55.429 ERROR rtsp-sender4c02ca248482 Error when new client: EOF 
-2023-02-13T15:25:00.431  INFO rtsp-sender4c02ca248482 gather candidate done 
+2023-02-14T16:59:43.088  INFO rtsp-sender3cc0d52712b0 Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T16:59:43.088  INFO rtsp-sender3cc0d52712b0 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T16:59:43.088  INFO rtsp-sender3cc0d52712b0 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T16:59:43.089  INFO rtsp-sender3cc0d52712b0 Server is running and awaiting signal for shutdown ... 
+2023-02-14T16:59:43.336  INFO rtsp-sender3cc0d52712b0 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T16:59:43.339  INFO rtsp-sender3cc0d52712b0 gRPC connected: sfu:5551 
+2023-02-14T16:59:43.341  INFO rtsp-sender3cc0d52712b0 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=VkRp 
+2023-02-14T16:59:43.342  INFO rtsp-sender3cc0d52712b0 [C=>S] [VkRp] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T16:59:43.342  INFO rtsp-sender3cc0d52712b0 Create pipeline: rtspsrc location=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="rtsp://127.0.0.1:8554/1" user-pw="ipsum Duis velit" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=Ut nostrud incididunt esse 
+2023-02-14T16:59:43.345  INFO rtsp-sender3cc0d52712b0 [VkRp] [join] success 
+2023-02-14T16:59:43.345  INFO rtsp-sender3cc0d52712b0 [VkRp] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5151 typ host 0xc0006146a0 0xc000682408 <nil>} 
+2023-02-14T16:59:43.345  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: checking 
+2023-02-14T16:59:43.404  INFO rtsp-sender3cc0d52712b0 [VkRp] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 39596 typ srflx raddr 0.0.0.0 rport 5120 0xc000127fd0 0xc0002ecae0 <nil>} 
+2023-02-14T16:59:43.597  INFO rtsp-sender3cc0d52712b0 [VkRp] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5123 typ host 0xc00031de40 0xc00049af18 <nil>} 
+2023-02-14T16:59:43.650  INFO rtsp-sender3cc0d52712b0 [VkRp] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 44337 typ srflx raddr 0.0.0.0 rport 5300 0xc00050fb60 0xc0001178a0 <nil>} 
+2023-02-14T16:59:44.409  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: connected 
+2023-02-14T16:59:44.412  INFO rtsp-sender3cc0d52712b0 Peer connection state changed: connected 
+2023-02-14T16:59:48.345  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T16:59:48.599  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:00:13.764  INFO rtsp-sender3cc0d52712b0 ICEConnectionStateDisconnected failed 
+2023-02-14T17:01:02.707  INFO rtsp-sender3cc0d52712b0 Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:01:02.707  INFO rtsp-sender3cc0d52712b0 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:01:02.707  INFO rtsp-sender3cc0d52712b0 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:01:02.707  INFO rtsp-sender3cc0d52712b0 Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:01:04.505  INFO rtsp-sender3cc0d52712b0 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:01:04.506  INFO rtsp-sender3cc0d52712b0 gRPC connected: sfu:5551 
+2023-02-14T17:01:04.507  INFO rtsp-sender3cc0d52712b0 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=3oR2 
+2023-02-14T17:01:04.507  INFO rtsp-sender3cc0d52712b0 [C=>S] [3oR2] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:01:04.507  INFO rtsp-sender3cc0d52712b0 Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="rtsp://127.0.0.1:8554/1" user-pw="2" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=1 
+2023-02-14T17:01:04.509  INFO rtsp-sender3cc0d52712b0 [3oR2] [join] success 
+2023-02-14T17:01:04.509  INFO rtsp-sender3cc0d52712b0 [3oR2] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5106 typ host 0xc0000a9390 0xc0000bc978 <nil>} 
+2023-02-14T17:01:04.509  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: checking 
+2023-02-14T17:01:04.625  INFO rtsp-sender3cc0d52712b0 [3oR2] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 23340 typ srflx raddr 0.0.0.0 rport 5203 0xc0003d6fe0 0xc00032ae88 <nil>} 
+2023-02-14T17:01:04.762  INFO rtsp-sender3cc0d52712b0 [3oR2] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5236 typ host 0xc0002d29a0 0xc0001deb48 <nil>} 
+2023-02-14T17:01:04.819  INFO rtsp-sender3cc0d52712b0 [3oR2] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 32140 typ srflx raddr 0.0.0.0 rport 5208 0xc0003d72b0 0xc00032afd8 <nil>} 
+2023-02-14T17:01:05.629  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: connected 
+2023-02-14T17:01:05.633  INFO rtsp-sender3cc0d52712b0 Peer connection state changed: connected 
+2023-02-14T17:01:09.509  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:01:09.767  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:01:34.942  INFO rtsp-sender3cc0d52712b0 ICEConnectionStateDisconnected failed 
+2023-02-14T17:02:18.056  INFO rtsp-sender3cc0d52712b0 Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:02:18.056  INFO rtsp-sender3cc0d52712b0 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:02:18.056  INFO rtsp-sender3cc0d52712b0 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:02:18.059  INFO rtsp-sender3cc0d52712b0 Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:02:18.932  INFO rtsp-sender3cc0d52712b0 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:02:18.933  INFO rtsp-sender3cc0d52712b0 gRPC connected: sfu:5551 
+2023-02-14T17:02:18.934  INFO rtsp-sender3cc0d52712b0 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=TWfz 
+2023-02-14T17:02:18.935  INFO rtsp-sender3cc0d52712b0 [C=>S] [TWfz] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:02:18.935  INFO rtsp-sender3cc0d52712b0 Create pipeline: rtspsrc location='rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2' user-id='rtsp://127.0.0.1:8554/1' user-pw='2' name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=1 
+2023-02-14T17:02:18.938  INFO rtsp-sender3cc0d52712b0 [TWfz] [join] success 
+2023-02-14T17:02:18.938  INFO rtsp-sender3cc0d52712b0 [TWfz] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5080 typ host 0xc0001113c0 0xc000124968 <nil>} 
+2023-02-14T17:02:18.938  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: checking 
+2023-02-14T17:02:19.000  INFO rtsp-sender3cc0d52712b0 [TWfz] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 57567 typ srflx raddr 0.0.0.0 rport 5016 0xc0003be540 0xc00030a6a8 <nil>} 
+2023-02-14T17:02:19.189  INFO rtsp-sender3cc0d52712b0 [TWfz] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5058 typ host 0xc0003beb00 0xc00030b278 <nil>} 
+2023-02-14T17:02:19.250  INFO rtsp-sender3cc0d52712b0 [TWfz] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 52205 typ srflx raddr 0.0.0.0 rport 5054 0xc000111760 0xc000124b90 <nil>} 
+2023-02-14T17:02:20.005  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: connected 
+2023-02-14T17:02:20.007  INFO rtsp-sender3cc0d52712b0 Peer connection state changed: connected 
+2023-02-14T17:02:23.937  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:02:24.193  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:02:49.362  INFO rtsp-sender3cc0d52712b0 ICEConnectionStateDisconnected failed 
+2023-02-14T17:05:45.134  INFO rtsp-sender3cc0d52712b0 Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:05:45.134  INFO rtsp-sender3cc0d52712b0 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:05:45.134  INFO rtsp-sender3cc0d52712b0 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:05:45.134  INFO rtsp-sender3cc0d52712b0 Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:05:50.350  INFO rtsp-sender3cc0d52712b0 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:05:50.353  INFO rtsp-sender3cc0d52712b0 gRPC connected: sfu:5551 
+2023-02-14T17:05:50.355  INFO rtsp-sender3cc0d52712b0 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=xEGW 
+2023-02-14T17:05:50.355  INFO rtsp-sender3cc0d52712b0 [C=>S] [xEGW] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:05:50.356  INFO rtsp-sender3cc0d52712b0 Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id='rtsp://127.0.0.1:8554/1' user-pw='2' name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=1 
+2023-02-14T17:05:50.361  INFO rtsp-sender3cc0d52712b0 [xEGW] [join] success 
+2023-02-14T17:05:50.361  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: checking 
+2023-02-14T17:05:50.361  INFO rtsp-sender3cc0d52712b0 [xEGW] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5248 typ host 0xc000222820 0xc0004224c8 <nil>} 
+2023-02-14T17:05:50.416  INFO rtsp-sender3cc0d52712b0 [xEGW] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 2737 typ srflx raddr 0.0.0.0 rport 5145 0xc00056e440 0xc000166408 <nil>} 
+2023-02-14T17:05:50.610  INFO rtsp-sender3cc0d52712b0 [xEGW] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5155 typ host 0xc00031e1e0 0xc00026c350 <nil>} 
+2023-02-14T17:05:50.665  INFO rtsp-sender3cc0d52712b0 [xEGW] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 39216 typ srflx raddr 0.0.0.0 rport 5076 0xc000626160 0xc0001cc100 <nil>} 
+2023-02-14T17:05:51.419  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: connected 
+2023-02-14T17:05:51.421  INFO rtsp-sender3cc0d52712b0 Peer connection state changed: connected 
+2023-02-14T17:05:55.358  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:05:55.612  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:06:20.755  INFO rtsp-sender3cc0d52712b0 ICEConnectionStateDisconnected failed 
+2023-02-14T17:09:48.000  INFO rtsp-sender3cc0d52712b0 Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:09:48.000  INFO rtsp-sender3cc0d52712b0 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:09:48.000  INFO rtsp-sender3cc0d52712b0 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:09:48.001  INFO rtsp-sender3cc0d52712b0 Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:09:49.286  INFO rtsp-sender3cc0d52712b0 [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:09:49.288  INFO rtsp-sender3cc0d52712b0 gRPC connected: sfu:5551 
+2023-02-14T17:09:49.290  INFO rtsp-sender3cc0d52712b0 [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=uyYt 
+2023-02-14T17:09:49.290  INFO rtsp-sender3cc0d52712b0 [C=>S] [uyYt] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:09:49.291  INFO rtsp-sender3cc0d52712b0 Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id='rtsp://127.0.0.1:8554/1' user-pw='2' name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=1 
+2023-02-14T17:09:49.293  INFO rtsp-sender3cc0d52712b0 [uyYt] [join] success 
+2023-02-14T17:09:49.293  INFO rtsp-sender3cc0d52712b0 [uyYt] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5253 typ host 0xc000424940 0xc0004024a8 <nil>} 
+2023-02-14T17:09:49.293  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: checking 
+2023-02-14T17:09:49.353  INFO rtsp-sender3cc0d52712b0 [uyYt] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 35130 typ srflx raddr 0.0.0.0 rport 5291 0xc000424b10 0xc0004025e8 <nil>} 
+2023-02-14T17:09:49.544  INFO rtsp-sender3cc0d52712b0 [uyYt] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5185 typ host 0xc0002a2270 0xc00003a8d8 <nil>} 
+2023-02-14T17:09:49.602  INFO rtsp-sender3cc0d52712b0 [uyYt] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 22493 typ srflx raddr 0.0.0.0 rport 5006 0xc000424da0 0xc000402798 <nil>} 
+2023-02-14T17:09:50.360  INFO rtsp-sender3cc0d52712b0 ICE connection state changed: connected 
+2023-02-14T17:09:50.365  INFO rtsp-sender3cc0d52712b0 Peer connection state changed: connected 
+2023-02-14T17:09:54.292  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:09:54.546  INFO rtsp-sender3cc0d52712b0 gather candidate done 
+2023-02-14T17:10:19.715  INFO rtsp-sender3cc0d52712b0 ICEConnectionStateDisconnected failed 
+2023-02-14T17:34:28.085  INFO rtsp-sender4ff3be10a3bb Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:34:28.086  INFO rtsp-sender4ff3be10a3bb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:34:28.086  INFO rtsp-sender4ff3be10a3bb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:34:28.086  INFO rtsp-sender4ff3be10a3bb Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:38:08.514  INFO rtsp-sender4ff3be10a3bb Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:38:08.514  INFO rtsp-sender4ff3be10a3bb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:38:08.514  INFO rtsp-sender4ff3be10a3bb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:38:08.514  INFO rtsp-sender4ff3be10a3bb Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:38:09.546  INFO rtsp-sender4ff3be10a3bb [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:38:09.549  INFO rtsp-sender4ff3be10a3bb gRPC connected: sfu:5551 
+2023-02-14T17:38:09.551  INFO rtsp-sender4ff3be10a3bb [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=u6rH 
+2023-02-14T17:38:09.552  INFO rtsp-sender4ff3be10a3bb [C=>S] [u6rH] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:38:09.552  INFO rtsp-sender4ff3be10a3bb Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id='rtsp://127.0.0.1:8554/1' user-pw='2' name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=1 
+2023-02-14T17:38:09.557  INFO rtsp-sender4ff3be10a3bb [u6rH] [join] success 
+2023-02-14T17:38:09.557  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: checking 
+2023-02-14T17:38:09.557  INFO rtsp-sender4ff3be10a3bb [u6rH] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5130 typ host 0xc00039e8b0 0xc00041c438 <nil>} 
+2023-02-14T17:38:09.714  INFO rtsp-sender4ff3be10a3bb [u6rH] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 50612 typ srflx raddr 0.0.0.0 rport 5246 0xc000326520 0xc0002e8468 <nil>} 
+2023-02-14T17:38:09.807  INFO rtsp-sender4ff3be10a3bb [u6rH] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5259 typ host 0xc0003268b0 0xc0002e8a88 <nil>} 
+2023-02-14T17:38:09.865  INFO rtsp-sender4ff3be10a3bb [u6rH] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 53396 typ srflx raddr 0.0.0.0 rport 5288 0xc0001f80c0 0xc000316130 <nil>} 
+2023-02-14T17:38:10.720  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: connected 
+2023-02-14T17:38:10.721  INFO rtsp-sender4ff3be10a3bb Peer connection state changed: connected 
+2023-02-14T17:38:14.554  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:38:14.809  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:38:25.339 ERROR rtsp-sender4ff3be10a3bb Error when new client: dial tcp :554: connect: connection refused 
+2023-02-14T17:38:39.960  INFO rtsp-sender4ff3be10a3bb ICEConnectionStateDisconnected failed 
+2023-02-14T17:38:49.381  INFO rtsp-sender4ff3be10a3bb Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:38:49.381  INFO rtsp-sender4ff3be10a3bb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:38:49.381  INFO rtsp-sender4ff3be10a3bb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:38:49.381  INFO rtsp-sender4ff3be10a3bb Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:38:50.437  INFO rtsp-sender4ff3be10a3bb [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:38:50.439  INFO rtsp-sender4ff3be10a3bb gRPC connected: sfu:5551 
+2023-02-14T17:38:50.440  INFO rtsp-sender4ff3be10a3bb [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=lFfK 
+2023-02-14T17:38:50.440  INFO rtsp-sender4ff3be10a3bb [C=>S] [lFfK] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:38:50.440  INFO rtsp-sender4ff3be10a3bb Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id='rtsp://127.0.0.1:8554/1' user-pw='aute aliquip' name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=id Lorem velit occaecat et 
+2023-02-14T17:38:50.443  INFO rtsp-sender4ff3be10a3bb [lFfK] [join] success 
+2023-02-14T17:38:50.443  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: checking 
+2023-02-14T17:38:50.443  INFO rtsp-sender4ff3be10a3bb [lFfK] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5068 typ host 0xc000078010 0xc00003a350 <nil>} 
+2023-02-14T17:38:50.498  INFO rtsp-sender4ff3be10a3bb [lFfK] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 61439 typ srflx raddr 0.0.0.0 rport 5067 0xc000078480 0xc00003a8b8 <nil>} 
+2023-02-14T17:38:50.694  INFO rtsp-sender4ff3be10a3bb [lFfK] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5161 typ host 0xc00039e840 0xc00038eac8 <nil>} 
+2023-02-14T17:38:50.754  INFO rtsp-sender4ff3be10a3bb [lFfK] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 28657 typ srflx raddr 0.0.0.0 rport 5150 0xc000328150 0xc0001b2180 <nil>} 
+2023-02-14T17:38:51.501  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: connected 
+2023-02-14T17:38:51.505  INFO rtsp-sender4ff3be10a3bb Peer connection state changed: connected 
+2023-02-14T17:38:55.443  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:38:55.696  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:39:20.857  INFO rtsp-sender4ff3be10a3bb ICEConnectionStateDisconnected failed 
+2023-02-14T17:39:58.680  INFO rtsp-sender4ff3be10a3bb Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:39:58.681  INFO rtsp-sender4ff3be10a3bb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:39:58.681  INFO rtsp-sender4ff3be10a3bb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:39:58.681  INFO rtsp-sender4ff3be10a3bb Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:40:01.328  INFO rtsp-sender4ff3be10a3bb [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:40:01.329  INFO rtsp-sender4ff3be10a3bb gRPC connected: sfu:5551 
+2023-02-14T17:40:01.330  INFO rtsp-sender4ff3be10a3bb [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=sThY 
+2023-02-14T17:40:01.330  INFO rtsp-sender4ff3be10a3bb [C=>S] [sThY] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:40:01.331  INFO rtsp-sender4ff3be10a3bb Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="rtsp://127.0.0.1:8554/1" user-pw="aute aliquip" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=id Lorem velit occaecat et 
+2023-02-14T17:40:01.333  INFO rtsp-sender4ff3be10a3bb [sThY] [join] success 
+2023-02-14T17:40:01.333  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: checking 
+2023-02-14T17:40:01.333  INFO rtsp-sender4ff3be10a3bb [sThY] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5212 typ host 0xc0002687d0 0xc00003a8e8 <nil>} 
+2023-02-14T17:40:01.387  INFO rtsp-sender4ff3be10a3bb [sThY] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 49183 typ srflx raddr 0.0.0.0 rport 5039 0xc000343150 0xc0000a68c8 <nil>} 
+2023-02-14T17:40:01.583  INFO rtsp-sender4ff3be10a3bb [sThY] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5270 typ host 0xc000078470 0xc00049c698 <nil>} 
+2023-02-14T17:40:01.639  INFO rtsp-sender4ff3be10a3bb [sThY] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 8151 typ srflx raddr 0.0.0.0 rport 5216 0xc000078640 0xc00049c7e0 <nil>} 
+2023-02-14T17:40:02.392  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: connected 
+2023-02-14T17:40:02.396  INFO rtsp-sender4ff3be10a3bb Peer connection state changed: connected 
+2023-02-14T17:40:06.331  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:40:06.584  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:40:31.735  INFO rtsp-sender4ff3be10a3bb ICEConnectionStateDisconnected failed 
+2023-02-14T17:41:21.832  INFO rtsp-sender4ff3be10a3bb Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:41:21.832  INFO rtsp-sender4ff3be10a3bb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:41:21.832  INFO rtsp-sender4ff3be10a3bb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:41:21.832  INFO rtsp-sender4ff3be10a3bb Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:41:23.121  INFO rtsp-sender4ff3be10a3bb [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:41:23.123  INFO rtsp-sender4ff3be10a3bb gRPC connected: sfu:5551 
+2023-02-14T17:41:23.125  INFO rtsp-sender4ff3be10a3bb [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=clfY 
+2023-02-14T17:41:23.125  INFO rtsp-sender4ff3be10a3bb [C=>S] [clfY] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:41:23.126  INFO rtsp-sender4ff3be10a3bb Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="aute aliquip" user-pw="id Lorem velit occaecat et" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-02-14T17:41:23.129  INFO rtsp-sender4ff3be10a3bb [clfY] [join] success 
+2023-02-14T17:41:23.129  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: checking 
+2023-02-14T17:41:23.129  INFO rtsp-sender4ff3be10a3bb [clfY] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5110 typ host 0xc000078790 0xc00038c678 <nil>} 
+2023-02-14T17:41:23.181  INFO rtsp-sender4ff3be10a3bb [clfY] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 14498 typ srflx raddr 0.0.0.0 rport 5092 0xc00029ad90 0xc0002124e8 <nil>} 
+2023-02-14T17:41:23.381  INFO rtsp-sender4ff3be10a3bb [clfY] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5152 typ host 0xc000558bd0 0xc00038d4c8 <nil>} 
+2023-02-14T17:41:23.442  INFO rtsp-sender4ff3be10a3bb [clfY] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 42001 typ srflx raddr 0.0.0.0 rport 5231 0xc000268150 0xc00003a508 <nil>} 
+2023-02-14T17:41:24.187  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: connected 
+2023-02-14T17:41:24.190  INFO rtsp-sender4ff3be10a3bb Peer connection state changed: connected 
+2023-02-14T17:41:28.127  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:41:28.382  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:41:53.547  INFO rtsp-sender4ff3be10a3bb ICEConnectionStateDisconnected failed 
+2023-02-14T17:42:30.288  INFO rtsp-sender4ff3be10a3bb Serve gRPC on: 0.0.0.0:5551 
+2023-02-14T17:42:30.288  INFO rtsp-sender4ff3be10a3bb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-02-14T17:42:30.288  INFO rtsp-sender4ff3be10a3bb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-02-14T17:42:30.288  INFO rtsp-sender4ff3be10a3bb Server is running and awaiting signal for shutdown ... 
+2023-02-14T17:42:31.890  INFO rtsp-sender4ff3be10a3bb [rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-02-14T17:42:31.892  INFO rtsp-sender4ff3be10a3bb gRPC connected: sfu:5551 
+2023-02-14T17:42:31.894  INFO rtsp-sender4ff3be10a3bb [C=>S] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=2Zse 
+2023-02-14T17:42:31.894  INFO rtsp-sender4ff3be10a3bb [C=>S] [2Zse] sid=rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-02-14T17:42:31.894  INFO rtsp-sender4ff3be10a3bb Create pipeline: rtspsrc location="rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-02-14T17:42:31.896  INFO rtsp-sender4ff3be10a3bb [2Zse] [join] success 
+2023-02-14T17:42:31.896  INFO rtsp-sender4ff3be10a3bb [2Zse] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5111 typ host 0xc000278730 0xc00003a978 <nil>} 
+2023-02-14T17:42:31.897  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: checking 
+2023-02-14T17:42:31.952  INFO rtsp-sender4ff3be10a3bb [2Zse] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 2819 typ srflx raddr 0.0.0.0 rport 5242 0xc00040e340 0xc0001161a0 <nil>} 
+2023-02-14T17:42:32.147  INFO rtsp-sender4ff3be10a3bb [2Zse] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5098 typ host 0xc00060a720 0xc0001f28a8 <nil>} 
+2023-02-14T17:42:32.201  INFO rtsp-sender4ff3be10a3bb [2Zse] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 34171 typ srflx raddr 0.0.0.0 rport 5062 0xc00040e410 0xc0001161e8 <nil>} 
+2023-02-14T17:42:32.959  INFO rtsp-sender4ff3be10a3bb ICE connection state changed: connected 
+2023-02-14T17:42:32.966  INFO rtsp-sender4ff3be10a3bb Peer connection state changed: connected 
+2023-02-14T17:42:36.896  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:42:37.149  INFO rtsp-sender4ff3be10a3bb gather candidate done 
+2023-02-14T17:43:02.313  INFO rtsp-sender4ff3be10a3bb ICEConnectionStateDisconnected failed 

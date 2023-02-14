@@ -18,7 +18,7 @@ static gboolean gstreamer_send_bus_call(GstBus *bus, GstMessage *msg, gpointer d
 
   case GST_MESSAGE_EOS:
     g_print("End of stream\n");
-    exit(1);
+    //exit(1);
     break;
 
   case GST_MESSAGE_ERROR: {
@@ -30,7 +30,7 @@ static gboolean gstreamer_send_bus_call(GstBus *bus, GstMessage *msg, gpointer d
 
     g_printerr("Error: %s\n", error->message);
     g_error_free(error);
-    exit(1);
+    //exit(1);
   }
   default:
     break;

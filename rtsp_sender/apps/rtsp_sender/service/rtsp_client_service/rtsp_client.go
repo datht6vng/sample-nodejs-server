@@ -35,7 +35,7 @@ type Client struct {
 	closed                 chan bool
 }
 
-func NewClient(clientAddress, username, password, rtspRelayAddress, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool) *Client {
+func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool) *Client {
 	return &Client{
 		clientAddress:    clientAddress,
 		rtspRelayAddress: rtspRelayAddress,
@@ -88,7 +88,7 @@ func (c *Client) Connect() error {
 
 	logger.Infof("[%v] Audio Only: %v, Video Codec: %v, Audio Codec: %v", c.clientAddress, audioOnly, videoCodec, audioCodec)
 
-	rtspSrc := fmt.Sprintf("rtspsrc location=%v user-id=%v user-pw %v name=demux", c.clientAddress, c.username, c.password)
+	rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=demux", c.clientAddress, c.username, c.password)
 
 	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", videoDepay, videoDecoder)
 	audioSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", audioDepay, audioDecoder)
@@ -202,6 +202,7 @@ func (c *Client) Close() {
 	if c.closed != nil {
 		select {
 		case <-c.closed:
+			return
 		default:
 			close(c.closed)
 		}
