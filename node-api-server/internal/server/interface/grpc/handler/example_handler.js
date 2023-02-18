@@ -13,7 +13,12 @@ class ExampleHandler {
             ]
         };
         console.log(9999999999999999999999)
-        callback(null, dummyRecords);
+        // callback(null, dummyRecords);
+        callback({
+            code: 304,
+            message: "Test error",
+            extra_info: "extra information"
+        })
     }
 
 

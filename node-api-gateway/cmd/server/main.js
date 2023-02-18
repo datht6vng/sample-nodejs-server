@@ -6,21 +6,22 @@
 
 
 
-// const grpc = require("@grpc/grpc-js");
-// const { ProtoLoader } = require("../../internal/server/interface/grpc/proto/ProtoLoader");
-// const protoLoader = new ProtoLoader();
+const grpc = require("@grpc/grpc-js");
+const { ProtoLoader } = require("../../pkg/grpc/proto/proto_loader");
+const protoLoader = new ProtoLoader();
 
-// let packageDef = protoLoader.loadPackage("example.proto");
+let packageDef = protoLoader.loadPackage("example.proto");
 
-// const ExampleService = packageDef.ExampleService;
-// let clientStub = new ExampleService(    
-//     "node-api-server:50051",
-//     grpc.credentials.createInsecure()
-// );
-// clientStub.retrievePasswords({}, (error, passwords) => {
-//   //implement your error logic here
-//   console.log(passwords);
-// });
+const ExampleService = packageDef.ExampleService;
+let clientStub = new ExampleService(    
+    "node-api-server:50051",
+    grpc.credentials.createInsecure()
+);
+clientStub.retrievePasswords({}, (error, passwords) => {
+  //implement your error logic here
+  // console.log(passwords);
+  console.log(error)
+});
 
 
 

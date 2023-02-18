@@ -15,7 +15,7 @@ class AreaService {
 }
 
 AreaService.prototype.getAllAreas = async function() {
-    const areas = await this.repository.getAllAreas();
+    const areas = await this.repository.getAll();
     return areas.map(area => {
         this.toProtobufConverter.visit(newArea(), area);
     })
@@ -23,7 +23,7 @@ AreaService.prototype.getAllAreas = async function() {
 
 AreaService.prototype.createArea = async function(area) {
     console.log(this.fromProtobufConverter.visit(newArea(), area))
-    const areaEntity = await this.repository.createArea(this.fromProtobufConverter.visit(newArea(), area));
+    const areaEntity = await this.repository.create(this.fromProtobufConverter.visit(newArea(), area));
     return this.toProtobufConverter.visit(areaEntity); 
 }
 

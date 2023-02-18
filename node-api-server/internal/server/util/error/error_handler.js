@@ -13,14 +13,15 @@ class ErrorHandler {
 }
 
 ErrorHandler.prototype.execute = function(error) {
-    return this.getMessage(error);
+    
 }
 
 ErrorHandler.prototype.getMessage = function(error) {
     if (error.isOperational()) {
         return {
             code: this.getHttpStatus(error),
-            message: error.getDescription()
+            message: error.getDescription(),
+            status: this.getGrpcStatus(error)
         }
     }
 

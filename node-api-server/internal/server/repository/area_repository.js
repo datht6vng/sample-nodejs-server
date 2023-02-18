@@ -6,6 +6,7 @@ const { newFromDatabaseConverter } = require("../util/converter/from_database_co
 const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
+const { newNotFoundError } = require("../entity/error/not_found_error");
 
 
 class AreaRepository {
@@ -15,47 +16,56 @@ class AreaRepository {
     }
 }
 
-AreaRepository.prototype.getAllAreas = async function() {
-    let areas;
+AreaRepository.prototype.getAll = async function() {
+    let areaDocs;
     try {
-        areas = await AreaModel.find({});
+        areaDocs = await AreaModel.find({});
     }
     catch(err) {
         throw newInternalServerError("Database error", "Database error occur");
     }
-    return areas.map(area => {
-        this.fromDatabaseConverter.visit(newArea(), area);
+    return areaDocs.map(areaDoc => {
+        this.fromDatabaseConverter.visit(newArea(), areaDoc);
     })
 }
 
-
-
-AreaRepository.prototype.createArea = async function(area) {
-    const areaData = this.toDatabaseConverter.visit(area);
-    let doc;
+AreaRepository.prototype.create = async function(areaEntity) {
+    const areaDoc = this.toDatabaseConverter.visit(areaEntity);
+    let newDoc;
     try {
-        doc = await AreaModel.create(areaData);
+        newDoc = await AreaModel.create(areaDoc);
     }
     catch(err) {
         throw newInternalServerError("Database error", "Database error occur");
     }
-    return this.fromDatabaseConverter.visit(newArea(), doc);
+    return this.fromDatabaseConverter.visit(newArea(), newDoc);
 }
 
-
-
-AreaRepository.prototype.findAreaById = async function(id) {
+AreaRepository.prototype.findById = async function(id) {
+    let areaDoc;
     try {
-        const areaId = id.getValue();
-        const area = await AreaModel.findById(areaId).exec();
-        return this.fromDatabaseConverter.visit(new Area(), area);
+        areaDoc = await AreaModel.findById(areaId).exec();
     }
     catch(err) {
-        console.log(err);
+        throw newInternalServerError("Database error", "Database error occur");
     }
+    const areaId = id.getValue();
+    return this.fromDatabaseConverter.visit(new Area(), areaDoc);
+}
 
-
-
+AreaRepository.prototype.findByIdAndUpdate = async function(id, areaEntity) {
+    const areaDoc = this.toDatabaseConverter.visit(areaEntity);
+    const filter = {
+        _id: id.getValue()
+    }
+    let newDoc;
+    try {
+        newDoc = await AreaModel.findOneAndUpdate(filter, areaDoc, { new: true }); // set new to true to return new document after update
+    }
+    catch(err) {
+        throw newInternalServerError("Database error", "Database error occur");
+    }
+    return this.fromDatabaseConverter.visit(new Area(), newDoc);
 }
 
 function newAreaRepository() {
