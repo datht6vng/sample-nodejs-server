@@ -20,7 +20,7 @@ RUN apk add \
     gst-plugins-ugly \
     gstreamer-tools \
     gst-libav \
-    gst-rtsp-server\ 
+    gst-rtsp-server \
     ffmpeg
 
 RUN apk add \

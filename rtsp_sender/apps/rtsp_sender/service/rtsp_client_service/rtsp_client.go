@@ -3,6 +3,7 @@ package rtsp_client_service
 import (
 	"fmt"
 	"io"
+	"strings"
 	"sync"
 	"time"
 
@@ -47,12 +48,19 @@ func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, 
 		enableRTSPRelay:  enableRTSPRelay,
 	}
 }
+
+func formatRTSPURL(url, username, password string) string {
+	parts := strings.Split(url, "://")
+	return parts[0] + "://" + username + ":" + password + "@" + parts[len(parts)-1]
+}
+
 func (c *Client) Connect() error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
 	var err error
-	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: c.clientAddress, DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
+	fmt.Println(formatRTSPURL(c.clientAddress, c.username, c.password))
+	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: formatRTSPURL(c.clientAddress, c.username, c.password), DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
 	if err != nil {
 		return err
 	}

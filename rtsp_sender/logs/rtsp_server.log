@@ -36,3 +36,63 @@
 2023/02/14 17:42:31 INF [RTSP] [conn 127.0.0.1:44404] opened
 2023/02/14 17:42:37 INF [RTSP] [session fa4176a3] created by 127.0.0.1:44404
 2023/02/14 17:42:38 INF [RTSP] [session fa4176a3] is publishing to path '1', with UDP, 1 track (H264)
+2023/02/17 14:51:18 INF rtsp-simple-server v0.21.2
+2023/02/17 14:51:18 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 14:52:43 INF rtsp-simple-server v0.21.2
+2023/02/17 14:52:43 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 14:57:14 INF rtsp-simple-server v0.21.2
+2023/02/17 14:57:14 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 14:57:43 INF [RTSP] [conn 127.0.0.1:48954] opened
+2023/02/17 14:57:48 INF [RTSP] [session 6e3327b5] created by 127.0.0.1:48954
+2023/02/17 14:57:49 INF [RTSP] [session 6e3327b5] is publishing to path '1', with UDP, 1 track (H264)
+2023/02/17 14:59:06 INF rtsp-simple-server v0.21.2
+2023/02/17 14:59:06 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 14:59:12 INF [RTSP] [conn 127.0.0.1:49524] opened
+2023/02/17 14:59:18 INF [RTSP] [session ea716980] created by 127.0.0.1:49524
+2023/02/17 14:59:19 INF [RTSP] [session ea716980] is publishing to path '1', with UDP, 1 track (H264)
+2023/02/17 14:59:42 INF rtsp-simple-server v0.21.2
+2023/02/17 14:59:42 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 14:59:44 INF [RTSP] [conn 127.0.0.1:56372] opened
+2023/02/17 15:22:15 INF rtsp-simple-server v0.21.2
+2023/02/17 15:22:15 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:22:40 INF [RTSP] [conn 127.0.0.1:41856] opened
+2023/02/17 15:24:09 INF rtsp-simple-server v0.21.2
+2023/02/17 15:24:09 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:24:14 INF [RTSP] [conn 127.0.0.1:58958] opened
+2023/02/17 15:24:53 INF rtsp-simple-server v0.21.2
+2023/02/17 15:24:53 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:33:43 INF rtsp-simple-server v0.21.2
+2023/02/17 15:33:43 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:34:17 INF rtsp-simple-server v0.21.2
+2023/02/17 15:34:17 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:37:40 INF rtsp-simple-server v0.21.2
+2023/02/17 15:37:40 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:38:55 INF rtsp-simple-server v0.21.2
+2023/02/17 15:38:55 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:45:20 INF rtsp-simple-server v0.21.2
+2023/02/17 15:45:20 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:46:01 INF rtsp-simple-server v0.21.2
+2023/02/17 15:46:01 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:47:20 INF rtsp-simple-server v0.21.2
+2023/02/17 15:47:20 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:51:21 INF rtsp-simple-server v0.21.2
+2023/02/17 15:51:21 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:51:56 INF rtsp-simple-server v0.21.2
+2023/02/17 15:51:56 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:53:40 INF rtsp-simple-server v0.21.2
+2023/02/17 15:53:40 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:54:45 INF rtsp-simple-server v0.21.2
+2023/02/17 15:54:45 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:54:46 INF [RTSP] [conn 127.0.0.1:42050] opened
+2023/02/17 15:54:51 INF [RTSP] [session b7b35ee9] created by 127.0.0.1:42050
+2023/02/17 15:54:52 INF [RTSP] [session b7b35ee9] is publishing to path '1', with UDP, 1 track (H264)
+2023/02/17 15:57:23 INF rtsp-simple-server v0.21.2
+2023/02/17 15:57:23 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 15:57:26 INF [RTSP] [conn 127.0.0.1:53724] opened
+2023/02/17 15:57:31 INF [RTSP] [session ddfadcac] created by 127.0.0.1:53724
+2023/02/17 15:57:32 INF [RTSP] [session ddfadcac] is publishing to path '1', with UDP, 1 track (H264)
+2023/02/17 16:01:43 INF rtsp-simple-server v0.21.2
+2023/02/17 16:01:43 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/02/17 16:01:44 INF [RTSP] [conn 127.0.0.1:54424] opened
+2023/02/17 16:01:49 INF [RTSP] [session 64d577d0] created by 127.0.0.1:54424
+2023/02/17 16:01:50 INF [RTSP] [session 64d577d0] is publishing to path '1', with UDP, 1 track (H264)

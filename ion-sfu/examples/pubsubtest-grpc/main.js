@@ -21,7 +21,7 @@ let trackEvent;
 
 const url = 'http://localhost:5551';
 const uid = Math.random().toString();
-const sid = "ion";
+const sid = "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2";
 let room;
 let rtc;
 let localStream;
