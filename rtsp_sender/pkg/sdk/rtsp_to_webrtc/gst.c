@@ -39,7 +39,7 @@ static gboolean gstreamer_send_bus_call(GstBus *bus, GstMessage *msg, gpointer d
   return TRUE;
 }
 
-GstFlowReturn gstreamer_send_new_video_sample_handler(GstElement *object, gpointer user_data) {
+GstFlowReturn gstreamer_send_new_video_sample_handler_f(GstElement *object, gpointer user_data) {
   GstSample *sample = NULL;
   GstBuffer *buffer = NULL;
   gpointer copy = NULL;
@@ -51,13 +51,51 @@ GstFlowReturn gstreamer_send_new_video_sample_handler(GstElement *object, gpoint
     buffer = gst_sample_get_buffer(sample);
     if (buffer) {
       gst_buffer_extract_dup(buffer, 0, gst_buffer_get_size(buffer), &copy, &copy_size);
-      goHandlePipelineVideoBuffer(copy, copy_size, GST_BUFFER_DURATION(buffer), s->pipelineId);
+      goHandlePipelineVideoBufferF(copy, copy_size, GST_BUFFER_DURATION(buffer), s->pipelineId);
     }
     gst_sample_unref (sample);
   }
-
   return GST_FLOW_OK;
 }
+
+GstFlowReturn gstreamer_send_new_video_sample_handler_h(GstElement *object, gpointer user_data) {
+  GstSample *sample = NULL;
+  GstBuffer *buffer = NULL;
+  gpointer copy = NULL;
+  gsize copy_size = 0;
+  SampleHandlerUserData *s = (SampleHandlerUserData *)user_data;
+
+  g_signal_emit_by_name (object, "pull-sample", &sample);
+  if (sample) {
+    buffer = gst_sample_get_buffer(sample);
+    if (buffer) {
+      gst_buffer_extract_dup(buffer, 0, gst_buffer_get_size(buffer), &copy, &copy_size);
+      goHandlePipelineVideoBufferH(copy, copy_size, GST_BUFFER_DURATION(buffer), s->pipelineId);
+    }
+    gst_sample_unref (sample);
+  }
+  return GST_FLOW_OK;
+}
+
+GstFlowReturn gstreamer_send_new_video_sample_handler_q(GstElement *object, gpointer user_data) {
+  GstSample *sample = NULL;
+  GstBuffer *buffer = NULL;
+  gpointer copy = NULL;
+  gsize copy_size = 0;
+  SampleHandlerUserData *s = (SampleHandlerUserData *)user_data;
+
+  g_signal_emit_by_name (object, "pull-sample", &sample);
+  if (sample) {
+    buffer = gst_sample_get_buffer(sample);
+    if (buffer) {
+      gst_buffer_extract_dup(buffer, 0, gst_buffer_get_size(buffer), &copy, &copy_size);
+      goHandlePipelineVideoBufferQ(copy, copy_size, GST_BUFFER_DURATION(buffer), s->pipelineId);
+    }
+    gst_sample_unref (sample);
+  }
+  return GST_FLOW_OK;
+}
+
 GstFlowReturn gstreamer_send_new_audio_sample_handler(GstElement *object, gpointer user_data) {
   GstSample *sample = NULL;
   GstBuffer *buffer = NULL;
@@ -74,7 +112,6 @@ GstFlowReturn gstreamer_send_new_audio_sample_handler(GstElement *object, gpoint
     }
     gst_sample_unref (sample);
   }
-
   return GST_FLOW_OK;
 }
 
@@ -99,17 +136,31 @@ void gstreamer_send_start_pipeline(GstElement *pipeline, bool audioEnable, bool 
   } 
 
   if (videoEnable) {
-    GstElement *appsink = gst_bin_get_by_name(GST_BIN(pipeline), "videosink");
+    GstElement *appsink;
+    appsink = gst_bin_get_by_name(GST_BIN(pipeline), "videosink_f");
     g_object_set(appsink, "emit-signals", TRUE, NULL);
-    g_signal_connect(appsink, "new-sample", G_CALLBACK(gstreamer_send_new_video_sample_handler), s);
+    g_signal_connect(appsink, "new-sample", G_CALLBACK(gstreamer_send_new_video_sample_handler_f), s);
+    gst_object_unref(appsink);
+
+    appsink = gst_bin_get_by_name(GST_BIN(pipeline), "videosink_h");
+    g_object_set(appsink, "emit-signals", TRUE, NULL);
+    g_signal_connect(appsink, "new-sample", G_CALLBACK(gstreamer_send_new_video_sample_handler_h), s);
+    gst_object_unref(appsink);
+
+    appsink = gst_bin_get_by_name(GST_BIN(pipeline), "videosink_q");
+    g_object_set(appsink, "emit-signals", TRUE, NULL);
+    g_signal_connect(appsink, "new-sample", G_CALLBACK(gstreamer_send_new_video_sample_handler_q), s);
     gst_object_unref(appsink);
   }
-  
+
   gst_element_set_state(pipeline, GST_STATE_PLAYING);
 }
 
 void gstreamer_send_stop_pipeline(GstElement *pipeline) {
+  GstEvent *eos = gst_event_new_eos();
+  gst_element_send_event(pipeline, eos);
   gst_element_set_state(pipeline, GST_STATE_NULL);
+  gst_object_unref (pipeline);
 }
 
 

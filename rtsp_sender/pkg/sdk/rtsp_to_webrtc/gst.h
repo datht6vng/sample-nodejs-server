@@ -9,7 +9,9 @@
 #include <stdbool.h>
 
 extern void goHandlePipelineAudioBuffer(void *buffer, int bufferLen, int samples, int pipelineId);
-extern void goHandlePipelineVideoBuffer(void *buffer, int bufferLen, int samples, int pipelineId);
+extern void goHandlePipelineVideoBufferF(void *buffer, int bufferLen, int samples, int pipelineId);
+extern void goHandlePipelineVideoBufferH(void *buffer, int bufferLen, int samples, int pipelineId);
+extern void goHandlePipelineVideoBufferQ(void *buffer, int bufferLen, int samples, int pipelineId);
 
 GstElement *gstreamer_send_create_pipeline(char *pipeline);
 void gstreamer_send_start_pipeline(GstElement *pipeline, bool audioEnable, bool videoEnable, int pipelineId);

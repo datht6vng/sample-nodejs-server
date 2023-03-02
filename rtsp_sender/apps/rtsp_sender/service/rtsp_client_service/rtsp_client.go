@@ -30,10 +30,10 @@ type Client struct {
 	connector *sdk.Connector
 	rtc       *sdk.RTC
 
-	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
-	codecs                 []av.CodecData
-	pipeline               *gst.Pipeline
-	closed                 chan bool
+	// audioTrack, videoTrack map[string]*webrtc.TrackLocalStaticSample
+	codecs   []av.CodecData
+	pipeline *gst.Pipeline
+	closed   chan bool
 }
 
 func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool) *Client {
@@ -98,7 +98,7 @@ func (c *Client) Connect() error {
 
 	rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=demux", c.clientAddress, c.username, c.password)
 
-	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", videoDepay, videoDecoder)
+	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ", videoDepay, videoDecoder)
 	audioSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", audioDepay, audioDecoder)
 
 	config := sdk.RTCConfig{
@@ -136,29 +136,50 @@ func (c *Client) Connect() error {
 	})
 
 	publishTrack := []webrtc.TrackLocal{}
-
+	videoTracks := map[string]*webrtc.TrackLocalStaticSample{}
 	// Choose track codec here
-	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", c.clientAddress)
+	// Publish 3 track to SFU
+	/*
+	* Q: Quarter resolution
+	* H: Half resolution
+	* F: Full resolution
+	 */
+	videoTrackQ, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", c.clientAddress, webrtc.WithRTPStreamID("q"))
 	if err != nil {
 		return err
 	}
-	c.videoTrack = videoTrack
-	publishTrack = append(publishTrack, c.videoTrack)
 
+	publishTrack = append(publishTrack, videoTrackQ)
+	videoTracks["q"] = videoTrackQ
+
+	videoTrackH, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", c.clientAddress, webrtc.WithRTPStreamID("h"))
+	if err != nil {
+		return err
+	}
+	publishTrack = append(publishTrack, videoTrackH)
+	videoTracks["h"] = videoTrackH
+
+	videoTrackF, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", c.clientAddress, webrtc.WithRTPStreamID("f"))
+	if err != nil {
+		return err
+	}
+	publishTrack = append(publishTrack, videoTrackF)
+	videoTracks["f"] = videoTrackF
+
+	var audioTrack *webrtc.TrackLocalStaticSample
 	if !audioOnly {
 		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", c.clientAddress)
 		if err != nil {
 			return err
 		}
-		c.audioTrack = audioTrack
-		publishTrack = append(publishTrack, c.audioTrack)
+		publishTrack = append(publishTrack, audioTrack)
 	}
 
 	c.pipeline = gst.CreatePipeline(
 		rtspSrc,
 		audioSrc, videoSrc,
 		audioCodec, videoCodec,
-		c.audioTrack, c.videoTrack,
+		audioTrack, videoTracks,
 		c.enableRTSPRelay,
 		c.rtspRelayAddress,
 	)
