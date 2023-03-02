@@ -1,8 +1,9 @@
 module github.com/datht6vng/hcmut-thexis/rtsp-sender
 
-go 1.19
+go 1.20
 
 require (
+	github.com/aler9/gortsplib/v2 v2.1.3
 	github.com/deepch/vdk v0.0.19
 	github.com/ebml-go/webm v0.0.0-20221117133942-84fa5245cf70
 	github.com/evalphobia/logrus_sentry v0.8.2

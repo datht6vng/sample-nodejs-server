@@ -7,11 +7,14 @@ import (
 	"sync"
 	"time"
 
+	"github.com/aler9/gortsplib/v2/pkg/url"
+
+	"github.com/aler9/gortsplib/v2"
+	"github.com/aler9/gortsplib/v2/pkg/format"
+	"github.com/aler9/gortsplib/v2/pkg/media"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
 	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk/rtsp_to_webrtc"
-	"github.com/deepch/vdk/av"
-	"github.com/deepch/vdk/format/rtspv2"
 	"github.com/pion/webrtc/v3"
 )
 
@@ -31,7 +34,7 @@ type Client struct {
 	rtc       *sdk.RTC
 
 	// audioTrack, videoTrack map[string]*webrtc.TrackLocalStaticSample
-	codecs   []av.CodecData
+	codecs   []format.Format
 	pipeline *gst.Pipeline
 	closed   chan bool
 }
@@ -60,34 +63,56 @@ func (c *Client) Connect() error {
 
 	var err error
 	fmt.Println(formatRTSPURL(c.clientAddress, c.username, c.password))
-	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: formatRTSPURL(c.clientAddress, c.username, c.password), DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
+
+	u, err := url.Parse(formatRTSPURL(c.clientAddress, c.username, c.password))
+	if err != nil {
+		panic(err)
+	}
+
+	rtspClient := &gortsplib.Client{
+		// the stream transport (UDP, Multicast or TCP). If nil, it is chosen automatically
+		Transport: nil,
+		// timeout of read operations
+		ReadTimeout: 10 * time.Second,
+		// timeout of write operations
+		WriteTimeout: 10 * time.Second,
+	}
+	// connect to the server
+	err = rtspClient.Start(u.Scheme, u.Host)
 	if err != nil {
 		return err
 	}
 
-	c.codecs = rtspClient.CodecData
-	rtspClient.Close()
-
 	audioOnly := true
+	// setup all medias
+	medias, _, _, err := rtspClient.Describe(u)
+	if err != nil {
+		return err
+	}
+	for _, m := range medias {
+		if m.Type == media.TypeAudio {
+			audioOnly = false
+		}
+		c.codecs = append(c.codecs, m.Formats...)
+	}
+
+	rtspClient.Close()
 
 	var videoCodec, audioCodec string
 	var videoDepay, audioDepay string
 	var videoDecoder, audioDecoder string
 
 	for _, codec := range c.codecs {
-		if codec.Type().IsAudio() {
-			audioOnly = false
-		}
-		switch codec.Type() {
-		case av.H264:
+		switch codec.(type) {
+		case *format.H264:
 			videoCodec = webrtc.MimeTypeH264
 			videoDepay = "rtph264depay"
 			videoDecoder = "avdec_h264"
-		case av.VP8:
+		case *format.VP8:
 			videoCodec = webrtc.MimeTypeVP8
 			videoDepay = "rtpvp8depay"
 			videoDecoder = "avdec_vp8"
-		case av.OPUS:
+		case *format.Opus:
 			audioCodec = webrtc.MimeTypeOpus
 			audioDepay = "rtpopusdepay"
 			audioDecoder = "avdec_opus"

@@ -625,3 +625,7 @@
 2023-03-02T16:32:00.109 ERROR rtsp-sender6977d1809342 Error when new client: dial tcp 42.119.88.47:5564: i/o timeout 
 2023-03-02T16:32:45.174  INFO rtsp-sender6977d1809342 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
 2023-03-02T16:32:55.181 ERROR rtsp-sender6977d1809342 Error when new client: dial tcp 42.119.88.47:5564: i/o timeout 
+2023-03-02T17:43:29.891  INFO rtsp-sender Cannot start rtsp sender handler with error: cannot start gRPC service: cannot listen on 0.0.0.0:5551: listen tcp 0.0.0.0:5551: bind: address already in use 
+2023-03-02T17:43:29.892  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-02T17:43:42.440  INFO rtsp-sender interrupt 
+2023-03-02T17:43:42.440  INFO rtsp-sender Exiting 
