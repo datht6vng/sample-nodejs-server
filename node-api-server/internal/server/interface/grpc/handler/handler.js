@@ -8,6 +8,7 @@ class Handler {
 }
 
 Handler.prototype.success = function(data, callback, message="Success", httpStatusCode=200) {
+    console.log(data)
     const response = {
         data: data,
         message: message,

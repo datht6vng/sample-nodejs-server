@@ -2,47 +2,32 @@ const mongoose = require('mongoose');
 
 const { config } = require("../../../pkg/config/config");
 
-const mongodb = config.database.mongodb;
-
-const defaultUser = mongodb.user;
-const defaultPassword = mongodb.password;
-const defaultHost = mongodb.host;
-const defaultPort = mongodb.port;
-const defaultDbName = mongodb.db_name;
-const defaultOptions = {
-    authSource: mongodb.options.auth_source,
-    useNewUrlParser: mongodb.options.use_new_url_parser, 
-    useUnifiedTopology: mongodb.options.use_unified_topology
-}
-
-
-class MongoDb {
-    constructor(user=defaultUser, password=defaultPassword, host=defaultHost, port=defaultPort, db=defaultDbName,  options=defaultOptions) {
-        this.user = user;
-        this.password = password;
-        this.host = host;
-        this.port = port;
-        this.db = db;
-        this.options = options;
+class MongoDB {
+    constructor() {     
+        this.conf = config.database.mongodb;
+        this.options = {
+            authSource: this.conf.options.auth_source,
+            useNewUrlParser: this.conf.options.use_new_url_parser, 
+            useUnifiedTopology: this.conf.options.use_unified_topology
+        }
     }
 
     
 }
 
-MongoDb.prototype.start = async function() {
-    const uri = `mongodb://${this.user}:${this.password}@${this.host}:${this.port}/${this.db}`;
+MongoDB.prototype.start = async function(user=this.conf.user, password=this.conf.password, host=this.conf.host, port=this.conf.port, db=this.conf.db_name, options=this.conf.options) {
+    const url = `mongodb://${user}:${password}@${host}:${port}/${db}`;
     try {
-        await mongoose.connect(uri, this.options);
-        console.log(`MongoDB is connected on ${uri}`);
+        await mongoose.connect(url, this.options);
+        console.log(`MongoDB is connected on ${url}`);
     }
     catch(error) {
         console.log(error);
     }
 }
 
-function newMongoDb(user=defaultUser, password=defaultPassword, host=defaultHost, port=defaultPort, db=defaultDbName,  options=defaultOptions) {
-    return new MongoDb(user, password, host, port, db, options);
+function newMongoDB() {
+    return new MongoDB();
 }
 
-module.exports.MongoDb = MongoDb;
-module.exports.newMongoDb = newMongoDb;
+module.exports.newMongoDB = newMongoDB;

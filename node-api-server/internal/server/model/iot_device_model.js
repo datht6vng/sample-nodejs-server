@@ -3,32 +3,31 @@ const Schema = mongoose.Schema;
 
 const iotDeviceSchema = new Schema (
     {
-        serial_number: String,
-        device_name: String,
-        device_type: String,
-        config_zone: Number,
-        status: String,
-        // event_name: String,
-        image_uri: String,
-        extra_information: String,
-        x_position: Schema.Types.Decimal128,
-        y_position: Schema.Types.Decimal128,
-        z_position: Schema.Types.Decimal128,
-        camera_id: {
-            type: Schema.Types.ObjectID,
-            ref: 'Camera'
+        iot_device_name: {
+            type: String,
+            unique: true,
+            required: true
         },
-        area_id: {
+
+        zone: Number,
+
+        event_type: {
             type: Schema.Types.ObjectID,
-            ref: 'Area'
+            ref: 'EventType'
+        },
+
+        status: {
+            type: String,
+            enum: ['used', 'free'],
+            default: 'free'
+        },
+
+
+        iot_device_type: {
+            type: Schema.Types.ObjectID,
+            ref: 'IotDeviceType'
         }
 
-    },
-    { 
-        timestamps: { 
-            createdAt: 'created_at',
-            updatedAt: 'updated_at' 
-        } 
     }
 );
 

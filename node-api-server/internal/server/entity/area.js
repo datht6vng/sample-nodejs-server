@@ -2,9 +2,14 @@ class Area {
     id = null;
     areaName = null;
     address = null;
-    mapUri = null;
-    children = null;
-    parent = null;
+    mapUrl = null;
+    // children = null;
+    parentArea = null;
+    
+    floorNumber = null;
+    lat = null;
+    lng = null;
+    areaType = null;
 
 }
 
@@ -24,16 +29,32 @@ Area.prototype.getAddress = function() {
     return this.address;
 }
 
-Area.prototype.getMapUri = function() {
-    return this.mapUri;
+Area.prototype.getMapUrl = function() {
+    return this.mapUrl;
 }
 
-Area.prototype.getChildren = function() {
-    return this.children;
+// Area.prototype.getChildren = function() {
+//     return this.children;
+// }
+
+Area.prototype.getParentArea = function() {
+    return this.parentArea;
 }
 
-Area.prototype.getParent = function() {
-    return this.parent;
+Area.prototype.getFloorNumber = function() {
+    return this.floorNumber;
+}
+
+Area.prototype.getLat = function() {
+    return this.lat;
+}
+
+Area.prototype.getLng = function() {
+    return this.lng;
+}
+
+Area.prototype.getAreaType = function() {
+    return this.areaType;
 }
 
 Area.prototype.setId = function(id) {
@@ -51,21 +72,41 @@ Area.prototype.setAddress = function(address) {
     return this;
 }
 
-Area.prototype.setMapUri = function(mapUri) {
-    this.mapUri = mapUri;
+Area.prototype.setMapUrl = function(mapUrl) {
+    this.mapUrl = mapUrl;
     return this;
 }
 
-Area.prototype.setChildren = function(children) {
-    // if (children && Array.isArray(children)) {
-    //     this.children = children;
-    // }
-    this.children = children;
+// Area.prototype.setChildren = function(children) {
+//     // if (children && Array.isArray(children)) {
+//     //     this.children = children;
+//     // }
+//     this.children = children;
+//     return this;
+// }
+
+Area.prototype.setParentArea = function(parentArea) {
+    this.parentArea = parentArea;
     return this;
 }
 
-Area.prototype.setParent = function(parent) {
-    this.parent = parent;
+Area.prototype.setFloorNumber = function(floorNumber) {
+    this.floorNumber = floorNumber;
+    return this;
+}
+  
+Area.prototype.setLat = function(lat) {
+    this.lat = lat;
+    return this;
+}
+
+Area.prototype.setLng = function(lng) {
+    this.lng = lng;
+    return this;
+}
+
+Area.prototype.setAreaType = function(areaType) {
+    this.areaType = areaType;
     return this;
 }
 

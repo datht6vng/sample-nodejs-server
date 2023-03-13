@@ -18,7 +18,7 @@ class AreaService {
 AreaService.prototype.getAllAreas = async function() {
     const areas = await this.repository.getAll();
     return areas.map(area => {
-        return this.toProtobufConverter.visit(area);
+        this.toProtobufConverter.visit(area);
     })
 }
 
@@ -33,15 +33,12 @@ AreaService.prototype.findAreaById = async function(areaId) {
     return this.toProtobufConverter.visit(areaEntity);
 }
 
-AreaService.prototype.findAreaByName = async function(areaName) {
+AreaService.prototype.findAreaByName = function(areaName) {
     const areaEntity = await this.repository.findByName(areaName);
     return this.toProtobufConverter.visit(areaEntity);
 }
 
-
-
-
-AreaService.prototype.updateAreaById = async function(areaId, areaDetail) {
+AreaService.prototype.updateAreaById = function(areaId, areaDetail) {
     const areaEntity = await this.repository.findByIdAndUpdate(newId(areaId), this.fromProtobufConverter.visit(newArea(), areaDetail));
     return this.toProtobufConverter.visit(areaEntity);
 }

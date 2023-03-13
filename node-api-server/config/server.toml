@@ -1,12 +1,12 @@
 [server]
     [server.http]
-        url = "http://localhost"
+        host = "http://localhost"
         port = "3000"
 
     [server.grpc]
-        url = "http://localhost"
-        binding_ip_address = "0.0.0.0"
+        host = "http://localhost"
         port = "50051"
+        binding_ip_address = "0.0.0.0"
 
 [database]
     [database.mongodb]

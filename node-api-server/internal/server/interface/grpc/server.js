@@ -1,39 +1,38 @@
 const grpc = require("@grpc/grpc-js");
-const { ProtoLoader } = require("../../../../pkg/grpc/proto/proto_loader");
+const { newProtoLoader } = require("../../../../pkg/grpc/proto/proto_loader");
 
 const { config } = require("../../../../pkg/config/config");
 
-const { ExampleHandler } = require("./handler/example_handler");
 const { newAreaHandler } = require("./handler/area_handler");
-// const { IotDeviceHandler } = require("./handler/iot_device_handler");
-// const { EventHandler } = require("./handler/event_handler");
 
-class GRPCServer {
-    constructor(binding_ip_address=config.server.grpc.binding_ip_address, port=config.server.grpc.port) {
+class GrpcServer {
+    constructor() {
         this.server = new grpc.Server();
-        this.protoLoader = new ProtoLoader();
-        this.binding_ip_address = binding_ip_address;
-        this.port = port;
-        
+        this.protoLoader = newProtoLoader();
+        this.conf = config.server.grpc;
+        this.initService();
     }
 
 }
 
-GRPCServer.prototype.start = function() {
-    this.server.addService(this.protoLoader.loadPackage("example.proto").ExampleService.service, new ExampleHandler());
-    this.server.addService(this.protoLoader.loadPackage("area.proto").AreaService.service, newAreaHandler());
-    // this.server.addService(this.protoLoader.loadPackage("iot_device.proto").IotDeviceService.service, new IotDeviceHandler());
-    // this.server.addService(this.protoLoader.loadPackage("event.proto").EventService.service, new EventHandler());
+GrpcServer.prototype.initService = function() {
+    this.server.addService(this.protoLoader.getService('area.proto', 'AreaService'), newAreaHandler());
+}
 
+GrpcServer.prototype.start = function(host=this.conf.host, port=this.conf.port) {
     this.server.bindAsync(
-        `${this.binding_ip_address}:${this.port}`,
+        `${this.conf.binding_ip_address}:${port}`,
         grpc.ServerCredentials.createInsecure(),
         (error, port) => {
             this.server.start();
-            console.log(`Server is listening on port ${this.port}`);
+            console.log(`Grpc server is running at ${host}:${port}`);
         }
     );
 }
 
-module.exports.GRPCServer = GRPCServer;
+function newGrpcServer() {
+    return new GrpcServer();
+}
+
+module.exports.newGrpcServer = newGrpcServer;
 

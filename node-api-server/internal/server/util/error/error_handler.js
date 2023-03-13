@@ -19,9 +19,8 @@ ErrorHandler.prototype.execute = function(error) {
 ErrorHandler.prototype.getMessage = function(error) {
     if (error.isOperational()) {
         return {
-            code: this.getHttpStatus(error),
+            code: this.getGrpcStatus(error),
             message: error.getDescription(),
-            status: this.getGrpcStatus(error)
         }
     }
 

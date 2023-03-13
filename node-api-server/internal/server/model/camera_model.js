@@ -3,28 +3,26 @@ const Schema = mongoose.Schema;
 
 const cameraSchema = new Schema (
     {
-        serial_number: String,
-        camera_name: String,
-        status: String,
-        extra_information: String,
-        x_position: Schema.Types.Decimal128,
-        y_position: Schema.Types.Decimal128,
-        z_position: Schema.Types.Decimal128,
-        iot_device_id: {
-            type: Schema.Types.ObjectID,
-            ref: 'IotDevice'
+        camera_name: {
+            type: String,
+            unique: true,
+            required: true
         },
-        area_id: {
+        status: String,
+
+        rtsp_stream_url: String,
+        sfu_rtsp_stream_url: String,
+
+        camera_device_type: {
             type: Schema.Types.ObjectID,
-            ref: 'Area'
+            ref: 'CameraType'
+        },
+
+        event_type: {
+            type: Schema.Types.ObjectID,
+            ref: 'EventType'
         }
-    
-    },
-    { 
-        timestamps: { 
-            createdAt: 'created_at',
-            updatedAt: 'updated_at' 
-        } 
+
     }
 )
 

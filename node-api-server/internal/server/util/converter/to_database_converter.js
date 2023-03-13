@@ -10,51 +10,48 @@ ToDatabaseConverter.prototype.visit = function(entity, o=null, env=null) {
     return entity.accept(this, o, env);
 }
 
-ToDatabaseConverter.prototype.visitId = function(entity, o, env) {
-    // let result = {};
-    // // check env to find attribute name should be returned 
-    // if (env && env.id_attribute_name) { 
-    //     result[env.id_attribute_name] = entity.getValue();
-    // }
-    // else {
-    //     result._id = entity.getValue()
-    // }
-    // return result;
-
-
-    if (entity) {
-        return entity.getValue(); 
-    }
-    return null;
-    
+ToDatabaseConverter.prototype.visitId = function(id, o, env) {
+    return id.getValue();
 }
 
-ToDatabaseConverter.prototype.visitArea = function(entity, o, env) {
+ToDatabaseConverter.prototype.visitArea = function(area, o, env) {
     // avoid save undefined value to database
-    if (entity) {
-        let area = {};
-        if (entity.getId() != undefined) {
-            area._id = this.visit(entity.getId());
-        }
-        if (entity.getAreaName() != undefined) {
-            area.area_name = entity.getAreaName()
-        }
-        if (entity.getMapUri() != undefined) {
-            area.map_uri = entity.getMapUri();
-        }
-        if (entity.getAddress() != undefined) {
-            area.address = entity.getAddress();
-        }
-        if (entity.getChildren()) {
-            area.children = entity.getChildren().map(e => this.visit(e));
-        }
-        if (entity.getParent() != undefined) {
-            area.parent = this.visit(entity.getParent());
-        }
-        return area;
+    let doc = {};
+    if (area.getId() != undefined) {
+        doc._id = this.visit(area.getId());
     }
-    return null;
-    
+    if (area.getAreaName() != undefined) {
+        doc.area_name = area.getAreaName()
+    }
+    if (area.getMapUrl() != undefined) {
+        doc.map_uri = area.getMapUri();
+    }
+    if (area.getAddress() != undefined) {
+        doc.address = area.getAddress();
+    }
+    // if (area.getChildren()) {
+    //     doc.children = area.getChildren().map(e => this.visit(e));
+    // }
+    if (area.getParentArea() != undefined) {
+        doc.parent_area = this.visit(area.getParentArea());
+    }
+
+    if (area.getFloorNumber() != undefined) {
+        doc.floor_number = area.getFloorNumber();
+    }
+
+    if (area.getLat() != undefined) {
+        doc.lat = area.getLat();
+    }
+
+    if (area.getLng() != undefined) {
+        doc.lng = area.getLng();
+    }
+
+    if (area.getAreaType() != undefined) {
+        doc.area_type = area.getAreaType();
+    }
+    return doc;    
 }
 
 

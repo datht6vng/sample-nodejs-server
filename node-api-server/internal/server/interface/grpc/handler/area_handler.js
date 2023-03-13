@@ -1,20 +1,21 @@
 const { newAreaService } = require("../../../service/area_service");
-const { newErrorHandler } = require("../../../util/error/error_handler");
 
 const { Handler } = require("./handler");
 
 class AreaHandler extends Handler {
-    constructor() {
-
+    constructor(service=newAreaService()) {
+        super();
+        this.service = service;
     }
 }
 
 AreaHandler.prototype.getAllAreas = function(call, callback) {
-    const areaService = newAreaService();
     const self = this;
-    areaService.getAllAreas()
+    this.service.getAllAreas()
     .then(areas => {
-        self.success(areas, callback);
+        self.success({ 
+            areas: areas 
+        }, callback);
     })
     .catch(err => {
         self.failure(err, callback);
@@ -22,22 +23,12 @@ AreaHandler.prototype.getAllAreas = function(call, callback) {
 }
 
 AreaHandler.prototype.createArea = function(call, callback) {
-    const areaService = newAreaService();
     const self = this;
-    areaService.createArea(call.request.area_detail)
+    this.service.createArea(call.request.area_detail)
     .then(area => {
-        console.log(area);
         self.success({
             area_detail: area
-        })
-        // const response = {
-        //     data: {
-        //         area_detail: area
-        //     },
-        //     message: "success",
-        //     status: "temp"
-        // }
-        // callback(null, response);
+        }, callback)
     })
     .catch(err => {
         self.failure(err, callback);

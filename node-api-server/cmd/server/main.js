@@ -1,20 +1,47 @@
-// const app = require("../../internal/server/interface/http/app");
-const config = require("../../pkg/config/config");
+const { newGrpcServer } = require("../../internal/server/interface/grpc/server");
+const { newMongoDB } = require("../../internal/server/database/mongodb");
 
-// const httpApp = app.NewHTTPApp();
+async function main() {
+    const db = newMongoDB();
+    const grpcServer = newGrpcServer();
+    db.start();
+    grpcServer.start();
+}
+
+main();
 
 
-const { GRPCServer } = require("../../internal/server/interface/grpc/server");
-
-const grpcServer = new GRPCServer();
-grpcServer.start();
 
 
 
 
-const { MongoDb } = require("../../internal/server/database/mongodb");
-const mongo = new MongoDb();
-mongo.start();
+
+
+
+
+// // const app = require("../../internal/server/interface/http/app");
+// const config = require("../../pkg/config/config");
+
+// // const httpApp = app.NewHTTPApp();
+
+
+// const { GRPCServer } = require("../../internal/server/interface/grpc/server");
+
+// const grpcServer = new GRPCServer();
+// grpcServer.start();
+
+
+
+
+// const { MongoDb } = require("../../internal/server/database/mongodb");
+// const mongo = new MongoDb();
+// mongo.start();
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,27 @@
++ Stream gui ve luon hinh anh (co bounding box va ko co)
+
+
++ Exchange: amq.topic - Receive Iot event - 1 queue - all routing queue (topic) bind to this queue
+
+
+
++ Exchange: receive event from camera
+
++ queue_event_created: After receive event, save event temporarily to database
++ queue_event_with_video: After receive video from video generation service
++ queue_event_complete: 
+
+
+
+
+Problem:
++ microservice domain recognition, save to database change - save to database 2 fields: domain and uri
++ need event key? Solution: database seeding
++ multiple websocket?
+
+
+
+
+
+Problem:
++ iot_type, camera_type???
