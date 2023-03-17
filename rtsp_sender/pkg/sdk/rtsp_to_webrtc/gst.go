@@ -153,7 +153,7 @@ func goHandlePipelineVideoBufferF(buffer unsafe.Pointer, bufferLen C.int, durati
 	if ok {
 		if videoTrack, ok := pipeline.videoTracks["f"]; ok {
 			if err := videoTrack.WriteSample(media.Sample{Data: C.GoBytes(buffer, bufferLen), Duration: time.Duration(duration)}); err != nil {
-				panic(err)
+				fmt.Println(err)
 			}
 		}
 	} else {
@@ -170,7 +170,7 @@ func goHandlePipelineVideoBufferH(buffer unsafe.Pointer, bufferLen C.int, durati
 	if ok {
 		if videoTrack, ok := pipeline.videoTracks["h"]; ok {
 			if err := videoTrack.WriteSample(media.Sample{Data: C.GoBytes(buffer, bufferLen), Duration: time.Duration(duration)}); err != nil {
-				panic(err)
+				fmt.Println(err)
 			}
 		}
 	} else {
@@ -187,7 +187,7 @@ func goHandlePipelineVideoBufferQ(buffer unsafe.Pointer, bufferLen C.int, durati
 	if ok {
 		if videoTrack, ok := pipeline.videoTracks["q"]; ok {
 			if err := videoTrack.WriteSample(media.Sample{Data: C.GoBytes(buffer, bufferLen), Duration: time.Duration(duration)}); err != nil {
-				panic(err)
+				fmt.Println(err)
 			}
 		}
 	} else {
@@ -203,7 +203,7 @@ func goHandlePipelineAudioBuffer(buffer unsafe.Pointer, bufferLen C.int, duratio
 	pipelinesLock.Unlock()
 	if ok {
 		if err := pipeline.audioTrack.WriteSample(media.Sample{Data: C.GoBytes(buffer, bufferLen), Duration: time.Duration(duration)}); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	} else {
 		fmt.Printf("discarding buffer, no pipeline with id %d", int(pipelineID))

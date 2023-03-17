@@ -629,3 +629,699 @@
 2023-03-02T17:43:29.892  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
 2023-03-02T17:43:42.440  INFO rtsp-sender interrupt 
 2023-03-02T17:43:42.440  INFO rtsp-sender Exiting 
+2023-03-17T15:58:26.773  INFO rtsp-sender08d3d19dd64c Serve gRPC on: 0.0.0.0:5551 
+2023-03-17T15:58:26.773  INFO rtsp-sender08d3d19dd64c Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T15:58:26.774  INFO rtsp-sender08d3d19dd64c Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T15:58:26.774  INFO rtsp-sender08d3d19dd64c Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:04:18.451  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:04:18.599 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:04:33.561  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:04:33.576 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:04:34.737  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:04:34.752 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:04:38.774  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:04:38.789 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:05:40.334  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:05:40.399 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:07:29.042  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:07:29.056 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:08:24.121  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-17T16:08:24.188 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 42.119.88.47:5564: connect: connection refused 
+2023-03-17T16:10:02.838  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:10:02.838 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:10:12.454  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:10:12.454 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:11:09.790  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:11:09.790 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:11:30.202  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:11:30.202 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:11:30.678  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:11:30.678 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:11:46.861  INFO rtsp-sender08d3d19dd64c Serve gRPC on: 0.0.0.0:5551 
+2023-03-17T16:11:46.861  INFO rtsp-sender08d3d19dd64c Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:11:46.861  INFO rtsp-sender08d3d19dd64c Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:11:46.861  INFO rtsp-sender08d3d19dd64c Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:11:54.189  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:11:54.189 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:12:43.624  INFO rtsp-sender08d3d19dd64c Serve gRPC on: 0.0.0.0:5551 
+2023-03-17T16:12:43.624  INFO rtsp-sender08d3d19dd64c Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:12:43.624  INFO rtsp-sender08d3d19dd64c Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:12:43.624  INFO rtsp-sender08d3d19dd64c Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:12:47.835  INFO rtsp-sender08d3d19dd64c Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:12:47.835 ERROR rtsp-sender08d3d19dd64c Error when new client: dial tcp 127.0.0.1:8555: connect: connection refused 
+2023-03-17T16:14:21.774  INFO rtsp-sender Cannot start rtsp sender handler with error: cannot start gRPC service: cannot listen on 0.0.0.0:5551: listen tcp 0.0.0.0:5551: bind: address already in use 
+2023-03-17T16:14:21.774  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:14:23.316  INFO rtsp-sender interrupt 
+2023-03-17T16:14:23.317  INFO rtsp-sender Exiting 
+2023-03-17T16:14:58.511  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:14:58.511  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:14:58.511  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:14:58.511  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:14:58.511 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:14:59.947  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:14:59.948  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:14:59.950  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:14:59.951  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=wXFQ 
+2023-03-17T16:14:59.952  INFO rtsp-sender [C=>S] [wXFQ] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:14:59.953  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:14:59.956  INFO rtsp-sender [wXFQ] [join] success 
+2023-03-17T16:14:59.956  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:14:59.957  INFO rtsp-sender [wXFQ] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5020 typ host 0xc000378920 0xc000414498 <nil>} 
+2023-03-17T16:14:59.957  INFO rtsp-sender [wXFQ] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5068 typ host 0xc0003a63c0 0xc0003a00a8 <nil>} 
+2023-03-17T16:14:59.957  INFO rtsp-sender [wXFQ] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5022 typ host 0xc0003a64e0 0xc0003a01b8 <nil>} 
+2023-03-17T16:14:59.957  INFO rtsp-sender [wXFQ] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5274 typ host 0xc0003a66f0 0xc0003a0368 <nil>} 
+2023-03-17T16:14:59.957  INFO rtsp-sender [wXFQ] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5139 typ host 0xc0003a67b0 0xc0003a03b8 <nil>} 
+2023-03-17T16:15:00.019  INFO rtsp-sender [wXFQ] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 6472 typ srflx raddr 0.0.0.0 rport 5009 0xc000379850 0xc000415af0 <nil>} 
+2023-03-17T16:15:00.212  INFO rtsp-sender [wXFQ] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5028 typ host 0xc0003a7c00 0xc0004b4fe0 <nil>} 
+2023-03-17T16:15:00.216  INFO rtsp-sender [wXFQ] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5264 typ host 0xc000408540 0xc000040b60 <nil>} 
+2023-03-17T16:15:00.219  INFO rtsp-sender [wXFQ] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5043 typ host 0xc00007c010 0xc000220008 <nil>} 
+2023-03-17T16:15:00.224  INFO rtsp-sender [wXFQ] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5114 typ host 0xc00007d330 0xc000220058 <nil>} 
+2023-03-17T16:15:00.226  INFO rtsp-sender [wXFQ] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5067 typ host 0xc00029a750 0xc000221160 <nil>} 
+2023-03-17T16:15:00.239  INFO rtsp-sender [wXFQ] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 26408 typ srflx raddr 0.0.0.0 rport 5046 0xc00029b020 0xc0002217e0 <nil>} 
+2023-03-17T16:15:01.031  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:15:01.037  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:15:05.225  INFO rtsp-sender gather candidate done 
+2023-03-17T16:15:05.225  INFO rtsp-sender gather candidate done 
+2023-03-17T16:15:30.380  INFO rtsp-sender ICEConnectionStateDisconnected failed 
+2023-03-17T16:25:19.028 ERROR rtsp-sender [wXFQ] Error receiving RTC response: rpc error: code = Unavailable desc = error reading from server: EOF 
+2023-03-17T16:25:23.423  INFO rtsp-sender ICE connection state changed: disconnected 
+2023-03-17T16:25:23.424  INFO rtsp-sender Peer connection state changed: disconnected 
+2023-03-17T16:25:42.247  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:25:47.430  INFO rtsp-sender ICE connection state changed: failed 
+2023-03-17T16:25:47.430  INFO rtsp-sender Peer connection state changed: failed 
+2023-03-17T16:25:49.498  INFO rtsp-sender interrupt 
+2023-03-17T16:25:49.498  INFO rtsp-sender Exiting 
+2023-03-17T16:25:51.114  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:25:51.115  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:25:51.115  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:25:51.115 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:25:51.115  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:25:51.500  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:25:51.501  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:25:51.503  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:25:51.504  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=OdPA 
+2023-03-17T16:25:51.504  INFO rtsp-sender [C=>S] [OdPA] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:25:51.504  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:25:51.507  INFO rtsp-sender [OdPA] [join] success 
+2023-03-17T16:25:51.508  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:25:51.508  INFO rtsp-sender [OdPA] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5201 typ host 0xc00007dbf0 0xc000040a68 <nil>} 
+2023-03-17T16:25:51.508  INFO rtsp-sender [OdPA] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5256 typ host 0xc000418330 0xc0004203c8 <nil>} 
+2023-03-17T16:25:51.508  INFO rtsp-sender [OdPA] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5220 typ host 0xc0004183f0 0xc000420418 <nil>} 
+2023-03-17T16:25:51.508  INFO rtsp-sender [OdPA] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5010 typ host 0xc0004184c0 0xc000420468 <nil>} 
+2023-03-17T16:25:51.508  INFO rtsp-sender [OdPA] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5193 typ host 0xc000418580 0xc0004204b8 <nil>} 
+2023-03-17T16:25:51.584  INFO rtsp-sender [OdPA] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 46032 typ srflx raddr 0.0.0.0 rport 5278 0xc000326f50 0xc000317ae8 <nil>} 
+2023-03-17T16:25:51.758  INFO rtsp-sender [OdPA] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5072 typ host 0xc0005c44b0 0xc000420c28 <nil>} 
+2023-03-17T16:25:51.758  INFO rtsp-sender [OdPA] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5016 typ host 0xc0005c4570 0xc000420c78 <nil>} 
+2023-03-17T16:25:51.758  INFO rtsp-sender [OdPA] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5204 typ host 0xc0005c4630 0xc000420cc8 <nil>} 
+2023-03-17T16:25:51.758  INFO rtsp-sender [OdPA] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5159 typ host 0xc0005c46f0 0xc000420d18 <nil>} 
+2023-03-17T16:25:51.758  INFO rtsp-sender [OdPA] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5095 typ host 0xc0005c47b0 0xc000420d68 <nil>} 
+2023-03-17T16:25:51.792  INFO rtsp-sender [OdPA] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 8825 typ srflx raddr 0.0.0.0 rport 5063 0xc0006c27a0 0xc0002da7d8 <nil>} 
+2023-03-17T16:25:52.593  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:25:52.595  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:25:56.505  INFO rtsp-sender gather candidate done 
+2023-03-17T16:25:56.759  INFO rtsp-sender gather candidate done 
+2023-03-17T16:26:21.926  INFO rtsp-sender ICEConnectionStateDisconnected failed 
+2023-03-17T16:31:06.876  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:31:11.743  INFO rtsp-sender interrupt 
+2023-03-17T16:31:11.743  INFO rtsp-sender Exiting 
+2023-03-17T16:31:13.265  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:31:13.266  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:31:13.266  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:31:13.266  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:31:13.266 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:31:14.105  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:31:14.106  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:31:14.107  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:31:14.108  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=Wt8S 
+2023-03-17T16:31:14.109  INFO rtsp-sender [C=>S] [Wt8S] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:31:14.110  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:31:14.112  INFO rtsp-sender [Wt8S] [join] success 
+2023-03-17T16:31:14.112  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:31:14.112  INFO rtsp-sender [Wt8S] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5027 typ host 0xc00029a8d0 0xc000040a68 <nil>} 
+2023-03-17T16:31:14.113  INFO rtsp-sender [Wt8S] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5255 typ host 0xc000374240 0xc000402138 <nil>} 
+2023-03-17T16:31:14.113  INFO rtsp-sender [Wt8S] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5152 typ host 0xc000374300 0xc000402188 <nil>} 
+2023-03-17T16:31:14.113  INFO rtsp-sender [Wt8S] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5052 typ host 0xc0003743e0 0xc0004021d8 <nil>} 
+2023-03-17T16:31:14.113  INFO rtsp-sender [Wt8S] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5016 typ host 0xc0003744a0 0xc000402228 <nil>} 
+2023-03-17T16:31:14.151  INFO rtsp-sender [Wt8S] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 28117 typ srflx raddr 0.0.0.0 rport 5031 0xc00029b570 0xc000041d00 <nil>} 
+2023-03-17T16:31:14.363  INFO rtsp-sender [Wt8S] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5006 typ host 0xc0001a8400 0xc0004ca6b8 <nil>} 
+2023-03-17T16:31:14.363  INFO rtsp-sender [Wt8S] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5035 typ host 0xc0001a84c0 0xc0004ca728 <nil>} 
+2023-03-17T16:31:14.363  INFO rtsp-sender [Wt8S] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5296 typ host 0xc0001a8580 0xc0004ca778 <nil>} 
+2023-03-17T16:31:14.363  INFO rtsp-sender [Wt8S] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5192 typ host 0xc0001a8640 0xc0004ca7c8 <nil>} 
+2023-03-17T16:31:14.363  INFO rtsp-sender [Wt8S] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5049 typ host 0xc0001a8700 0xc0004ca818 <nil>} 
+2023-03-17T16:31:14.418  INFO rtsp-sender [Wt8S] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 24545 typ srflx raddr 0.0.0.0 rport 5217 0xc000375090 0xc00035b730 <nil>} 
+2023-03-17T16:31:15.184  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:31:15.186  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:31:19.111  INFO rtsp-sender gather candidate done 
+2023-03-17T16:31:19.364  INFO rtsp-sender gather candidate done 
+2023-03-17T16:31:44.541  INFO rtsp-sender ICEConnectionStateDisconnected failed 
+2023-03-17T16:31:53.077  INFO rtsp-sender interrupt 
+2023-03-17T16:31:53.077  INFO rtsp-sender Exiting 
+2023-03-17T16:33:00.888  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:33:00.888  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:33:00.888  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:33:00.888  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:33:00.888 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:33:03.785  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:33:03.787  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:33:03.789  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:33:03.790  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=hCZu 
+2023-03-17T16:33:03.791  INFO rtsp-sender [C=>S] [hCZu] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:33:03.791  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  
+2023-03-17T16:33:03.794  INFO rtsp-sender [hCZu] [join] success 
+2023-03-17T16:33:03.794  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:33:03.795  INFO rtsp-sender [hCZu] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5092 typ host 0xc0002f6cd0 0xc0002de5e8 <nil>} 
+2023-03-17T16:33:03.795  INFO rtsp-sender [hCZu] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5102 typ host 0xc0002f6d90 0xc0002de638 <nil>} 
+2023-03-17T16:33:03.795  INFO rtsp-sender [hCZu] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5005 typ host 0xc00021a050 0xc000430058 <nil>} 
+2023-03-17T16:33:03.796  INFO rtsp-sender [hCZu] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5262 typ host 0xc00021a120 0xc0004300a8 <nil>} 
+2023-03-17T16:33:03.796  INFO rtsp-sender [hCZu] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5086 typ host 0xc0002f7370 0xc0002deb10 <nil>} 
+2023-03-17T16:33:03.827  INFO rtsp-sender [hCZu] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 52363 typ srflx raddr 0.0.0.0 rport 5199 0xc0002f74d0 0xc0002debf0 <nil>} 
+2023-03-17T16:33:04.044  INFO rtsp-sender [hCZu] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5041 typ host 0xc0005740b0 0xc0002de088 <nil>} 
+2023-03-17T16:33:04.044  INFO rtsp-sender [hCZu] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5277 typ host 0xc000574170 0xc0002de0d8 <nil>} 
+2023-03-17T16:33:04.044  INFO rtsp-sender [hCZu] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5292 typ host 0xc000574230 0xc0002de128 <nil>} 
+2023-03-17T16:33:04.044  INFO rtsp-sender [hCZu] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5054 typ host 0xc0005742f0 0xc0002de188 <nil>} 
+2023-03-17T16:33:04.044  INFO rtsp-sender [hCZu] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5123 typ host 0xc0005743b0 0xc0002de2d8 <nil>} 
+2023-03-17T16:33:04.101  INFO rtsp-sender [hCZu] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 24677 typ srflx raddr 0.0.0.0 rport 5002 0xc000574040 0xc0002de030 <nil>} 
+2023-03-17T16:33:04.841  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:33:04.846  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:34:20.696  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:34:20.698  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:34:20.698  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:34:20.698 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:34:20.698  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:34:37.633  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:34:37.634  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:34:37.635  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:34:37.636  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=6GHE 
+2023-03-17T16:34:37.636  INFO rtsp-sender [C=>S] [6GHE] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:34:37.636  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  
+2023-03-17T16:34:37.639  INFO rtsp-sender [6GHE] [join] success 
+2023-03-17T16:34:37.639  INFO rtsp-sender [6GHE] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5033 typ host 0xc000410ae0 0xc0003fe758 <nil>} 
+2023-03-17T16:34:37.639  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:34:37.640  INFO rtsp-sender [6GHE] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5202 typ host 0xc0002ae010 0xc000274048 <nil>} 
+2023-03-17T16:34:37.640  INFO rtsp-sender [6GHE] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5238 typ host 0xc0002ae0d0 0xc0002740a8 <nil>} 
+2023-03-17T16:34:37.640  INFO rtsp-sender [6GHE] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5148 typ host 0xc000410d80 0xc0003fe8f0 <nil>} 
+2023-03-17T16:34:37.640  INFO rtsp-sender [6GHE] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5136 typ host 0xc000410e40 0xc0003fe940 <nil>} 
+2023-03-17T16:34:37.694  INFO rtsp-sender [6GHE] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 16248 typ srflx raddr 0.0.0.0 rport 5178 0xc000326ba0 0xc00050be20 <nil>} 
+2023-03-17T16:34:37.891  INFO rtsp-sender [6GHE] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5280 typ host 0xc0006e2510 0xc000274ff8 <nil>} 
+2023-03-17T16:34:37.891  INFO rtsp-sender [6GHE] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5037 typ host 0xc0006e25d0 0xc000275058 <nil>} 
+2023-03-17T16:34:37.891  INFO rtsp-sender [6GHE] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5011 typ host 0xc0006e2690 0xc0002750a8 <nil>} 
+2023-03-17T16:34:37.891  INFO rtsp-sender [6GHE] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5173 typ host 0xc0006e2750 0xc0002750f8 <nil>} 
+2023-03-17T16:34:37.891  INFO rtsp-sender [6GHE] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5164 typ host 0xc0006e2810 0xc000275158 <nil>} 
+2023-03-17T16:34:37.947  INFO rtsp-sender [6GHE] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 43154 typ srflx raddr 0.0.0.0 rport 5021 0xc0004b6040 0xc000196508 <nil>} 
+2023-03-17T16:34:38.705  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:34:38.707  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:34:42.637  INFO rtsp-sender gather candidate done 
+2023-03-17T16:34:42.892  INFO rtsp-sender gather candidate done 
+2023-03-17T16:35:08.062  INFO rtsp-sender ICEConnectionStateDisconnected failed 
+2023-03-17T16:35:22.070  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:35:30.246  INFO rtsp-sender interrupt 
+2023-03-17T16:35:30.246  INFO rtsp-sender Exiting 
+2023-03-17T16:35:32.082  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:35:32.082  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:35:32.082  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:35:32.082  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:35:32.082 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:35:32.221  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:35:32.222  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:35:32.225  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:35:32.226  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=KlKI 
+2023-03-17T16:35:32.226  INFO rtsp-sender [C=>S] [KlKI] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:35:32.227  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:35:32.229  INFO rtsp-sender [KlKI] [join] success 
+2023-03-17T16:35:32.229  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:35:32.229  INFO rtsp-sender [KlKI] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5022 typ host 0xc00061a900 0xc000592498 <nil>} 
+2023-03-17T16:35:32.229  INFO rtsp-sender [KlKI] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5176 typ host 0xc0002b81b0 0xc0001ca088 <nil>} 
+2023-03-17T16:35:32.229  INFO rtsp-sender [KlKI] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5096 typ host 0xc0002b8270 0xc0001ca0d8 <nil>} 
+2023-03-17T16:35:32.229  INFO rtsp-sender [KlKI] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5295 typ host 0xc0002b8340 0xc0001ca128 <nil>} 
+2023-03-17T16:35:32.229  INFO rtsp-sender [KlKI] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5235 typ host 0xc0002b8400 0xc0001ca188 <nil>} 
+2023-03-17T16:35:32.284  INFO rtsp-sender [KlKI] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 57105 typ srflx raddr 0.0.0.0 rport 5209 0xc00061bf20 0xc00061fcc0 <nil>} 
+2023-03-17T16:35:32.480  INFO rtsp-sender [KlKI] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5148 typ host 0xc000304860 0xc0002720e8 <nil>} 
+2023-03-17T16:35:32.480  INFO rtsp-sender [KlKI] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5293 typ host 0xc000304920 0xc000272138 <nil>} 
+2023-03-17T16:35:32.480  INFO rtsp-sender [KlKI] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5133 typ host 0xc00058fa30 0xc000592960 <nil>} 
+2023-03-17T16:35:32.481  INFO rtsp-sender [KlKI] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5059 typ host 0xc00058e010 0xc000272008 <nil>} 
+2023-03-17T16:35:32.481  INFO rtsp-sender [KlKI] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5101 typ host 0xc00058e0f0 0xc0002720f8 <nil>} 
+2023-03-17T16:35:32.536  INFO rtsp-sender [KlKI] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 57014 typ srflx raddr 0.0.0.0 rport 5100 0xc0001f0250 0xc0001ec3d8 <nil>} 
+2023-03-17T16:35:33.291  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:35:33.294  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:35:37.228  INFO rtsp-sender gather candidate done 
+2023-03-17T16:35:37.481  INFO rtsp-sender gather candidate done 
+2023-03-17T16:35:57.357  INFO rtsp-sender interrupt 
+2023-03-17T16:35:57.357  INFO rtsp-sender Exiting 
+2023-03-17T16:35:58.861  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:35:58.861  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:35:58.861  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:35:58.861  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:35:58.861 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:35:59.835  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:35:59.836  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:35:59.837  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:35:59.838  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=Bhde 
+2023-03-17T16:35:59.839  INFO rtsp-sender [C=>S] [Bhde] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:35:59.839  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:35:59.842  INFO rtsp-sender [Bhde] [join] success 
+2023-03-17T16:35:59.842  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:35:59.842  INFO rtsp-sender [Bhde] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5096 typ host 0xc00007dc30 0xc000040a78 <nil>} 
+2023-03-17T16:35:59.842  INFO rtsp-sender [Bhde] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5209 typ host 0xc0001262c0 0xc000116358 <nil>} 
+2023-03-17T16:35:59.842  INFO rtsp-sender [Bhde] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5138 typ host 0xc000126380 0xc0001163a8 <nil>} 
+2023-03-17T16:35:59.842  INFO rtsp-sender [Bhde] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5155 typ host 0xc000126450 0xc0001163f8 <nil>} 
+2023-03-17T16:35:59.842  INFO rtsp-sender [Bhde] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5107 typ host 0xc000126510 0xc000116448 <nil>} 
+2023-03-17T16:35:59.956  INFO rtsp-sender [Bhde] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 43800 typ srflx raddr 0.0.0.0 rport 5005 0xc0003b0100 0xc0003a80d0 <nil>} 
+2023-03-17T16:36:00.092  INFO rtsp-sender [Bhde] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5295 typ host 0xc00031f280 0xc000261618 <nil>} 
+2023-03-17T16:36:00.092  INFO rtsp-sender [Bhde] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5233 typ host 0xc000334040 0xc00035c140 <nil>} 
+2023-03-17T16:36:00.092  INFO rtsp-sender [Bhde] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5207 typ host 0xc000334110 0xc00035c1d0 <nil>} 
+2023-03-17T16:36:00.092  INFO rtsp-sender [Bhde] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5159 typ host 0xc0003341d0 0xc00035c220 <nil>} 
+2023-03-17T16:36:00.092  INFO rtsp-sender [Bhde] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5119 typ host 0xc000334290 0xc00035c280 <nil>} 
+2023-03-17T16:36:00.146  INFO rtsp-sender [Bhde] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 25657 typ srflx raddr 0.0.0.0 rport 5062 0xc00031f370 0xc0002a0108 <nil>} 
+2023-03-17T16:36:00.963  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:36:00.964  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:36:04.840  INFO rtsp-sender gather candidate done 
+2023-03-17T16:36:05.093  INFO rtsp-sender gather candidate done 
+2023-03-17T16:36:30.260  INFO rtsp-sender ICEConnectionStateDisconnected failed 
+2023-03-17T16:38:16.463  INFO rtsp-sender interrupt 
+2023-03-17T16:38:16.464  INFO rtsp-sender Exiting 
+2023-03-17T16:38:18.299  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:38:18.299  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:38:18.299  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:38:18.299  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:38:18.299 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:38:18.965  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:38:18.965  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:38:18.967  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:38:18.968  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=fqoa 
+2023-03-17T16:38:18.968  INFO rtsp-sender [C=>S] [fqoa] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:38:18.968  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:38:18.971  INFO rtsp-sender [fqoa] [join] success 
+2023-03-17T16:38:18.971  INFO rtsp-sender [fqoa] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5229 typ host 0xc00041e9a0 0xc000040878 <nil>} 
+2023-03-17T16:38:18.972  INFO rtsp-sender [fqoa] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5130 typ host 0xc00041ea60 0xc000040928 <nil>} 
+2023-03-17T16:38:18.971  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:38:18.972  INFO rtsp-sender [fqoa] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5005 typ host 0xc00041eb20 0xc000040988 <nil>} 
+2023-03-17T16:38:18.972  INFO rtsp-sender [fqoa] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5279 typ host 0xc0006a4200 0xc0004181b8 <nil>} 
+2023-03-17T16:38:18.972  INFO rtsp-sender [fqoa] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5035 typ host 0xc0006a42c0 0xc000418208 <nil>} 
+2023-03-17T16:38:19.006  INFO rtsp-sender [fqoa] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 36237 typ srflx raddr 0.0.0.0 rport 5177 0xc00007c030 0xc000270010 <nil>} 
+2023-03-17T16:38:19.223  INFO rtsp-sender [fqoa] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5196 typ host 0xc0002b7860 0xc000418c68 <nil>} 
+2023-03-17T16:38:19.224  INFO rtsp-sender [fqoa] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5240 typ host 0xc0002b79f0 0xc000418cb8 <nil>} 
+2023-03-17T16:38:19.224  INFO rtsp-sender [fqoa] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5174 typ host 0xc0002b7d30 0xc000418d08 <nil>} 
+2023-03-17T16:38:19.224  INFO rtsp-sender [fqoa] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5079 typ host 0xc0002b7e20 0xc000418d58 <nil>} 
+2023-03-17T16:38:19.224  INFO rtsp-sender [fqoa] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5173 typ host 0xc0002b7ef0 0xc000418db0 <nil>} 
+2023-03-17T16:38:19.264  INFO rtsp-sender [fqoa] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 19422 typ srflx raddr 0.0.0.0 rport 5058 0xc00007c5c0 0xc000270798 <nil>} 
+2023-03-17T16:38:20.016  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:38:20.019  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:38:23.969  INFO rtsp-sender gather candidate done 
+2023-03-17T16:38:24.226  INFO rtsp-sender gather candidate done 
+2023-03-17T16:38:29.683 ERROR rtsp-sender [fqoa] Error receiving RTC response: rpc error: code = Unavailable desc = error reading from server: EOF 
+2023-03-17T16:38:32.722  INFO rtsp-sender interrupt 
+2023-03-17T16:38:32.722  INFO rtsp-sender Exiting 
+2023-03-17T16:38:49.294  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:38:49.294  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:38:49.294  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:38:49.294  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:38:49.294 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:38:49.817  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:38:49.819  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:38:49.820  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:38:49.821  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=PHRz 
+2023-03-17T16:38:49.821  INFO rtsp-sender [C=>S] [PHRz] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:38:49.821  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink_f video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-17T16:38:49.825  INFO rtsp-sender [PHRz] [join] success 
+2023-03-17T16:38:49.825  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:38:49.826  INFO rtsp-sender [PHRz] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5099 typ host 0xc0003c3a20 0xc000270458 <nil>} 
+2023-03-17T16:38:49.826  INFO rtsp-sender [PHRz] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5206 typ host 0xc0003c3af0 0xc0002704b8 <nil>} 
+2023-03-17T16:38:49.826  INFO rtsp-sender [PHRz] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5287 typ host 0xc0003c3bb0 0xc000270508 <nil>} 
+2023-03-17T16:38:49.826  INFO rtsp-sender [PHRz] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5267 typ host 0xc0003c3c80 0xc000270558 <nil>} 
+2023-03-17T16:38:49.826  INFO rtsp-sender [PHRz] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc0003c3d40 0xc0002705a8 <nil>} 
+2023-03-17T16:38:49.882  INFO rtsp-sender [PHRz] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 28855 typ srflx raddr 0.0.0.0 rport 5153 0xc00047e5a0 0xc0002e8da0 <nil>} 
+2023-03-17T16:38:50.076  INFO rtsp-sender [PHRz] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5109 typ host 0xc0005daf70 0xc0005133e8 <nil>} 
+2023-03-17T16:38:50.076  INFO rtsp-sender [PHRz] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5099 typ host 0xc00023a090 0xc000224048 <nil>} 
+2023-03-17T16:38:50.076  INFO rtsp-sender [PHRz] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5296 typ host 0xc0003c3620 0xc0002e8108 <nil>} 
+2023-03-17T16:38:50.076  INFO rtsp-sender [PHRz] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5091 typ host 0xc0003c36e0 0xc0002e8158 <nil>} 
+2023-03-17T16:38:50.076  INFO rtsp-sender [PHRz] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5029 typ host 0xc0003c3870 0xc0002e81b8 <nil>} 
+2023-03-17T16:38:50.131  INFO rtsp-sender [PHRz] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 33365 typ srflx raddr 0.0.0.0 rport 5174 0xc0005db4a0 0xc0002714d8 <nil>} 
+2023-03-17T16:38:50.890  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:38:50.892  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:38:54.822  INFO rtsp-sender gather candidate done 
+2023-03-17T16:38:55.077  INFO rtsp-sender gather candidate done 
+2023-03-17T16:39:20.243  INFO rtsp-sender ICEConnectionStateDisconnected failed 
+2023-03-17T16:41:02.215  INFO rtsp-sender Cannot start rtsp sender handler with error: cannot start gRPC service: cannot listen on 0.0.0.0:5552: listen tcp 0.0.0.0:5552: bind: address already in use 
+2023-03-17T16:41:02.215  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:41:07.296  INFO rtsp-sender interrupt 
+2023-03-17T16:41:07.296  INFO rtsp-sender Exiting 
+2023-03-17T16:41:09.067  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:41:09.068  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:41:09.068  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:41:09.068 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:41:09.069  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:41:12.897  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:41:12.898 ERROR rtsp-sender Error when new client: bad status code: 404 (Not Found) 
+2023-03-17T16:41:19.892  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:41:19.893 ERROR rtsp-sender Error when new client: bad status code: 404 (Not Found) 
+2023-03-17T16:41:21.710  INFO rtsp-sender interrupt 
+2023-03-17T16:41:21.710  INFO rtsp-sender Exiting 
+2023-03-17T16:41:33.369  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:41:33.369  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:41:33.369  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:41:33.369 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:41:33.369  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:41:36.930  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:41:36.930 ERROR rtsp-sender Error when new client: bad status code: 404 (Not Found) 
+2023-03-17T16:42:23.114  INFO rtsp-sender interrupt 
+2023-03-17T16:42:23.114  INFO rtsp-sender Exiting 
+2023-03-17T16:42:24.787  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:42:24.787  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:42:24.787  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:42:24.787 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:42:24.788  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:42:25.206  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:42:25.206 ERROR rtsp-sender Error when new client: bad status code: 404 (Not Found) 
+2023-03-17T16:42:41.322  INFO rtsp-sender interrupt 
+2023-03-17T16:42:41.322  INFO rtsp-sender Exiting 
+2023-03-17T16:42:42.819  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:42:42.820  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:42:42.820  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:42:42.820  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:42:42.821 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:42:43.541  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:42:43.543 ERROR rtsp-sender Error when new client: bad status code: 404 (Not Found) 
+2023-03-17T16:43:03.036  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:43:03.037 ERROR rtsp-sender Error when new client: bad status code: 404 (Not Found) 
+2023-03-17T16:43:11.588  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:43:11.595  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:43:11.597  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:43:11.597  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=avqp 
+2023-03-17T16:43:11.598  INFO rtsp-sender [C=>S] [avqp] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:43:11.598  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:43:11.600  INFO rtsp-sender [avqp] [join] success 
+2023-03-17T16:43:11.600  INFO rtsp-sender [avqp] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5067 typ host 0xc00007db60 0xc000614478 <nil>} 
+2023-03-17T16:43:11.600  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:43:11.600  INFO rtsp-sender [avqp] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5116 typ host 0xc00007dc20 0xc0006144c8 <nil>} 
+2023-03-17T16:43:11.600  INFO rtsp-sender [avqp] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5192 typ host 0xc000496250 0xc0004900e8 <nil>} 
+2023-03-17T16:43:11.600  INFO rtsp-sender [avqp] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5181 typ host 0xc00058e130 0xc00041a040 <nil>} 
+2023-03-17T16:43:11.600  INFO rtsp-sender [avqp] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5106 typ host 0xc00058e1f0 0xc00041a090 <nil>} 
+2023-03-17T16:43:11.638  INFO rtsp-sender [avqp] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 45662 typ srflx raddr 0.0.0.0 rport 5174 0xc000374070 0xc000041978 <nil>} 
+2023-03-17T16:43:11.855  INFO rtsp-sender [avqp] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5139 typ host 0xc00039fc40 0xc000614048 <nil>} 
+2023-03-17T16:43:11.855  INFO rtsp-sender [avqp] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5031 typ host 0xc00039fd00 0xc0006140a8 <nil>} 
+2023-03-17T16:43:11.855  INFO rtsp-sender [avqp] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5122 typ host 0xc00039fdc0 0xc0006140f8 <nil>} 
+2023-03-17T16:43:11.855  INFO rtsp-sender [avqp] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5072 typ host 0xc00039fe80 0xc000614148 <nil>} 
+2023-03-17T16:43:11.855  INFO rtsp-sender [avqp] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5214 typ host 0xc00039ff40 0xc0006141c8 <nil>} 
+2023-03-17T16:43:11.907  INFO rtsp-sender [avqp] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 51219 typ srflx raddr 0.0.0.0 rport 5183 0xc00024a2d0 0xc000040258 <nil>} 
+2023-03-17T16:43:12.673  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:43:12.675  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:43:23.536  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:43:23.536  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:43:23.536  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:43:23.537  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:43:23.537 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:43:24.899  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:43:24.900  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:43:24.901  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:43:24.902  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=X27r 
+2023-03-17T16:43:24.903  INFO rtsp-sender [C=>S] [X27r] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:43:24.903  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:43:24.905  INFO rtsp-sender [X27r] [join] success 
+2023-03-17T16:43:24.906  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:43:24.906  INFO rtsp-sender [X27r] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5297 typ host 0xc00007dc20 0xc0001e84b8 <nil>} 
+2023-03-17T16:43:24.906  INFO rtsp-sender [X27r] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5146 typ host 0xc000126640 0xc000116458 <nil>} 
+2023-03-17T16:43:24.906  INFO rtsp-sender [X27r] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5114 typ host 0xc000126700 0xc0001164a8 <nil>} 
+2023-03-17T16:43:24.906  INFO rtsp-sender [X27r] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5108 typ host 0xc0001267d0 0xc0001164f8 <nil>} 
+2023-03-17T16:43:24.906  INFO rtsp-sender [X27r] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5018 typ host 0xc000126890 0xc000116548 <nil>} 
+2023-03-17T16:43:24.960  INFO rtsp-sender [X27r] [trickle] type=PUBLISHER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 56350 typ srflx raddr 0.0.0.0 rport 5061 0xc000127a00 0xc00035dbb0 <nil>} 
+2023-03-17T16:43:25.155  INFO rtsp-sender [X27r] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5149 typ host 0xc00029a550 0xc000260678 <nil>} 
+2023-03-17T16:43:25.155  INFO rtsp-sender [X27r] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5161 typ host 0xc00029a610 0xc0002606c8 <nil>} 
+2023-03-17T16:43:25.155  INFO rtsp-sender [X27r] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5269 typ host 0xc00029a6d0 0xc000260728 <nil>} 
+2023-03-17T16:43:25.155  INFO rtsp-sender [X27r] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5060 typ host 0xc00029a790 0xc000260778 <nil>} 
+2023-03-17T16:43:25.155  INFO rtsp-sender [X27r] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5223 typ host 0xc00029a850 0xc0002607c8 <nil>} 
+2023-03-17T16:43:25.210  INFO rtsp-sender [X27r] [trickle] type=SUBSCRIBER candidate={candidate:1752294804 1 udp 1694498815 1.53.255.144 44042 typ srflx raddr 0.0.0.0 rport 5010 0xc0004288b0 0xc0002ba740 <nil>} 
+2023-03-17T16:43:25.976  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:43:25.979  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:46:07.303  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:46:07.303  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:46:07.303  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:46:07.304  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:46:07.304 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:46:12.041  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:46:12.041  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:46:12.043  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:46:12.043  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=g9dw 
+2023-03-17T16:46:12.044  INFO rtsp-sender [C=>S] [g9dw] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:46:12.044  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:46:12.047  INFO rtsp-sender [g9dw] [join] success 
+2023-03-17T16:46:12.048  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:46:12.048  INFO rtsp-sender [g9dw] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5239 typ host 0xc00050c8e0 0xc000040a58 <nil>} 
+2023-03-17T16:46:12.048  INFO rtsp-sender [g9dw] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5107 typ host 0xc00029a1b0 0xc0002200f8 <nil>} 
+2023-03-17T16:46:12.050  INFO rtsp-sender [g9dw] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5256 typ host 0xc00039e0e0 0xc00039a060 <nil>} 
+2023-03-17T16:46:12.050  INFO rtsp-sender [g9dw] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5115 typ host 0xc00029a7a0 0xc000220610 <nil>} 
+2023-03-17T16:46:12.050  INFO rtsp-sender [g9dw] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5089 typ host 0xc00029a860 0xc000220660 <nil>} 
+2023-03-17T16:46:12.079  INFO rtsp-sender [g9dw] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 41819 typ srflx raddr 0.0.0.0 rport 5297 0xc000375910 0xc00035d820 <nil>} 
+2023-03-17T16:46:12.297  INFO rtsp-sender [g9dw] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5124 typ host 0xc00007d790 0xc0001ca708 <nil>} 
+2023-03-17T16:46:12.297  INFO rtsp-sender [g9dw] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5287 typ host 0xc00007d850 0xc0001ca758 <nil>} 
+2023-03-17T16:46:12.297  INFO rtsp-sender [g9dw] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5012 typ host 0xc00007d910 0xc0001ca7a8 <nil>} 
+2023-03-17T16:46:12.297  INFO rtsp-sender [g9dw] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5086 typ host 0xc00007d9d0 0xc0001ca7f8 <nil>} 
+2023-03-17T16:46:12.298  INFO rtsp-sender [g9dw] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5157 typ host 0xc00007da90 0xc0001ca848 <nil>} 
+2023-03-17T16:46:12.329  INFO rtsp-sender [g9dw] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 52282 typ srflx raddr 0.0.0.0 rport 5184 0xc00039e310 0xc00046cb40 <nil>} 
+2023-03-17T16:46:13.110  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:46:13.111  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:48:57.485  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:48:57.486  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:48:57.486  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:48:57.487  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:48:57.487 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:48:58.563  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:48:58.565  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:48:58.568  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:48:58.569  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=8bRP 
+2023-03-17T16:48:58.570  INFO rtsp-sender [C=>S] [8bRP] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:48:58.571  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:48:58.575  INFO rtsp-sender [8bRP] [join] success 
+2023-03-17T16:48:58.575  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:48:58.575  INFO rtsp-sender [8bRP] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5291 typ host 0xc000119ba0 0xc000582548 <nil>} 
+2023-03-17T16:48:58.575  INFO rtsp-sender [8bRP] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5130 typ host 0xc0002b61b0 0xc00012c178 <nil>} 
+2023-03-17T16:48:58.575  INFO rtsp-sender [8bRP] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5259 typ host 0xc0002b6270 0xc00012c448 <nil>} 
+2023-03-17T16:48:58.575  INFO rtsp-sender [8bRP] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5252 typ host 0xc0002b6340 0xc00012c538 <nil>} 
+2023-03-17T16:48:58.576  INFO rtsp-sender [8bRP] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5110 typ host 0xc0002b6400 0xc00012c588 <nil>} 
+2023-03-17T16:48:58.617  INFO rtsp-sender [8bRP] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 52783 typ srflx raddr 0.0.0.0 rport 5148 0xc000586e70 0xc000270e98 <nil>} 
+2023-03-17T16:48:58.825  INFO rtsp-sender [8bRP] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5259 typ host 0xc000614600 0xc000496718 <nil>} 
+2023-03-17T16:48:58.826  INFO rtsp-sender [8bRP] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5172 typ host 0xc000586220 0xc000270170 <nil>} 
+2023-03-17T16:48:58.826  INFO rtsp-sender [8bRP] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5205 typ host 0xc0005862e0 0xc0002701c0 <nil>} 
+2023-03-17T16:48:58.826  INFO rtsp-sender [8bRP] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5132 typ host 0xc0005863a0 0xc000270210 <nil>} 
+2023-03-17T16:48:58.826  INFO rtsp-sender [8bRP] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5290 typ host 0xc000586460 0xc000270270 <nil>} 
+2023-03-17T16:48:58.858  INFO rtsp-sender [8bRP] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 18687 typ srflx raddr 0.0.0.0 rport 5246 0xc00055c670 0xc0001fe8a0 <nil>} 
+2023-03-17T16:48:59.652  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:48:59.655  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:51:15.023  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:51:15.024  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:51:15.024  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:51:15.024  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:51:15.024 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:51:15.573  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:51:15.574  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:51:15.576  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:51:15.577  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=E5v4 
+2023-03-17T16:51:15.578  INFO rtsp-sender [C=>S] [E5v4] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:51:15.579  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  
+2023-03-17T16:51:15.581  INFO rtsp-sender [E5v4] [join] success 
+2023-03-17T16:51:15.582  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:51:15.582  INFO rtsp-sender [E5v4] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5016 typ host 0xc00029a8b0 0xc000040ba8 <nil>} 
+2023-03-17T16:51:15.582  INFO rtsp-sender [E5v4] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5105 typ host 0xc00029a970 0xc000040c08 <nil>} 
+2023-03-17T16:51:15.582  INFO rtsp-sender [E5v4] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5184 typ host 0xc00029aa30 0xc000040c58 <nil>} 
+2023-03-17T16:51:15.582  INFO rtsp-sender [E5v4] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5072 typ host 0xc00029ab00 0xc000040ca8 <nil>} 
+2023-03-17T16:51:15.583  INFO rtsp-sender [E5v4] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5165 typ host 0xc00048c460 0xc000430190 <nil>} 
+2023-03-17T16:51:15.615  INFO rtsp-sender [E5v4] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 16909 typ srflx raddr 0.0.0.0 rport 5131 0xc00050e790 0xc0001e9618 <nil>} 
+2023-03-17T16:51:15.832  INFO rtsp-sender [E5v4] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5052 typ host 0xc00050e4c0 0xc00048bda8 <nil>} 
+2023-03-17T16:51:15.833  INFO rtsp-sender [E5v4] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5102 typ host 0xc00050e580 0xc00048bdf8 <nil>} 
+2023-03-17T16:51:15.833  INFO rtsp-sender [E5v4] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5256 typ host 0xc00050e640 0xc00048be48 <nil>} 
+2023-03-17T16:51:15.833  INFO rtsp-sender [E5v4] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5048 typ host 0xc00050e700 0xc00048be98 <nil>} 
+2023-03-17T16:51:15.833  INFO rtsp-sender [E5v4] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5193 typ host 0xc00050e810 0xc00048bee8 <nil>} 
+2023-03-17T16:51:15.864  INFO rtsp-sender [E5v4] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 18415 typ srflx raddr 0.0.0.0 rport 5137 0xc000390b10 0xc00065f020 <nil>} 
+2023-03-17T16:51:16.644  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:51:16.646  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:51:48.335  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:51:48.335  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:51:48.335  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:51:48.335  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:51:48.335 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:51:48.827  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:51:48.829  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:51:48.831  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:51:48.832  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=z5hk 
+2023-03-17T16:51:48.833  INFO rtsp-sender [C=>S] [z5hk] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:51:48.833  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  
+2023-03-17T16:51:48.835  INFO rtsp-sender [z5hk] [join] success 
+2023-03-17T16:51:48.836  INFO rtsp-sender [z5hk] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5207 typ host 0xc00039ed00 0xc000398818 <nil>} 
+2023-03-17T16:51:48.836  INFO rtsp-sender [z5hk] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5116 typ host 0xc00039edc0 0xc000398898 <nil>} 
+2023-03-17T16:51:48.836  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:51:48.838  INFO rtsp-sender [z5hk] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5148 typ host 0xc0003740f0 0xc00035a1d0 <nil>} 
+2023-03-17T16:51:48.840  INFO rtsp-sender [z5hk] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5279 typ host 0xc0003741c0 0xc00035a220 <nil>} 
+2023-03-17T16:51:48.840  INFO rtsp-sender [z5hk] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5089 typ host 0xc000374280 0xc00035a290 <nil>} 
+2023-03-17T16:51:48.867  INFO rtsp-sender [z5hk] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 24909 typ srflx raddr 0.0.0.0 rport 5277 0xc00058d140 0xc000680cec <nil>} 
+2023-03-17T16:51:49.089  INFO rtsp-sender [z5hk] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5144 typ host 0xc00039e470 0xc000399178 <nil>} 
+2023-03-17T16:51:49.089  INFO rtsp-sender [z5hk] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5150 typ host 0xc00039e6a0 0xc0003991c8 <nil>} 
+2023-03-17T16:51:49.089  INFO rtsp-sender [z5hk] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5177 typ host 0xc00039e770 0xc000399218 <nil>} 
+2023-03-17T16:51:49.089  INFO rtsp-sender [z5hk] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5248 typ host 0xc00039e840 0xc000399268 <nil>} 
+2023-03-17T16:51:49.090  INFO rtsp-sender [z5hk] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5189 typ host 0xc00039e9d0 0xc0003992b8 <nil>} 
+2023-03-17T16:51:49.145  INFO rtsp-sender [z5hk] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 34942 typ srflx raddr 0.0.0.0 rport 5117 0xc00058c290 0xc0006808e0 <nil>} 
+2023-03-17T16:51:49.879  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:51:49.882  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:52:52.023  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:52:52.024  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:52:52.024  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:52:52.024  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:52:52.024 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:52:52.746  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:52:52.748  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:52:52.749  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:52:52.750  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=yRbv 
+2023-03-17T16:52:52.751  INFO rtsp-sender [C=>S] [yRbv] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:52:52.751  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:52:52.754  INFO rtsp-sender [yRbv] [join] success 
+2023-03-17T16:52:52.755  INFO rtsp-sender [yRbv] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5206 typ host 0xc000119bf0 0xc0001c8468 <nil>} 
+2023-03-17T16:52:52.755  INFO rtsp-sender [yRbv] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5140 typ host 0xc000119cb0 0xc0001c84c8 <nil>} 
+2023-03-17T16:52:52.755  INFO rtsp-sender [yRbv] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5064 typ host 0xc000119d70 0xc0001c8518 <nil>} 
+2023-03-17T16:52:52.755  INFO rtsp-sender [yRbv] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5001 typ host 0xc000119e40 0xc0001c8568 <nil>} 
+2023-03-17T16:52:52.755  INFO rtsp-sender [yRbv] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5070 typ host 0xc000119f00 0xc0001c85b8 <nil>} 
+2023-03-17T16:52:52.755  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:52:52.787  INFO rtsp-sender [yRbv] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 29989 typ srflx raddr 0.0.0.0 rport 5164 0xc00007d990 0xc000041a50 <nil>} 
+2023-03-17T16:52:53.004  INFO rtsp-sender [yRbv] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5241 typ host 0xc000485cb0 0xc0001c8db8 <nil>} 
+2023-03-17T16:52:53.004  INFO rtsp-sender [yRbv] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5054 typ host 0xc000485d70 0xc0001c8e18 <nil>} 
+2023-03-17T16:52:53.004  INFO rtsp-sender [yRbv] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5281 typ host 0xc000485e30 0xc0001c8e68 <nil>} 
+2023-03-17T16:52:53.004  INFO rtsp-sender [yRbv] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5218 typ host 0xc000485ef0 0xc0001c8ec8 <nil>} 
+2023-03-17T16:52:53.004  INFO rtsp-sender [yRbv] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5225 typ host 0xc000485fb0 0xc0001c8f18 <nil>} 
+2023-03-17T16:52:53.058  INFO rtsp-sender [yRbv] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 33372 typ srflx raddr 0.0.0.0 rport 5146 0xc00034d640 0xc000391ec0 <nil>} 
+2023-03-17T16:52:53.819  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:52:53.820  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:53:35.389  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:53:35.389  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:53:35.389  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:53:35.389  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:53:35.389 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:53:35.802  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:53:35.803  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:53:35.804  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:53:35.805  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=RIkr 
+2023-03-17T16:53:35.806  INFO rtsp-sender [C=>S] [RIkr] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:53:35.806  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:53:35.808  INFO rtsp-sender [RIkr] [join] success 
+2023-03-17T16:53:35.809  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:53:35.809  INFO rtsp-sender [RIkr] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5151 typ host 0xc00029a8b0 0xc0001e8478 <nil>} 
+2023-03-17T16:53:35.809  INFO rtsp-sender [RIkr] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5269 typ host 0xc00041e440 0xc0004181c8 <nil>} 
+2023-03-17T16:53:35.810  INFO rtsp-sender [RIkr] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5237 typ host 0xc00041e500 0xc000418218 <nil>} 
+2023-03-17T16:53:35.810  INFO rtsp-sender [RIkr] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5143 typ host 0xc00041e600 0xc000418268 <nil>} 
+2023-03-17T16:53:35.810  INFO rtsp-sender [RIkr] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5298 typ host 0xc00041e6c0 0xc0004182d8 <nil>} 
+2023-03-17T16:53:35.862  INFO rtsp-sender [RIkr] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 25975 typ srflx raddr 0.0.0.0 rport 5085 0xc00029a010 0xc0002a0018 <nil>} 
+2023-03-17T16:53:36.059  INFO rtsp-sender [RIkr] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5300 typ host 0xc00017a240 0xc000040768 <nil>} 
+2023-03-17T16:53:36.059  INFO rtsp-sender [RIkr] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5075 typ host 0xc00017a300 0xc000040848 <nil>} 
+2023-03-17T16:53:36.059  INFO rtsp-sender [RIkr] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5215 typ host 0xc00017a3c0 0xc000040898 <nil>} 
+2023-03-17T16:53:36.059  INFO rtsp-sender [RIkr] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5205 typ host 0xc000688010 0xc0001e8018 <nil>} 
+2023-03-17T16:53:36.059  INFO rtsp-sender [RIkr] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5254 typ host 0xc0006880d0 0xc0001e8098 <nil>} 
+2023-03-17T16:53:36.121  INFO rtsp-sender [RIkr] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 3151 typ srflx raddr 0.0.0.0 rport 5094 0xc00048bc20 0xc0007196d0 <nil>} 
+2023-03-17T16:53:36.870  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:53:36.872  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:54:45.791  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:54:45.791  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:54:45.791  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:54:45.791  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:54:45.791 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:54:47.714  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:54:47.716  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:54:47.718  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:54:47.721  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=GBIx 
+2023-03-17T16:54:47.721  INFO rtsp-sender [C=>S] [GBIx] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:54:47.722  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:54:47.726  INFO rtsp-sender [GBIx] [join] success 
+2023-03-17T16:54:47.727  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:54:47.727  INFO rtsp-sender [GBIx] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5076 typ host 0xc00041ab60 0xc0004187c8 <nil>} 
+2023-03-17T16:54:47.727  INFO rtsp-sender [GBIx] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5056 typ host 0xc00007c510 0xc0000404d8 <nil>} 
+2023-03-17T16:54:47.727  INFO rtsp-sender [GBIx] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5100 typ host 0xc00007c5d0 0xc000040528 <nil>} 
+2023-03-17T16:54:47.727  INFO rtsp-sender [GBIx] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5014 typ host 0xc00007c6a0 0xc000040578 <nil>} 
+2023-03-17T16:54:47.727  INFO rtsp-sender [GBIx] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5147 typ host 0xc00007c760 0xc0000405c8 <nil>} 
+2023-03-17T16:54:47.784  INFO rtsp-sender [GBIx] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 35796 typ srflx raddr 0.0.0.0 rport 5043 0xc00041ac50 0xc000418a68 <nil>} 
+2023-03-17T16:54:47.975  INFO rtsp-sender [GBIx] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5154 typ host 0xc00007c750 0xc0002718c8 <nil>} 
+2023-03-17T16:54:47.975  INFO rtsp-sender [GBIx] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5180 typ host 0xc00007c810 0xc000271928 <nil>} 
+2023-03-17T16:54:47.975  INFO rtsp-sender [GBIx] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5098 typ host 0xc00007c8d0 0xc000271978 <nil>} 
+2023-03-17T16:54:47.975  INFO rtsp-sender [GBIx] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5179 typ host 0xc00007c990 0xc0002719c8 <nil>} 
+2023-03-17T16:54:47.976  INFO rtsp-sender [GBIx] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5299 typ host 0xc00007ca50 0xc000271a28 <nil>} 
+2023-03-17T16:54:48.034  INFO rtsp-sender [GBIx] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 13046 typ srflx raddr 0.0.0.0 rport 5212 0xc0004780d0 0xc00044c298 <nil>} 
+2023-03-17T16:54:48.796  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:54:48.799  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:55:20.050  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:55:20.056  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:55:20.056  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:55:20.056  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:55:20.056 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:55:24.678  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:55:24.679  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:55:24.681  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:55:24.682  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=Lv6y 
+2023-03-17T16:55:24.682  INFO rtsp-sender [C=>S] [Lv6y] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:55:24.682  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:55:24.685  INFO rtsp-sender [Lv6y] [join] success 
+2023-03-17T16:55:24.685  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:55:24.685  INFO rtsp-sender [Lv6y] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5043 typ host 0xc00052ab70 0xc000500678 <nil>} 
+2023-03-17T16:55:24.685  INFO rtsp-sender [Lv6y] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5254 typ host 0xc0001264b0 0xc0001163b8 <nil>} 
+2023-03-17T16:55:24.685  INFO rtsp-sender [Lv6y] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5066 typ host 0xc000126570 0xc000116528 <nil>} 
+2023-03-17T16:55:24.685  INFO rtsp-sender [Lv6y] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5277 typ host 0xc000126680 0xc000116578 <nil>} 
+2023-03-17T16:55:24.685  INFO rtsp-sender [Lv6y] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5095 typ host 0xc000126870 0xc000116628 <nil>} 
+2023-03-17T16:55:24.748  INFO rtsp-sender [Lv6y] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 34245 typ srflx raddr 0.0.0.0 rport 5244 0xc0003740c0 0xc00035a188 <nil>} 
+2023-03-17T16:55:24.936  INFO rtsp-sender [Lv6y] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5251 typ host 0xc00007d740 0xc000260738 <nil>} 
+2023-03-17T16:55:24.936  INFO rtsp-sender [Lv6y] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5248 typ host 0xc00007d800 0xc000260788 <nil>} 
+2023-03-17T16:55:24.936  INFO rtsp-sender [Lv6y] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5156 typ host 0xc00007d8c0 0xc0002607d8 <nil>} 
+2023-03-17T16:55:24.936  INFO rtsp-sender [Lv6y] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5242 typ host 0xc00007d980 0xc000260838 <nil>} 
+2023-03-17T16:55:24.936  INFO rtsp-sender [Lv6y] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5159 typ host 0xc00007da40 0xc000260888 <nil>} 
+2023-03-17T16:55:24.992  INFO rtsp-sender [Lv6y] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 32116 typ srflx raddr 0.0.0.0 rport 5119 0xc00052a440 0xc0002205f8 <nil>} 
+2023-03-17T16:55:25.758  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:55:25.761  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:56:08.215  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:56:08.216  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:56:08.216  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:56:08.216  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:56:08.216 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:56:09.392  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:56:09.393  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:56:09.395  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:56:09.396  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=m2ED 
+2023-03-17T16:56:09.396  INFO rtsp-sender [C=>S] [m2ED] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:56:09.396  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  
+2023-03-17T16:56:09.400  INFO rtsp-sender [m2ED] [join] success 
+2023-03-17T16:56:09.400  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:56:09.400  INFO rtsp-sender [m2ED] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5003 typ host 0xc000201c20 0xc000512708 <nil>} 
+2023-03-17T16:56:09.400  INFO rtsp-sender [m2ED] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5255 typ host 0xc0001b2260 0xc000040238 <nil>} 
+2023-03-17T16:56:09.400  INFO rtsp-sender [m2ED] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5222 typ host 0xc0001b2320 0xc000040288 <nil>} 
+2023-03-17T16:56:09.400  INFO rtsp-sender [m2ED] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5233 typ host 0xc0001b23f0 0xc0000402d8 <nil>} 
+2023-03-17T16:56:09.400  INFO rtsp-sender [m2ED] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5071 typ host 0xc0001b24b0 0xc000040328 <nil>} 
+2023-03-17T16:56:09.434  INFO rtsp-sender [m2ED] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 10390 typ srflx raddr 0.0.0.0 rport 5199 0xc000201af0 0xc000041b20 <nil>} 
+2023-03-17T16:56:09.656  INFO rtsp-sender [m2ED] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5293 typ host 0xc000128ce0 0xc000155716 <nil>} 
+2023-03-17T16:56:09.656  INFO rtsp-sender [m2ED] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5291 typ host 0xc0004d2020 0xc0002160f8 <nil>} 
+2023-03-17T16:56:09.657  INFO rtsp-sender [m2ED] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5114 typ host 0xc0004d2250 0xc000216588 <nil>} 
+2023-03-17T16:56:09.657  INFO rtsp-sender [m2ED] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5140 typ host 0xc0004d2310 0xc0002165d8 <nil>} 
+2023-03-17T16:56:09.657  INFO rtsp-sender [m2ED] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5294 typ host 0xc0004d23d0 0xc0002166c8 <nil>} 
+2023-03-17T16:56:09.688  INFO rtsp-sender [m2ED] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 8088 typ srflx raddr 0.0.0.0 rport 5136 0xc0004d3120 0xc000217378 <nil>} 
+2023-03-17T16:56:10.443  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:56:10.447  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:56:33.230  INFO rtsp-sender Serve gRPC on: 0.0.0.0:5552 
+2023-03-17T16:56:33.230  INFO rtsp-sender Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-17T16:56:33.230  INFO rtsp-sender Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-17T16:56:33.230  INFO rtsp-sender Server is running and awaiting signal for shutdown ... 
+2023-03-17T16:56:33.230 ERROR rtsp-sender RTSP Relay Server Error: chdir /configs: no such file or directory 
+2023-03-17T16:56:34.662  INFO rtsp-sender Request connect to: rtsp://127.0.0.1:8555/1, username: , password:  
+2023-03-17T16:56:34.663  INFO rtsp-sender [rtsp://127.0.0.1:8555/1] Audio Only: false, Video Codec: video/H264, Audio Codec: audio/opus 
+2023-03-17T16:56:34.665  INFO rtsp-sender gRPC connected: localhost:5551 
+2023-03-17T16:56:34.666  INFO rtsp-sender [C=>S] sid=rtsp://127.0.0.1:8555/1 uid=xvpg 
+2023-03-17T16:56:34.667  INFO rtsp-sender [C=>S] [xvpg] sid=rtsp://127.0.0.1:8555/1 
+2023-03-17T16:56:34.667  INFO rtsp-sender Create pipeline: rtspsrc location="rtsp://127.0.0.1:8555/1" user-id="" user-pw="" name=demux demux. ! queue ! application/x-rtp ! rtpopusdepay ! avdec_opus ! audioconvert ! audioresample  ! opusenc  ! appsink name=audiosink  demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert  ! tee name=t  t. ! queue ! videoscale ! video/x-raw,format=I420,width=1280,height=720,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_f  t. ! queue ! videoscale ! video/x-raw,format=I420,width=320,height=180,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_q  t. ! queue ! videoscale ! video/x-raw,format=I420,width=640,height=360,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1 ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! appsink name=videosink_h  
+2023-03-17T16:56:34.669  INFO rtsp-sender [xvpg] [join] success 
+2023-03-17T16:56:34.669  INFO rtsp-sender ICE connection state changed: checking 
+2023-03-17T16:56:34.669  INFO rtsp-sender [xvpg] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5051 typ host 0xc00029a0c0 0xc0001e8088 <nil>} 
+2023-03-17T16:56:34.669  INFO rtsp-sender [xvpg] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5149 typ host 0xc00007dc10 0xc000040a70 <nil>} 
+2023-03-17T16:56:34.670  INFO rtsp-sender [xvpg] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5096 typ host 0xc00007dcd0 0xc000040ac8 <nil>} 
+2023-03-17T16:56:34.670  INFO rtsp-sender [xvpg] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5018 typ host 0xc00007dda0 0xc000040b28 <nil>} 
+2023-03-17T16:56:34.670  INFO rtsp-sender [xvpg] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5135 typ host 0xc00007de60 0xc000040b78 <nil>} 
+2023-03-17T16:56:34.702  INFO rtsp-sender [xvpg] [trickle] type=PUBLISHER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 26903 typ srflx raddr 0.0.0.0 rport 5133 0xc0002da250 0xc0002d6620 <nil>} 
+2023-03-17T16:56:34.920  INFO rtsp-sender [xvpg] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5204 typ host 0xc000321f50 0xc0001e9738 <nil>} 
+2023-03-17T16:56:34.920  INFO rtsp-sender [xvpg] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5043 typ host 0xc00039e110 0xc0001e9788 <nil>} 
+2023-03-17T16:56:34.921  INFO rtsp-sender [xvpg] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5157 typ host 0xc00039e270 0xc0001e9808 <nil>} 
+2023-03-17T16:56:34.921  INFO rtsp-sender [xvpg] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5286 typ host 0xc00039e330 0xc0001e9858 <nil>} 
+2023-03-17T16:56:34.921  INFO rtsp-sender [xvpg] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5293 typ host 0xc00039e450 0xc0001e98b8 <nil>} 
+2023-03-17T16:56:34.953  INFO rtsp-sender [xvpg] [trickle] type=SUBSCRIBER candidate={candidate:313636596 1 udp 1694498815 1.53.255.146 44348 typ srflx raddr 0.0.0.0 rport 5245 0xc0002da010 0xc000116038 <nil>} 
+2023-03-17T16:56:35.745  INFO rtsp-sender ICE connection state changed: connected 
+2023-03-17T16:56:35.746  INFO rtsp-sender Peer connection state changed: connected 
+2023-03-17T16:56:39.668  INFO rtsp-sender gather candidate done 
+2023-03-17T16:56:39.922  INFO rtsp-sender gather candidate done 
+2023-03-17T16:57:05.071  INFO rtsp-sender ICEConnectionStateDisconnected failed 

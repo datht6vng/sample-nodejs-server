@@ -53,6 +53,9 @@ func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, 
 }
 
 func formatRTSPURL(url, username, password string) string {
+	if username == "" && password == "" {
+		return url
+	}
 	parts := strings.Split(url, "://")
 	return parts[0] + "://" + username + ":" + password + "@" + parts[len(parts)-1]
 }
@@ -82,7 +85,6 @@ func (c *Client) Connect() error {
 	if err != nil {
 		return err
 	}
-
 	audioOnly := true
 	// setup all medias
 	medias, _, _, err := rtspClient.Describe(u)
@@ -191,9 +193,12 @@ func (c *Client) Connect() error {
 	publishTrack = append(publishTrack, videoTrackF)
 	videoTracks["f"] = videoTrackF
 
+	fmt.Println(videoTrackF.RID(), videoTrackH.RID(), videoTrackQ.RID())
+
 	var audioTrack *webrtc.TrackLocalStaticSample
+
 	if !audioOnly {
-		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", c.clientAddress)
+		audioTrack, err = webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", c.clientAddress)
 		if err != nil {
 			return err
 		}
