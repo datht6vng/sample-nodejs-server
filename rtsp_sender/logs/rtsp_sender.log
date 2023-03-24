@@ -22,3 +22,48 @@
 2023-03-24T23:41:01.542  INFO rtsp-sender854d3e04721d Peer connection state changed: connected 
 2023-03-24T23:41:05.397  INFO rtsp-sender854d3e04721d gather candidate done 
 2023-03-24T23:41:05.650  INFO rtsp-sender854d3e04721d gather candidate done 
+2023-03-24T23:44:21.193  INFO rtsp-sender854d3e04721d Serve gRPC on: 0.0.0.0:5551 
+2023-03-24T23:44:21.198  INFO rtsp-sender854d3e04721d Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-24T23:44:21.199  INFO rtsp-sender854d3e04721d Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-24T23:44:21.201  INFO rtsp-sender854d3e04721d Server is running and awaiting signal for shutdown ... 
+2023-03-24T23:44:22.794  INFO rtsp-sender854d3e04721d Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-24T23:44:22.995  INFO rtsp-sender854d3e04721d [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-03-24T23:44:22.999  INFO rtsp-sender854d3e04721d gRPC connected: sfu:5551 
+2023-03-24T23:44:23.001  INFO rtsp-sender854d3e04721d [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-24T23:44:23.002  INFO rtsp-sender854d3e04721d [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-24T23:44:23.003  INFO rtsp-sender854d3e04721d Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink sync=false video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-24T23:44:23.004 ERROR rtsp-sender854d3e04721d id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-03-24T23:44:23.007  INFO rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-03-24T23:44:23.009  INFO rtsp-sender854d3e04721d ICE connection state changed: checking 
+2023-03-24T23:44:23.009  INFO rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5274 typ host 0xc0004988d0 0xc0004a0458 <nil>} 
+2023-03-24T23:44:23.011 ERROR rtsp-sender854d3e04721d id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-03-24T23:44:23.013 ERROR rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-03-24T23:44:23.014 ERROR rtsp-sender854d3e04721d Request error: code:500  reason:"trickle error:  no rtc transport exists for this Peer" 
+2023-03-24T23:44:23.057  INFO rtsp-sender854d3e04721d [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-03-24T23:44:23.141 ERROR rtsp-sender854d3e04721d Request error: code:500  reason:"trickle error:  no rtc transport exists for this Peer" 
+2023-03-24T23:44:23.147  INFO rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2980706648 1 udp 1694498815 58.186.197.211 3864 typ srflx raddr 0.0.0.0 rport 5027 0xc000194020 0xc0001c4670 <nil>} 
+2023-03-24T23:44:24.155  INFO rtsp-sender854d3e04721d ICE connection state changed: connected 
+2023-03-24T23:44:24.159  INFO rtsp-sender854d3e04721d Peer connection state changed: connected 
+2023-03-24T23:44:28.014  INFO rtsp-sender854d3e04721d gather candidate done 
+2023-03-24T23:44:59.785  INFO rtsp-sender854d3e04721d Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-24T23:44:59.786  INFO rtsp-sender854d3e04721d id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-24T23:44:59.788  INFO rtsp-sender854d3e04721d Peer connection state changed: closed 
+2023-03-24T23:44:59.788  INFO rtsp-sender854d3e04721d ICE connection state changed: closed 
+2023-03-24T23:44:59.898  INFO rtsp-sender854d3e04721d [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-03-24T23:44:59.902  INFO rtsp-sender854d3e04721d gRPC connected: sfu:5551 
+2023-03-24T23:44:59.904  INFO rtsp-sender854d3e04721d [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-24T23:44:59.905  INFO rtsp-sender854d3e04721d [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-24T23:44:59.906  INFO rtsp-sender854d3e04721d Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale  ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream  ! tee name=video_tee ! queue ! appsink name=videosink sync=false video_tee. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 
+2023-03-24T23:44:59.907 ERROR rtsp-sender854d3e04721d id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-03-24T23:44:59.910  INFO rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-03-24T23:44:59.912  INFO rtsp-sender854d3e04721d ICE connection state changed: checking 
+2023-03-24T23:44:59.912  INFO rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5002 typ host 0xc000881900 0xc000268648 <nil>} 
+2023-03-24T23:44:59.915 ERROR rtsp-sender854d3e04721d id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-03-24T23:44:59.917 ERROR rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-03-24T23:44:59.919 ERROR rtsp-sender854d3e04721d Request error: code:500  reason:"trickle error:  no rtc transport exists for this Peer" 
+2023-03-24T23:44:59.928  INFO rtsp-sender854d3e04721d [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-03-24T23:44:59.995 ERROR rtsp-sender854d3e04721d Request error: code:500  reason:"trickle error:  no rtc transport exists for this Peer" 
+2023-03-24T23:44:59.997  INFO rtsp-sender854d3e04721d [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2980706648 1 udp 1694498815 58.186.197.211 10344 typ srflx raddr 0.0.0.0 rport 5016 0xc0002d0660 0xc0005e8018 <nil>} 
+2023-03-24T23:45:01.004  INFO rtsp-sender854d3e04721d ICE connection state changed: connected 
+2023-03-24T23:45:01.007  INFO rtsp-sender854d3e04721d Peer connection state changed: connected 
+2023-03-24T23:45:04.916  INFO rtsp-sender854d3e04721d gather candidate done 
