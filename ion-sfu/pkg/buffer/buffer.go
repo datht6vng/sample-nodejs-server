@@ -10,6 +10,9 @@ import (
 
 	"github.com/gammazero/deque"
 	"github.com/go-logr/logr"
+
+	"github.com/pion/ion-sfu/pkg/mediatransportutil/bucket"
+	"github.com/pion/ion-sfu/pkg/mediatransportutil/nack"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
 	"github.com/pion/sdp/v3"
@@ -42,12 +45,12 @@ type ExtPacket struct {
 // Buffer contains all packets
 type Buffer struct {
 	sync.Mutex
-	bucket     *Bucket
-	nacker     *nackQueue
+	bucket     *bucket.Bucket
+	nacker     *nack.NACKQueue
 	videoPool  *sync.Pool
 	audioPool  *sync.Pool
 	codecType  webrtc.RTPCodecType
-	extPackets deque.Deque
+	extPackets deque.Deque[*ExtPacket]
 	pPackets   []pendingPackets
 	closeOnce  sync.Once
 	mediaSSRC  uint32
@@ -57,7 +60,7 @@ type Buffer struct {
 	twccExt    uint8
 	audioExt   uint8
 	bound      bool
-	closed     atomicBool
+	closed     atomic.Bool
 	mime       string
 
 	// supported feedbacks
@@ -118,7 +121,7 @@ func NewBuffer(ssrc uint32, vp, ap *sync.Pool, logger logr.Logger) *Buffer {
 		audioPool: ap,
 		logger:    logger,
 	}
-	b.extPackets.SetMinCapacity(7)
+	b.extPackets.SetMinCapacity(256)
 	return b
 }
 
@@ -134,10 +137,10 @@ func (b *Buffer) Bind(params webrtc.RTPParameters, o Options) {
 	switch {
 	case strings.HasPrefix(b.mime, "audio/"):
 		b.codecType = webrtc.RTPCodecTypeAudio
-		b.bucket = NewBucket(b.audioPool.Get().(*[]byte))
+		b.bucket = bucket.NewBucket(b.audioPool.Get().(*[]byte))
 	case strings.HasPrefix(b.mime, "video/"):
 		b.codecType = webrtc.RTPCodecTypeVideo
-		b.bucket = NewBucket(b.videoPool.Get().(*[]byte))
+		b.bucket = bucket.NewBucket(b.videoPool.Get().(*[]byte))
 	default:
 		b.codecType = webrtc.RTPCodecType(0)
 	}
@@ -160,7 +163,7 @@ func (b *Buffer) Bind(params webrtc.RTPParameters, o Options) {
 				b.twcc = true
 			case webrtc.TypeRTCPFBNACK:
 				b.logger.V(1).Info("Setting feedback", "type", webrtc.TypeRTCPFBNACK)
-				b.nacker = newNACKQueue()
+				b.nacker = nack.NewNACKQueue()
 				b.nack = true
 			}
 		}
@@ -179,7 +182,7 @@ func (b *Buffer) Bind(params webrtc.RTPParameters, o Options) {
 	b.pPackets = nil
 	b.bound = true
 
-	b.logger.V(1).Info("NewBuffer", "MaxBitRate", o.MaxBitRate)
+	b.logger.Info("NewBuffer", "MaxBitRate", o.MaxBitRate)
 }
 
 // Write adds a RTP Packet, out of order, new packet may be arrived later
@@ -187,7 +190,7 @@ func (b *Buffer) Write(pkt []byte) (n int, err error) {
 	b.Lock()
 	defer b.Unlock()
 
-	if b.closed.get() {
+	if b.closed.Load() {
 		err = io.EOF
 		return
 	}
@@ -209,7 +212,7 @@ func (b *Buffer) Write(pkt []byte) (n int, err error) {
 
 func (b *Buffer) Read(buff []byte) (n int, err error) {
 	for {
-		if b.closed.get() {
+		if b.closed.Load() {
 			err = io.EOF
 			return
 		}
@@ -233,12 +236,12 @@ func (b *Buffer) Read(buff []byte) (n int, err error) {
 
 func (b *Buffer) ReadExtended() (*ExtPacket, error) {
 	for {
-		if b.closed.get() {
+		if b.closed.Load() {
 			return nil, io.EOF
 		}
 		b.Lock()
 		if b.extPackets.Len() > 0 {
-			extPkt := b.extPackets.PopFront().(*ExtPacket)
+			extPkt := b.extPackets.PopFront()
 			b.Unlock()
 			return extPkt, nil
 		}
@@ -253,12 +256,12 @@ func (b *Buffer) Close() error {
 
 	b.closeOnce.Do(func() {
 		if b.bucket != nil && b.codecType == webrtc.RTPCodecTypeVideo {
-			b.videoPool.Put(b.bucket.src)
+			b.videoPool.Put(b.bucket.Src())
 		}
 		if b.bucket != nil && b.codecType == webrtc.RTPCodecTypeAudio {
-			b.audioPool.Put(b.bucket.src)
+			b.audioPool.Put(b.bucket.Src())
 		}
-		b.closed.set(true)
+		b.closed.Store(true)
 		b.onClose()
 	})
 	return nil
@@ -289,7 +292,7 @@ func (b *Buffer) calc(pkt []byte, arrivalTime int64) {
 				} else {
 					extSN = b.cycles | uint32(msn)
 				}
-				b.nacker.push(extSN)
+				b.nacker.Push(extSN)
 			}
 		}
 		b.maxSeqNo = sn
@@ -300,11 +303,11 @@ func (b *Buffer) calc(pkt []byte, arrivalTime int64) {
 		} else {
 			extSN = b.cycles | uint32(sn)
 		}
-		b.nacker.remove(extSN)
+		b.nacker.Remove(extSN)
 	}
 
 	var p rtp.Packet
-	pb, err := b.bucket.AddPacket(pkt, sn, sn == b.maxSeqNo)
+	pb, err := b.bucket.AddPacket(pkt)
 	if err != nil {
 		if err == errRTXPacket {
 			return
@@ -376,7 +379,7 @@ func (b *Buffer) calc(pkt []byte, arrivalTime int64) {
 	b.lastTransit = transit
 
 	if b.twcc {
-		if ext := p.GetExtension(b.twccExt); ext != nil && len(ext) > 1 {
+		if ext := p.GetExtension(b.twccExt); ext != nil {
 			b.feedbackTWCC(binary.BigEndian.Uint16(ext[0:2]), arrivalTime, p.Marker)
 		}
 	}
@@ -408,7 +411,7 @@ func (b *Buffer) calc(pkt []byte, arrivalTime int64) {
 }
 
 func (b *Buffer) buildNACKPacket() []rtcp.Packet {
-	if nacks, askKeyframe := b.nacker.pairs(b.cycles | uint32(b.maxSeqNo)); (nacks != nil && len(nacks) > 0) || askKeyframe {
+	if nacks, askKeyframe := b.nacker.Pairs(b.cycles | uint32(b.maxSeqNo)); nacks != nil || askKeyframe {
 		var pkts []rtcp.Packet
 		if len(nacks) > 0 {
 			pkts = []rtcp.Packet{&rtcp.TransportLayerNack{
@@ -442,7 +445,6 @@ func (b *Buffer) buildREMBPacket() *rtcp.ReceiverEstimatedMaximumBitrate {
 		br = 100000
 	}
 	b.stats.TotalByte = 0
-
 	return &rtcp.ReceiverEstimatedMaximumBitrate{
 		Bitrate: float32(br),
 		SSRCs:   []uint32{b.mediaSSRC},
@@ -513,7 +515,7 @@ func (b *Buffer) getRTCP() []rtcp.Packet {
 func (b *Buffer) GetPacket(buff []byte, sn uint16) (int, error) {
 	b.Lock()
 	defer b.Unlock()
-	if b.closed.get() {
+	if b.closed.Load() {
 		return 0, io.EOF
 	}
 	return b.bucket.GetPacket(buff, sn)
@@ -583,13 +585,7 @@ func IsTimestampWrapAround(timestamp1 uint32, timestamp2 uint32) bool {
 // IsLaterTimestamp returns true if timestamp1 is later in time than timestamp2 factoring in timestamp wrap-around
 func IsLaterTimestamp(timestamp1 uint32, timestamp2 uint32) bool {
 	if timestamp1 > timestamp2 {
-		if IsTimestampWrapAround(timestamp2, timestamp1) {
-			return false
-		}
-		return true
+		return IsTimestampWrapAround(timestamp2, timestamp1)
 	}
-	if IsTimestampWrapAround(timestamp1, timestamp2) {
-		return true
-	}
-	return false
+	return IsTimestampWrapAround(timestamp1, timestamp2)
 }

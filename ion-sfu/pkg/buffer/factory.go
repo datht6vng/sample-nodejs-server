@@ -5,7 +5,8 @@ import (
 	"sync"
 
 	"github.com/go-logr/logr"
-	"github.com/pion/transport/packetio"
+	"github.com/pion/ion-sfu/pkg/mediatransportutil/bucket"
+	"github.com/pion/transport/v2/packetio"
 )
 
 type Factory struct {
@@ -30,13 +31,13 @@ func NewBufferFactory(trackingPackets int, logger logr.Logger) *Factory {
 	return &Factory{
 		videoPool: &sync.Pool{
 			New: func() interface{} {
-				b := make([]byte, trackingPackets*maxPktSize)
+				b := make([]byte, trackingPackets*bucket.MaxPktSize)
 				return &b
 			},
 		},
 		audioPool: &sync.Pool{
 			New: func() interface{} {
-				b := make([]byte, maxPktSize*25)
+				b := make([]byte, bucket.MaxPktSize*25)
 				return &b
 			},
 		},

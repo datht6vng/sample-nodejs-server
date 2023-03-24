@@ -90,14 +90,15 @@ func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 
 	if c.WebRTC.ICESinglePort != 0 {
 		Logger.Info("Listen on ", "single-port", c.WebRTC.ICESinglePort)
-		udpListener, err := net.ListenUDP("udp", &net.UDPAddr{
-			IP:   net.IP{0, 0, 0, 0},
-			Port: c.WebRTC.ICESinglePort,
-		})
+		opts := []ice.UDPMuxFromPortOption{
+			ice.UDPMuxFromPortWithReadBufferSize(16777216),
+			ice.UDPMuxFromPortWithWriteBufferSize(16777216),
+		}
+		udpMux, err := ice.NewMultiUDPMuxFromPort(int(c.WebRTC.ICESinglePort), opts...)
 		if err != nil {
 			panic(err)
 		}
-		se.SetICEUDPMux(webrtc.NewICEUDPMux(nil, udpListener))
+		se.SetICEUDPMux(udpMux)
 	} else {
 		var icePortStart, icePortEnd uint16
 

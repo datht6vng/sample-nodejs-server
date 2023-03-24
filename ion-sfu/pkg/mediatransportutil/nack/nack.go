@@ -1,4 +1,4 @@
-package buffer
+package nack
 
 import (
 	"sort"
@@ -6,7 +6,7 @@ import (
 	"github.com/pion/rtcp"
 )
 
-const maxNackTimes = 3   // Max number of times a packet will be NACKed
+const maxNackTimes = 5   // Max number of times a packet will be NACKed
 const maxNackCache = 100 // Max NACK sn the sfu will keep reference
 
 type nack struct {
@@ -14,18 +14,18 @@ type nack struct {
 	nacked uint8
 }
 
-type nackQueue struct {
+type NACKQueue struct {
 	nacks []nack
 	kfSN  uint32
 }
 
-func newNACKQueue() *nackQueue {
-	return &nackQueue{
+func NewNACKQueue() *NACKQueue {
+	return &NACKQueue{
 		nacks: make([]nack, 0, maxNackCache+1),
 	}
 }
 
-func (n *nackQueue) remove(extSN uint32) {
+func (n *NACKQueue) Remove(extSN uint32) {
 	i := sort.Search(len(n.nacks), func(i int) bool { return n.nacks[i].sn >= extSN })
 	if i >= len(n.nacks) || n.nacks[i].sn != extSN {
 		return
@@ -34,7 +34,7 @@ func (n *nackQueue) remove(extSN uint32) {
 	n.nacks = n.nacks[:len(n.nacks)-1]
 }
 
-func (n *nackQueue) push(extSN uint32) {
+func (n *NACKQueue) Push(extSN uint32) {
 	i := sort.Search(len(n.nacks), func(i int) bool { return n.nacks[i].sn >= extSN })
 	if i < len(n.nacks) && n.nacks[i].sn == extSN {
 		return
@@ -56,7 +56,7 @@ func (n *nackQueue) push(extSN uint32) {
 	}
 }
 
-func (n *nackQueue) pairs(headSN uint32) ([]rtcp.NackPair, bool) {
+func (n *NACKQueue) Pairs(headSN uint32) ([]rtcp.NackPair, bool) {
 	if len(n.nacks) == 0 {
 		return nil, false
 	}

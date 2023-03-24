@@ -11,6 +11,10 @@ import (
 	"github.com/pion/rtcp"
 )
 
+/*
+This is twcc of livekit and ion, it is have a little retransmission of packets (pion is not)
+But in long time, the congestion chart is more stable than pion twcc
+*/
 const (
 	baseSequenceNumberOffset = 8
 	packetStatusCountOffset  = 10
@@ -32,15 +36,14 @@ type rtpExtInfo struct {
 type Responder struct {
 	sync.Mutex
 
-	extInfo     []rtpExtInfo
-	lastReport  int64
-	cycles      uint32
-	lastExtSN   uint32
-	pktCtn      uint8
-	lastSn      uint16
-	lastExtInfo uint16
-	mSSRC       uint32
-	sSSRC       uint32
+	extInfo    []rtpExtInfo
+	lastReport int64
+	cycles     uint32
+	lastExtSN  uint32
+	pktCtn     uint8
+	lastSn     uint16
+	mSSRC      uint32
+	sSSRC      uint32
 
 	len      uint16
 	deltaLen uint16
@@ -71,6 +74,10 @@ func (t *Responder) Push(sn uint16, timeNS int64, marker bool) {
 		ExtTSN:    t.cycles | uint32(sn),
 		Timestamp: timeNS / 1e3,
 	})
+	// t.extInfo = insertSorted(t.extInfo, rtpExtInfo{
+	// 	ExtTSN:    t.cycles | uint32(sn),
+	// 	Timestamp: timeNS / 1e3,
+	// })
 	if t.lastReport == 0 {
 		t.lastReport = timeNS
 	}
@@ -85,6 +92,26 @@ func (t *Responder) Push(sn uint16, timeNS int64, marker bool) {
 	}
 }
 
+// func insertSorted(list []rtpExtInfo, element rtpExtInfo) []rtpExtInfo {
+// 	if len(list) == 0 {
+// 		return append(list, element)
+// 	}
+// 	for i := len(list) - 1; i >= 0; i-- {
+// 		if list[i].ExtTSN < element.ExtTSN {
+// 			list = append(list, rtpExtInfo{})
+// 			copy(list[i+2:], list[i+1:])
+// 			list[i+1] = element
+// 			return list
+// 		}
+// 		if list[i].ExtTSN == element.ExtTSN {
+// 			list[i] = element
+// 			return list
+// 		}
+// 	}
+// 	// element.sequenceNumber is between 0 and first ever received sequenceNumber
+// 	return append([]rtpExtInfo{element}, list...)
+// }
+
 // OnFeedback sets the callback for the formed twcc feedback rtcp packet
 func (t *Responder) OnFeedback(f func(p rtcp.RawPacket)) {
 	t.onFeedback = f
@@ -97,7 +124,9 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 	sort.Slice(t.extInfo, func(i, j int) bool {
 		return t.extInfo[i].ExtTSN < t.extInfo[j].ExtTSN
 	})
-	tccPkts := make([]rtpExtInfo, 0, int(float64(len(t.extInfo))*1.2))
+	maxTccPktsLen := int(float64(len(t.extInfo)) * 1.2)
+	tccPkts := make([]rtpExtInfo, 0, maxTccPktsLen)
+	var consumedExtInfo int
 	for _, tccExtInfo := range t.extInfo {
 		if tccExtInfo.ExtTSN < t.lastExtSN {
 			continue
@@ -109,8 +138,16 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 		}
 		t.lastExtSN = tccExtInfo.ExtTSN
 		tccPkts = append(tccPkts, tccExtInfo)
+		consumedExtInfo++
+		if len(tccPkts) >= maxTccPktsLen {
+			break
+		}
 	}
-	t.extInfo = t.extInfo[:0]
+	if consumedExtInfo == len(t.extInfo) {
+		t.extInfo = t.extInfo[:0]
+	} else {
+		t.extInfo = t.extInfo[consumedExtInfo:]
+	}
 
 	firstRecv := false
 	same := true
@@ -118,7 +155,7 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 	lastStatus := rtcp.TypeTCCPacketReceivedWithoutDelta
 	maxStatus := rtcp.TypeTCCPacketNotReceived
 
-	var statusList deque.Deque
+	var statusList deque.Deque[uint16]
 	statusList.SetMinCapacity(3)
 
 	for _, stat := range tccPkts {
@@ -175,7 +212,7 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 
 		if !same && maxStatus == rtcp.TypeTCCPacketReceivedLargeDelta && statusList.Len() > 6 {
 			for i := 0; i < 7; i++ {
-				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeTwoBit, statusList.PopFront().(uint16), i)
+				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeTwoBit, statusList.PopFront(), i)
 			}
 			t.writeStatusSymbolChunk(rtcp.TypeTCCSymbolSizeTwoBit)
 			lastStatus = rtcp.TypeTCCPacketReceivedWithoutDelta
@@ -183,7 +220,7 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 			same = true
 
 			for i := 0; i < statusList.Len(); i++ {
-				status = statusList.At(i).(uint16)
+				status = statusList.At(i)
 				if status > maxStatus {
 					maxStatus = status
 				}
@@ -194,7 +231,7 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 			}
 		} else if !same && statusList.Len() > 13 {
 			for i := 0; i < 14; i++ {
-				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeOneBit, statusList.PopFront().(uint16), i)
+				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeOneBit, statusList.PopFront(), i)
 			}
 			t.writeStatusSymbolChunk(rtcp.TypeTCCSymbolSizeOneBit)
 			lastStatus = rtcp.TypeTCCPacketReceivedWithoutDelta
@@ -208,12 +245,12 @@ func (t *Responder) buildTransportCCPacket() rtcp.RawPacket {
 			t.writeRunLengthChunk(lastStatus, uint16(statusList.Len()))
 		} else if maxStatus == rtcp.TypeTCCPacketReceivedLargeDelta {
 			for i := 0; i < statusList.Len(); i++ {
-				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeTwoBit, statusList.PopFront().(uint16), i)
+				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeTwoBit, statusList.PopFront(), i)
 			}
 			t.writeStatusSymbolChunk(rtcp.TypeTCCSymbolSizeTwoBit)
 		} else {
 			for i := 0; i < statusList.Len(); i++ {
-				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeOneBit, statusList.PopFront().(uint16), i)
+				t.createStatusSymbolChunk(rtcp.TypeTCCSymbolSizeOneBit, statusList.PopFront(), i)
 			}
 			t.writeStatusSymbolChunk(rtcp.TypeTCCSymbolSizeOneBit)
 		}
