@@ -310,7 +310,7 @@ func (s *Subscriber) sendStreamDownTracksReports(streamID string) {
 		i := 0
 		for {
 			if err := s.pc.WriteRTCP(r); err != nil {
-				Logger.Error(err, "Sending track binding reports err")
+				//Logger.Error(err, "Sending track binding reports err")
 			}
 			if i > 5 {
 				return

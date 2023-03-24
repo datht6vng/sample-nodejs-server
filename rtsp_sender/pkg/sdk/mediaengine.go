@@ -143,7 +143,7 @@ func ConfigureNACK(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interce
 	return nil
 }
 
-func ConfigureGoogleCongestionControl(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interceptor.Registry, networkConfig config.NetworkConfig) error {
+func ConfigureGoogleCongestionControl(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interceptor.Registry, rtcConfig *RTCConfig, networkConfig config.NetworkConfig) error {
 	var maxBitrate, minBitrate int
 	if networkConfig.MaxBitrate == 0 {
 		maxBitrate = 500 * 1000
@@ -157,32 +157,33 @@ func ConfigureGoogleCongestionControl(mediaEngine *webrtc.MediaEngine, intercept
 	}
 	gccInterceptor, err := cc.NewInterceptor(func() (cc.BandwidthEstimator, error) {
 		return gcc.NewSendSideBWE(
-			gcc.SendSideBWEInitialBitrate(maxBitrate),
+			gcc.SendSideBWEInitialBitrate(minBitrate),
 			gcc.SendSideBWEMaxBitrate(maxBitrate),
 			gcc.SendSideBWEMinBitrate(minBitrate),
-			gcc.SendSideBWEPacer(gcc.NewLeakyBucketPacer((maxBitrate+minBitrate)/2)), // Send engine
+			gcc.SendSideBWEPacer(gcc.NewNoOpPacer()), // Send engine
 		)
 	})
 	if err != nil {
 		return err
 	}
+	gccInterceptor.OnNewPeerConnection(func(id string, estimator cc.BandwidthEstimator) {
+		rtcConfig.WebRTC.OnBWE(estimator)
+	})
 	interceptorRegistry.Add(gccInterceptor)
 	return nil
 }
 
-func RegisterInterceptors(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interceptor.Registry, role Target, networkConfig config.NetworkConfig) error {
+func RegisterInterceptors(mediaEngine *webrtc.MediaEngine, interceptorRegistry *interceptor.Registry, role Target, rtcConfig *RTCConfig, networkConfig config.NetworkConfig) error {
 	// Not neccessary to register report
 	// if err := webrtc.ConfigureRTCPReports(interceptorRegistry); err != nil {
 	// 	return err
 	// }
-
-	// GCC - This Congestion Control is not completed - Use later
-	// if err := ConfigureGoogleCongestionControl(mediaEngine, interceptorRegistry, networkConfig); err != nil {
-	// 	return err
-	// }
-
-	// // TWCC
 	if role == Target_PUBLISHER {
+		// GCC - This Congestion Control is not completed - Use later
+		if err := ConfigureGoogleCongestionControl(mediaEngine, interceptorRegistry, rtcConfig, networkConfig); err != nil {
+			return err
+		}
+
 		if err := ConfigureTWCC(mediaEngine, interceptorRegistry, networkConfig); err != nil {
 			return err
 		}
@@ -193,10 +194,10 @@ func RegisterInterceptors(mediaEngine *webrtc.MediaEngine, interceptorRegistry *
 	return nil
 }
 
-func NewInterceptorRegistry(mediaEngine *webrtc.MediaEngine, role Target, networkConfig config.NetworkConfig) (*interceptor.Registry, error) {
+func NewInterceptorRegistry(mediaEngine *webrtc.MediaEngine, role Target, rtcConfig *RTCConfig, networkConfig config.NetworkConfig) (*interceptor.Registry, error) {
 	interceptorRegistry := &interceptor.Registry{}
 
-	if err := RegisterInterceptors(mediaEngine, interceptorRegistry, role, networkConfig); err != nil {
+	if err := RegisterInterceptors(mediaEngine, interceptorRegistry, role, rtcConfig, networkConfig); err != nil {
 		return nil, errors.Annotatef(err, "registering interceptors")
 	}
 

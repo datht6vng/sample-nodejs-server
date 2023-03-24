@@ -20,6 +20,6 @@ maxBackups=10
 maxAge=28
 
 [network]
-max_bitrate = "1000"
+max_bitrate = "1500"
 min_bitrate = "50"
 twcc_interval = "100" #Miliseconds

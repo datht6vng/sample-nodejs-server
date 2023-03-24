@@ -11,6 +11,7 @@ import (
 	"time"
 
 	log "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/pion/webrtc/v3"
 	"google.golang.org/grpc/codes"
@@ -103,6 +104,7 @@ type WebRTCTransportConfig struct {
 	VideoMime     string
 	Configuration webrtc.Configuration
 	Setting       webrtc.SettingEngine
+	OnBWE         func(cc.BandwidthEstimator)
 }
 
 type RTCConfig struct {

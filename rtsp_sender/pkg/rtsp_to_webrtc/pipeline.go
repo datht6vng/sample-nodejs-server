@@ -178,6 +178,7 @@ func (p *Pipeline2) onReceiveGSTAudioSample(sink *app.Sink) gst.FlowReturn {
 	}
 	return gst.FlowOK
 }
+
 func (p *Pipeline2) onReceiveGSTVideoSample(sink *app.Sink) gst.FlowReturn {
 	sample := sink.PullSample()
 	if sample == nil {
@@ -218,4 +219,12 @@ func (p *Pipeline2) OnVideoSample(f func(media.Sample) error) {
 
 func (p *Pipeline2) OnAudioSample(f func(media.Sample) error) {
 	p.onAudioSampleHandler.Store(f)
+}
+
+func (p *Pipeline2) ChangeEncoderBitrate(bitrate int) error {
+	encoder, err := p.pipeline.GetElementByName(encoderName)
+	if err != nil {
+		return err
+	}
+	return encoder.SetProperty("bitrate", uint(bitrate))
 }

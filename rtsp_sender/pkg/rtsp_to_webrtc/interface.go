@@ -13,6 +13,7 @@ import (
 const (
 	MaxAliveTime  = 2 * time.Hour
 	SrcName       = "demux"
+	encoderName   = "encoder"
 	audioSinkName = "audiosink"
 	videoSinkName = "videosink"
 
@@ -33,6 +34,7 @@ type Pipeline interface {
 	EmitVideoSample() error
 	OnAudioSample(func(media.Sample) error)
 	OnVideoSample(func(media.Sample) error)
+	ChangeEncoderBitrate(bitrate int) error
 }
 
 // CreatePipeline creates a GStreamer Pipeline
@@ -66,15 +68,15 @@ func CreatePipeline(
 
 		switch videoCodec {
 		case webrtc.MimeTypeVP8:
-			pipelineStr += videoSrc + " ! vp8enc error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 " + videoSink
+			pipelineStr += videoSrc + fmt.Sprintf(" ! vp8enc error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v ", encoderName) + videoSink
 			//clockRate = videoClockRate
 
 		case webrtc.MimeTypeVP9:
-			pipelineStr += videoSrc + " ! vp9enc ! " + videoSink
+			pipelineStr += videoSrc + fmt.Sprintf(" ! vp9enc name=%v ", encoderName) + videoSink
 			//clockRate = videoClockRate
 
 		case webrtc.MimeTypeH264:
-			pipelineStr += videoSrc + " ! x264enc speed-preset=ultrafast tune=zerolatency ! video/x-h264,stream-format=byte-stream " + videoSink
+			pipelineStr += videoSrc + fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast tune=zerolatency name=%v ! video/x-h264,stream-format=byte-stream ", encoderName) + videoSink
 			//clockRate = videoClockRate
 
 		default:

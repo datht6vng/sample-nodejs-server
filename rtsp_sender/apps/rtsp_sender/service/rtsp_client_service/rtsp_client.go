@@ -13,6 +13,7 @@ import (
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
 	"github.com/deepch/vdk/av"
 	"github.com/deepch/vdk/format/rtspv2"
+	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/webrtc/v3"
 )
 
@@ -105,6 +106,7 @@ func (c *Client) Connect() error {
 	videoSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", gst.SrcName, videoDepay, videoDecoder)
 	audioSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", gst.SrcName, audioDepay, audioDecoder)
 
+	var bwe cc.BandwidthEstimator
 	config := sdk.RTCConfig{
 		WebRTC: sdk.WebRTCTransportConfig{
 			Configuration: webrtc.Configuration{
@@ -117,9 +119,12 @@ func (c *Client) Connect() error {
 					},
 				},
 			},
+			OnBWE: func(estimator cc.BandwidthEstimator) {
+				logger.Infof("ON BWE")
+				bwe = estimator
+			},
 		},
 	}
-
 	connector, err := sdk.NewConnector(c.sfuAddress)
 	if err != nil {
 		return err
@@ -209,6 +214,11 @@ func (c *Client) Connect() error {
 		}
 	}()
 	wg.Wait()
+	fmt.Println("BWE is", bwe)
+	bwe.OnTargetBitrateChange(func(bitrate int) {
+		logger.Infof("Send bitrate changed to %d", bitrate)
+		c.pipeline.ChangeEncoderBitrate(int(bitrate / 1000))
+	})
 	if pipelineErr != nil {
 		return pipelineErr
 	}
