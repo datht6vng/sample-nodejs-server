@@ -42,7 +42,7 @@ func NewTransport(role Target, rtc *RTC) *Transport {
 		return nil
 	}
 
-	interceptorRegistry, err := NewInterceptorRegistry(me, *config.Config.NetworkConfig)
+	interceptorRegistry, err := NewInterceptorRegistry(me, role, *config.Config.NetworkConfig)
 	if err != nil {
 		log.Error("New interceptor registry", errors.Trace(err), nil)
 	}

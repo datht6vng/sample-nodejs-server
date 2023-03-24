@@ -130,7 +130,7 @@ func (c *Client) Connect() error {
 		return err
 	}
 
-	if err := rtc.Join(c.sessionName, fmt.Sprintf("camera:%v", c.sessionName), sdk.NewJoinConfig().SetNoSubscribe().SetNoAutoSubscribe()); err != nil {
+	if err := rtc.Join(c.sessionName, fmt.Sprintf("camera:%v", c.sessionName), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
 		return err
 	}
 
