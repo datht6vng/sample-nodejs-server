@@ -5,11 +5,12 @@ import (
 	"io"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/rtsp_to_webrtc"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
-	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk/rtsp_to_webrtc"
 	"github.com/deepch/vdk/av"
 	"github.com/deepch/vdk/format/rtspv2"
 	"github.com/pion/webrtc/v3"
@@ -28,12 +29,12 @@ type Client struct {
 	enableRTSPRelay bool
 
 	connector *sdk.Connector
-	rtc       *sdk.RTC
 
 	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
 	codecs                 []av.CodecData
-	pipeline               *gst.Pipeline
+	pipeline               gst.Pipeline
 	closed                 chan bool
+	onCloseHandler         atomic.Value
 }
 
 func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool) *Client {
@@ -50,6 +51,9 @@ func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, 
 }
 
 func formatRTSPURL(url, username, password string) string {
+	if username == "" && password == "" {
+		return url
+	}
 	parts := strings.Split(url, "://")
 	return parts[0] + "://" + username + ":" + password + "@" + parts[len(parts)-1]
 }
@@ -66,7 +70,7 @@ func (c *Client) Connect() error {
 	}
 
 	c.codecs = rtspClient.CodecData
-	rtspClient.Close()
+	go rtspClient.Close()
 
 	audioOnly := true
 
@@ -96,10 +100,10 @@ func (c *Client) Connect() error {
 
 	logger.Infof("[%v] Audio Only: %v, Video Codec: %v, Audio Codec: %v", c.clientAddress, audioOnly, videoCodec, audioCodec)
 
-	rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=demux", c.clientAddress, c.username, c.password)
+	rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v", c.clientAddress, c.username, c.password, gst.SrcName)
 
-	videoSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", videoDepay, videoDecoder)
-	audioSrc := fmt.Sprintf(" demux. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", audioDepay, audioDecoder)
+	videoSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", gst.SrcName, videoDepay, videoDecoder)
+	audioSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", gst.SrcName, audioDepay, audioDecoder)
 
 	config := sdk.RTCConfig{
 		WebRTC: sdk.WebRTCTransportConfig{
@@ -116,22 +120,24 @@ func (c *Client) Connect() error {
 		},
 	}
 
-	if c.connector, err = sdk.NewConnector(c.sfuAddress); err != nil {
+	connector, err := sdk.NewConnector(c.sfuAddress)
+	if err != nil {
 		return err
 	}
 
-	if c.rtc, err = sdk.NewRTC(c.connector, config); err != nil {
+	rtc, err := sdk.NewRTC(connector, config)
+	if err != nil {
 		return err
 	}
 
-	if err := c.rtc.Join(c.sessionName, sdk.RandomKey(4), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
+	if err := rtc.Join(c.sessionName, fmt.Sprintf("camera:%v", c.sessionName), sdk.NewJoinConfig().SetNoSubscribe().SetNoAutoSubscribe()); err != nil {
 		return err
 	}
 
-	c.rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
+	rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
 		logger.Infof("ICE connection state changed: %v", state)
 	})
-	c.rtc.GetPubTransport().GetPeerConnection().OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
+	rtc.GetPubTransport().GetPeerConnection().OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
 		logger.Infof("Peer connection state changed: %v", state)
 	})
 
@@ -153,25 +159,60 @@ func (c *Client) Connect() error {
 		c.audioTrack = audioTrack
 		publishTrack = append(publishTrack, c.audioTrack)
 	}
+	var wg sync.WaitGroup
 
-	c.pipeline = gst.CreatePipeline(
-		rtspSrc,
-		audioSrc, videoSrc,
-		audioCodec, videoCodec,
-		c.audioTrack, c.videoTrack,
-		c.enableRTSPRelay,
-		c.rtspRelayAddress,
-	)
-
-	c.pipeline.Start()
-
-	if len(publishTrack) > 0 {
-		// Read RTCP from each track to make sure the interceptors work
-		rtcpReaderList, _ := c.rtc.Publish(publishTrack...)
-		for _, rtcpReader := range rtcpReaderList {
-			c.startRTCPHandler(rtcpReader)
+	var pipelineErr error
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		pipeline, err := gst.CreatePipeline(
+			rtspSrc,
+			audioSrc, videoSrc,
+			audioCodec, videoCodec,
+			c.audioTrack, c.videoTrack,
+			c.enableRTSPRelay,
+			c.rtspRelayAddress,
+		)
+		if err != nil {
+			pipelineErr = err
+			return
 		}
+
+		if audioCodec != "" {
+			pipeline.OnAudioSample(c.audioTrack.WriteSample)
+			if err := pipeline.EmitAudioSample(); err != nil {
+				pipelineErr = err
+				return
+			}
+		}
+
+		if videoCodec != "" {
+			pipeline.OnVideoSample(c.videoTrack.WriteSample)
+			if err := pipeline.EmitVideoSample(); err != nil {
+				pipelineErr = err
+				return
+			}
+		}
+		pipeline.Start()
+		c.pipeline = pipeline
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		if len(publishTrack) > 0 {
+			// Read RTCP from each track to make sure the interceptors work
+			rtcpReaderList, _ := rtc.Publish(publishTrack...)
+			for _, rtcpReader := range rtcpReaderList {
+				c.startRTCPHandler(rtcpReader)
+			}
+		}
+	}()
+	wg.Wait()
+	if pipelineErr != nil {
+		return pipelineErr
 	}
+	c.connector = connector
 	return nil
 }
 
@@ -216,7 +257,17 @@ func (c *Client) Close() {
 		}
 	}
 
-	c.rtc.Close()
 	c.connector.Close()
 	c.pipeline.Stop()
+	c.onClose()
+}
+
+func (c *Client) onClose() {
+	if handler, ok := c.onCloseHandler.Load().(func()); ok {
+		handler()
+	}
+}
+
+func (c *Client) OnClose(f func()) {
+	c.onCloseHandler.Store(f)
 }

@@ -188,7 +188,7 @@ func (r *RTC) start(signaller Signaller) {
 		r.Connect()
 	}
 	r.pub = NewTransport(Target_PUBLISHER, r)
-	r.sub = NewTransport(Target_PUBLISHER, r)
+	r.sub = NewTransport(Target_SUBSCRIBER, r)
 }
 
 // Join client join a session
@@ -348,7 +348,6 @@ func (r *RTC) trickle(candidate webrtc.ICECandidateInit, target Target) {
 	} else {
 		t = r.pub
 	}
-
 	if t.pc.CurrentRemoteDescription() == nil {
 		t.RecvCandidates = append(t.RecvCandidates, candidate)
 	} else {

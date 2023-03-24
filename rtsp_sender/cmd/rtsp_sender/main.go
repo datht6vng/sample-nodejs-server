@@ -10,6 +10,7 @@ import (
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/tinyzimmer/go-gst/gst"
 )
 
 var (
@@ -42,7 +43,7 @@ func main() {
 		return
 	}
 	logger.InitFileLogger(nodeID, *config.Config.LogConfig, "")
-
+	gst.Init(nil)
 	handler, err := rtsp_sender.NewHandler(nodeID)
 	if err != nil {
 		logger.Infof("Cannot init rtsp sender handler with error: %v", nodeID, err)

@@ -27,12 +27,9 @@ func NewRTSPClientService() (*RTSPClientService, error) {
 }
 
 func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, username, password string, enableRTSPRelay bool) (string, error) {
+	// Force end
 	if client, err := r.GetRTSPClient(connectClientAddress); err == nil {
-		if client.enableRTSPRelay && enableRTSPRelay || !client.enableRTSPRelay && !enableRTSPRelay {
-			return client.rtspRelayAddress, err
-		} else {
-			client.Close()
-		}
+		client.Close()
 	}
 
 	r.rtspSenderLock.Lock()
@@ -49,7 +46,9 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 		logger.Errorf("Error when new client: %v", err)
 		return "", err
 	}
-
+	client.OnClose(func() {
+		r.autoDomain.Add(-1)
+	})
 	r.clients[connectClientAddress] = client
 	return rtspRelayAddress, nil
 }
@@ -68,12 +67,8 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 	if _, err := r.GetRTSPClient(connectClientAddress); err != nil {
 		return err
 	}
-
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
-
-	r.autoDomain.Add(-1)
-	r.clients[connectClientAddress].Close()
 	delete(r.clients, connectClientAddress)
 	return nil
 }

@@ -19,7 +19,7 @@ const config = {
 const signalLocal = new Signal.IonSFUJSONRPCSignal(serverUrl);
 
 const clientLocal = new IonSDK.Client(signalLocal, config);
-signalLocal.onopen = () => clientLocal.join(params.has("session") ? params.get("session") : "ion");
+signalLocal.onopen = () => clientLocal.join(params.has("session") ? params.get("session") : "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
 
 /**
  * For every remote stream this object will hold the follwing information:
