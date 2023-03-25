@@ -64,8 +64,11 @@ func (c *Client) Connect() error {
 	defer c.mu.Unlock()
 
 	var err error
-	fmt.Println(formatRTSPURL(c.clientAddress, c.username, c.password))
-	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: formatRTSPURL(c.clientAddress, c.username, c.password), DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
+
+	formatRTSPURL := formatRTSPURL(c.clientAddress, c.username, c.password)
+	logger.Infof("[%v] RTSP URL: %s", c.clientAddress, formatRTSPURL)
+
+	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: formatRTSPURL, DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
 	if err != nil {
 		return err
 	}
@@ -101,51 +104,6 @@ func (c *Client) Connect() error {
 
 	logger.Infof("[%v] Audio Only: %v, Video Codec: %v, Audio Codec: %v", c.clientAddress, audioOnly, videoCodec, audioCodec)
 
-	rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v", c.clientAddress, c.username, c.password, gst.SrcName)
-
-	videoSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ", gst.SrcName, videoDepay, videoDecoder)
-	audioSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ", gst.SrcName, audioDepay, audioDecoder)
-
-	var bwe cc.BandwidthEstimator
-	config := sdk.RTCConfig{
-		WebRTC: sdk.WebRTCTransportConfig{
-			Configuration: webrtc.Configuration{
-				ICEServers: []webrtc.ICEServer{
-					{
-						URLs: []string{
-							"stun:stun.l.google.com:19302",
-							"stun:stun.stunprotocol.org:3478",
-						},
-					},
-				},
-			},
-			OnBWE: func(estimator cc.BandwidthEstimator) {
-				logger.Infof("ON BWE")
-				bwe = estimator
-			},
-		},
-	}
-	connector, err := sdk.NewConnector(c.sfuAddress)
-	if err != nil {
-		return err
-	}
-
-	rtc, err := sdk.NewRTC(connector, config)
-	if err != nil {
-		return err
-	}
-
-	if err := rtc.Join(c.sessionName, fmt.Sprintf("camera:%v", c.sessionName), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
-		return err
-	}
-
-	rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
-		logger.Infof("ICE connection state changed: %v", state)
-	})
-	rtc.GetPubTransport().GetPeerConnection().OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
-		logger.Infof("Peer connection state changed: %v", state)
-	})
-
 	publishTrack := []webrtc.TrackLocal{}
 
 	// Choose track codec here
@@ -164,12 +122,20 @@ func (c *Client) Connect() error {
 		c.audioTrack = audioTrack
 		publishTrack = append(publishTrack, c.audioTrack)
 	}
+
 	var wg sync.WaitGroup
+
+	// Start pipeline and join SFU, run parallel
 
 	var pipelineErr error
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+
+		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true", c.clientAddress, c.username, c.password, gst.SrcName)
+		videoSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
+		audioSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
+
 		pipeline, err := gst.CreatePipeline(
 			rtspSrc,
 			audioSrc, videoSrc,
@@ -202,9 +168,53 @@ func (c *Client) Connect() error {
 		c.pipeline = pipeline
 	}()
 
+	var bwe cc.BandwidthEstimator
+	var rtcErr error
 	wg.Add(1)
+
 	go func() {
 		defer wg.Done()
+		config := sdk.RTCConfig{
+			WebRTC: sdk.WebRTCTransportConfig{
+				Configuration: webrtc.Configuration{
+					ICEServers: []webrtc.ICEServer{
+						{
+							URLs: []string{
+								"stun:stun.l.google.com:19302",
+								"stun:stun.stunprotocol.org:3478",
+							},
+						},
+					},
+				},
+				OnBWE: func(estimator cc.BandwidthEstimator) {
+					bwe = estimator
+				},
+			},
+		}
+		connector, err := sdk.NewConnector(c.sfuAddress)
+		if err != nil {
+			rtcErr = err
+			return
+		}
+
+		rtc, err := sdk.NewRTC(connector, config)
+		if err != nil {
+			rtcErr = err
+			return
+		}
+
+		if err := rtc.Join(c.sessionName, fmt.Sprintf("camera:%v", c.sessionName), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
+			rtcErr = err
+			return
+		}
+
+		rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
+			logger.Infof("ICE connection state changed: %v", state)
+		})
+		rtc.GetPubTransport().GetPeerConnection().OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
+			logger.Infof("Peer connection state changed: %v", state)
+		})
+
 		if len(publishTrack) > 0 {
 			// Read RTCP from each track to make sure the interceptors work
 			rtcpReaderList, _ := rtc.Publish(publishTrack...)
@@ -212,17 +222,25 @@ func (c *Client) Connect() error {
 				c.startRTCPHandler(rtcpReader)
 			}
 		}
+		c.connector = connector
 	}()
+
 	wg.Wait()
-	fmt.Println("BWE is", bwe)
-	bwe.OnTargetBitrateChange(func(bitrate int) {
-		logger.Infof("Send bitrate changed to %d", bitrate)
-		c.pipeline.ChangeEncoderBitrate(int(bitrate / 1000))
-	})
+
 	if pipelineErr != nil {
+		c.Close()
 		return pipelineErr
 	}
-	c.connector = connector
+
+	if rtcErr != nil {
+		c.Close()
+		return rtcErr
+	}
+
+	bwe.OnTargetBitrateChange(func(bitrate int) {
+		c.pipeline.ChangeEncoderBitrate(int(bitrate / 2000))
+	})
+
 	return nil
 }
 
@@ -266,9 +284,12 @@ func (c *Client) Close() {
 			close(c.closed)
 		}
 	}
-
-	c.connector.Close()
-	c.pipeline.Stop()
+	if c.connector != nil {
+		c.connector.Close()
+	}
+	if c.pipeline != nil {
+		c.pipeline.Stop()
+	}
 	c.onClose()
 }
 

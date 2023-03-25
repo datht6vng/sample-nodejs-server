@@ -59,31 +59,34 @@ func CreatePipeline(
 			return nil, webrtc.ErrCodecNotFound
 		}
 	}
-
 	if videoCodec != "" {
-		videoSink := fmt.Sprintf(" ! appsink name=%v sync=false", videoSinkName)
-		if enableRTSPRelay {
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! appsink name=%v sync=false video_tee. ! queue ! rtspclientsink location=%v", videoSinkName, rtspRelayAddress)
-		}
-
+		var videoEncoder, caps string
 		switch videoCodec {
 		case webrtc.MimeTypeVP8:
-			pipelineStr += videoSrc + fmt.Sprintf(" ! vp8enc error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v ", encoderName) + videoSink
-			//clockRate = videoClockRate
+			videoEncoder = fmt.Sprintf(" ! vp8enc bitrate=1024 error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v", encoderName)
+			caps = "video/x-vp8,stream-format=byte-stream"
 
 		case webrtc.MimeTypeVP9:
-			pipelineStr += videoSrc + fmt.Sprintf(" ! vp9enc name=%v ", encoderName) + videoSink
-			//clockRate = videoClockRate
+			videoEncoder = fmt.Sprintf(" ! vp9enc bitrate=1024 name=%v", encoderName)
+			caps = "video/x-vp9,stream-format=byte-stream"
 
 		case webrtc.MimeTypeH264:
-			pipelineStr += videoSrc + fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast tune=zerolatency name=%v ! video/x-h264,stream-format=byte-stream ", encoderName) + videoSink
-			//clockRate = videoClockRate
+			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast pass=pass1 interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=%v", encoderName)
+			caps = "video/x-h264,stream-format=byte-stream"
 
 		default:
 			return nil, webrtc.ErrCodecNotFound
 		}
+
+		videoSink := fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=%v sync=false", videoSinkName)
+		if enableRTSPRelay {
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! rtspclientsink location=%v", caps, videoSinkName, rtspRelayAddress)
+		}
+		pipelineStr += videoSrc + videoEncoder + videoSink
 	}
+
 	logger.Infof("Create pipeline: %v", pipelineStr)
+
 	pipeline, err := CreatePipeline2(pipelineStr)
 	if err != nil {
 		return nil, err

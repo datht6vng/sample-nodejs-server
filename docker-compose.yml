@@ -26,9 +26,9 @@ services:
       - gaddr=:5551
       - jaddr=:7000
     ports:
-      - 7000:7000
-      - 5551:5551
-      - 5000:5000
+      - 7000:7000 # JSON RPC port
+      - 5551:5551 # gRPC port
+      - 5000:5000 # ICE mux port
     networks:
       - backend 
     
@@ -48,9 +48,10 @@ services:
     command: >
       sh -c "go run ./cmd/rtsp_sender/main.go -c /configs/rtsp_sender.toml"
     ports:
-      - 8554:8554
-      - 5552:5551
-      # - 5000-5300:5000-5300/udp
+      - 5552:5551 # gRPC port
+      - 8554:8554 # RTSP port
+      - 8322:8322 # RTP port
+      - 8000-8003:8000-8003 # multicast 
     environment:
     - GST_DEBUG=1
     networks:

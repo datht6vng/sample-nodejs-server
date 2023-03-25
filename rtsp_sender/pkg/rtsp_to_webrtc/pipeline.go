@@ -113,6 +113,7 @@ func (p *Pipeline2) MessageWatch() func(msg *gst.Message) bool {
 
 		case gst.MessageError:
 			// handle error if possible, otherwise close and return
+			logger.Errorf("[GST-ERROR]%v", msg)
 			stop()
 			return false
 

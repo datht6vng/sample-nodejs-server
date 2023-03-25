@@ -35,8 +35,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
 
-	rtspRelayAddress := ""
-	rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort)
+	rtspRelayAddress := "Disable"
 	if enableRTSPRelay {
 		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, r.autoDomain.Add(1))
 	}
@@ -46,10 +45,13 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 		logger.Errorf("Error when new client: %v", err)
 		return "", err
 	}
+
 	client.OnClose(func() {
 		r.autoDomain.Add(-1)
 	})
+
 	r.clients[connectClientAddress] = client
+
 	return rtspRelayAddress, nil
 }
 
