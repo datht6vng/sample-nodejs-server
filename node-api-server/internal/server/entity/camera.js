@@ -1,14 +1,14 @@
 
 class Camera {
-    id = null;
-    serialNumber = null;
-    cameraName = null;
-    avatarImageUrl = null;
-    // status = null;
-    extraInformation = null;
-    iotDevice = null;
-    area = null;
-    eventType = null;
+    id = undefined;
+    serialNumber = undefined;
+    cameraName = undefined;
+    avatarImageUrl = undefined;
+    // status = undefined;
+    extraInformation = undefined;
+    iotDevice = undefined;
+    area = undefined;
+    eventType = undefined;
 
 }
 

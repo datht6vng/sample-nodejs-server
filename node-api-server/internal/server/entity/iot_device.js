@@ -1,17 +1,17 @@
 
 class IotDevice {
-    id = null;
-    iotDeviceName = null;
-    configZone = null;
-    eventType = null;
-    // status = null;
+    id = undefined;
+    iotDeviceName = undefined;
+    configZone = undefined;
+    eventType = undefined;
+    // status = undefined;
 
-    avatarImageUrl = null;
-    extraInformation = null;
+    avatarImageUrl = undefined;
+    extraInformation = undefined;
 
 
-    camera = null;
-    area = null;
+    camera = undefined;
+    area = undefined;
 }
 
 IotDevice.prototype.accept = function(visitor, o, env) {

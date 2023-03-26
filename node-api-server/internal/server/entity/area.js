@@ -1,15 +1,15 @@
 class Area {
-    id = null;
-    areaName = null;
-    address = null;
-    mapUrl = null;
-    // children = null;
-    parentArea = null;
+    id = undefined;
+    areaName = undefined;
+    address = undefined;
+    mapUrl = undefined;
+    // children = undefined;
+    parentArea = undefined;
     
-    floorNumber = null;
-    lat = null;
-    lng = null;
-    areaType = null;
+    floorNumber = undefined;
+    lat = undefined;
+    lng = undefined;
+    areaType = undefined;
 
 }
 

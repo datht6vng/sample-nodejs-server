@@ -39,10 +39,13 @@ AreaService.prototype.findAreaByName = async function(areaName) {
 }
 
 
-
-
 AreaService.prototype.updateAreaById = async function(areaId, areaDetail) {
     const areaEntity = await this.repository.findByIdAndUpdate(newId(areaId), this.fromProtobufConverter.visit(newArea(), areaDetail));
+    return this.toProtobufConverter.visit(areaEntity);
+}
+
+AreaService.prototype.getAllAreasByType = async function(areaType) {
+    const areaEntity = await this.repository.findByType(areaType);
     return this.toProtobufConverter.visit(areaEntity);
 }
 

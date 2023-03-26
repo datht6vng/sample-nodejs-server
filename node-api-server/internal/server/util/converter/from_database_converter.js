@@ -32,6 +32,9 @@ FromDatabaseConverter.prototype.visitArea = function(area, o, env) {
     // const children = o.children?.map(e => {
     //     this.visit(e instanceof ObjectId ? newId() : newArea(), o);
     // });
+
+    if (!o)   return area;
+
     area.setId(this.visit(newId(), o))
         .setAreaName(o.area_name)
         .setAddress(o.address)

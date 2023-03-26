@@ -2,7 +2,10 @@ const { Handler } = require("./handler");
 
 Handler.prototype.initRoute = function() {
   this.app.get('/api/areas', this.areaController.getAllAreas);
+  this.app.get('/api/areas/type=?', this.areaController.getAllAreasByType);
   this.app.post('/api/areas', this.areaController.createArea);
+
+  this.app.get('/api/camerasMap', this.cameraMapController.getAllCamerasMap)
 }
 
 

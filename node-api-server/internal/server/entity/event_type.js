@@ -1,9 +1,9 @@
 
 class EventType {
-    id = null;
-    eventKey = null;
-    eventName = null;
-    eventDescription = null;
+    id = undefined;
+    eventKey = undefined;
+    eventName = undefined;
+    eventDescription = undefined;
 }
 
 EventType.prototype.accept = function(visitor, o, env) {

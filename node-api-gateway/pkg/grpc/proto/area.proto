@@ -40,7 +40,7 @@ message GetAllAreasByTypeRequest {
     string area_type = 1;
 }
 
-
+ 
 service AreaService {
     rpc GetAllAreas (Empty) returns (GetAllAreasResponse) {};
     rpc GetAllAreasByType (GetAllAreasByTypeRequest) returns (GetAllAreasResponse) {};

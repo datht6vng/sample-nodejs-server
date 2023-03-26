@@ -54,6 +54,23 @@ AreaRepository.prototype.findById = async function(areaId) {
 }
 
 
+AreaRepository.prototype.findByType = async function(areaType) {
+    let areaDoc;
+    console.log("area name: ", areaType);
+    try {
+        areaDoc = await AreaModel.find({
+            area_type: areaType 
+        }).exec();
+        console.log("area find by type: ", areaDoc); 
+    }
+    catch(err) {
+        throw newInternalServerError("Database error", err);
+    }
+    
+    return this.fromDatabaseConverter.visit(newArea(), areaDoc);
+}
+
+
 AreaRepository.prototype.findByName = async function(areaName) {
     let areaDoc;
 

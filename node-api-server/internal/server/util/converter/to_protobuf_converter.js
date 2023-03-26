@@ -24,7 +24,8 @@ ToProtobufConverter.prototype.visitArea = function(area, o, env) {
         doc.area_name = area.getAreaName()
     }
     if (area.getMapUrl() != undefined) {
-        doc.map_uri = area.getMapUri();
+        // doc.map_uri = area.getMapUri();
+        doc.map_url = area.getMapUrl();
     }
     if (area.getAddress() != undefined) {
         doc.address = area.getAddress();

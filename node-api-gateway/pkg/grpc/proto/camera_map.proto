@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+message AreaDetail {
+    string _id = 1;
+    string area_name = 2;
+}
+
+message CameraDetail {
+    string _id = 1;
+    string camera_name = 2;
+    AreaDetail area_id = 3;
+}
+
+
+message GetDeviceRequest {
+    string _id = 1;
+}
+
+message CreateDeviceRequest {
+    string _id = 1;
+    string camera_name = 2;
+    string area_id = 3;
+}
+
+
+
+service CameraMapService {
+    rpc GetAllCamerasMap (Empty) returns (CameraList) {}
+    rpc GetDevice (GetDeviceRequest) returns (CameraDetail) {}
+    rpc CreateDevice (CreateDeviceRequest) returns (CameraDetail) {}
+}
+
+message Empty {}
+
+message CameraList {
+    repeated CameraDetail cameras = 1;
+}
+
+
+
+

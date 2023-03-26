@@ -20,11 +20,11 @@ ToDatabaseConverter.prototype.visitArea = function(area, o, env) {
     if (area.getId() != undefined) {
         doc._id = this.visit(area.getId());
     }
-    if (area.getAreaName() != undefined) {
+    if (area.getAreaName() != undefined) { 
         doc.area_name = area.getAreaName()
     }
     if (area.getMapUrl() != undefined) {
-        doc.map_uri = area.getMapUri();
+        doc.map_url = area.getMapUrl();
     }
     if (area.getAddress() != undefined) {
         doc.address = area.getAddress();

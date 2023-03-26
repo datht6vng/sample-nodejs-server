@@ -8,6 +8,7 @@ const cors = require("cors");
 const { newAreaController } = require("./controller/area_controller");
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const { newCameraMapController } = require("./controller/camera_map_controller");
 
 
 class Handler {
@@ -17,10 +18,11 @@ class Handler {
     this.initMiddleware();
 
   }
-}
+} 
 
 Handler.prototype.initController = function() {
   this.areaController = newAreaController();
+  this.cameraMapController = newCameraMapController();
 }
 
 Handler.prototype.initMiddleware = function() {

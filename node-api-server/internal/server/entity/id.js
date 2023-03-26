@@ -1,7 +1,7 @@
 
 class Id {
-    value = null;
-    constructor(value=null) {
+    value = undefined;
+    constructor(value=undefined) {
         this.value = value;
     }
 }
@@ -18,7 +18,7 @@ Id.prototype.setValue = function(value) {
     this.value = value;
 }
 
-function newId(value=null) {
+function newId(value=undefined) {
     return new Id(value);
 }
 

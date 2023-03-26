@@ -20,6 +20,16 @@ AreaService.prototype.getAllAreas = function(arg, success, failure) {
     this.clientStuff.getAllAreas(arg, self.handleResponse(success, failure));
 }
 
+AreaService.prototype.createArea = function(arg, success, failure) {
+    const self = this;
+    this.clientStuff.createArea(arg, self.handleResponse(success, failure));
+}
+
+AreaService.prototype.getAllAreasByType = function(arg, success, failure) {
+    const self = this;
+    this.clientStuff.getAllAreasByType(arg, self.handleResponse(success, failure));
+}
+
 function newAreaService() {
     return new AreaService();
 }

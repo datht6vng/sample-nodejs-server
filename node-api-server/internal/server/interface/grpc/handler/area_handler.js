@@ -32,6 +32,21 @@ AreaHandler.prototype.createArea = function(call, callback) {
     })
     .catch(err => {
         self.failure(err, callback);
+    }) 
+
+}
+
+AreaHandler.prototype.getAllAreasByType = function(call, callback) {
+    const self = this;
+    console.log("controller: ", call.request);
+    this.service.getAllAreasByType(call.request.area_type)
+    .then(area => {
+        self.success({
+            area_detail: area
+        }, callback)
+    })
+    .catch(err => {
+        self.failure(err, callback);
     })
 
 }
