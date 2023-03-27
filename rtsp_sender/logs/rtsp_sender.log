@@ -1,2 +1,31 @@
 2023-03-25T22:01:44.480  INFO rtsp-sendere243fb463ab2 terminated 
 2023-03-25T22:01:44.483  INFO rtsp-sendere243fb463ab2 Exiting 
+2023-03-28T01:18:09.467  INFO rtsp_sender_8478f53a426f Serve gRPC on: 0.0.0.0:5551 
+2023-03-28T01:18:09.467  INFO rtsp_sender_8478f53a426f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-28T01:18:09.467  INFO rtsp_sender_8478f53a426f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-28T01:18:09.468  INFO rtsp_sender_8478f53a426f Server is running and awaiting signal for shutdown ... 
+2023-03-28T01:18:29.116  INFO rtsp_sender_8478f53a426f Serve gRPC on: 0.0.0.0:5551 
+2023-03-28T01:18:29.116  INFO rtsp_sender_8478f53a426f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-28T01:18:29.116  INFO rtsp_sender_8478f53a426f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-28T01:18:29.116  INFO rtsp_sender_8478f53a426f Server is running and awaiting signal for shutdown ... 
+2023-03-28T01:18:30.311  INFO rtsp_sender_8478f53a426f Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-03-28T01:18:30.311  INFO rtsp_sender_8478f53a426f [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-28T01:18:30.658  INFO rtsp_sender_8478f53a426f [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-03-28T01:18:30.660  INFO rtsp_sender_8478f53a426f Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux is-live=true demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,is-live=true  ! x264enc bitrate=1024 speed-preset=ultrafast interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=encoder ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=videosink sync=false 
+2023-03-28T01:18:30.662  INFO rtsp_sender_8478f53a426f gRPC connected: sfu:5551 
+2023-03-28T01:18:30.664  INFO rtsp_sender_8478f53a426f [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-28T01:18:30.665  INFO rtsp_sender_8478f53a426f [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-03-28T01:18:30.666 ERROR rtsp_sender_8478f53a426f id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-03-28T01:18:30.669  INFO rtsp_sender_8478f53a426f [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-03-28T01:18:30.669  INFO rtsp_sender_8478f53a426f ICE connection state changed: checking 
+2023-03-28T01:18:30.669  INFO rtsp_sender_8478f53a426f [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc0007027b0 0xc0000bc8e8 <nil>} 
+2023-03-28T01:18:30.669 ERROR rtsp_sender_8478f53a426f id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-03-28T01:18:30.669 ERROR rtsp_sender_8478f53a426f [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-03-28T01:18:30.699  INFO rtsp_sender_8478f53a426f [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-03-28T01:18:30.736  INFO rtsp_sender_8478f53a426f [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 36514 typ srflx raddr 0.0.0.0 rport 36514 0xc0004205d0 0xc000428210 <nil>} 
+2023-03-28T01:18:30.922  INFO rtsp_sender_8478f53a426f [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00059e610 0xc0005a0ab8 <nil>} 
+2023-03-28T01:18:30.993  INFO rtsp_sender_8478f53a426f [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 40623 typ srflx raddr 0.0.0.0 rport 40623 0xc0000a9fa0 0xc0001d2ef8 <nil>} 
+2023-03-28T01:18:31.741  INFO rtsp_sender_8478f53a426f ICE connection state changed: connected 
+2023-03-28T01:18:31.746  INFO rtsp_sender_8478f53a426f Peer connection state changed: connected 
+2023-03-28T01:18:35.668  INFO rtsp_sender_8478f53a426f gather candidate done 
+2023-03-28T01:18:35.924  INFO rtsp_sender_8478f53a426f gather candidate done 

@@ -71,7 +71,7 @@ func CreatePipeline(
 			caps = "video/x-vp9,stream-format=byte-stream"
 
 		case webrtc.MimeTypeH264:
-			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast pass=pass1 interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=%v", encoderName)
+			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=%v", encoderName)
 			caps = "video/x-h264,stream-format=byte-stream"
 
 		default:
