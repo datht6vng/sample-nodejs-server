@@ -8,6 +8,7 @@ import (
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	jujuErr "github.com/juju/errors"
 )
 
 var (
@@ -62,15 +63,18 @@ func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client,
 	if client, ok := r.clients[connectClientAddress]; ok {
 		return client, nil
 	}
-	return nil, ErrNotFound
+	return nil, jujuErr.Annotate(ErrNotFound, "cannot get rtsp client")
 }
 
 func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress string) error {
 	if _, err := r.GetRTSPClient(connectClientAddress); err != nil {
 		return err
 	}
+
 	r.rtspSenderLock.Lock()
 	defer r.rtspSenderLock.Unlock()
+
+	r.clients[connectClientAddress].Close()
 	delete(r.clients, connectClientAddress)
 	return nil
 }

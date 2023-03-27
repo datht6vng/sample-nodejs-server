@@ -29,3 +29,11 @@
 2023-03-28T01:18:31.746  INFO rtsp_sender_8478f53a426f Peer connection state changed: connected 
 2023-03-28T01:18:35.668  INFO rtsp_sender_8478f53a426f gather candidate done 
 2023-03-28T01:18:35.924  INFO rtsp_sender_8478f53a426f gather candidate done 
+2023-03-28T01:23:40.941  INFO rtsp_sender_8478f53a426f Serve gRPC on: 0.0.0.0:5551 
+2023-03-28T01:23:40.941  INFO rtsp_sender_8478f53a426f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-28T01:23:40.941  INFO rtsp_sender_8478f53a426f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-28T01:23:40.941  INFO rtsp_sender_8478f53a426f Server is running and awaiting signal for shutdown ... 
+2023-03-28T01:27:33.928  INFO rtsp_sender_8478f53a426f Serve gRPC on: 0.0.0.0:5551 
+2023-03-28T01:27:33.928  INFO rtsp_sender_8478f53a426f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-03-28T01:27:33.928  INFO rtsp_sender_8478f53a426f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-03-28T01:27:33.928  INFO rtsp_sender_8478f53a426f Server is running and awaiting signal for shutdown ... 

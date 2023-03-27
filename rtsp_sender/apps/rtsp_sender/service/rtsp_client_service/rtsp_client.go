@@ -48,6 +48,7 @@ func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, 
 		sessionName:      sessionName,
 		enableAudio:      enableAudio,
 		enableRTSPRelay:  enableRTSPRelay,
+		closed:           make(chan bool),
 	}
 }
 
