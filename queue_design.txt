@@ -25,3 +25,6 @@ Problem:
 
 Problem:
 + iot_type, camera_type???
+
+
++ Tạm thời viết các API mà không cần populate các foreign key của nó

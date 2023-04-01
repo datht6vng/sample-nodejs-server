@@ -2,94 +2,75 @@
 class IotDevice {
     id = undefined;
     iotDeviceName = undefined;
-    configZone = undefined;
+    zone = undefined;
     eventType = undefined;
-    // status = undefined;
+    status = undefined;
+    iotDeviceType = undefined;
 
-    avatarImageUrl = undefined;
-    extraInformation = undefined;
+    accept(visitor, o, env) {
+        return visitor.visitIotDevice(this, o, env);
+    }
+
+    getId() {
+        return this.id;
+    }
+
+    getIotDeviceName() {
+        return this.iotDeviceName;
+    }
+
+    getZone() {
+        return this.zone;
+    }
+
+    getEventType() {
+        return this.eventType;
+    }
+
+    getStatus() {
+        return this.status;
+    }
+
+    getIotDeviceType() {
+        return this.iotDeviceType;
+    }
 
 
-    camera = undefined;
-    area = undefined;
+
+    setId(id) {
+        this.id = id;
+        return this;
+    }
+    
+    setIotDeviceName(deviceName) {
+        this.deviceName = deviceName;
+        return this;
+    }
+    
+    setZone(zone) {
+        this.zone = zone;
+        return this;
+    }
+    
+    setEventType(eventType) {
+        this.eventType = eventType;
+        return this;
+    }
+    
+    setStatus(status) {
+        this.status = status;
+        return this;
+    }
+    
+    setIotDeviceType(deviceType) {
+        this.deviceType = deviceType;
+        return this;
+    }
 }
 
-IotDevice.prototype.accept = function(visitor, o, env) {
-    return visitor.visitIotDevice(this, o, env);
-}
-
-IotDevice.prototype.getId = function() {
-    return this.id;
-}
-
-IotDevice.prototype.getIotDeviceName = function() {
-    return this.iotDeviceName;
-}
-
-IotDevice.prototype.getConfigZone = function() {
-    return this.configZone;
-}
-
-IotDevice.prototype.getEventType = function() {
-    return this.eventType;
-}
-
-IotDevice.prototype.getAvatarImageUrl = function() {
-    return this.avatarImageUrl;
-}
-
-IotDevice.prototype.getExtraInformation = function() {
-    return this.extraInformation;
-}
-
-IotDevice.prototype.getCamera = function() {
-    return this.camera;
-}
-
-IotDevice.prototype.getArea = function() {
-    return this.area;
-}
 
 
-IotDevice.prototype.setId = function(id) {
-    this.id = id;
-    return this;
-}
 
-IotDevice.prototype.setIotDeviceName = function(iotDeviceName) {
-    this.iotDeviceName = iotDeviceName;
-    return this;
-}
-
-IotDevice.prototype.setConfigZone = function(configZone) {
-    this.configZone = configZone;
-    return this;
-}
-
-IotDevice.prototype.setEventType = function(eventType) {
-    this.eventType = eventType;
-    return this;
-}
-
-IotDevice.prototype.setAvatarImageUrl = function(avatarImageUrl) {
-    this.avatarImageUrl = avatarImageUrl;
-    return this;
-}
-
-IotDevice.prototype.setExtraInformation = function(extraInformation) {
-    this.extraInformation = extraInformation;
-    return this;
-}
-
-IotDevice.prototype.setCamera = function(camera) {
-    this.camera = camera;
-    return this;
-}
-
-IotDevice.prototype.setArea = function(area) {
-    this.area = area;
-    return this;
-}
 
 
 function newIotDevice() {

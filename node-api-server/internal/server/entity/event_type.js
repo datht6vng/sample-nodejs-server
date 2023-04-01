@@ -4,50 +4,54 @@ class EventType {
     eventKey = undefined;
     eventName = undefined;
     eventDescription = undefined;
+
+
+
+    accept(visitor, o, env) {
+        return visitor.visitEventType(this, o, env);
+    }
+    
+    getId() {
+        return this.id;
+    }
+    
+    getEventKey() {
+        return this.eventKey;
+    }   
+    
+    getEventName() {
+        return this.eventName;
+    }
+    
+    getEventDescription() {
+        return this.eventDescription;
+    }
+    
+    
+    
+    
+    setId(id) {
+        this.id = id;
+        return this;
+    }
+    
+    setEventKey(eventKey) {
+        this.eventKey = eventKey;
+        return this;
+    }   
+    
+    setEventName(eventName) {
+        this.eventName = eventName;
+        return this;
+    }
+    
+    setEventDescription(eventDescription) {
+        this.eventDescription = eventDescription;
+        return this;
+    }
 }
 
-EventType.prototype.accept = function(visitor, o, env) {
-    return visitor.visitEventType(this, o, env);
-}
 
-EventType.prototype.getId = function() {
-    return this.id;
-}
-
-EventType.prototype.getEventKey = function() {
-    return this.eventKey;
-}   
-
-EventType.prototype.getEventName = function() {
-    return this.eventName;
-}
-
-EventType.prototype.getEventDescription = function() {
-    return this.eventDescription;
-}
-
-
-
-
-EventType.prototype.setId = function(id) {
-    this.id = id;
-    return this;
-}
-
-EventType.prototype.setEventKey = function(eventKey) {
-    this.eventKey = eventKey;
-    return this;
-}   
-
-EventType.prototype.setEventName = function(eventName) {
-    this.eventName = eventName;
-    return this;
-}
-
-EventType.prototype.setEventDescription = function(eventDescription) {
-    this.eventDescription = eventDescription;
-    return this;
-}
 
 
 function newEventType() {
