@@ -1,36 +1,77 @@
-const AreaModel = require("../model/area_model");
-const { newArea } = require("../entity/area");
+const CameraMapModel = require("../model/camera_map_model");
+const { newCameraMap } = require("../entity/camera_map")
 const { newFromDatabaseConverter } = require("../util/converter/from_database_converter");
 const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
 
 
-class AreaRepository {
-    constructor(fromDatabaseConverter=newFromDatabaseConverter(), toDatabaseConverter=newToDatabaseConverter()) {
-        this.fromDatabaseConverter = fromDatabaseConverter;
-        this.toDatabaseConverter = toDatabaseConverter;
+class CameraMapRepository {
+    constructor() {
+        this.fromDatabaseConverter = newFromDatabaseConverter();
+        this.toDatabaseConverter = newToDatabaseConverter();
     }
+
+    async getAll() {
+        let cameraMapDocs;
+        try {
+            cameraMapDocs = await CameraMapModel.find({});
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return cameraMapDocs.map(cameraMapDoc => {
+            return this.fromDatabaseConverter.visit(newCameraMap(), cameraMapDoc);
+        })
+    }
+
+    async create(cameraMapEntity) {
+        const cameraMapDoc = this.toDatabaseConverter.visit(cameraMapEntity);
+        let newCameraMapDoc;
+        try {
+            newCameraMapDoc = await CameraMapModel.create(cameraMapDoc);
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newCameraMap(), newCameraMapDoc);
+    }
+
+    async findById(cameraMapId) {
+        let cameraMapDoc;
+        cameraMapId = cameraMapId.getValue();
+        try {
+            cameraMapDoc = await CameraMapModel.findById(cameraMapId).exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
+        return this.fromDatabaseConverter.visit(newCameraMap(), cameraMapDoc);
+    }
+
+    async findByIdAndUpdate(cameraMapId, cameraMapEntity) {
+        const cameraMapDoc = this.toDatabaseConverter.visit(cameraMapEntity);
+        const filter = {
+            _id: cameraMapId.getValue()
+        }
+        let newCameraMapDoc;
+        try {
+            newCameraMapDoc = await CameraMapModel.findOneAndUpdate(filter, cameraMapDoc, { new: true }); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newCameraMap(), newCameraMapDoc);
+    }
+
 }
 
-AreaRepository.prototype.getAll = async function() {
-    let areaDocs;
-    try {
-        areaDocs = await AreaModel.find({});
-    }
-    catch(err) {
-        throw newInternalServerError("Database error", err);
-    }
-    return areaDocs.map(areaDoc => {
-        return this.fromDatabaseConverter.visit(newArea(), areaDoc);
-    })
+
+function newCameraMapRepository() {
+    return new CameraMapRepository();
 }
 
-
-function newAreaRepository() {
-    return new AreaRepository();
-}
-
-module.exports.newAreaRepository = newAreaRepository;
+module.exports.newCameraMapRepository = newCameraMapRepository;
 
 

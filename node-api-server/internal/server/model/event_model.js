@@ -15,8 +15,14 @@ const eventSchema = new Schema (
             type: Schema.Types.ObjectID,
             ref: 'Camera'
         },
-
-
+        iot_device_map: {
+            type: Schema.Types.ObjectID,
+            ref: 'IotDeviceMap'
+        },
+        camera_map: {
+            type: Schema.Types.ObjectID,
+            ref: 'CameraMap'
+        },
         ai_true_alarm: Boolean,
         human_true_alarm: Boolean,
 

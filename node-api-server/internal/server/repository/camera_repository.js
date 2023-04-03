@@ -9,81 +9,85 @@ const { newInternalServerError } = require("../entity/error/internal_server_erro
 
 
 class CameraRepository {
-    constructor(fromDatabaseConverter=newFromDatabaseConverter(), toDatabaseConverter=newToDatabaseConverter()) {
-        this.fromDatabaseConverter = fromDatabaseConverter;
-        this.toDatabaseConverter = toDatabaseConverter;
+    constructor() {
+        this.fromDatabaseConverter = newFromDatabaseConverter();
+        this.toDatabaseConverter = newToDatabaseConverter();
     }
-}
 
-CameraRepository.prototype.getAll = async function() {
-    let cameraDocs;
-    try {
-        cameraDocs = await CameraModel.find({});
+
+
+    async getAll() {
+        let cameraDocs;
+        try {
+            cameraDocs = await CameraModel.find({});
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return cameraDocs.map(cameraDoc => {
+            return this.fromDatabaseConverter.visit(newCamera(), cameraDoc);
+        })
     }
-    catch(err) {
-        throw newInternalServerError("Database error", err);
+    
+    async create(cameraEntity) {
+        const cameraDoc = this.toDatabaseConverter.visit(cameraEntity);
+        let newCameraDoc;
+        try {
+            newCameraDoc = await CameraModel.create(cameraDoc);
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
     }
-    return cameraDocs.map(cameraDoc => {
+    
+    async findById(cameraId) {
+        let cameraDoc;
+        const cameraId = cameraId.getValue();
+        try {
+            cameraDoc = await CameraModel.findById(cameraId).exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
         return this.fromDatabaseConverter.visit(newCamera(), cameraDoc);
-    })
-}
-
-CameraRepository.prototype.create = async function(cameraEntity) {
-    const cameraDoc = this.toDatabaseConverter.visit(cameraEntity);
-    let newCameraDoc;
-    try {
-        newCameraDoc = await CameraModel.create(cameraDoc);
-    }
-    catch(err) {
-        throw newInternalServerError("Database error", err);
-    }
-    return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
-}
-
-CameraRepository.prototype.findById = async function(cameraId) {
-    let cameraDoc;
-    const cameraId = cameraId.getValue();
-    try {
-        cameraDoc = await CameraModel.findById(cameraId).exec();
-    }
-    catch(err) {
-        throw newInternalServerError("Database error", err);
     }
     
-    return this.fromDatabaseConverter.visit(newCamera(), cameraDoc);
-}
-
-
-CameraRepository.prototype.findByName = async function(cameraName) {
-    let cameraDoc;
-
-    try {
-        cameraDoc = await CameraModel.findOne({
-            camera_name: cameraName
-        }).exec();
-    }
-    catch(err) {
-        throw newInternalServerError("Database error", err);
+    
+    async findByName(cameraName) {
+        let cameraDoc;
+    
+        try {
+            cameraDoc = await CameraModel.findOne({
+                camera_name: cameraName
+            }).exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
+        return this.fromDatabaseConverter.visit(newCamera(), cameraDoc);
     }
     
-    return this.fromDatabaseConverter.visit(newCamera(), cameraDoc);
+    
+    async findByIdAndUpdate(cameraId, cameraEntity) {
+        const cameraDoc = this.toDatabaseConverter.visit(cameraEntity);
+        const filter = {
+            _id: cameraId.getValue()
+        }
+        let newCameraDoc;
+        try {
+            newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc, { new: true }); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
+    }
 }
 
 
-CameraRepository.prototype.findByIdAndUpdate = async function(cameraId, cameraEntity) {
-    const cameraDoc = this.toDatabaseConverter.visit(cameraEntity);
-    const filter = {
-        _id: cameraId.getValue()
-    }
-    let newCameraDoc;
-    try {
-        newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc, { new: true }); // set new to true to return new document after update
-    }
-    catch(err) {
-        throw newInternalServerError("Database error", err);
-    }
-    return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
-}
 
 function newCameraRepository() {
     return new CameraRepository();

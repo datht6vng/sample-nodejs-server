@@ -5,6 +5,8 @@ class Event {
     eventType = undefined;
     iotDevice = undefined;
     camera = undefined;
+    iotDeviceMap = undefined;
+    cameraMap = undefined;
     aiTrueAlarm = undefined;
     humanTrueAlarm = undefined;
     normalImageUrl = undefined;
@@ -35,6 +37,14 @@ class Event {
 
     getCamera() {
         return this.camera;
+    }
+
+    getIotDeviceMap() {
+        return this.iotDeviceMap;
+    }
+
+    getCameraMap() {
+        return this.cameraMap;
     }
 
     getAiTrueAlarm() {
@@ -97,6 +107,16 @@ class Event {
     
     setCamera(camera) {
         this.camera = camera;
+        return this;
+    }
+
+    setIotDeviceMap(iotDeviceMap) {
+        this.iotDeviceMap = iotDeviceMap;
+        return this;
+    }
+
+    setCameraMap(cameraMap) {
+        this.cameraMap = cameraMap;
         return this;
     }
     

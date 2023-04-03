@@ -1,16 +1,6 @@
 syntax = "proto3";
 
-message AreaDetail {
-    optional string _id = 1;
-    optional string area_name = 2;
-    optional string address = 3;
-    optional string map_url = 4;
-    optional string parent_area = 5;
-    optional int32 floor_number = 6;
-    optional float lat = 7;
-    optional float lng = 8;
-    optional string area_type = 9;
-}
+import "details.proto";
 
 message GetAllAreasResponseData {
     repeated AreaDetail areas = 1;
@@ -36,19 +26,27 @@ message CreateAreaResponse {
     string status = 3;
 }
 
-message GetAllAreasByTypeRequest {
-    string area_type = 1;
+message GetAreaByIdRequest {
+    string _id = 1;
+}
+
+
+message GetAreaByIdResponseData {
+    AreaDetail area_detail = 1;
+}
+
+
+message GetAreaByIdResponse {
+    GetAreaByIdResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
 
 
 service AreaService {
     rpc GetAllAreas (Empty) returns (GetAllAreasResponse) {};
-    rpc GetAllAreasByType (GetAllAreasByTypeRequest) returns (GetAllAreasResponse) {};
     rpc CreateArea (CreateAreaRequest) returns (CreateAreaResponse) {};
+    rpc GetAreaById (GetAreaByIdRequest) returns (GetAreaByIdResponse) {};
 }
 
 message Empty {}
-
-message AreaList {
-    repeated AreaDetail areas = 1;
-}

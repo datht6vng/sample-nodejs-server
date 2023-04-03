@@ -35,13 +35,17 @@ message CameraDetail {
     optional string sfu_rtsp_stream_url = 5;
     optional string camera_device_type = 6;
     optional string event_type = 7;
+    optional float offset_x_begin = 8;
+    optional float offset_x_end = 9;
+    optional float offset_y_begin = 10;
+    optional float offset_y_end = 11;
 }
 
 
 message CameraTypeDetail {
     optional string _id = 1;
     optional string camera_type_name = 2;
-    optional strign image_url = 3;
+    optional string image_url = 3;
 }
 
 message EventDetail {
@@ -58,6 +62,8 @@ message EventDetail {
     optional string event_status = 11;
     optional string created_at = 12;
     optional string updated_at = 13;
+    optional string iot_device_map = 14;
+    optional string camera_map = 15;
 }
 
 

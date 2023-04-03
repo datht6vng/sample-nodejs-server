@@ -5,7 +5,11 @@ class Camera {
     status = undefined;
     rtspStreamUrl = undefined;
     sfuRtspStreamUrl = undefined;
-    cameraDeviceType = undefined;
+    offsetXBegin = undefined;
+    offsetXEnd = undefined;
+    offsetYBegin = undefined;
+    offsetYEnd = undefined;
+    cameraType = undefined;
     eventType = undefined;
 
 
@@ -33,8 +37,24 @@ class Camera {
         return this.sfuRtspStreamUrl;
     }
 
+    getOffsetXBegin() {
+        return this.offsetXBegin;
+    }
+
+    getOffsetXEnd() {
+        return this.offsetXEnd;
+    }
+
+    getOffsetYBegin() {
+        return this.offsetYBegin;
+    }
+
+    getOffsetYEnd() {
+        return this.offsetYEnd;
+    }
+
     getCameraDeviceType() {
-        return this.cameraDeviceType;
+        return this.cameraType;
     }
     
     getEventType() {
@@ -69,9 +89,29 @@ class Camera {
         this.sfuRtspStreamUrl = sfuRtspStreamUrl;
         return this;
     }
+
+    setOffsetXBegin(offsetXBegin) {
+        this.offsetXBegin = offsetXBegin;
+        return this;
+    }
+
+    setOffsetXEnd(offsetXEnd) {
+        this.offsetXEnd = offsetXEnd;
+        return this;
+    }
+
+    setOffsetYBegin(offsetYBegin) {
+        this.offsetYBegin = offsetYBegin;
+        return this;
+    }
+
+    setOffsetYEnd(offsetYEnd) {
+        this.offsetYEnd = offsetYEnd;
+        return this;
+    }
     
-    setCameraDeviceType(cameraDeviceType) {
-        this.cameraDeviceType = cameraDeviceType;
+    setCameraDeviceType(cameraType) {
+        this.cameraType = cameraType;
         return this;
     }
     

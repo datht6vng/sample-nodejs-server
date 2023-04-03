@@ -28,3 +28,6 @@ Problem:
 
 
 + Tạm thời viết các API mà không cần populate các foreign key của nó
+
+
++ Viết visit xong ==> xử tới model các vụ update và delete

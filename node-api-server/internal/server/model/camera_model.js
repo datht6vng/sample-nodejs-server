@@ -13,7 +13,12 @@ const cameraSchema = new Schema (
         rtsp_stream_url: String,
         sfu_rtsp_stream_url: String,
 
-        camera_device_type: {
+        offset_x_begin: Number,
+        offset_x_end: Number,
+        offset_y_begin: Number,
+        offset_y_end: Number,
+
+        camera_type: {
             type: Schema.Types.ObjectID,
             ref: 'CameraType'
         },

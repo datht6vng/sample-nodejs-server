@@ -30,9 +30,6 @@ ToProtobufConverter.prototype.visitArea = function(area, o, env) {
     if (area.getAddress() != undefined) {
         doc.address = area.getAddress();
     }
-    // if (area.getChildren()) {
-    //     doc.children = area.getChildren().map(e => this.visit(e));
-    // }
     if (area.getParentArea() != undefined) {
         doc.parent_area = this.visit(area.getParentArea());
     }
@@ -52,7 +49,7 @@ ToProtobufConverter.prototype.visitArea = function(area, o, env) {
     if (area.getAreaType() != undefined) {
         doc.area_type = area.getAreaType();
     }
-    return doc;    
+    return doc;
 }
 
 
