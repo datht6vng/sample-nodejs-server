@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const EventModel = require("./event_model");
+const CameraMapModel = require("./camera_map_model");
+
 const cameraSchema = new Schema (
     {
         camera_name: {
@@ -30,6 +33,13 @@ const cameraSchema = new Schema (
 
     }
 )
+
+// cameraSchema.pre("remove", async function(next) {
+//     const self = this;
+//     await EventModel.deleteMany({ camera: self._id });
+//     await CameraMapModel.updateMany({ connect_camera: self._id }, { connect_camera: null });
+//     next();
+// })
 
 
 module.exports = mongoose.model('Camera', cameraSchema);

@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const EventModel = require("./event_model");
+const CameraMapModel = require("./camera_map_model");
+
 const iotDeviceMapSchema = new Schema (
     {
         iot_device_name: {
@@ -37,6 +40,13 @@ const iotDeviceMapSchema = new Schema (
 
     }
 );
+
+// iotDeviceMapSchema.pre("remove", async function(next) {
+//     const self = this;
+//     await EventModel.deleteMany({ iot_device_map: self._id });
+//     await CameraMapModel.updateMany({ observe_iot: self._id }, { $set: { observe_iot: null } });
+//     next();
+// })
 
 module.exports = mongoose.model('IotDeviceMap', iotDeviceMapSchema);
 

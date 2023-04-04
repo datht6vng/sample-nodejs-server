@@ -31,3 +31,16 @@ Problem:
 
 
 + Viết visit xong ==> xử tới model các vụ update và delete
+
+
+
+====================================
++ Viết xong các hàm của repo để biết dùng hàm delete hay update nào rồi mới viết các middleware của model cho các hàm đó
+    + create: Có thể truyền vào object hay 1 mảng. Kết quả trả ra cũng có thể là object hoặc 1 mảng
+        + Middleware: save (cho mỗi document)
+    + findOneAndUpdate (dùng tiện hơn cách findOne rồi mới save trên document)
+        + Middleware: findOneAndUpdate
+    + findOneAndDelete, deleteMany
+        + $ni, $ne in mongoose
+    
++ Nhớ viết middleware cho iot_device_type và camera_type
