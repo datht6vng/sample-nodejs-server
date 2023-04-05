@@ -80,7 +80,7 @@ func CreatePipeline(
 
 		videoSink := fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=%v sync=false", videoSinkName)
 		if enableRTSPRelay {
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! rtspclientsink location=%v", caps, videoSinkName, rtspRelayAddress)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! rtspclientsink location=%v video_tee_2. ! queue ! h264parse ! matroskamux ! filesink location=a.mkv sync=false", caps, videoSinkName, rtspRelayAddress)
 		}
 		pipelineStr += videoSrc + videoEncoder + videoSink
 	}
