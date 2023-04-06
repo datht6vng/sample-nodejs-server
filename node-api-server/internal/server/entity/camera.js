@@ -9,6 +9,7 @@ class Camera {
     offsetXEnd = undefined;
     offsetYBegin = undefined;
     offsetYEnd = undefined;
+    isSetLine = undefined;
     cameraType = undefined;
     eventType = undefined;
 
@@ -53,7 +54,11 @@ class Camera {
         return this.offsetYEnd;
     }
 
-    getCameraDeviceType() {
+    getIsSetLine() {
+        return this.isSetLine;
+    }
+
+    getCameraType() {
         return this.cameraType;
     }
     
@@ -109,8 +114,13 @@ class Camera {
         this.offsetYEnd = offsetYEnd;
         return this;
     }
+
+    setIsSetLine(isSetLine) {
+        this.isSetLine = isSetLine;
+        return this;
+    }
     
-    setCameraDeviceType(cameraType) {
+    setCameraType(cameraType) {
         this.cameraType = cameraType;
         return this;
     }

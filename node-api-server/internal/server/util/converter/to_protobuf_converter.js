@@ -23,7 +23,7 @@ ToProtobufConverter.prototype.visitArea = function(area, o, env) {
     if (area.getAreaName() != undefined) {
         doc.area_name = area.getAreaName()
     }
-    if (area.getMapUrl() != undefined) {
+    if (area.getMapUrl() !== undefined) {
         // doc.map_uri = area.getMapUri();
         doc.map_url = area.getMapUrl();
     }
@@ -34,7 +34,7 @@ ToProtobufConverter.prototype.visitArea = function(area, o, env) {
         doc.parent_area = this.visit(area.getParentArea());
     }
 
-    if (area.getFloorNumber() != undefined) {
+    if (area.getFloorNumber() !== undefined) {
         doc.floor_number = area.getFloorNumber();
     }
 
@@ -49,6 +49,9 @@ ToProtobufConverter.prototype.visitArea = function(area, o, env) {
     if (area.getAreaType() != undefined) {
         doc.area_type = area.getAreaType();
     }
+    // console.log(area)
+    // console.log(area.getMapUrl() != undefined)
+    // console.log(doc)
     return doc;
 }
 

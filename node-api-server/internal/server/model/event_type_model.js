@@ -13,8 +13,5 @@ const eventTypeSchema = new Schema (
     }
 )
 
-{
-    event_name: "Ten su kien 1"
-}
 
 module.exports = mongoose.model('EventType', eventTypeSchema);

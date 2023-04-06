@@ -6,7 +6,7 @@ message AreaDetail {
     optional string address = 3;
     optional string map_url = 4;
     optional string parent_area = 5;
-    optional int32 floot_number = 6;
+    optional int32 floor_number = 6;
     optional float lat = 7;
     optional float lng = 8;
     optional string area_type = 9;
@@ -33,12 +33,13 @@ message CameraDetail {
     optional string status = 3;
     optional string rtsp_stream_url = 4;
     optional string sfu_rtsp_stream_url = 5;
-    optional string camera_device_type = 6;
+    optional string camera_type = 6;
     optional string event_type = 7;
     optional float offset_x_begin = 8;
     optional float offset_x_end = 9;
     optional float offset_y_begin = 10;
     optional float offset_y_end = 11;
+    optional bool is_set_line = 12;
 }
 
 

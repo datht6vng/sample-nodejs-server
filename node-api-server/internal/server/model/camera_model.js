@@ -20,6 +20,10 @@ const cameraSchema = new Schema (
         offset_x_end: Number,
         offset_y_begin: Number,
         offset_y_end: Number,
+        is_set_line: {
+            type: Boolean,
+            default: false
+        },
 
         camera_type: {
             type: Schema.Types.ObjectID,
