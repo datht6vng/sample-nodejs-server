@@ -2,8 +2,8 @@
 
 const EventModel = require("../model/event_model");
 const { newEvent } = require("../entity/event");
-const { newFromDatabaseConverter } = require("../util/converter/from_database_converter");
-const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
+const { newFromDatabaseConverter } = require("../data_converter/from_database_converter");
+const { newToDatabaseConverter } = require("../data_converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
 
@@ -67,6 +67,20 @@ class EventRepository {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newEvent(), newEventDoc);
+    }
+
+    async findByIdAndDelete(eventId) {
+        const filter = {
+            _id: eventId.getValue()
+        }
+        let deleteEventDoc;
+        try {
+            deleteEventDoc = await EventModel.findOneAndDelete(filter); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newEvent(), deleteEventDoc);
     }
 }
 

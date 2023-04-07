@@ -95,6 +95,85 @@ class ToDatabaseConverter {
         return doc;
     }
 
+    visitCameraType(cameraType, o, env) {
+        let doc = {};
+        this.setDocAttribute(cameraType, cameraType.getId, "_id", doc, true);
+        this.setDocAttribute(cameraType, cameraType.getCameraTypeName, "camera_type_name", doc);
+        this.setDocAttribute(cameraType, cameraType.getImageUrl, "image_url", doc);
+
+        return doc;
+    }
+
+    visitEvent(event, o, env) {
+        let doc = {};
+        this.setDocAttribute(event, event.getId, "_id", doc, true);
+        this.setDocAttribute(event, event.getIotDevice, "iot_device", doc, true);
+        this.setDocAttribute(event, event.getIotDeviceMap, "iot_device_map", doc, true);
+        this.setDocAttribute(event, event.getCameraMap, "camera_map", doc, true);
+        this.setDocAttribute(event, event.getCamera, "camera", doc, true);
+        this.setDocAttribute(event, event.getAiTrueAlarm, "ai_true_alarm", doc);
+        this.setDocAttribute(event, event.getHumanTrueAlarm, "human_true_alarm", doc);
+        this.setDocAttribute(event, event.getNormalImageUrl, "normal_image_url", doc);
+        this.setDocAttribute(event, event.getDetectionImageUrl, "detection_image_url", doc);
+        this.setDocAttribute(event, event.getNormalVideoUrl, "normal_video_url", doc);
+        this.setDocAttribute(event, event.getDetectionVideoUrl, "detection_video_url", doc);
+        this.setDocAttribute(event, event.getEventTime, "event_time", doc);
+        this.setDocAttribute(event, event.getStatus, "status", doc);
+        this.setDocAttribute(event, event.getCreatedAt, "created_at", doc);
+        this.setDocAttribute(event, event.getUpdatedAt, "updated_at", doc);
+        
+        return doc;
+    }
+
+    visitEventType(eventType, o, env) {
+
+        let doc = {};
+        this.setDocAttribute(eventType, eventType.getId, "_id", doc, true);
+        this.setDocAttribute(eventType, eventType.getEventKey, "event_key", doc);
+        this.setDocAttribute(eventType, eventType.getEventName, "event_name", doc);
+        this.setDocAttribute(eventType, eventType.getDescription, "event_description", doc);
+
+        return doc;
+    }
+
+    visitIotDeviceMap(iotDeviceMap, o, env) {
+        let doc = {};
+
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getId, "_id", doc, true);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getIotDeviceName, "iot_device_name", doc);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getAddress, "address", doc);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getLat, "lat", doc);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getLng, "lng", doc);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getType, "type", doc);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getObservedStatus, "observed_status", doc);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getConnectIot, "connect_iot", doc, true);
+        this.setDocAttribute(iotDeviceMap, iotDeviceMap.getArea, "area", doc, true);
+
+        return doc;
+    }
+
+    visitIotDevice(iotDevice, o, env) {
+        let doc = {};
+
+        this.setDocAttribute(iotDevice, iotDevice.getId, "_id", doc, true);
+        this.setDocAttribute(iotDevice, iotDevice.getIotDeviceName, "iot_device_name", doc);
+        this.setDocAttribute(iotDevice, iotDevice.getZone, "zone", doc);
+        this.setDocAttribute(iotDevice, iotDevice.getEventType, "event_type", doc, true);
+        this.setDocAttribute(iotDevice, iotDevice.getStatus, "status", doc);
+        this.setDocAttribute(iotDevice, iotDevice.getIotDeviceType, "iot_device_type", doc, true);
+
+        return doc;
+    }
+
+    visitIotDeviceType(iotDeviceType, o, env) {
+        let doc = {};
+
+        this.setDocAttribute(iotDeviceType, iotDeviceType.getId, "_id", doc, true);
+        this.setDocAttribute(iotDeviceType, iotDeviceType.getIotDeviceTypeName, "iot_device_type_name", doc);
+        this.setDocAttribute(iotDeviceType, iotDeviceType.getImageUrl, "image_url", doc);
+
+        return doc;
+    }
 
 
     setDocAttribute(entity, getEntityMethod, docAttributeName, doc, isRefType=false) {

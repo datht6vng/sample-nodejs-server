@@ -2,12 +2,16 @@ syntax = "proto3";
 
 import "details.proto";
 
-message GetAllAreasResponseData {
+message SingleAreaResponseData {
+    AreaDetail area_detail = 1;
+}
+
+message MultipleAreasResponseData {
     repeated AreaDetail areas = 1;
 }
 
 message GetAllAreasResponse {
-    GetAllAreasResponseData data = 1;
+    MultipleAreasResponseData data = 1;
     string message = 2;
     string status = 3;
 }
@@ -16,12 +20,8 @@ message CreateAreaRequest {
     AreaDetail area_detail = 1;
 }
 
-message CreateAreaResponseData {
-    AreaDetail area_detail = 1;
-}
-
 message CreateAreaResponse {
-    CreateAreaResponseData data = 1;
+    SingleAreaResponseData data = 1;
     string message = 2;
     string status = 3;
 }
@@ -30,14 +30,40 @@ message GetAreaByIdRequest {
     string _id = 1;
 }
 
+message GetAreaByIdResponse {
+    SingleAreaResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
 
-message GetAreaByIdResponseData {
-    AreaDetail area_detail = 1;
+message GetAllAreasByTypeRequest {
+    string area_type = 1;
+}
+
+message GetAllAreasByTypeResponse {
+    MultipleAreasResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateAreaByIdRequest {
+    string _id = 1;
+    AreaDetail area_detail = 2;
+}
+
+message UpdateAreaByIdResponse {
+    SingleAreaResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
 
 
-message GetAreaByIdResponse {
-    GetAreaByIdResponseData data = 1;
+message DeleteAreaByIdRequest {
+    string _id = 1;
+}
+
+message DeleteAreaByIdResponse {
+    SingleAreaResponseData data = 1;
     string message = 2;
     string status = 3;
 }
@@ -47,6 +73,9 @@ service AreaService {
     rpc GetAllAreas (Empty) returns (GetAllAreasResponse) {};
     rpc CreateArea (CreateAreaRequest) returns (CreateAreaResponse) {};
     rpc GetAreaById (GetAreaByIdRequest) returns (GetAreaByIdResponse) {};
+    rpc GetAllAreasByType (GetAllAreasByTypeRequest) returns (GetAllAreasByTypeResponse) {};
+    rpc UpdateAreaById (UpdateAreaByIdRequest) returns (UpdateAreaByIdResponse) {};
+    rpc DeleteAreaById (DeleteAreaByIdRequest) returns (DeleteAreaByIdResponse) {};
 }
 
 message Empty {}

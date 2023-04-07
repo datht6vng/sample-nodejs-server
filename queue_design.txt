@@ -44,3 +44,32 @@ Problem:
         + $ni, $ne in mongoose
     
 + Nhớ viết middleware cho iot_device_type và camera_type
+
+
+
+
+
++ Subscribe vào queue nhận iot event new => Có event lưu database => Gọi grpc để lấy video => Publish lên event media để verified
++ Subscribe vào queue nhận camera event new => Có event lưu database => Gọi grpc để lấy video => Publish lên event media để verified
++ Subscribe vào queue nhận event verified => lưu database => đổ vào socket
+
+
+
+
++ Hàm grpc để test thì tạm để dữ liệu giả trong lời gọi hàm
+
++ Duyệt qua tất cả các exchange, queue, với mỗi cái ta truyền vào hàm của event_context exchange name, queue name để nó lựa chọn nên gọi hàm callback nào
+
+
+
++ Có camera mới
+
+
++ Xóa camera
+
+
++ Sửa camera:
+
+
++ Thêm trường username, password của RTSP vào cho camera model (để gửi về bên rtsp_sender lấy url về)
+

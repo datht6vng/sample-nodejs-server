@@ -1,53 +1,40 @@
 
-const { newArea } = require("../entity/area");
-const { newId } = require("../entity/id");
 const { newAreaRepository } = require("../repository/area_repository");
-const { newFromProtobufConverter } = require("../util/converter/from_protobuf_converter");
-const { newToProtobufConverter } = require("../util/converter/to_protobuf_converter");
-
-
 
 class AreaService {
     constructor(repository=newAreaRepository()) {
         this.repository = repository;
-        this.fromProtobufConverter = newFromProtobufConverter();
-        this.toProtobufConverter = newToProtobufConverter();
     }
 
     async getAllAreas() {
         const areas = await this.repository.getAll();
-        return areas.map(area => {
-            return this.toProtobufConverter.visit(area);
-        })
+        return areas;
     }
     
     async createArea(area) {
-        // console.log(this.fromProtobufConverter.visit(newArea(), area))
-        const areaEntity = await this.repository.create(this.fromProtobufConverter.visit(newArea(), area));
-        return this.toProtobufConverter.visit(areaEntity); 
+        const areaEntity = await this.repository.create(area);
+        return areaEntity; 
     }
     
     async findAreaById(areaId) {
-        const areaEntity = await this.repository.findById(newId(areaId));
-        return this.toProtobufConverter.visit(areaEntity);
+        const areaEntity = await this.repository.findById(areaId);
+        return areaEntity;
     }
-    
-    async findAreaByName(areaName) {
-        const areaEntity = await this.repository.findByName(areaName);
-        return this.toProtobufConverter.visit(areaEntity);
-    }
-    
     
     async updateAreaById(areaId, areaDetail) {
-        const areaEntity = await this.repository.findByIdAndUpdate(newId(areaId), this.fromProtobufConverter.visit(newArea(), areaDetail));
-        return this.toProtobufConverter.visit(areaEntity);
+        const areaEntity = await this.repository.findByIdAndUpdate(areaId, areaDetail);
+        return areaEntity;
+    }
+
+
+    async deleteAreaById(areaId) {
+        const areaEntity = await this.repository.findByIdAndDelete(areaId);
+        return areaEntity;
     }
     
     async getAllAreasByType(areaType) {
         const areas = await this.repository.findByType(areaType);
-        return areas.map(area => {
-            return this.toProtobufConverter.visit(area);
-        })
+        return areas;
     }
 }
 

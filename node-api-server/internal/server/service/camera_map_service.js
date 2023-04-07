@@ -1,30 +1,43 @@
 
-const { newArea } = require("../entity/area");
-const { newId } = require("../entity/id");
-const { newAreaRepository } = require("../repository/area_repository");
-const { newFromProtobufConverter } = require("../util/converter/from_protobuf_converter");
-const { newToProtobufConverter } = require("../util/converter/to_protobuf_converter");
+const { newCameraMapRepository } = require("../repository/camera_map_repository");
 
-
-
-class AreaService {
-    constructor(repository=newAreaRepository(), fromProtobufConverter=newFromProtobufConverter(), toProtobufConverter=newToProtobufConverter()) {
+class CameraMapService {
+    constructor(repository=newCameraMapRepository()) {
         this.repository = repository;
-        this.fromProtobufConverter = fromProtobufConverter;
-        this.toProtobufConverter = toProtobufConverter;
+    }
+
+    async getAllCameraMaps() {
+        const cameraMaps = await this.repository.getAll();
+        return cameraMaps;
+    }
+    
+    async createCameraMap(cameraMap) {
+        const cameraMapEntity = await this.repository.create(cameraMap);
+        return cameraMapEntity; 
+    }
+    
+    async findCameraMapById(cameraMapId) {
+        const cameraMapEntity = await this.repository.findById(cameraMapId);
+        return cameraMapEntity;
+    }
+    
+    async updateCameraMapById(cameraMapId, cameraMapDetail) {
+        const cameraMapEntity = await this.repository.findByIdAndUpdate(cameraMapId, cameraMapDetail);
+        return cameraMapEntity;
+    }
+
+
+    async deleteCameraMapById(cameraMapId) {
+        const cameraMapEntity = await this.repository.findByIdAndDelete(cameraMapId);
+        return cameraMapEntity;
     }
 }
 
-AreaService.prototype.getAllAreas = async function() {
-    const areas = await this.repository.getAll();
-    return areas.map(area => {
-        return this.toProtobufConverter.visit(area);
-    })
-}
 
-function newAreaService(repository=newAreaRepository()) {
-    return new AreaService(repository);
+
+function newCameraMapService(repository=newCameraMapRepository()) {
+    return new CameraMapService(repository);
 }
 
 
-module.exports.newAreaService = newAreaService;
+module.exports.newCameraMapService = newCameraMapService;

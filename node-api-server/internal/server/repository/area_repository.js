@@ -2,8 +2,8 @@
 
 const AreaModel = require("../model/area_model");
 const { newArea } = require("../entity/area");
-const { newFromDatabaseConverter } = require("../util/converter/from_database_converter");
-const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
+const { newFromDatabaseConverter } = require("../data_converter/from_database_converter");
+const { newToDatabaseConverter } = require("../data_converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
 
@@ -35,6 +35,7 @@ class AreaRepository {
             newAreaDoc = await AreaModel.create(areaDoc);
         }
         catch(err) {
+            console.log(err)
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newArea(), newAreaDoc);
@@ -47,9 +48,9 @@ class AreaRepository {
             areaDoc = await AreaModel.findById(areaId).exec();
         }
         catch(err) {
+            console.log(err)
             throw newInternalServerError("Database error", err);
         }
-        console.log(areaDoc);
         
         return this.fromDatabaseConverter.visit(newArea(), areaDoc);
     }
@@ -99,6 +100,21 @@ class AreaRepository {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newArea(), newAreaDoc);
+    }
+
+
+    async findByIdAndDelete(areaId) {
+        const filter = {
+            _id: areaId.getValue()
+        }
+        let deleteAreaDoc;
+        try {
+            deleteAreaDoc = await AreaModel.findOneAndDelete(filter); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newArea(), deleteAreaDoc);
     }
 }
 

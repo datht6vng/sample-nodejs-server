@@ -8,18 +8,20 @@ class BaseError extends Error {
         this.isOperational = isOperational;
         Error.captureStackTrace(this);
     }
+
+    getName() {
+        return this.name;
+    }
+    
+    getDescription() {
+        return this.description;
+    }
+    
+    isOperationalError() {
+        return this.isOperational;
+    }
 }
 
-BaseError.prototype.getName = function() {
-    return this.name;
-}
 
-BaseError.prototype.getDescription = function() {
-    return this.description;
-}
-
-BaseError.prototype.isOperational = function() {
-    return this.isOperational;
-}
 
 module.exports.BaseError = BaseError;

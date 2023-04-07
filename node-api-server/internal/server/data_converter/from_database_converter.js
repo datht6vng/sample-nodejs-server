@@ -1,23 +1,25 @@
-const { newId } = require("../../entity/id");
-const { newArea } = require("../../entity/area");
-const { newCameraMap } = require("../../entity/camera_map");
-const { newCameraType } = require("../../entity/camera_type");
-const { newCamera } = require("../../entity/camera");
-const { newEventType } = require("../../entity/event_type");
-const { newEvent } = require("../../entity/event");
-const { newIotDeviceMap } = require("../../entity/iot_device_map");
-const { newIotDeviceType } = require("../../entity/iot_device_type");
-const { newIotDevice } = require("../../entity/iot_device");
+const { newId } = require("../entity/id");
+const { newArea } = require("../entity/area");
+const { newCameraMap } = require("../entity/camera_map");
+const { newCameraType } = require("../entity/camera_type");
+const { newCamera } = require("../entity/camera");
+const { newEventType } = require("../entity/event_type");
+const { newEvent } = require("../entity/event");
+const { newIotDeviceMap } = require("../entity/iot_device_map");
+const { newIotDeviceType } = require("../entity/iot_device_type");
+const { newIotDevice } = require("../entity/iot_device");
+const ObjectId = require('mongoose').Types.ObjectId;
 
 
 
-class FromProtobufConverter {
+class FromDatabaseConverter {
 
-    visit(entity, doc=null, env=null) {
+    visit(entity, doc=undefined, env=undefined) {
         return entity.accept(this, doc, env);
     }
 
     visitId(id, doc, env) {
+        if (!doc) return undefined;
         id.setValue(doc);
         return id;
     }
@@ -152,16 +154,15 @@ class FromProtobufConverter {
     setEntityWithRefType(entity, setEntityMethod, value, newEntity) {
         setEntityMethod = setEntityMethod.bind(entity);
         if (value) {
-            setEntityMethod(typeof(value) != 'object' ? this.visit(newId(), value) : this.visit(newEntity, value));
+            setEntityMethod(value instanceof ObjectId ? this.visit(newId(), value) : this.visit(newEntity, value));
         }
         else setEntityMethod(value);
         return entity;
     }
 }
 
-function newFromProtobufConverter() {
-    return new FromProtobufConverter();
+function newFromDatabaseConverter() {
+    return new FromDatabaseConverter();
 }
 
-module.exports.newFromProtobufConverter = newFromProtobufConverter;
-
+module.exports.newFromDatabaseConverter = newFromDatabaseConverter;

@@ -39,7 +39,7 @@ class FromDatabaseConverter {
             .setLng(doc.lng)
             .setAreaType(doc.area_type);
     
-        this.setEntityWithRefType(area, doc.setParentArea, doc.parent_area, newArea());
+        this.setEntityWithRefType(area, area.setParentArea, doc.parent_area, newArea());
         return area;
     }
 
@@ -140,6 +140,7 @@ class FromDatabaseConverter {
             .setStatus(doc.status)
         
         this.setEntityWithRefType(iotDevice, iotDevice.setIotDeviceType, doc.iot_device_type, newIotDeviceType())
+        this.setEntityWithRefType(iotDevice, iotDevice.setEventType, doc.event_type, newEventType());
         return iotDevice;
     }
 

@@ -1,23 +1,24 @@
-const { newId } = require("../../entity/id");
-const { newArea } = require("../../entity/area");
-const { newCameraMap } = require("../../entity/camera_map");
-const { newCameraType } = require("../../entity/camera_type");
-const { newCamera } = require("../../entity/camera");
-const { newEventType } = require("../../entity/event_type");
-const { newEvent } = require("../../entity/event");
-const { newIotDeviceMap } = require("../../entity/iot_device_map");
-const { newIotDeviceType } = require("../../entity/iot_device_type");
-const { newIotDevice } = require("../../entity/iot_device");
+const { newId } = require("../entity/id");
+const { newArea } = require("../entity/area");
+const { newCameraMap } = require("../entity/camera_map");
+const { newCameraType } = require("../entity/camera_type");
+const { newCamera } = require("../entity/camera");
+const { newEventType } = require("../entity/event_type");
+const { newEvent } = require("../entity/event");
+const { newIotDeviceMap } = require("../entity/iot_device_map");
+const { newIotDeviceType } = require("../entity/iot_device_type");
+const { newIotDevice } = require("../entity/iot_device");
 
 
 
 class FromProtobufConverter {
 
-    visit(entity, doc=null, env=null) {
+    visit(entity, doc=undefined, env=undefined) {
         return entity.accept(this, doc, env);
     }
 
     visitId(id, doc, env) {
+        if (!doc) return undefined;
         id.setValue(doc);
         return id;
     }
@@ -36,6 +37,7 @@ class FromProtobufConverter {
             .setAreaType(doc.area_type);
     
         this.setEntityWithRefType(area, area.setParentArea, doc.parent_area, newArea());
+
         return area;
     }
 

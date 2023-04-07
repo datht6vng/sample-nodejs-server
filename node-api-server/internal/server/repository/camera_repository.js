@@ -2,8 +2,8 @@
 
 const CameraModel = require("../model/camera_model");
 const { newCamera } = require("../entity/camera");
-const { newFromDatabaseConverter } = require("../util/converter/from_database_converter");
-const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
+const { newFromDatabaseConverter } = require("../data_converter/from_database_converter");
+const { newToDatabaseConverter } = require("../data_converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
 
@@ -84,6 +84,20 @@ class CameraRepository {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
+    }
+
+    async findByIdAndDelete(cameraId) {
+        const filter = {
+            _id: cameraId.getValue()
+        }
+        let deleteCameraDoc;
+        try {
+            deleteCameraDoc = await CameraModel.findOneAndDelete(filter); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newCamera(), deleteCameraDoc);
     }
 }
 

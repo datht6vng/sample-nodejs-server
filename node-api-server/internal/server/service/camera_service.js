@@ -1,51 +1,43 @@
 
-const { newArea } = require("../entity/area");
-const { newId } = require("../entity/id");
-const { newAreaRepository } = require("../repository/area_repository");
-const { newFromProtobufConverter } = require("../util/converter/from_protobuf_converter");
-const { newToProtobufConverter } = require("../util/converter/to_protobuf_converter");
+const { newCameraRepository } = require("../repository/camera_repository");
 
-
-
-class AreaService {
-    constructor(repository=newAreaRepository(), fromProtobufConverter=newFromProtobufConverter(), toProtobufConverter=newToProtobufConverter()) {
+class CameraService {
+    constructor(repository=newCameraRepository()) {
         this.repository = repository;
-        this.fromProtobufConverter = fromProtobufConverter;
-        this.toProtobufConverter = toProtobufConverter;
+    }
+
+    async getAllCameras() {
+        const cameras = await this.repository.getAll();
+        return cameras;
+    }
+    
+    async createCamera(camera) {
+        const cameraEntity = await this.repository.create(camera);
+        return cameraEntity; 
+    }
+    
+    async findCameraById(cameraId) {
+        const cameraEntity = await this.repository.findById(cameraId);
+        return cameraEntity;
+    }
+    
+    async updateCameraById(cameraId, cameraDetail) {
+        const cameraEntity = await this.repository.findByIdAndUpdate(cameraId, cameraDetail);
+        return cameraEntity;
+    }
+
+
+    async deleteCameraById(cameraId) {
+        const cameraEntity = await this.repository.findByIdAndDelete(cameraId);
+        return cameraEntity;
     }
 }
 
-AreaService.prototype.getAllAreas = async function() {
-    const areas = await this.repository.getAll();
-    return areas.map(area => {
-        this.toProtobufConverter.visit(area);
-    })
-}
 
-AreaService.prototype.createArea = async function(area) {
-    // console.log(this.fromProtobufConverter.visit(newArea(), area))
-    const areaEntity = await this.repository.create(this.fromProtobufConverter.visit(newArea(), area));
-    return this.toProtobufConverter.visit(areaEntity); 
-}
 
-AreaService.prototype.findAreaById = async function(areaId) {
-    const areaEntity = await this.repository.findById(newId(areaId));
-    return this.toProtobufConverter.visit(areaEntity);
-}
-
-AreaService.prototype.findAreaByName = function(areaName) {
-    const areaEntity = await this.repository.findByName(areaName);
-    return this.toProtobufConverter.visit(areaEntity);
-}
-
-AreaService.prototype.updateAreaById = function(areaId, areaDetail) {
-    const areaEntity = await this.repository.findByIdAndUpdate(newId(areaId), this.fromProtobufConverter.visit(newArea(), areaDetail));
-    return this.toProtobufConverter.visit(areaEntity);
-}
-
-function newAreaService(repository=newAreaRepository()) {
-    return new AreaService(repository);
+function newCameraService(repository=newCameraRepository()) {
+    return new CameraService(repository);
 }
 
 
-module.exports.newAreaService = newAreaService;
+module.exports.newCameraService = newCameraService;

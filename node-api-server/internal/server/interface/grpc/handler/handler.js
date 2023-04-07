@@ -1,4 +1,4 @@
-const { newErrorHandler } = require("../../../util/error/error_handler");
+const { newErrorHandler } = require("../../../error/error_handler");
 
 const { BaseError } = require("../../../entity/error/base_error");
 

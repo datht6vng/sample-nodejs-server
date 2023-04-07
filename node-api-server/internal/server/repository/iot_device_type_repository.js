@@ -1,7 +1,7 @@
 const IotDeviceTypeModel = require("../model/iot_device_type_model");
 const { newIotDeviceType } = require("../entity/iot_device_type")
-const { newFromDatabaseConverter } = require("../util/converter/from_database_converter");
-const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
+const { newFromDatabaseConverter } = require("../data_converter/from_database_converter");
+const { newToDatabaseConverter } = require("../data_converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
 
@@ -63,6 +63,20 @@ class IotDeviceTypeRepository {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newIotDeviceType(), newIotDeviceTypeDoc);
+    }
+
+    async findByIdAndDelete(iotDeviceTypeId) {
+        const filter = {
+            _id: iotDeviceTypeId.getValue()
+        }
+        let deleteIotDeviceTypeDoc;
+        try {
+            deleteIotDeviceTypeDoc = await IotDeviceTypeModel.findOneAndDelete(filter); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newIotDeviceType(), deleteIotDeviceTypeDoc);
     }
 
 }

@@ -2,8 +2,8 @@
 
 const EventTypeModel = require("../model/event_type_model");
 const { newEventType } = require("../entity/event_type");
-const { newFromDatabaseConverter } = require("../util/converter/from_database_converter");
-const { newToDatabaseConverter } = require("../util/converter/to_database_converter");
+const { newFromDatabaseConverter } = require("../data_converter/from_database_converter");
+const { newToDatabaseConverter } = require("../data_converter/to_database_converter");
 
 const { newInternalServerError } = require("../entity/error/internal_server_error");
 
@@ -85,6 +85,19 @@ class EventTypeRepository {
         return this.fromDatabaseConverter.visit(newEventType(), newEventTypeDoc);
     }
     
+    async findByIdAndDelete(eventTypeId) {
+        const filter = {
+            _id: eventTypeId.getValue()
+        }
+        let deleteEventTypeDoc;
+        try {
+            deleteEventTypeDoc = await EventTypeModel.findOneAndDelete(filter); // set new to true to return new document after update
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newEventType(), deleteEventTypeDoc);
+    }
 }
 
 

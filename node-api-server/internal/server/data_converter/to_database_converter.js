@@ -1,10 +1,12 @@
-class ToProtobufConverter {
+
+
+class ToDatabaseConverter {
     constructor() {
 
     }
 
 
-    visit(entity, o=null, env=null) {
+    visit(entity, o=undefined, env=undefined) {
         return entity.accept(this, o, env);
     }
     
@@ -177,6 +179,9 @@ class ToProtobufConverter {
     setDocAttribute(entity, getEntityMethod, docAttributeName, doc, isRefType=false) {
         getEntityMethod = getEntityMethod.bind(entity);
         if (getEntityMethod() !== undefined) {
+            if (docAttributeName == "_id") {
+                console.log(getEntityMethod() !== undefined)
+            }
             if (!isRefType) {
                 doc[docAttributeName] = getEntityMethod();
             }
@@ -191,10 +196,8 @@ class ToProtobufConverter {
 
 
 
-function newToProtobufConverter() {
-    return new ToProtobufConverter();
+function newToDatabaseConverter() {
+    return new ToDatabaseConverter();
 }
 
-module.exports.newToProtobufConverter = newToProtobufConverter;
-
-
+module.exports.newToDatabaseConverter = newToDatabaseConverter;

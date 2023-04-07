@@ -4,7 +4,7 @@ class ToProtobufConverter {
     }
 
 
-    visit(entity, o=null, env=null) {
+    visit(entity, o=undefined, env=undefined) {
         return entity.accept(this, o, env);
     }
     

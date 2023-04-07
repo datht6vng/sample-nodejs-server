@@ -1,71 +1,116 @@
 const { newAreaService } = require("../../../service/area_service");
-
+const { newArea } = require("../../../entity/area");
+const { newId } = require("../../../entity/id");
 const { Handler } = require("./handler");
+
+const { newFromProtobufConverter } = require("../../../data_converter/from_protobuf_converter");
+const { newToProtobufConverter } = require("../../../data_converter/to_protobuf_converter");
 
 class AreaHandler extends Handler {
     constructor(service=newAreaService()) {
         super();
         this.service = service;
+        this.fromProtobufConverter = newFromProtobufConverter()
+        this.toProtobufConverter = newToProtobufConverter();
     }
 
     getAllAreas(call, callback) {
-        const self = this;
         this.service.getAllAreas()
         .then(areas => {
-            self.success({ 
+               
+            areas = areas.map(area => {
+                return this.toProtobufConverter.visit(area);
+            })
+
+            this.success({ 
                 areas: areas 
             }, callback);
         })
         .catch(err => {
-            self.failure(err, callback);
+            this.failure(err, callback);
         })
     }
     
     createArea(call, callback) {
-        const self = this;
-        this.service.createArea(call.request.area_detail)
+        let area = this.fromProtobufConverter.visit(newArea(), call.request.area_detail);
+        this.service.createArea(area)
         .then(area => {
-            self.success({
+            area = this.toProtobufConverter.visit(area);
+            this.success({
                 area_detail: area
             }, callback)
         })
         .catch(err => {
-            self.failure(err, callback);
+            this.failure(err, callback);
         }) 
     
     }
-
 
     getAreaById(call, callback) {
-        const self = this;
-        this.service.findAreaById(call.request._id)
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        this.service.findAreaById(id)
         .then(area => {
-            self.success({
+            
+            area = this.toProtobufConverter.visit(area);
+            this.success({
                 area_detail: area
             }, callback)
         })
         .catch(err => {
-            self.failure(err, callback);
+            this.failure(err, callback);
         }) 
     
     }
     
-
-
-    
     getAllAreasByType(call, callback) {
-        const self = this;
         this.service.getAllAreasByType(call.request.area_type)
         .then(areas => {
-            self.success({
+            areas = areas.map(area => {
+                return this.toProtobufConverter.visit(area);
+            })
+            this.success({
                 areas: areas
             }, callback)
         })
         .catch(err => {
-            self.failure(err, callback);
+            this.failure(err, callback);
         })
     
-    }   
+    }
+    
+    
+
+    updateAreaById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        let area = this.fromProtobufConverter.visit(newArea(), call.request.area_detail);
+        this.service.updateAreaById(id, area)
+        .then(area => {
+            
+            area = this.toProtobufConverter.visit(area);
+            this.success({
+                area_detail: area
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
+    }
+
+
+    deleteAreaById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        this.service.deleteAreaById(id)
+        .then(area => {
+            
+            area = this.toProtobufConverter.visit(area);
+            this.success({
+                area_detail: area
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
+    }
 }
 
 
