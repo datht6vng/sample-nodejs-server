@@ -6,7 +6,8 @@ const defaultLoaderOptions = {
     longs: String,
     enums: String,
     defaults: true,
-    oneofs: true
+    oneofs: true,
+    includeDirs: [__dirname]
 };
 
 class ProtoLoader {

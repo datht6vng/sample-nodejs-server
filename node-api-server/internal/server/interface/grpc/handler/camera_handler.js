@@ -1,32 +1,98 @@
-const Camera = require('../../../models/camera');
+const { newCameraService } = require("../../../service/camera_service");
+const { newCamera } = require("../../../entity/camera");
+const { newId } = require("../../../entity/id");
+const { Handler } = require("./handler");
 
+class CameraHandler extends Handler {
+    constructor(service=newCameraService()) {
+        super();
+        this.service = service;
+    }
 
-class CameraHandler {
-    constructor() {
+    getAllCameras(call, callback) {
+        this.service.getAllCameras()
+        .then(cameras => {
+               
+            cameras = cameras.map(camera => {
+                return this.toProtobufConverter.visit(camera);
+            })
 
+            this.success({ 
+                cameras: cameras 
+            }, callback);
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
+    }
+    
+    createCamera(call, callback) {
+        let camera = this.fromProtobufConverter.visit(newCamera(), call.request.camera_detail);
+        this.service.createCamera(camera)
+        .then(camera => {
+            camera = this.toProtobufConverter.visit(camera);
+            this.success({
+                camera_detail: camera
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        }) 
+    
+    }
+
+    getCameraById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        this.service.findCameraById(id)
+        .then(camera => {
+            
+            camera = this.toProtobufConverter.visit(camera);
+            this.success({
+                camera_detail: camera
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        }) 
+    
+    }
+
+    updateCameraById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        let camera = this.fromProtobufConverter.visit(newCamera(), call.request.camera_detail);
+        this.service.updateCameraById(id, camera)
+        .then(camera => {
+            
+            camera = this.toProtobufConverter.visit(camera);
+            this.success({
+                camera_detail: camera
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
     }
 
 
+    deleteCameraById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        this.service.deleteCameraById(id)
+        .then(camera => {
+            
+            camera = this.toProtobufConverter.visit(camera);
+            this.success({
+                camera_detail: camera
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
+    }
 }
 
-CameraHandler.prototype.getAllDevices = async function(_, callback) {
-    let devices = await Camera.find().populate('area_id');
-    callback(null, devices);
+
+function newCameraHandler() {
+    return new CameraHandler();
 }
 
-CameraHandler.prototype.getDevice = async function(device, callback) {
-    let device = await Camera.find(device).populate('area_id');
-    callback(null, device);
-
-}
-
-
-
-CameraHandler.prototype.createDevice = async function(device, callback) {
-    let newDevice = await Camera.create(device);
-    callback(null, newDevice);
-
-}
-
-module.exports.CameraHandler = CameraHandler;
-
+module.exports.newCameraHandler = newCameraHandler;

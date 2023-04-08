@@ -14,25 +14,32 @@ class ProtoLoader {
     constructor() {
 
     } 
-    // loadPackage(filename, options=defaultLoaderOptions) {
-    //     const path = __dirname + "/" + filename;
-    //     const packageDef = protoLoader.loadSync(path, options);
-    //     const packetObject = grpc.loadPackageDefinition(packageDef);
-    //     return packetObject;
-    // }
+
+
+    loadPackage(fileName, options=defaultLoaderOptions) {
+        const path = __dirname + "/" + fileName;
+        const packageDef = protoLoader.loadSync(path, options);
+        const protoDescriptor = grpc.loadPackageDefinition(packageDef);
+        return protoDescriptor;
+    }
+    
+    getService(fileName, serviceName) {
+        const protoDescriptor = this.loadPackage(fileName);
+        return protoDescriptor[serviceName].service;
+    }
+    
+    getClientStub(fileName, serviceName, ipAddress, port) {
+        const protoDescriptor = this.loadPackage(fileName);
+        const Service = protoDescriptor[serviceName];
+        return new Service(
+            `${ipAddress}:${port}`,
+            grpc.credentials.createInsecure()
+        );
+    
+    }
 }
 
-ProtoLoader.prototype.loadPackage = function(fileName, options=defaultLoaderOptions) {
-    const path = __dirname + "/" + fileName;
-    const packageDef = protoLoader.loadSync(path, options);
-    const protoDescriptor = grpc.loadPackageDefinition(packageDef);
-    return protoDescriptor;
-}
 
-ProtoLoader.prototype.getService = function(fileName, serviceName) {
-    const protoDescriptor = this.loadPackage(fileName);
-    return protoDescriptor[serviceName].service;
-}
 
 function newProtoLoader() {
     return new ProtoLoader();

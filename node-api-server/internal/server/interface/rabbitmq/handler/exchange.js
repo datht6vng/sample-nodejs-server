@@ -3,7 +3,7 @@ const { ExchangeType } = require("./exchange_type");
 class Exchange {
     constructor(name, typ=ExchangeType.DEFAULT) {
         this.name = name;
-        this.typ = type;
+        this.typ = typ;
     }
 }
 

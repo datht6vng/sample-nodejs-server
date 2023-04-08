@@ -2,8 +2,16 @@ const { newErrorHandler } = require("../../../error/error_handler");
 
 const { BaseError } = require("../../../entity/error/base_error");
 
+const { newFromProtobufConverter } = require("../../../data_converter/from_protobuf_converter");
+const { newToProtobufConverter } = require("../../../data_converter/to_protobuf_converter");
 
 class Handler {
+
+    constructor() {
+        this.fromProtobufConverter = newFromProtobufConverter()
+        this.toProtobufConverter = newToProtobufConverter();
+    }
+
     success(data, callback, message="Success", httpStatusCode=200) {
         console.log(data)
         const response = {
@@ -19,6 +27,7 @@ class Handler {
             const errorHandler = newErrorHandler();
             errorHandler.execute(error);
             const response = errorHandler.getMessage(error);
+            console.log(error);
             callback(response);
         }
         else {

@@ -51,4 +51,21 @@
             routing_key_prefix = {event_verified_iot = "event.verified.iot", event_verified_camera = "event.verified.camera"}
 
 
-    
+    [[rabbitmq.exchanges]]
+        name = "stream_processsing"
+        type = "topic"
+        [[rabbitmq.exchanges.queues]]
+            name = "camera_event_new"
+            binding_keys = ["event.new.camera.*"] # not have event.new.iot because iot event is published to another queue of another exchange
+            routing_key_prefix = {event_new_camera = "event.new.camera"}
+
+
+[ai_server]
+    [ai_server.http]
+        host = "localhost"
+        port = "5000"
+        scheme = "http"
+    [ai_server.grpc]
+        host = "localhost"
+        port = "5000"
+

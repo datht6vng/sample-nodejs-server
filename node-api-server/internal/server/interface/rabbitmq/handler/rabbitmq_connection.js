@@ -21,7 +21,7 @@ class RabbitMQConection {
     }
 
     async init() {
-        this.connection = await amqp.connect(`${this.scheme}://${this.usrname}:${this.password}@${this.host}:${this.port}${this.virtualHost}`);
+        this.connection = await amqp.connect(`${this.scheme}://${this.username}:${this.password}@${this.host}:${this.port}${this.virtualHost}`);
         return this.connection;
     }
 

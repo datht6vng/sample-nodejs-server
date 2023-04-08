@@ -1,41 +1,70 @@
 syntax = "proto3";
 
-message AreaDetail {
-    string _id = 1;
-    string area_name = 2;
+import "details.proto";
+
+message SingleCameraMapResponseData {
+    CameraMapDetail camera_map_detail = 1;
 }
 
-message CameraDetail {
+message MultipleCameraMapsResponseData {
+    repeated CameraMapDetail camera_maps = 1;
+}
+
+message GetAllCameraMapsResponse {
+    MultipleCameraMapsResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateCameraMapRequest {
+    CameraMapDetail camera_map_detail = 1;
+}
+
+message CreateCameraMapResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetCameraMapByIdRequest {
     string _id = 1;
-    string camera_name = 2;
-    AreaDetail area_id = 3;
+}
+
+message GetCameraMapByIdResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateCameraMapByIdRequest {
+    string _id = 1;
+    CameraMapDetail camera_map_detail = 2;
+}
+
+message UpdateCameraMapByIdResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
 
 
-message GetDeviceRequest {
+message DeleteCameraMapByIdRequest {
     string _id = 1;
 }
 
-message CreateDeviceRequest {
-    string _id = 1;
-    string camera_name = 2;
-    string area_id = 3;
+message DeleteCameraMapByIdResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
-
 
 
 service CameraMapService {
-    rpc GetAllCameraMap (Empty) returns (CameraList) {}
-    rpc GetDevice (GetDeviceRequest) returns (CameraDetail) {}
-    rpc CreateDevice (CreateDeviceRequest) returns (CameraDetail) {}
+    rpc GetAllCameraMaps (Empty) returns (GetAllCameraMapsResponse) {};
+    rpc CreateCameraMap (CreateCameraMapRequest) returns (CreateCameraMapResponse) {};
+    rpc GetCameraMapById (GetCameraMapByIdRequest) returns (GetCameraMapByIdResponse) {};
+    rpc UpdateCameraMapById (UpdateCameraMapByIdRequest) returns (UpdateCameraMapByIdResponse) {};
+    rpc DeleteCameraMapById (DeleteCameraMapByIdRequest) returns (DeleteCameraMapByIdResponse) {};
 }
 
 message Empty {}
-
-message CameraList {
-    repeated CameraDetail cameras = 1;
-}
-
-
-
-

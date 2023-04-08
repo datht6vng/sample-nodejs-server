@@ -3,14 +3,26 @@ const RabbitMQ = require("./rabbitmq");
 
 class AMQPConsumer extends RabbitMQ {
     constructor(exchange, queue, callback) {
-        this.init(exchange, queue, callback);
+        super();
+        this.exchange = exchange; 
+        this.queue = queue;
+        this.callback = callback;
     }
 
-    async init(exchange, queue) {
+    async start() {
         await this.initConnection();
         await this.initChannel();
-        await this.initExchange(exchange.name, exchange.typ);
-        await this.initQueue(exchange.name, queue.name, queue.bindingKeys, queue.params);
+        await this.initExchange(this.exchange.name, this.exchange.typ);
+        await this.initQueue(this.exchange.name, this.queue.name, this.queue.bindingKeys, this.queue.params);
+
+        // Temporarily set noAck to true
+        this.channel.consume(this.queue.name, callback, { noAck: true });
     }
 
 }
+
+function newAMQPConsumer(exchange, queue, callback) {
+    return new AMQPConsumer(exchange, queue, callback);
+}
+
+module.exports.newAMQPConsumer = newAMQPConsumer;

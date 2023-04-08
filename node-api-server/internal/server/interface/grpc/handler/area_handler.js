@@ -3,15 +3,10 @@ const { newArea } = require("../../../entity/area");
 const { newId } = require("../../../entity/id");
 const { Handler } = require("./handler");
 
-const { newFromProtobufConverter } = require("../../../data_converter/from_protobuf_converter");
-const { newToProtobufConverter } = require("../../../data_converter/to_protobuf_converter");
-
 class AreaHandler extends Handler {
     constructor(service=newAreaService()) {
         super();
         this.service = service;
-        this.fromProtobufConverter = newFromProtobufConverter()
-        this.toProtobufConverter = newToProtobufConverter();
     }
 
     getAllAreas(call, callback) {

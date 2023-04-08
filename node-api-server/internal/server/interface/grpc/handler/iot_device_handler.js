@@ -1,42 +1,98 @@
-const IotDevice = require('../../../models/iot_device');
+const { newIotDeviceService } = require("../../../service/iot_device_service");
+const { newIotDevice } = require("../../../entity/iot_device");
+const { newId } = require("../../../entity/id");
+const { Handler } = require("./handler");
 
+class IotDeviceHandler extends Handler {
+    constructor(service=newIotDeviceService()) {
+        super();
+        this.service = service;
+    }
 
-class IotDeviceHandler {
-    constructor() {
+    getAllIotDevices(call, callback) {
+        this.service.getAllIotDevices()
+        .then(iotDevices => {
+               
+            iotDevices = iotDevices.map(iotDevice => {
+                return this.toProtobufConverter.visit(iotDevice);
+            })
 
+            this.success({ 
+                iot_devices: iotDevices 
+            }, callback);
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
+    }
+    
+    createIotDevice(call, callback) {
+        let iotDevice = this.fromProtobufConverter.visit(newIotDevice(), call.request.iot_device_detail);
+        this.service.createIotDevice(iotDevice)
+        .then(iotDevice => {
+            iotDevice = this.toProtobufConverter.visit(iotDevice);
+            this.success({
+                iot_device_detail: iotDevice
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        }) 
+    
+    }
+
+    getIotDeviceById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        this.service.findIotDeviceById(id)
+        .then(iotDevice => {
+            
+            iotDevice = this.toProtobufConverter.visit(iotDevice);
+            this.success({
+                iot_device_detail: iotDevice
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        }) 
+    
+    }
+
+    updateIotDeviceById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        let iotDevice = this.fromProtobufConverter.visit(newIotDevice(), call.request.iot_device_detail);
+        this.service.updateIotDeviceById(id, iotDevice)
+        .then(iotDevice => {
+            
+            iotDevice = this.toProtobufConverter.visit(iotDevice);
+            this.success({
+                iot_device_detail: iotDevice
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
     }
 
 
-}
-
-IotDeviceHandler.prototype.getAllDevices = async function(_, callback) {
-    console.log(222222)
-    let devices = await IotDevice.find().populate('camera_id').populate('area_id');
-    console.log(devices);
-    let res = {
-        iot_devices: devices
+    deleteIotDeviceById(call, callback) {
+        let id = this.fromProtobufConverter.visit(newId(), call.request._id);
+        this.service.deleteIotDeviceById(id)
+        .then(iotDevice => {
+            
+            iotDevice = this.toProtobufConverter.visit(iotDevice);
+            this.success({
+                iot_device_detail: iotDevice
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        })
     }
-    callback(null, res);
 }
 
-IotDeviceHandler.prototype.getDevice = async function(req, callback) {
-    let data = await IotDevice.find(req.request).populate('camera_id').populate('area_id');
-    callback(null, data);
 
+function newIotDeviceHandler() {
+    return new IotDeviceHandler();
 }
 
-IotDeviceHandler.prototype.createDevice = async function(req, callback) {
-    
-    req.request.camera_id = "73bba2c30953043cd7d792a3";
-    req.request.area_id = "63bba2c30953043cd7d792a3";
-    
-
-    let newDevice = await IotDevice.create(req.request);
-    newDevice = await IotDevice.findOne({ _id: newDevice._id }).populate('camera_id').populate('area_id');
-    console.log(newDevice)
-    callback(null, newDevice);
-
-}
-
-module.exports.IotDeviceHandler = IotDeviceHandler;
-
+module.exports.newIotDeviceHandler = newIotDeviceHandler;
