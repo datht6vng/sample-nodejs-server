@@ -1,31 +1,62 @@
 const { Controller } = require("./controller");
-const { newAreaService } = require("../../../service/grpc/area_service");
+const { newAreaHandler } = require("../../../service/grpc_client/handler/area_handler");
 
 class AreaController extends Controller {
-    constructor(areaService=newAreaService()) {
+    constructor(areaHandler=newAreaHandler()) {
         super();
-        this.service = areaService;
+        this.handler = areaHandler;
         
         this.getAllAreas = this.getAllAreas.bind(this);
+        this.createArea = this.createArea.bind(this);
+        this.getAreaById = this.getAreaById.bind(this);
+        this.updateAreaById = this.updateAreaById.bind(this);
+        this.deleteAreaById = this.deleteAreaById.bind(this);
+    }
+
+    getAllAreas(req, res, next) {
+        let arg = {};
+        if (req.query.type) {
+            arg = {
+                area_type: req.query.type
+            }
+            this.handler.getAllAreasByType(arg, this.success(res), this.failure(res));
+        }
+        else {
+            this.handler.getAllAreas(arg, this.success(res), this.failure(res));
+        }
+    }
+    
+    createArea(req, res, next) {
+        let arg = {
+            area_detail: req.body
+        };
+        this.handler.createArea(arg, this.success(res), this.failure(res));
+    }
+
+    getAreaById(req, res, next) {
+        let arg = {
+            _id: req.params.id
+        };
+        this.handler.getAreaById(arg, this.success(res), this.failure(res));
+    }
+
+    updateAreaById(req, res, next) {
+        let arg = {
+            _id: req.params.id,
+            area_detail: req.body
+        };
+        this.handler.updateAreaById(arg, this.success(res), this.failure(res));
+    }
+
+    deleteAreaById(req, res, next) {
+        let arg = {
+            _id: req.params.id
+        };
+        this.handler.deleteAreaById(arg, this.success(res), this.failure(res));
     }
 }
 
-AreaController.prototype.getAllAreas = function(req, res, next) {
-    console.log("req body get all: ", req.body)
-    let arg = {};
-    this.service.getAllAreas(arg, this.success(res), this.failure(res));
-}
 
-AreaController.prototype.getAllAreasByType = function(req, res, next) {
-    console.log("req: ",  req.body)
-    let arg = req.body;
-    this.service.getAllAreasByType(arg, this.success(res), this.failure(res));
-}
-
-AreaController.prototype.createArea = function(req, res, next) {
-    let arg = req.body;
-    this.service.createArea(arg, this.success(res), this.failure(res));
-}
 
 
 function newAreaController() {

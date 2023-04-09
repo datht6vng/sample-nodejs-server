@@ -43,7 +43,7 @@ class EventRepository {
     
     async findById(eventId) {
         let eventDoc;
-        const eventId = eventId.getValue();
+        eventId = eventId.getValue();
         try {
             eventDoc = await EventModel.findById(eventId).exec();
         }

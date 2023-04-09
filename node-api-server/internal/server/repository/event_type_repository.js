@@ -42,7 +42,7 @@ class EventTypeRepository {
     
     async findById(eventTypeId) {
         let eventTypeDoc;
-        const eventTypeId = eventTypeId.getValue();
+        eventTypeId = eventTypeId.getValue();
         try {
             eventTypeDoc = await EventTypeModel.findById(eventTypeId).exec();
         }
@@ -70,7 +70,7 @@ class EventTypeRepository {
     }
     
     
-    async findByIdAndUpdatefunction(eventTypeId, eventTypeEntity) {
+    async findByIdAndUpdate(eventTypeId, eventTypeEntity) {
         const eventTypeDoc = this.toDatabaseConverter.visit(eventTypeEntity);
         const filter = {
             _id: eventTypeId.getValue()

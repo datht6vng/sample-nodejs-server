@@ -5,6 +5,8 @@ class Camera {
     status = undefined;
     rtspStreamUrl = undefined;
     sfuRtspStreamUrl = undefined;
+    username = undefined;
+    password = undefined;
     offsetXBegin = undefined;
     offsetXEnd = undefined;
     offsetYBegin = undefined;
@@ -36,6 +38,14 @@ class Camera {
     
     getSfuRtspStreamUrl() {
         return this.sfuRtspStreamUrl;
+    }
+
+    getUsername() {
+        return this.username;
+    }
+
+    getPassword() {
+        return this.password;
     }
 
     getOffsetXBegin() {
@@ -92,6 +102,16 @@ class Camera {
     
     setSfuRtspStreasmUrl(sfuRtspStreamUrl) {
         this.sfuRtspStreamUrl = sfuRtspStreamUrl;
+        return this;
+    }
+
+    setUsername(username) {
+        this.username = username;
+        return this;
+    }
+
+    setPassword(password) {
+        this.password = password;
         return this;
     }
 

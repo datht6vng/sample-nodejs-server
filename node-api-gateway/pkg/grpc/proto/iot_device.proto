@@ -1,54 +1,70 @@
 syntax = "proto3";
 
-message CameraDetail {
-    string _id = 1;
-    string camera_name = 2;
+import "details.proto";
+
+message SingleIotDeviceResponseData {
+    IotDeviceDetail iot_device_detail = 1;
+}
+
+message MultipleIotDevicesResponseData {
+    repeated IotDeviceDetail iot_devices = 1;
+}
+
+message GetAllIotDevicesResponse {
+    MultipleIotDevicesResponseData data = 1;
+    string message = 2;
     string status = 3;
-    string created_at = 4;
-    string updated_at = 5;
 }
 
-message AreaDetail {
-    string _id = 1;
-    string area_name = 2;
-    string address = 3;
-    string created_at = 4;
-    string updated_at = 5;
+message CreateIotDeviceRequest {
+    IotDeviceDetail iot_device_detail = 1;
 }
 
-message IotDeviceDetail {
-    string _id = 1;
-    string device_name = 2;
-    string config_zone = 3;
-    string status = 4;
-    CameraDetail camera_id = 5;
-    AreaDetail area_id = 6;
-    string event_name = 7;
-    string created_at = 8;
-    string updated_at = 9;
+message CreateIotDeviceResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
 
-message GetDeviceRequest {
+message GetIotDeviceByIdRequest {
     string _id = 1;
 }
 
-message CreateDeviceRequest {
-    string device_name = 1;
-    string device_type = 2;
-    string config_zone = 3;
-    string event_name = 4;
+message GetIotDeviceByIdResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
 
+message UpdateIotDeviceByIdRequest {
+    string _id = 1;
+    IotDeviceDetail iot_device_detail = 2;
+}
+
+message UpdateIotDeviceByIdResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteIotDeviceByIdRequest {
+    string _id = 1;
+}
+
+message DeleteIotDeviceByIdResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
 
 
 service IotDeviceService {
-    rpc GetAllDevices (Empty) returns (IotDeviceList) {}
-    rpc GetDevice (GetDeviceRequest) returns (IotDeviceDetail) {}
-    rpc CreateDevice (CreateDeviceRequest) returns (IotDeviceDetail) {}
+    rpc GetAllIotDevices (Empty) returns (GetAllIotDevicesResponse) {};
+    rpc CreateIotDevice (CreateIotDeviceRequest) returns (CreateIotDeviceResponse) {};
+    rpc GetIotDeviceById (GetIotDeviceByIdRequest) returns (GetIotDeviceByIdResponse) {};
+    rpc UpdateIotDeviceById (UpdateIotDeviceByIdRequest) returns (UpdateIotDeviceByIdResponse) {};
+    rpc DeleteIotDeviceById (DeleteIotDeviceByIdRequest) returns (DeleteIotDeviceByIdResponse) {};
 }
 
 message Empty {}
-
-message IotDeviceList {
-    repeated IotDeviceDetail iot_devices = 1;
-}

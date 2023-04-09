@@ -2,13 +2,15 @@ const { newIotEventNewMessage } = require("./event_message/iot_event_new_message
 
 class IotEventNewCallback {
 
-    parseMessage(message) {
+    static parseMessage(message) {
         jsonMessage = JSON.parse(message);
         return newIotEventNewMessage(jsonMessage.zone, jsonMessage.event_time);
     }
 
-    execute(message) {
+    static execute(message) {
         const eventMessage = this.parseMessage(message);
         
     }
 }
+
+module.exports.IotEventNewCallback = IotEventNewCallback;

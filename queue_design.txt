@@ -73,3 +73,7 @@ Problem:
 
 + Thêm trường username, password của RTSP vào cho camera model (để gửi về bên rtsp_sender lấy url về)
 
++ Handler trả về entity Event
++ Use lodash hoặc prefetch để chặn spam (OpenAI)
+
+Test video: https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/people-detection.mp4

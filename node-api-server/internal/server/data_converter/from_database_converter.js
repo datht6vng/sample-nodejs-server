@@ -64,6 +64,8 @@ class FromDatabaseConverter {
             .setStatus(doc.status)
             .setRtspStreamUrl(doc.rtsp_stream_url)
             .setSfuRtspStreamUrl(doc.sfu_rtsp_stream_url)
+            .setUsername(doc.username)
+            .setPassword(doc.password)
             .setOffsetXBegin(doc.offset_x_begin)
             .setOffsetXEnd(doc.offset_x_end)
             .setOffsetYBegin(doc.offset_y_begin)

@@ -6,9 +6,17 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const { newAreaController } = require("./controller/area_controller");
+const { newCameraMapController } = require("./controller/camera_map_controller");
+const { newCameraTypeController } = require("./controller/camera_type_controller");
+const { newCameraController } = require("./controller/camera_controller");
+const { newEventController } = require("./controller/event_controller");
+const { newEventTypeController } = require("./controller/event_type_controller");
+const { newIotDeviceMapController } = require("./controller/iot_device_map_controller");
+const { newIotDeviceTypeController } = require("./controller/iot_device_type_controller");
+const { newIotDeviceController } = require("./controller/iot_device_controller");
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const { newCameraMapController } = require("./controller/camera_map_controller");
+// const { newCameraMapController } = require("./controller/camera_map_controller");
 
 
 class Handler {
@@ -23,6 +31,13 @@ class Handler {
 Handler.prototype.initController = function() {
   this.areaController = newAreaController();
   this.cameraMapController = newCameraMapController();
+  this.cameraTypeController = newCameraTypeController()
+  this.cameraController = newCameraController();
+  this.eventController = newEventController();
+  this.eventTypeController = newEventTypeController();
+  this.iotDeviceMapController = newIotDeviceMapController();
+  this.iotDeviceTypeController = newIotDeviceTypeController();
+  this.iotDeviceController = newIotDeviceController();
 }
 
 Handler.prototype.initMiddleware = function() {

@@ -1,44 +1,70 @@
 syntax = "proto3";
 
-message AreaDetail {
-    string _id = 1;
-    string area_name = 2;
+import "details.proto";
+
+message SingleCameraResponseData {
+    CameraDetail camera_detail = 1;
 }
 
-message CameraDetail {
-    string _id = 1;
-    string camera_name = 2;
-    AreaDetail area_id = 3;
-}
-
-
-
-
-
-message GetDeviceRequest {
-    string _id = 1;
-}
-
-message CreateDeviceRequest {
-    string _id = 1;
-    string camera_name = 2;
-    string area_id = 3;
-}
-
-
-
-service CameraService {
-    rpc GetAllDevices (Empty) returns (CameraList) {}
-    rpc GetDevice (GetDeviceRequest) returns (CameraDetail) {}
-    rpc CreateDevice (CreateDeviceRequest) returns (CameraDetail) {}
-}
-
-message Empty {}
-
-message CameraList {
+message MultipleCamerasResponseData {
     repeated CameraDetail cameras = 1;
 }
 
+message GetAllCamerasResponse {
+    MultipleCamerasResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateCameraRequest {
+    CameraDetail camera_detail = 1;
+}
+
+message CreateCameraResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetCameraByIdRequest {
+    string _id = 1;
+}
+
+message GetCameraByIdResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateCameraByIdRequest {
+    string _id = 1;
+    CameraDetail camera_detail = 2;
+}
+
+message UpdateCameraByIdResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
 
 
+message DeleteCameraByIdRequest {
+    string _id = 1;
+}
 
+message DeleteCameraByIdResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service CameraService {
+    rpc GetAllCameras (Empty) returns (GetAllCamerasResponse) {};
+    rpc CreateCamera (CreateCameraRequest) returns (CreateCameraResponse) {};
+    rpc GetCameraById (GetCameraByIdRequest) returns (GetCameraByIdResponse) {};
+    rpc UpdateCameraById (UpdateCameraByIdRequest) returns (UpdateCameraByIdResponse) {};
+    rpc DeleteCameraById (DeleteCameraByIdRequest) returns (DeleteCameraByIdResponse) {};
+}
+
+message Empty {}

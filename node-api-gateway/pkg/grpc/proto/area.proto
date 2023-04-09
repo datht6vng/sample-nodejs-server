@@ -1,23 +1,17 @@
 syntax = "proto3";
 
-message AreaDetail {
-    optional string _id = 1;
-    optional string area_name = 2;
-    optional string address = 3;
-    optional string map_url = 4;
-    optional string parent_area = 5;
-    optional int32 floor_number = 6;
-    optional float lat = 7;
-    optional float lng = 8;
-    optional string area_type = 9;
+import "details.proto";
+
+message SingleAreaResponseData {
+    AreaDetail area_detail = 1;
 }
 
-message GetAllAreasResponseData {
+message MultipleAreasResponseData {
     repeated AreaDetail areas = 1;
 }
 
 message GetAllAreasResponse {
-    GetAllAreasResponseData data = 1;
+    MultipleAreasResponseData data = 1;
     string message = 2;
     string status = 3;
 }
@@ -26,12 +20,18 @@ message CreateAreaRequest {
     AreaDetail area_detail = 1;
 }
 
-message CreateAreaResponseData {
-    AreaDetail area_detail = 1;
+message CreateAreaResponse {
+    SingleAreaResponseData data = 1;
+    string message = 2;
+    string status = 3;
 }
 
-message CreateAreaResponse {
-    CreateAreaResponseData data = 1;
+message GetAreaByIdRequest {
+    string _id = 1;
+}
+
+message GetAreaByIdResponse {
+    SingleAreaResponseData data = 1;
     string message = 2;
     string status = 3;
 }
@@ -40,15 +40,42 @@ message GetAllAreasByTypeRequest {
     string area_type = 1;
 }
 
- 
+message GetAllAreasByTypeResponse {
+    MultipleAreasResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateAreaByIdRequest {
+    string _id = 1;
+    AreaDetail area_detail = 2;
+}
+
+message UpdateAreaByIdResponse {
+    SingleAreaResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteAreaByIdRequest {
+    string _id = 1;
+}
+
+message DeleteAreaByIdResponse {
+    SingleAreaResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
 service AreaService {
     rpc GetAllAreas (Empty) returns (GetAllAreasResponse) {};
-    rpc GetAllAreasByType (GetAllAreasByTypeRequest) returns (GetAllAreasResponse) {};
     rpc CreateArea (CreateAreaRequest) returns (CreateAreaResponse) {};
+    rpc GetAreaById (GetAreaByIdRequest) returns (GetAreaByIdResponse) {};
+    rpc GetAllAreasByType (GetAllAreasByTypeRequest) returns (GetAllAreasByTypeResponse) {};
+    rpc UpdateAreaById (UpdateAreaByIdRequest) returns (UpdateAreaByIdResponse) {};
+    rpc DeleteAreaById (DeleteAreaByIdRequest) returns (DeleteAreaByIdResponse) {};
 }
 
 message Empty {}
-
-message AreaList {
-    repeated AreaDetail areas = 1;
-}

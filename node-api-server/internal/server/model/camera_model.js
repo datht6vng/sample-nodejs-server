@@ -15,6 +15,8 @@ const cameraSchema = new Schema (
 
         rtsp_stream_url: String,
         sfu_rtsp_stream_url: String,
+        username: String, // rtsp stream username
+        password: String, // rtsp stream password
 
         offset_x_begin: Number,
         offset_x_end: Number,

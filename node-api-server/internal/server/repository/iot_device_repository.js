@@ -39,9 +39,9 @@ class IotDeviceRepository {
         return this.fromDatabaseConverter.visit(newIotDevice(), newIotDeviceDoc);
     }
     
-    async findByIdfunction(iotDeviceId) {
+    async findById(iotDeviceId) {
         let iotDeviceDoc;
-        const iotDeviceId = iotDeviceId.getValue();
+        iotDeviceId = iotDeviceId.getValue();
         try {
             iotDeviceDoc = await IotDeviceModel.findById(iotDeviceId).exec();
         }

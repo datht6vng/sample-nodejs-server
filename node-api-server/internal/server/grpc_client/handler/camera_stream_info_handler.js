@@ -21,6 +21,27 @@ class CameraStreamInfoHandler extends GrpcHandler {
         const response = await this.callRpc(this.clientStuff.createCameraStream, arg);
         return response;
     }
+
+    async updateCameraStreamInfoById(id, cameraStreamInfo) {
+        cameraStreamInfo = this.toProtobufConverter.visit(cameraStreamInfo);
+        id = id.getValue();
+        const arg = {
+            _id: id,
+            camera_stream_detail: cameraStreamInfo
+        }
+        const response = await this.callRpc(this.clientStuff.updateCameraStreamInfoById, arg);
+        return response;
+    }
+
+
+    async deleteCameraStreamById(id) {
+        id = id.getValue();
+        const arg = {
+            _id: id
+        }
+        const response = await this.callRpc(this.clientStuff.deleteCameraStreamById, arg);
+        return response;
+    }
 }
 
 function newCameraStreamInfoHandler(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {

@@ -84,6 +84,8 @@ class ToDatabaseConverter {
         this.setDocAttribute(camera, camera.getStatus, "status", doc);
         this.setDocAttribute(camera, camera.getRtspStreamUrl, "rtsp_stream_url", doc);
         this.setDocAttribute(camera, camera.getSfuRtspStreamUrl, "sfu_rtsp_stream_url", doc);
+        this.setDocAttribute(camera, camera.getUsername, "username", doc);
+        this.setDocAttribute(camera, camera.getPassword, "password", doc);
         this.setDocAttribute(camera, camera.getCameraType, "camera_type", doc, true);
         this.setDocAttribute(camera, camera.getEventType, "event_type", doc, true);
         this.setDocAttribute(camera, camera.getOffsetXBegin, "offset_x_begin", doc);

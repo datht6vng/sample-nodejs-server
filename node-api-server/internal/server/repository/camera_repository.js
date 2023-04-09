@@ -43,7 +43,7 @@ class CameraRepository {
     
     async findById(cameraId) {
         let cameraDoc;
-        const cameraId = cameraId.getValue();
+        cameraId = cameraId.getValue();
         try {
             cameraDoc = await CameraModel.findById(cameraId).exec();
         }

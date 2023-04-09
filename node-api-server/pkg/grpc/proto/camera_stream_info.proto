@@ -1,3 +1,4 @@
+syntax = "proto3";
 
 message SingleCameraStreamResponseData {
     CameraStreamDetail camera_stream_detail = 1;
@@ -17,6 +18,8 @@ message CameraStreamDetail {
     float offset_y_begin = 10;
     float offset_y_end = 11;
     bool is_set_line = 12;
+    string username = 13;
+    string password = 14;
 }
 
 
