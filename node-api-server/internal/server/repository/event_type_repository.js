@@ -24,7 +24,7 @@ class EventTypeRepository {
             throw newInternalServerError("Database error", err);
         }
         return eventTypeDocs.map(eventTypeDoc => {
-            this.fromDatabaseConverter.visit(newEventType(), eventTypeDoc);
+            return this.fromDatabaseConverter.visit(newEventType(), eventTypeDoc);
         })
     }
     
