@@ -1,0 +1,25 @@
+{
+    "folders": [
+		{
+			"path": "rtsp_sender"
+		},
+		{
+			"path": "ion-sfu"
+		},
+		{
+			"path": "node-api-server"
+		},
+		{
+			"path": "smart-security-system"
+		},
+		{
+			"path": "."
+		}
+	],
+    "settings": {
+        "files.associations": {
+            "gst.h": "c"
+		},
+		"liveServer.settings.multiRootWorkspaceName": "ion-sfu"
+    }
+}

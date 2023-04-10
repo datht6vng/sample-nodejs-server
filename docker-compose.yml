@@ -43,6 +43,7 @@ services:
       - ./rtsp_sender/rtsp-simple-server:/configs/rtsp-simple-server
       - ./rtsp_sender/rtsp-simple-server.yml:/configs/rtsp-simple-server.yml
       - ./rtsp_sender/logs:/logs
+      - ./videos:/videos
     working_dir: /service/rtsp_sender
     # restart: always
     command: >

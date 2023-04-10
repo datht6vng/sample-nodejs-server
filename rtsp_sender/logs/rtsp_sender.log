@@ -769,3 +769,93 @@
 2023-04-10T16:48:40.674  INFO rtsp_sender_a8fe4e772c68 Peer connection state changed: connected 
 2023-04-10T16:48:44.633  INFO rtsp_sender_a8fe4e772c68 gather candidate done 
 2023-04-10T16:48:44.880  INFO rtsp_sender_a8fe4e772c68 gather candidate done 
+2023-04-10T16:50:15.453 ERROR rtsp_sender_a8fe4e772c68 [GST-ERROR][sink] ERROR - Could not open file "videos/camera_PTZ/Mon, 10 Apr 2023 16:48:39 +07/record_3.mkv" for writing. 
+2023-04-10T16:50:49.524  INFO rtsp_sender_a8fe4e772c68 Serve gRPC on: 0.0.0.0:5551 
+2023-04-10T16:50:49.524  INFO rtsp_sender_a8fe4e772c68 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-10T16:50:49.524  INFO rtsp_sender_a8fe4e772c68 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-10T16:50:49.524  INFO rtsp_sender_a8fe4e772c68 Server is running and awaiting signal for shutdown ... 
+2023-04-10T16:50:51.005  INFO rtsp_sender_a8fe4e772c68 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-04-10T16:50:51.005  INFO rtsp_sender_a8fe4e772c68 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:50:51.201  INFO rtsp_sender_a8fe4e772c68 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-04-10T16:50:51.202  INFO rtsp_sender_a8fe4e772c68 gRPC connected: sfu:5551 
+2023-04-10T16:50:51.203  INFO rtsp_sender_a8fe4e772c68 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:50:51.203  INFO rtsp_sender_a8fe4e772c68 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:50:51.204 ERROR rtsp_sender_a8fe4e772c68 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-04-10T16:50:51.204  INFO rtsp_sender_a8fe4e772c68 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:50:51.205  INFO rtsp_sender_a8fe4e772c68 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-04-10T16:50:51.205 ERROR rtsp_sender_a8fe4e772c68 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidStateError: connection closed 
+2023-04-10T16:50:51.206 ERROR rtsp_sender_a8fe4e772c68 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] error InvalidStateError: connection closed 
+2023-04-10T16:50:56.207 ERROR rtsp_sender_a8fe4e772c68 Error when new client: cannot create directory: mkdir videos/camera_PTZ/Mon, 10 Apr 2023 16:50:51 +07: no such file or directory 
+2023-04-10T16:50:56.207  INFO rtsp_sender_a8fe4e772c68 Peer connection state changed: closed 
+2023-04-10T16:51:00.837  INFO rtsp_sender_a8fe4e772c68 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-04-10T16:51:00.837  INFO rtsp_sender_a8fe4e772c68 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:51:00.929  INFO rtsp_sender_a8fe4e772c68 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-04-10T16:51:00.931  INFO rtsp_sender_a8fe4e772c68 gRPC connected: sfu:5551 
+2023-04-10T16:51:00.931  INFO rtsp_sender_a8fe4e772c68 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:51:00.932  INFO rtsp_sender_a8fe4e772c68 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:51:00.935  INFO rtsp_sender_a8fe4e772c68 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-04-10T16:51:00.936 ERROR rtsp_sender_a8fe4e772c68 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-04-10T16:51:00.936  INFO rtsp_sender_a8fe4e772c68 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:51:00.936  INFO rtsp_sender_a8fe4e772c68 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc0000be2d0 0xc000386240 <nil>} 
+2023-04-10T16:51:00.936 ERROR rtsp_sender_a8fe4e772c68 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=ICEAgent does not exist: unable to add remote candidates 
+2023-04-10T16:51:00.936 ERROR rtsp_sender_a8fe4e772c68 Error when new client: cannot create directory: mkdir videos/camera_PTZ/Mon, 10 Apr 2023 16:51:00 +07: no such file or directory 
+2023-04-10T16:51:00.936  INFO rtsp_sender_a8fe4e772c68 Peer connection state changed: closed 
+2023-04-10T16:55:58.115  INFO rtsp_sender_6c18a329ce14 Serve gRPC on: 0.0.0.0:5551 
+2023-04-10T16:55:58.115  INFO rtsp_sender_6c18a329ce14 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-10T16:55:58.115  INFO rtsp_sender_6c18a329ce14 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-10T16:55:58.116  INFO rtsp_sender_6c18a329ce14 Server is running and awaiting signal for shutdown ... 
+2023-04-10T16:56:54.900  INFO rtsp_sender_6c18a329ce14 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-04-10T16:56:54.900  INFO rtsp_sender_6c18a329ce14 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:56:55.053  INFO rtsp_sender_6c18a329ce14 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-04-10T16:56:55.054  INFO rtsp_sender_6c18a329ce14 gRPC connected: sfu:5551 
+2023-04-10T16:56:55.055  INFO rtsp_sender_6c18a329ce14 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:56:55.055  INFO rtsp_sender_6c18a329ce14 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:56:55.055 ERROR rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-04-10T16:56:55.055  INFO rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:56:55.057  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-04-10T16:56:55.057 ERROR rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidStateError: connection closed 
+2023-04-10T16:56:55.057 ERROR rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] error InvalidStateError: connection closed 
+2023-04-10T16:57:00.058  INFO rtsp_sender_6c18a329ce14 Peer connection state changed: closed 
+2023-04-10T16:57:00.058 ERROR rtsp_sender_6c18a329ce14 Error when new client: cannot create directory: mkdir videos/camera_PTZ/Mon, 10 Apr 2023 16:56:55 +07: no such file or directory 
+2023-04-10T16:57:31.355  INFO rtsp_sender_6c18a329ce14 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-04-10T16:57:31.355  INFO rtsp_sender_6c18a329ce14 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:57:31.461  INFO rtsp_sender_6c18a329ce14 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-04-10T16:57:31.462  INFO rtsp_sender_6c18a329ce14 gRPC connected: sfu:5551 
+2023-04-10T16:57:31.463  INFO rtsp_sender_6c18a329ce14 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:57:31.463  INFO rtsp_sender_6c18a329ce14 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:57:31.463 ERROR rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-04-10T16:57:31.463  INFO rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:57:31.464  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-04-10T16:57:31.464 ERROR rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidStateError: connection closed 
+2023-04-10T16:57:31.465 ERROR rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] error InvalidStateError: connection closed 
+2023-04-10T16:57:36.466  INFO rtsp_sender_6c18a329ce14 Peer connection state changed: closed 
+2023-04-10T16:57:36.466 ERROR rtsp_sender_6c18a329ce14 Error when new client: cannot create directory: mkdir videos/camera_PTZ/Mon, 10 Apr 2023 16:57:31 +07: no such file or directory 
+2023-04-10T16:58:17.194  INFO rtsp_sender_6c18a329ce14 Serve gRPC on: 0.0.0.0:5551 
+2023-04-10T16:58:17.194  INFO rtsp_sender_6c18a329ce14 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-10T16:58:17.194  INFO rtsp_sender_6c18a329ce14 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-10T16:58:17.194  INFO rtsp_sender_6c18a329ce14 Server is running and awaiting signal for shutdown ... 
+2023-04-10T16:58:17.837  INFO rtsp_sender_6c18a329ce14 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-04-10T16:58:17.837  INFO rtsp_sender_6c18a329ce14 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:58:17.993  INFO rtsp_sender_6c18a329ce14 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-04-10T16:58:17.993  INFO rtsp_sender_6c18a329ce14 Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux is-live=true demux. ! queue ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,is-live=true  ! x264enc bitrate=1024 speed-preset=ultrafast interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=encoder ! tee name=video_tee ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=videosink sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/1 video_tee_2. ! queue ! h264parse ! splitmuxsink muxer=matroskamux location="/videos/camera_PTZ/Mon, 10 Apr 2023 16:58:17 +07/record_%d.mkv" max-size-time=30000000000 max-files=10 
+2023-04-10T16:58:17.994  INFO rtsp_sender_6c18a329ce14 gRPC connected: sfu:5551 
+2023-04-10T16:58:17.994  INFO rtsp_sender_6c18a329ce14 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:58:17.995  INFO rtsp_sender_6c18a329ce14 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:58:17.995 ERROR rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: have-local-offer->SetLocal(offer)->have-local-offer 
+2023-04-10T16:58:17.997  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc000182160 0xc0001b42c0 <nil>} 
+2023-04-10T16:58:17.997  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-04-10T16:58:17.997  INFO rtsp_sender_6c18a329ce14 ICE connection state changed: checking 
+2023-04-10T16:58:17.998 ERROR rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-04-10T16:58:17.998 ERROR rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [description] setRemoteSDP err=InvalidModificationError: invalid proposed signaling state transition: stable->SetRemote(answer)->stable 
+2023-04-10T16:58:18.039  INFO rtsp_sender_6c18a329ce14 [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-04-10T16:58:18.094  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:2671902445 1 udp 1694498815 42.119.165.245 61796 typ srflx raddr 0.0.0.0 rport 57771 0xc0002c1d40 0xc000116a58 <nil>} 
+2023-04-10T16:58:18.248  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:2878742611 1 udp 2130706431 127.0.0.1 5000 typ host 0xc00063a540 0xc00003bb68 <nil>} 
+2023-04-10T16:58:18.303  INFO rtsp_sender_6c18a329ce14 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:2671902445 1 udp 1694498815 42.119.165.245 18137 typ srflx raddr 0.0.0.0 rport 40754 0xc0002062c0 0xc000116248 <nil>} 
+2023-04-10T16:58:19.099  INFO rtsp_sender_6c18a329ce14 ICE connection state changed: connected 
+2023-04-10T16:58:19.100  INFO rtsp_sender_6c18a329ce14 Peer connection state changed: connected 
+2023-04-10T16:58:22.996  INFO rtsp_sender_6c18a329ce14 gather candidate done 
+2023-04-10T16:58:23.250  INFO rtsp_sender_6c18a329ce14 gather candidate done 
+2023-04-10T16:58:36.275  INFO rtsp_sender_6c18a329ce14 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-04-10T16:58:36.276  INFO rtsp_sender_6c18a329ce14 Peer connection state changed: closed 
+2023-04-10T16:58:36.276  INFO rtsp_sender_6c18a329ce14 ICEConnectionStateDisconnected closed 
+2023-04-10T16:58:36.276  INFO rtsp_sender_6c18a329ce14 ICE connection state changed: closed 

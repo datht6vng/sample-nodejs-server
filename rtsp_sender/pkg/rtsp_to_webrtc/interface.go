@@ -91,8 +91,8 @@ func CreatePipeline(
 		if enableRTSPRelay {
 			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! rtspclientsink location=%v", caps, videoSinkName, rtspRelayAddress)
 			if enableRecord {
-				dir1 := filepath.Join("videos", dir)
-				dir2 := filepath.Join("videos", dir, time.Now().Format(time.RFC1123))
+				dir1 := filepath.Join("/videos", dir)
+				dir2 := filepath.Join("/videos", dir, time.Now().Format(time.RFC1123))
 				if err := os.Mkdir(dir1, 0777); err != nil {
 					//return nil, errors.Annotate(err, "cannot create directory")
 				}
@@ -104,8 +104,8 @@ func CreatePipeline(
 				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! rtspclientsink location=%v video_tee_2. ! queue ! h264parse ! splitmuxsink muxer=matroskamux location=%v max-size-time=%v max-files=%v", caps, videoSinkName, rtspRelayAddress, filepath, recordFileDuration, maxRecordFiles)
 			}
 		} else if enableRecord {
-			dir1 := filepath.Join("videos", dir)
-			dir2 := filepath.Join("videos", dir, time.Now().Format(time.RFC1123))
+			dir1 := filepath.Join("/videos", dir)
+			dir2 := filepath.Join("/videos", dir, time.Now().Format(time.RFC1123))
 			if err := os.Mkdir(dir1, 0777); err != nil {
 				//return nil, errors.Annotate(err, "cannot create directory")
 			}
