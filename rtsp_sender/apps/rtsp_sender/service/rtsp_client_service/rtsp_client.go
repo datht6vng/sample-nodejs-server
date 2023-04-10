@@ -19,6 +19,7 @@ import (
 
 type Client struct {
 	mu               sync.RWMutex
+	clientID         string
 	clientAddress    string
 	rtspRelayAddress string
 	username         string
@@ -29,6 +30,8 @@ type Client struct {
 	enableAudio     bool
 	enableRTSPRelay bool
 
+	enableRecord bool
+
 	connector *sdk.Connector
 
 	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
@@ -38,8 +41,9 @@ type Client struct {
 	onCloseHandler         atomic.Value
 }
 
-func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool) *Client {
+func NewClient(clientID, clientAddress, rtspRelayAddress, username, password, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool, enableRecord bool) *Client {
 	return &Client{
+		clientID:         clientID,
 		clientAddress:    clientAddress,
 		rtspRelayAddress: rtspRelayAddress,
 		username:         username,
@@ -48,6 +52,7 @@ func NewClient(clientAddress, rtspRelayAddress, username, password, sfuAddress, 
 		sessionName:      sessionName,
 		enableAudio:      enableAudio,
 		enableRTSPRelay:  enableRTSPRelay,
+		enableRecord:     enableRecord,
 		closed:           make(chan bool),
 	}
 }
@@ -144,6 +149,8 @@ func (c *Client) Connect() error {
 			c.audioTrack, c.videoTrack,
 			c.enableRTSPRelay,
 			c.rtspRelayAddress,
+			c.enableRecord,
+			c.clientID,
 		)
 		if err != nil {
 			pipelineErr = err
@@ -229,12 +236,12 @@ func (c *Client) Connect() error {
 	wg.Wait()
 
 	if pipelineErr != nil {
-		c.Close()
+		c.close()
 		return pipelineErr
 	}
 
 	if rtcErr != nil {
-		c.Close()
+		c.close()
 		return rtcErr
 	}
 
@@ -273,10 +280,7 @@ func (c *Client) IsClosed() bool {
 	}
 }
 
-func (c *Client) Close() {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-
+func (c *Client) close() {
 	if c.closed != nil {
 		select {
 		case <-c.closed:
@@ -292,6 +296,12 @@ func (c *Client) Close() {
 		c.pipeline.Stop()
 	}
 	c.onClose()
+}
+
+func (c *Client) Close() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.close()
 }
 
 func (c *Client) onClose() {

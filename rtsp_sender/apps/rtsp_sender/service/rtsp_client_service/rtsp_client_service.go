@@ -27,7 +27,7 @@ func NewRTSPClientService() (*RTSPClientService, error) {
 	}, nil
 }
 
-func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, username, password string, enableRTSPRelay bool) (string, error) {
+func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, username, password string, enableRTSPRelay bool, enableRecord bool) (string, error) {
 	// Force end
 	if client, err := r.GetRTSPClient(connectClientAddress); err == nil {
 		client.Close()
@@ -41,7 +41,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, r.autoDomain.Add(1))
 	}
 
-	client := NewClient(connectClientAddress, rtspRelayAddress, username, password, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, enableRTSPRelay)
+	client := NewClient(clientID, connectClientAddress, rtspRelayAddress, username, password, config.Config.SFUConfig.SFUAddres, connectClientAddress, true, enableRTSPRelay, enableRecord)
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
 		return "", err

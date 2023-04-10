@@ -70,6 +70,7 @@ func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) 
 		username,
 		password,
 		request.EnableRTSPRelay,
+		request.EnableRecord,
 	); err != nil {
 		return &grpc.ConnectReply{
 			Code:    http.StatusInternalServerError,

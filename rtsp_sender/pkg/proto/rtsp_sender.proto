@@ -17,6 +17,7 @@ message ConnectRequest {
   string username = 3;
   string password = 4;
   bool enableRTSPRelay = 5;
+  bool enableRecord = 6;
 }
 
 message ConnectReplyData {
