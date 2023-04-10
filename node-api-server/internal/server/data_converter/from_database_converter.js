@@ -33,6 +33,7 @@ class FromDatabaseConverter {
             .setAddress(doc.address)
             .setMapUrl(doc.map_url)
             .setFloorNumber(doc.floor_number)
+            .setFloorLevel(doc.floor_level)
             .setLat(doc.lat)
             .setLng(doc.lng)
             .setAreaType(doc.area_type);
@@ -73,6 +74,7 @@ class FromDatabaseConverter {
 
         this.setEntityWithRefType(camera, camera.setCameraType, doc.camera_type, newCameraType())
         this.setEntityWithRefType(camera, camera.setEventType, doc.event_type, newEventType());
+        return camera;
     }
 
     visitCameraType(cameraType, doc, env) {
@@ -98,10 +100,11 @@ class FromDatabaseConverter {
             .setCreatedAt(doc.created_at)
             .setUpdatedAt(doc.updated_at)
         
-        this.setEntityWithRefType(event, camera.setIotDevice, doc.iot_device, newIotDevice())
-        this.setEntityWithRefType(event, camera.setIotDeviceMap, doc.iot_device_map, newIotDeviceMap())
-        this.setEntityWithRefType(event, camera.setCamera, doc.camera, newCamera())
-        this.setEntityWithRefType(event, camera.setCameraMap, doc.camera_map, newCameraMap())
+        this.setEntityWithRefType(event, event.setIotDevice, doc.iot_device, newIotDevice())
+        this.setEntityWithRefType(event, event.setIotDeviceMap, doc.iot_device_map, newIotDeviceMap())
+        this.setEntityWithRefType(event, event.setCamera, doc.camera, newCamera())
+        this.setEntityWithRefType(event, event.setCameraMap, doc.camera_map, newCameraMap())
+        return event;
     }
 
     visitEventType(eventType, doc, env) {

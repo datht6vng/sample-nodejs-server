@@ -36,3 +36,9 @@ class CameraType {
     }
 
 }
+
+function newCameraType() {
+    return new CameraType();
+}
+
+module.exports.newCameraType = newCameraType;

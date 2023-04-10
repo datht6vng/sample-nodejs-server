@@ -104,4 +104,4 @@ function newIotDeviceMap() {
     return new IotDeviceMap();
 }
 
-module.exports.IotDeviceMap = IotDeviceMap;
+module.exports.newIotDeviceMap = newIotDeviceMap;

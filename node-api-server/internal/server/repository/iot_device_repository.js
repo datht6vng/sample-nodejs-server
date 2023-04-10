@@ -14,7 +14,7 @@ class IotDeviceRepository {
         this.toDatabaseConverter = newToDatabaseConverter();
     }
 
-    async getAllfunction() {
+    async getAll() {
         let iotDeviceDocs;
         try {
             iotDeviceDocs = await IotDeviceModel.find({});
@@ -23,7 +23,7 @@ class IotDeviceRepository {
             throw newInternalServerError("Database error", err);
         }
         return iotDeviceDocs.map(iotDeviceDoc => {
-            this.fromDatabaseConverter.visit(newIotDevice(), iotDeviceDoc);
+            return this.fromDatabaseConverter.visit(newIotDevice(), iotDeviceDoc);
         })
     }
     

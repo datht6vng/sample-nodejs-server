@@ -28,6 +28,7 @@ class AreaHandler extends Handler {
     
     createArea(call, callback) {
         let area = this.fromProtobufConverter.visit(newArea(), call.request.area_detail);
+        console.log(area)
         this.service.createArea(area)
         .then(area => {
             area = this.toProtobufConverter.visit(area);

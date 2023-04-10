@@ -42,7 +42,7 @@ class CameraMap {
         return this.connectCamera;
     }
 
-    getObserverIot() {
+    getObserveIot() {
         return this.observeIot;
     }
 
@@ -53,6 +53,7 @@ class CameraMap {
 
     setId(id) {
         this.id = id;
+        return this;
     }
 
     setCameraName(cameraName) {
@@ -85,7 +86,7 @@ class CameraMap {
         return this;
     }
     
-    setObserverIot(observeIot) {
+    setObserveIot(observeIot) {
         this.observeIot = observeIot;
         return this;
     }

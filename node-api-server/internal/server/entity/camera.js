@@ -100,7 +100,7 @@ class Camera {
         return this;
     }
     
-    setSfuRtspStreasmUrl(sfuRtspStreamUrl) {
+    setSfuRtspStreamUrl(sfuRtspStreamUrl) {
         this.sfuRtspStreamUrl = sfuRtspStreamUrl;
         return this;
     }

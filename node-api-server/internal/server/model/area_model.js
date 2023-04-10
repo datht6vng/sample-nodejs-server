@@ -20,6 +20,7 @@ const areaSchema = new Schema (
         },
 
         floor_number: Number,
+        floor_level: Number,
         lat: Number,
         lng: Number,
         area_type: {

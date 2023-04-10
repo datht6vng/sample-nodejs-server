@@ -4,8 +4,8 @@ const { newCallbackContext } = require("./callback_context");
 const { newExchange } = require("./handler/exchange");
 const { newQueue } = require("./handler/queue");
 
-const rabbitMQConfig = config.rabbitmq;
-const defaultExchanges = rabbitMQConfig.exchanges;
+const brokerConfig = config.rabbitmq;
+const defaultExchanges = brokerConfig.exchanges;
 
 class Consumers {
     constructor(exchanges=defaultExchanges) {

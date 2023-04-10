@@ -10,6 +10,7 @@ message AreaDetail {
     optional float lat = 7;
     optional float lng = 8;
     optional string area_type = 9;
+    optional int32 floor_level = 10;
 }
 
 

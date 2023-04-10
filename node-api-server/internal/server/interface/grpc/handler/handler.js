@@ -23,16 +23,15 @@ class Handler {
     }
 
     failure(error, callback) {
+        console.log(error)
         if (error instanceof BaseError) {
             const errorHandler = newErrorHandler();
             errorHandler.execute(error);
             const response = errorHandler.getMessage(error);
-            console.log(error);
             callback(response);
         }
         else {
             // Instance of original Error
-            console.log(error);
         }
     }
 }

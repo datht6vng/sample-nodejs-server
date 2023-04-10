@@ -5,6 +5,7 @@ class Area {
     mapUrl = undefined;
     parentArea = undefined;
     floorNumber = undefined;
+    floorLevel = undefined;
     lat = undefined;
     lng = undefined;
     areaType = undefined;
@@ -36,6 +37,10 @@ class Area {
 
     getFloorNumber() {
         return this.floorNumber;
+    }
+
+    getFloorLevel() {
+        return this.floorLevel;
     }
 
     getLat() {
@@ -77,6 +82,11 @@ class Area {
     
     setFloorNumber(floorNumber) {
         this.floorNumber = floorNumber;
+        return this;
+    }
+
+    setFloorLevel(floorLevel) {
+        this.floorLevel = floorLevel;
         return this;
     }
       

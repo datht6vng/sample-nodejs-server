@@ -74,7 +74,7 @@ class IotDevice {
 
 
 function newIotDevice() {
-    return new newIotDevice();
+    return new IotDevice();
 }
 
 module.exports.newIotDevice = newIotDevice;

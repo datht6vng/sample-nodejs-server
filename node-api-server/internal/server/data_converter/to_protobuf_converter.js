@@ -21,6 +21,7 @@ class ToProtobufConverter {
         this.setDocAttribute(area, area.getMapUrl, "map_url", doc);
         this.setDocAttribute(area, area.getParentArea, "parent_area", doc, true);
         this.setDocAttribute(area, area.getFloorNumber, "floor_number", doc);
+        this.setDocAttribute(area, area.getFloorLevel, "floor_level", doc);
         this.setDocAttribute(area, area.getLat, "lat", doc);
         this.setDocAttribute(area, area.getLng, "lng", doc);
         this.setDocAttribute(area, area.getAreaType, "area_type", doc);
@@ -118,7 +119,7 @@ class ToProtobufConverter {
         this.setDocAttribute(event, event.getNormalVideoUrl, "normal_video_url", doc);
         this.setDocAttribute(event, event.getDetectionVideoUrl, "detection_video_url", doc);
         this.setDocAttribute(event, event.getEventTime, "event_time", doc);
-        this.setDocAttribute(event, event.getStatus, "status", doc);
+        this.setDocAttribute(event, event.getEventStatus, "event_status", doc);
         this.setDocAttribute(event, event.getCreatedAt, "created_at", doc);
         this.setDocAttribute(event, event.getUpdatedAt, "updated_at", doc);
         
@@ -131,7 +132,7 @@ class ToProtobufConverter {
         this.setDocAttribute(eventType, eventType.getId, "_id", doc, true);
         this.setDocAttribute(eventType, eventType.getEventKey, "event_key", doc);
         this.setDocAttribute(eventType, eventType.getEventName, "event_name", doc);
-        this.setDocAttribute(eventType, eventType.getDescription, "event_description", doc);
+        this.setDocAttribute(eventType, eventType.getEventDescription, "event_description", doc);
 
         return doc;
     }
