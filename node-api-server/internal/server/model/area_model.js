@@ -25,10 +25,15 @@ const areaSchema = new Schema (
         lng: Number,
         area_type: {
             type: String,
-            enum: ["building", "floor"]
+            enum: ["building", "floor", "area"]
         }
     }
 )
+
+
+areaSchema.post('findOneAndUpdate', function(doc) {
+    console.log(doc)
+  });
 
 
 // areaSchema.pre("remove", async function(next) {
