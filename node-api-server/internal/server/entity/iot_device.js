@@ -42,8 +42,8 @@ class IotDevice {
         return this;
     }
     
-    setIotDeviceName(deviceName) {
-        this.deviceName = deviceName;
+    setIotDeviceName(iotDeviceName) {
+        this.iotDeviceName = iotDeviceName;
         return this;
     }
     
