@@ -103,6 +103,7 @@ class ToDatabaseConverter {
         this.setDocAttribute(cameraType, cameraType.getId, "_id", doc, true);
         this.setDocAttribute(cameraType, cameraType.getCameraTypeName, "camera_type_name", doc);
         this.setDocAttribute(cameraType, cameraType.getImageUrl, "image_url", doc);
+        this.setDocAttribute(cameraType, cameraType.getDescription, "description", doc);
 
         return doc;
     }
@@ -174,6 +175,7 @@ class ToDatabaseConverter {
         this.setDocAttribute(iotDeviceType, iotDeviceType.getId, "_id", doc, true);
         this.setDocAttribute(iotDeviceType, iotDeviceType.getIotDeviceTypeName, "iot_device_type_name", doc);
         this.setDocAttribute(iotDeviceType, iotDeviceType.getImageUrl, "image_url", doc);
+        this.setDocAttribute(iotDeviceType, iotDeviceType.getDescription, "description", doc);
 
         return doc;
     }

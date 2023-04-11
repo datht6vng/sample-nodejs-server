@@ -80,7 +80,8 @@ class FromProtobufConverter {
         if (!doc) return cameraType;
         cameraType.setId(this.visit(newId(), doc._id))
                 .setCameraTypeName(doc.camera_type_name)
-                .setImageUrl(doc.image_url);
+                .setImageUrl(doc.image_url)
+                .setDescription(doc.description);
         return cameraType;
     }
 
@@ -151,7 +152,8 @@ class FromProtobufConverter {
 
         iotDeviceType.setId(this.visit(newId(), doc._id))
             .setIotDeviceTypeName(doc.iot_device_type_name)
-            .setImageUrl(doc.image_url);
+            .setImageUrl(doc.image_url)
+            .setDescription(doc.description);
         return iotDeviceType;
     }
 

@@ -50,6 +50,7 @@ message CameraTypeDetail {
     optional string _id = 1;
     optional string camera_type_name = 2;
     optional string image_url = 3;
+    optional string description = 4;
 }
 
 message EventDetail {
@@ -105,4 +106,5 @@ message IotDeviceTypeDetail {
     optional string _id = 1;
     optional string iot_device_type_name = 2;
     optional string image_url = 3;
+    optional string description = 4;
 }

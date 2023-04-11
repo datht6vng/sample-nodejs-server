@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const cameraType = new Schema (
     {
         camera_type_name: String,
-        image_url: String
+        image_url: String,
+        description: String
     }
 )
 

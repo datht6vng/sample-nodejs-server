@@ -4,6 +4,7 @@ class IotDeviceType {
     id = undefined;
     iotDeviceTypeName = undefined;
     imageUrl = undefined;
+    description = undefined;
 
     accept(visitor, o, env) {
         return visitor.visitIotDeviceType(this, o, env);
@@ -21,6 +22,10 @@ class IotDeviceType {
         return this.imageUrl;
     }
 
+    getDescription() {
+        return this.description;
+    }
+
     setId(id) {
         this.id = id;
         return this;
@@ -33,6 +38,11 @@ class IotDeviceType {
 
     setImageUrl(imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    setDescription(description) {
+        this.description = description;
         return this;
     }
 }
