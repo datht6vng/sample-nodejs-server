@@ -15,6 +15,8 @@ const { newIotDeviceMapController } = require("./controller/iot_device_map_contr
 const { newIotDeviceTypeController } = require("./controller/iot_device_type_controller");
 const { newIotDeviceController } = require("./controller/iot_device_controller");
 
+const { newSystemUtilityController } = require("./controller/system_utility_controller");
+
 const { createProxyMiddleware } = require('http-proxy-middleware');
 // const { newCameraMapController } = require("./controller/camera_map_controller");
 
@@ -38,6 +40,8 @@ Handler.prototype.initController = function() {
   this.iotDeviceMapController = newIotDeviceMapController();
   this.iotDeviceTypeController = newIotDeviceTypeController();
   this.iotDeviceController = newIotDeviceController();
+
+  this.systemUtilityController = newSystemUtilityController();
 }
 
 Handler.prototype.initMiddleware = function() {

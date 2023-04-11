@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message CrudAllMapUtilsRequest {
+    repeated AreaDetail areas = 1;
+    repeated IotDeviceMapDetail iot_device_maps = 2;
+    repeated CameraMapDetail camera_maps = 3;
+}
+
+message CrudAllMapUtilsResponseData {
+    repeated AreaDetail areas = 1;
+    repeated IotDeviceMapDetail iot_device_maps = 2;
+    repeated CameraMapDetail camera_maps = 3;
+}
+
+message CrudAllMapUtilsResponse {
+    CrudAllMapUtilsResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+service SystemUtilityService {
+    rpc CrudAllMapUtils(CrudAllMapUtilsRequest) returns (CrudAllMapUtilsResponse);
+}

@@ -76,4 +76,23 @@ Problem:
 + Handler trả về entity Event
 + Use lodash hoặc prefetch để chặn spam (OpenAI)
 
++ Tạm thời chỉ cần quan tâm populate cho các cái có khóa ngoại area
+https://www.appsloveworld.com/mongodb/100/50/update-from-mongoose-post-findoneandupdate-hook
+https://masteringjs.io/tutorials/express/query-parameters
+
 Test video: https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/people-detection.mp4
+
+
+
+
+
+
+nếu chưa có area, building, floor, camera_map, iot_map thì thêm mới
+à, phải check id trước
+còn nếu đã có, thì update thông tin thôi
+
+trong list camera_map và iot_mapo
+check connect_camera_config với connect_iot_config trong 2 cái đó
+coi có kết nối config hay không
+
+nếu có thì update lại cái field "status" trong camera config, iot config thành "used"
