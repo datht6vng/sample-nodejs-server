@@ -38,7 +38,7 @@ class SystemUtilityService {
         return await repository.getAll();
     }
 
-    async crudAllMapUtils(areas, cameraMaps, iotDeviceMaps) {
+    async crudAllMapUtils(areas, iotDeviceMaps, cameraMaps) {
         areas = await this.crudEntities(areas, this.areaRepository);
         iotDeviceMaps = await this.crudEntities(iotDeviceMaps, this.iotDeviceMapRepository);
         cameraMaps = await this.crudEntities(cameraMaps, this.cameraMapRepository)
