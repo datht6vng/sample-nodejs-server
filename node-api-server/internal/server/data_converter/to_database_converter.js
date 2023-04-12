@@ -125,6 +125,7 @@ class ToDatabaseConverter {
         this.setDocAttribute(event, event.getEventStatus, "event_status", doc);
         this.setDocAttribute(event, event.getCreatedAt, "created_at", doc);
         this.setDocAttribute(event, event.getUpdatedAt, "updated_at", doc);
+        this.setDocAttribute(event, event.getComment, "comment", doc);
         
         return doc;
     }

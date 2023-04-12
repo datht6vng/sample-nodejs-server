@@ -100,6 +100,7 @@ class FromDatabaseConverter {
             .setEventStatus(doc.event_status)
             .setCreatedAt(doc.created_at)
             .setUpdatedAt(doc.updated_at)
+            .setComment(doc.comment)
         
         this.setEntityWithRefType(event, event.setIotDevice, doc.iot_device, newIotDevice())
         this.setEntityWithRefType(event, event.setIotDeviceMap, doc.iot_device_map, newIotDeviceMap())

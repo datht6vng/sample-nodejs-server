@@ -42,7 +42,8 @@ const eventSchema = new Schema (
             type: String,
             enum: ['wait_for_processing', 'ai_verified', 'human_verified'],
             default: 'wait_for_processing'
-        }
+        }, 
+        comment: String
 
     },
     { 

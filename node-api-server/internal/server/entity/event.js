@@ -17,6 +17,7 @@ class Event {
     eventStatus = undefined;
     createdAt = undefined;
     updatedAt = undefined;
+    comment = undefined;
 
 
     accept(visitor, o, env) {
@@ -87,7 +88,9 @@ class Event {
         return this.updatedAt;
     }
 
-
+    getComment() {
+        return this.comment;
+    }
 
 
     setId(id) {
@@ -167,6 +170,11 @@ class Event {
     
     setUpdatedAt(updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
+    }
+
+    setComment(comment) {
+        this.comment = comment;
         return this;
     }
     
