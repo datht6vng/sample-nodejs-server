@@ -17,7 +17,7 @@ class SystemUtilityService {
             .forEach(entity => {
                 dict[entity.getId().getValue()] = entity;
             });
-        let dbEntities = await this.areaResository.getAll();
+        let dbEntities = await repository.getAll();
 
         let visitedIdValue = new Set();
         for (let entity of dbEntities) {

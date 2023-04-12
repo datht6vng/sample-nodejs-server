@@ -23,13 +23,13 @@ class SystemUtilityHandler extends Handler {
         this.service.crudAllMapUtils(areas, iotDeviceMaps, cameraMaps)
         .then(entityObj => {
             areas = entityObj.areas.map(area => {
-                return this.toProtobufConverter(area);
+                return this.toProtobufConverter.visit(area);
             });
             iotDeviceMaps = entityObj.iotDeviceMaps.map(iotDevice => {
-                return this.toProtobufConverter(iotDevice);
+                return this.toProtobufConverter.visit(iotDevice);
             });
             cameraMaps = entityObj.cameraMaps.map(cameraMap => {
-                return this.toProtobufConverter(cameraMap);
+                return this.toProtobufConverter.visit(cameraMap);
             });
 
 
