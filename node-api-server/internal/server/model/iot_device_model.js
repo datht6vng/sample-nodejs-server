@@ -34,6 +34,29 @@ const iotDeviceSchema = new Schema (
     }
 );
 
+
+
+
+async function deleteIotDeviceRelation(schema) {
+    const doc = await schema.model.findOne(schema.getFilter());
+    if (doc) {
+        await IotDeviceMapModel.findOneAndUpdate({ connect_iot: doc._id }, { connect_iot: null });
+        await EventModel.deleteMany({ iot_device: doc._id });
+    }
+}
+
+iotDeviceSchema.pre('findOneAndDelete', async function(next) {
+    await deleteIotDeviceRelation(this);
+    next();
+})
+
+iotDeviceSchema.pre('deleteMany', async function(next) {
+    await deleteIotDeviceRelation(this);
+    next();
+})
+
+
+
 // iotDeviceSchema.pre("remove", async function(next) {
 //     const self = this;
 //     await EventModel.deleteMany({ iot_device: self._id });

@@ -40,6 +40,24 @@ const cameraSchema = new Schema (
     }
 )
 
+async function deleteCameraRelation(schema) {
+    const doc = await schema.model.findOne(schema.getFilter());
+    if (doc) {
+        await CameraMapModel.findOneAndUpdate({ connect_camera: doc._id }, { connect_camera: null });
+        await EventModel.deleteMany({ camera: doc._id });
+    }
+}
+
+cameraSchema.pre('findOneAndDelete', async function(next) {
+    await deleteCameraRelation(this);
+    next();
+})
+
+cameraSchema.pre('deleteMany', async function(next) {
+    await deleteCameraRelation(this);
+    next();
+})
+
 // cameraSchema.pre("remove", async function(next) {
 //     const self = this;
 //     await EventModel.deleteMany({ camera: self._id });

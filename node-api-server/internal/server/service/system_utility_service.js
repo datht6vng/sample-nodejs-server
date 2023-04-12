@@ -18,6 +18,8 @@ class SystemUtilityService {
                 dict[entity.getId().getValue()] = entity;
             });
         let dbEntities = await this.areaResository.getAll();
+
+        let visitedIdValue = new Set();
         for (let entity of dbEntities) {
             const id = entity.getId();
             const idValue = id.getValue();
@@ -25,11 +27,12 @@ class SystemUtilityService {
                 await repository.findByIdAndDelete(id);
             }
             else {
+                visitedIdValue.add(idValue);
                 await repository.findByIdAndUpdate(id, entity.setId(undefined));
                 entity.setId(id);
             }
         }
-        for (let entity of entities.filter(entity => !entity.getId())) {
+        for (let entity of entities.filter(entity => !visitedIdValue.has(entity.getId().getValue()))) {
             await repository.create(entity);
         }
         return await repository.getAll();

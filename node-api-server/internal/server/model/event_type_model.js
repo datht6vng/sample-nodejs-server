@@ -13,5 +13,6 @@ const eventTypeSchema = new Schema (
     }
 )
 
+// Haven't handled middleware yet
 
 module.exports = mongoose.model('EventType', eventTypeSchema);

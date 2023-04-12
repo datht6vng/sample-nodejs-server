@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const EventModel = require("./event_model");
+const IotDeviceModel = require("./iot_device_model");
 const CameraMapModel = require("./camera_map_model");
 
 const iotDeviceMapSchema = new Schema (
@@ -40,6 +41,59 @@ const iotDeviceMapSchema = new Schema (
 
     }
 );
+
+
+
+async function deleteIotDeviceMapRelation(schema) {
+    const doc = await schema.model.findOne(schema.getFilter());
+
+    if (doc) {
+        let docs = await schema.model.find({ connect_iot: doc.connect_iot });
+        if (!docs || docs.length < 2) {
+            await IotDeviceModel.findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
+        }
+
+        await EventModel.findOneAndUpdate({ iot_device_map: doc._id }, { iot_device_map: null });
+
+        await CameraMapModel.findOneAndUpdate({ observe_iot: doc._id }, { observe_iot: null });
+    }
+
+}
+
+
+iotDeviceMapSchema.pre('save', async function(next) {
+    const doc = this;
+    await IotDeviceModel.findOneAndUpdate({ _id: doc.connect_iot }, { status: "used" });
+    next();
+})
+
+iotDeviceMapSchema.pre('findOneAndUpdate', async function(next) {
+    const doc = await this.model.findOne(this.getFilter());
+    const updateDoc = this.getUpdate();
+    if (doc) {
+        if (updateDoc.connect_iot && doc.connect_iot != updateDoc.connect_iot) {
+            let docs = await this.model.find({ connect_iot: doc.connect_iot });
+            if (!docs || docs.length < 2) {
+                await IotDeviceModel.findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
+            }
+        }
+    }
+
+    next();
+})
+
+iotDeviceMapSchema.pre('findOneAndDelete', async function(next) {
+    await deleteIotDeviceMapRelation(this);
+    next();
+});
+
+iotDeviceMapSchema.pre('deleteMany', async function(next) {
+    await deleteIotDeviceMapRelation(this);
+    next();
+});
+
+
+
 
 // iotDeviceMapSchema.pre("remove", async function(next) {
 //     const self = this;
