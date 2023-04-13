@@ -18,16 +18,16 @@ class SystemUtilityService {
                 dict[entity.getId().getValue()] = entity;
             });
         let dbEntities = await repository.getAll();
-
         let visitedIdValue = new Set();
-        for (let entity of dbEntities) {
-            const id = entity.getId();
+        for (let dbEntity of dbEntities) {
+            const id = dbEntity.getId();
             const idValue = id.getValue();
-            if (!idValue in dict) {
+            if (!(idValue in dict)) {
                 await repository.findByIdAndDelete(id);
             }
             else {
                 visitedIdValue.add(idValue);
+                let entity = dict[idValue];
                 await repository.findByIdAndUpdate(id, entity.setId(undefined));
                 entity.setId(id);
             }

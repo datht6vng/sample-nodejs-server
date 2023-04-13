@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const IotDeviceModel = require("./iot_device_model");
 
 const iotDeviceTypeSchema = new Schema (
     {
@@ -16,7 +15,7 @@ async function deleteIotDeviceTypeRelation(schema) {
     const doc = await schema.model.findOne(schema.getFilter());
     
     if (doc) {
-        await IotDeviceModel.updateMany({ _id: doc._id }, { iot_device_type: null });
+        await mongoose.model("IotDevice").updateMany({ _id: doc._id }, { iot_device_type: null });
     }
 }
 

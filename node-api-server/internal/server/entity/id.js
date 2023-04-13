@@ -2,7 +2,8 @@
 class Id {
     value = undefined;
     constructor(value=undefined) {
-        this.value = value;
+        if (value) this.value = String(value);
+        else this.value = value;
     }
 
 
@@ -15,7 +16,8 @@ class Id {
     }
     
     setValue(value) {
-        this.value = value;
+        if (value) this.value = String(value);
+        else this.value = value;
     }
 }
 

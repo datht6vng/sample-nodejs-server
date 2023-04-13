@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CameraModel = require("./camera_model");
-const EventModel = require("./event_model");
-const IotDeviceMapModel = require("./iot_device_map_model");
 
 const cameraMapSchema = new Schema (
     {
@@ -51,15 +48,15 @@ async function deleteCameraMapRelation(schema) {
         // ===> Happen when update 2 records refer to the same parent record and the app's business logic does not allow it 
         let docs = await schema.model.find({ connect_camera: doc.connect_camera });
         if (!docs || docs.length < 2) {
-            await CameraModel.findOneAndUpdate({ _id: doc.connect_camera }, { status: "free" });
+            await mongoose.model("Camera").findOneAndUpdate({ _id: doc.connect_camera }, { status: "free" });
         }
 
         docs = await schema.model.find({ observe_iot: doc.observe_iot });
         if (!docs || docs.length < 2) {
-            await IotDeviceMapModel.findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "free" });
+            await mongoose.model("IotDeviceMap").findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "free" });
         }
 
-        await EventModel.findOneAndUpdate({ camera_map: doc._id }, { camera_map: null });
+        await mongoose.model("Event").findOneAndUpdate({ camera_map: doc._id }, { camera_map: null });
     }
 
 }
@@ -67,8 +64,8 @@ async function deleteCameraMapRelation(schema) {
 
 cameraMapSchema.pre('save', async function(next) {
     const doc = this;
-    await CameraModel.findOneAndUpdate({ _id: doc.connect_camera }, { status: "used" });
-    await IotDeviceMapModel.findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "used" });
+    await mongoose.model("Camera").findOneAndUpdate({ _id: doc.connect_camera }, { status: "used" });
+    await mongoose.model("IotDeviceMap").findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "used" });
     next();
 })
 
@@ -79,7 +76,7 @@ cameraMapSchema.pre('findOneAndUpdate', async function(next) {
         if (updateDoc.connect_camera && doc.connect_camera != updateDoc.connect_camera) {
             let docs = await this.model.find({ connect_camera: doc.connect_camera });
             if (!docs || docs.length < 2) {
-                await CameraModel.findOneAndUpdate({ _id: doc.connect_camera }, { status: "free" });
+                await mongoose.model("Camera").findOneAndUpdate({ _id: doc.connect_camera }, { status: "free" });
             }
         }
 
@@ -88,7 +85,7 @@ cameraMapSchema.pre('findOneAndUpdate', async function(next) {
         if (updateDoc.observe_iot && doc.observe_iot != updateDoc.observe_iot) {
             let docs = await this.model.find({ observe_iot: doc.observe_iot });
             if (!docs || docs.length < 2) {
-                await IotDeviceMapModel.findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "free" });
+                await mongoose.model("IotDeviceMap").findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "free" });
             }
         }
     }
@@ -109,8 +106,8 @@ cameraMapSchema.pre('deleteMany', async function(next) {
 
 // cameraMapSchema.pre("remove", async function(next) {
 //     const self = this;
-//     await EventModel.deleteMany({ camera_map: self._id });
-//     await IotDeviceMapModel.updateOne({ _id: self.observe_iot }, { observed_status: "free" });
+//     await mongoose.model("Event").deleteMany({ camera_map: self._id });
+//     await mongoose.model("IotDeviceMap").updateOne({ _id: self.observe_iot }, { observed_status: "free" });
 //     next();
 // })
 

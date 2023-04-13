@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const EventModel = require("./event_model");
-const CameraMapModel = require("./camera_map_model");
 
 const cameraSchema = new Schema (
     {
@@ -43,8 +41,8 @@ const cameraSchema = new Schema (
 async function deleteCameraRelation(schema) {
     const doc = await schema.model.findOne(schema.getFilter());
     if (doc) {
-        await CameraMapModel.findOneAndUpdate({ connect_camera: doc._id }, { connect_camera: null });
-        await EventModel.deleteMany({ camera: doc._id });
+        await mongoose.model("CameraMap").findOneAndUpdate({ connect_camera: doc._id }, { connect_camera: null });
+        await mongoose.model("Event").deleteMany({ camera: doc._id });
     }
 }
 
@@ -60,8 +58,8 @@ cameraSchema.pre('deleteMany', async function(next) {
 
 // cameraSchema.pre("remove", async function(next) {
 //     const self = this;
-//     await EventModel.deleteMany({ camera: self._id });
-//     await CameraMapModel.updateMany({ connect_camera: self._id }, { connect_camera: null });
+//     await mongoose.model("Event").deleteMany({ camera: self._id });
+//     await mongoose.model("CameraMap").updateMany({ connect_camera: self._id }, { connect_camera: null });
 //     next();
 // })
 

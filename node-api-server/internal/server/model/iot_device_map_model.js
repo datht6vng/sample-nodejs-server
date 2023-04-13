@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const EventModel = require("./event_model");
-const IotDeviceModel = require("./iot_device_model");
-const CameraMapModel = require("./camera_map_model");
 
 const iotDeviceMapSchema = new Schema (
     {
@@ -50,12 +47,12 @@ async function deleteIotDeviceMapRelation(schema) {
     if (doc) {
         let docs = await schema.model.find({ connect_iot: doc.connect_iot });
         if (!docs || docs.length < 2) {
-            await IotDeviceModel.findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
+            await mongoose.model("IotDevice").findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
         }
 
-        await EventModel.findOneAndUpdate({ iot_device_map: doc._id }, { iot_device_map: null });
+        await mongoose.model("Event").findOneAndUpdate({ iot_device_map: doc._id }, { iot_device_map: null });
 
-        await CameraMapModel.findOneAndUpdate({ observe_iot: doc._id }, { observe_iot: null });
+        await mongoose.model("CameraMap").findOneAndUpdate({ observe_iot: doc._id }, { observe_iot: null });
     }
 
 }
@@ -63,7 +60,7 @@ async function deleteIotDeviceMapRelation(schema) {
 
 iotDeviceMapSchema.pre('save', async function(next) {
     const doc = this;
-    await IotDeviceModel.findOneAndUpdate({ _id: doc.connect_iot }, { status: "used" });
+    await mongoose.model("IotDevice").findOneAndUpdate({ _id: doc.connect_iot }, { status: "used" });
     next();
 })
 
@@ -74,7 +71,7 @@ iotDeviceMapSchema.pre('findOneAndUpdate', async function(next) {
         if (updateDoc.connect_iot && doc.connect_iot != updateDoc.connect_iot) {
             let docs = await this.model.find({ connect_iot: doc.connect_iot });
             if (!docs || docs.length < 2) {
-                await IotDeviceModel.findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
+                await mongoose.model("IotDevice").findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
             }
         }
     }
@@ -97,8 +94,8 @@ iotDeviceMapSchema.pre('deleteMany', async function(next) {
 
 // iotDeviceMapSchema.pre("remove", async function(next) {
 //     const self = this;
-//     await EventModel.deleteMany({ iot_device_map: self._id });
-//     await CameraMapModel.updateMany({ observe_iot: self._id }, { $set: { observe_iot: null } });
+//     await mongoose.model("Event").deleteMany({ iot_device_map: self._id });
+//     await mongoose.model("CameraMap").updateMany({ observe_iot: self._id }, { $set: { observe_iot: null } });
 //     next();
 // })
 

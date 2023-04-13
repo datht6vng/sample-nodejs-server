@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CameraModel = require("./camera_model");
 
 const cameraTypeSchema = new Schema (
     {
@@ -15,7 +14,7 @@ async function deleteCameraTypeRelation(schema) {
     const doc = await schema.model.findOne(schema.getFilter());
     
     if (doc) {
-        await CameraModel.updateMany({ _id: doc._id }, { camera_type: null });
+        await mongoose.model("Camera").updateMany({ _id: doc._id }, { camera_type: null });
     }
 }
 

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const EventModel = require("./event_model");
-const IotDeviceMapModel = require("./iot_device_map_model");
 
 const iotDeviceSchema = new Schema (
     {
@@ -40,8 +38,8 @@ const iotDeviceSchema = new Schema (
 async function deleteIotDeviceRelation(schema) {
     const doc = await schema.model.findOne(schema.getFilter());
     if (doc) {
-        await IotDeviceMapModel.findOneAndUpdate({ connect_iot: doc._id }, { connect_iot: null });
-        await EventModel.deleteMany({ iot_device: doc._id });
+        await mongoose.model("IotDeviceMap").findOneAndUpdate({ connect_iot: doc._id }, { connect_iot: null });
+        await mongoose.model("Event").deleteMany({ iot_device: doc._id });
     }
 }
 
@@ -59,8 +57,8 @@ iotDeviceSchema.pre('deleteMany', async function(next) {
 
 // iotDeviceSchema.pre("remove", async function(next) {
 //     const self = this;
-//     await EventModel.deleteMany({ iot_device: self._id });
-//     await IotDeviceMapModel.updateMany({ connect_iot: self._id }, { connect_iot: null });
+//     await mongoose.model("Event").deleteMany({ iot_device: self._id });
+//     await mongoose.model("IotDeviceMap").updateMany({ connect_iot: self._id }, { connect_iot: null });
 //     next();
 // })
 

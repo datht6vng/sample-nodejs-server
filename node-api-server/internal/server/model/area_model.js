@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CameraMapModel = require("./camera_map_model");
-const IotDeviceMapModel = require("./iot_device_map_model");
 
 const areaSchema = new Schema (
     {
@@ -33,8 +31,8 @@ async function deleteAreaCascade(schema) {
     const doc = await schema.model.findOne(schema.getFilter());
     if (doc) {
         await schema.model.deleteMany({ parent_area: doc._id });
-        await CameraMapModel.deleteMany({ area: doc._id });
-        await IotDeviceMapModel.deleteMany({ area: doc._id });
+        await mongoose.model("CameraMap").deleteMany({ area: doc._id });
+        await mongoose.model("IotDeviceMap").deleteMany({ area: doc._id });
     }
 }
 
@@ -53,8 +51,8 @@ areaSchema.pre('deleteMany', { document: false, query: true }, async function (n
 // areaSchema.pre("remove", async function(next) {
 //     const self = this;
 //     await this.model("Area").deleteMany({ parent_area: self._id });
-//     await CameraMapModel.deleteMany({ area: self._id })
-//     await IotDeviceMapModel.deleteMany({ area: self._id });
+//     await mongoose.model("CameraMap").deleteMany({ area: self._id })
+//     await mongoose.model("IotDeviceMap").deleteMany({ area: self._id });
 //     next();
 // });
 
