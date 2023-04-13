@@ -35,8 +35,8 @@ class SystemUtilityHandler extends Handler {
 
             this.success({ 
                 areas: areas,
-                iot_device_maps: iotDeviceMaps,
-                camera_maps: cameraMaps
+                camera_maps: cameraMaps,
+                iot_device_maps: iotDeviceMaps
             }, callback);
         })
         .catch(err => {
