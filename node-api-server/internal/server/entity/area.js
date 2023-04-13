@@ -76,7 +76,10 @@ class Area {
     }
     
     setParentArea(parentArea) {
-        this.parentArea = parentArea;
+        if (parentArea == "") this.parentArea = null;
+        else {
+            this.parentArea = parentArea;
+        }
         return this;
     }
     

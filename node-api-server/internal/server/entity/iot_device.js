@@ -53,7 +53,10 @@ class IotDevice {
     }
     
     setEventType(eventType) {
-        this.eventType = eventType;
+        if (eventType == "") this.eventType = null;
+        else {
+            this.eventType = eventType;
+        }
         return this;
     }
     
@@ -63,7 +66,10 @@ class IotDevice {
     }
     
     setIotDeviceType(iotDeviceType) {
-        this.iotDeviceType = iotDeviceType;
+        if (iotDeviceType == "") this.iotDeviceType = null;
+        else {
+            this.iotDeviceType = iotDeviceType;
+        }
         return this;
     }
 }

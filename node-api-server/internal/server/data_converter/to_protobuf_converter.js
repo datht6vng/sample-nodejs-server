@@ -66,6 +66,7 @@ class ToProtobufConverter {
         
         this.setDocAttribute(cameraMap, cameraMap.getId, "_id", doc, true);
         this.setDocAttribute(cameraMap, cameraMap.getCameraName, "camera_name", doc);
+        this.setDocAttribute(cameraMap, cameraMap.getAddress, "address", doc);
         this.setDocAttribute(cameraMap, cameraMap.getLat, "lat", doc);
         this.setDocAttribute(cameraMap, cameraMap.getLng, "lng", doc);
         this.setDocAttribute(cameraMap, cameraMap.getType, "type", doc);

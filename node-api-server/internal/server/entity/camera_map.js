@@ -82,17 +82,26 @@ class CameraMap {
     }
     
     setConnectCamera(connectCamera) {
-        this.connectCamera = connectCamera;
+        if (connectCamera == "") this.connectCamera = null;
+        else {
+            this.connectCamera = connectCamera;
+        }
         return this;
     }
     
     setObserveIot(observeIot) {
-        this.observeIot = observeIot;
+        if (observeIot == "") this.observeIot = null;
+        else {
+            this.observeIot = observeIot;
+        }
         return this;
     }
     
     setArea(area) {
-        this.area = area;
+        if (area == "") this.area = null;
+        else {
+            this.area = area;
+        }
         return this;
     }
 

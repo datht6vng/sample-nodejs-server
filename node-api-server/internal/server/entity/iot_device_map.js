@@ -89,12 +89,18 @@ class IotDeviceMap {
     }
     
     setConnectIot(connectIot) {
-        this.connectIot = connectIot;
+        if (connectIot == "") this.connectIot = null;
+        else {
+            this.connectIot = connectIot;
+        }
         return this;
     }
     
     setArea(area) {
-        this.area = area;
+        if (area == "") this.area = null;
+        else {
+            this.area = area;
+        }
         return this;
     }
 }

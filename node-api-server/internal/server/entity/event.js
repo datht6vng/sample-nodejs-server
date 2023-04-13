@@ -99,27 +99,42 @@ class Event {
     }
     
     setEventType(eventType) {
-        this.eventType = eventType;
+        if (eventType == "") this.eventType = null;
+        else {
+            this.eventType = eventType;
+        }
         return this;
     }
     
     setIotDevice(iotDevice) {
-        this.iotDevice = iotDevice;
+        if (iotDevice == "") this.iotDevice = null;
+        else {
+            this.iotDevice = iotDevice;
+        }
         return this;
     }
     
     setCamera(camera) {
-        this.camera = camera;
+        if (camera == "") this.camera == null;
+        else {
+            this.camera = camera;
+        }
         return this;
     }
 
     setIotDeviceMap(iotDeviceMap) {
-        this.iotDeviceMap = iotDeviceMap;
+        if (iotDeviceMap == "") this.iotDeviceMap = null;
+        else {
+            this.iotDeviceMap = iotDeviceMap;
+        }
         return this;
     }
 
     setCameraMap(cameraMap) {
-        this.cameraMap = cameraMap;
+        if (cameraMap == "") this.cameraMap = null;
+        else {
+            this.cameraMap = cameraMap;
+        }
         return this;
     }
     

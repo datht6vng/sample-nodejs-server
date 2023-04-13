@@ -141,12 +141,18 @@ class Camera {
     }
     
     setCameraType(cameraType) {
-        this.cameraType = cameraType;
+        if (cameraType == "") this.cameraType = null;
+        else {
+            this.cameraType = cameraType;
+        }
         return this;
     }
     
     setEventType(eventType) {
-        this.eventType = eventType;
+        if (eventType == "") this.eventType = null;
+        else {
+            this.eventType = eventType;
+        }
         return this;
     }
 }
