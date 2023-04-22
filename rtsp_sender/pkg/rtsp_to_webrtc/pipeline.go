@@ -26,6 +26,7 @@ type Pipeline2 struct {
 	ready                                      atomic.Bool
 	audioCodec, videoCodec                     string
 	onAudioSampleHandler, onVideoSampleHandler atomic.Value
+	onCloseHandler                             atomic.Value
 }
 
 func CreatePipeline2(pipelineStr string) (*Pipeline2, error) {
@@ -87,6 +88,7 @@ func (p *Pipeline2) Start() {
 		p.pipeline.GetPipelineBus().AddWatch(p.MessageWatch())
 		p.pipeline.SetState(gst.StatePlaying)
 		p.main.Run()
+		p.onClose()
 	}()
 }
 
@@ -228,4 +230,14 @@ func (p *Pipeline2) ChangeEncoderBitrate(bitrate int) error {
 		return err
 	}
 	return encoder.SetProperty("bitrate", uint(bitrate))
+}
+
+func (p *Pipeline2) OnClose(f func()) {
+	p.onCloseHandler.Store(f)
+}
+
+func (p *Pipeline2) onClose() {
+	if handler, ok := p.onCloseHandler.Load().(func()); ok {
+		handler()
+	}
 }

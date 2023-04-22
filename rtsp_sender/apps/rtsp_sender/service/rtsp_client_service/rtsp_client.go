@@ -172,6 +172,9 @@ func (c *Client) Connect() error {
 				return
 			}
 		}
+		pipeline.OnClose(func() {
+			c.close()
+		})
 		pipeline.Start()
 		c.pipeline = pipeline
 	}()

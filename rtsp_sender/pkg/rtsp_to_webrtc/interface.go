@@ -42,6 +42,7 @@ type Pipeline interface {
 	OnAudioSample(func(media.Sample) error)
 	OnVideoSample(func(media.Sample) error)
 	ChangeEncoderBitrate(bitrate int) error
+	OnClose(func())
 }
 
 // CreatePipeline creates a GStreamer Pipeline
