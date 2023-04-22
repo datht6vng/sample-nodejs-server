@@ -212,3 +212,10 @@
 2023/04/22 19:37:13 INF [RTSP] [conn 127.0.0.1:58718] closed (EOF)
 2023/04/22 19:37:16 INF [RTSP] [session 5ed0abe3] created by 127.0.0.1:53656
 2023/04/22 19:37:17 INF [RTSP] [session 5ed0abe3] is publishing to path '1', with UDP, 1 track (H264)
+2023/04/22 19:43:08 INF rtsp-simple-server v0.21.2
+2023/04/22 19:43:08 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/04/22 19:43:25 INF [RTSP] [conn 127.0.0.1:54664] opened
+2023/04/22 19:43:30 INF [RTSP] [session 5f4bcb9c] created by 127.0.0.1:54664
+2023/04/22 19:43:31 INF [RTSP] [session 5f4bcb9c] is publishing to path '1', with UDP, 1 track (H264)
+2023/04/22 19:44:18 INF [RTSP] [session 5f4bcb9c] destroyed (teared down by 127.0.0.1:54664)
+2023/04/22 19:44:18 INF [RTSP] [conn 127.0.0.1:54664] closed (EOF)
