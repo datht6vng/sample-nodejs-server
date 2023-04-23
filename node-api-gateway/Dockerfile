@@ -2,7 +2,7 @@ FROM node:alpine
 WORKDIR /usr/app
 
 COPY . .
-COPY ./configs /configs
+COPY ./config /config
 
 
 RUN npm install
@@ -17,6 +17,6 @@ RUN  apk add --no-cache bash \
 
 RUN apk --no-cache add ca-certificates && apk --no-cache add curl
 
-ENV CONFIG_PATH="./configs/server.toml"
+ENV CONFIG_PATH="./config/server.toml"
 
 CMD ["npm", "run", "dev"]
