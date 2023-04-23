@@ -1,0 +1,98 @@
++ Stream gui ve luon hinh anh (co bounding box va ko co)
+
+
++ Exchange: amq.topic - Receive Iot event - 1 queue - all routing queue (topic) bind to this queue
+
+
+
++ Exchange: receive event from camera
+
++ queue_event_created: After receive event, save event temporarily to database
++ queue_event_with_video: After receive video from video generation service
++ queue_event_complete: 
+
+
+
+
+Problem:
++ microservice domain recognition, save to database change - save to database 2 fields: domain and uri
++ need event key? Solution: database seeding
++ multiple websocket?
+
+
+
+
+
+Problem:
++ iot_type, camera_type???
+
+
++ Tạm thời viết các API mà không cần populate các foreign key của nó
+
+
++ Viết visit xong ==> xử tới model các vụ update và delete
+
+
+
+====================================
++ Viết xong các hàm của repo để biết dùng hàm delete hay update nào rồi mới viết các middleware của model cho các hàm đó
+    + create: Có thể truyền vào object hay 1 mảng. Kết quả trả ra cũng có thể là object hoặc 1 mảng
+        + Middleware: save (cho mỗi document)
+    + findOneAndUpdate (dùng tiện hơn cách findOne rồi mới save trên document)
+        + Middleware: findOneAndUpdate
+    + findOneAndDelete, deleteMany
+        + $ni, $ne in mongoose
+    
++ Nhớ viết middleware cho iot_device_type và camera_type
+
+
+
+
+
++ Subscribe vào queue nhận iot event new => Có event lưu database => Gọi grpc để lấy video => Publish lên event media để verified
++ Subscribe vào queue nhận camera event new => Có event lưu database => Gọi grpc để lấy video => Publish lên event media để verified
++ Subscribe vào queue nhận event verified => lưu database => đổ vào socket
+
+
+
+
++ Hàm grpc để test thì tạm để dữ liệu giả trong lời gọi hàm
+
++ Duyệt qua tất cả các exchange, queue, với mỗi cái ta truyền vào hàm của event_context exchange name, queue name để nó lựa chọn nên gọi hàm callback nào
+
+
+
++ Có camera mới
+
+
++ Xóa camera
+
+
++ Sửa camera:
+
+
++ Thêm trường username, password của RTSP vào cho camera model (để gửi về bên rtsp_sender lấy url về)
+
++ Handler trả về entity Event
++ Use lodash hoặc prefetch để chặn spam (OpenAI)
+
++ Tạm thời chỉ cần quan tâm populate cho các cái có khóa ngoại area
+https://www.appsloveworld.com/mongodb/100/50/update-from-mongoose-post-findoneandupdate-hook
+https://masteringjs.io/tutorials/express/query-parameters
+
+Test video: https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/people-detection.mp4
+
+
+
+
+
+
+nếu chưa có area, building, floor, camera_map, iot_map thì thêm mới
+à, phải check id trước
+còn nếu đã có, thì update thông tin thôi
+
+trong list camera_map và iot_mapo
+check connect_camera_config với connect_iot_config trong 2 cái đó
+coi có kết nối config hay không
+
+nếu có thì update lại cái field "status" trong camera config, iot config thành "used"

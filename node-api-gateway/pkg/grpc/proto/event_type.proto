@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleEventTypeResponseData {
+    EventTypeDetail event_type_detail = 1;
+}
+
+message MultipleEventTypesResponseData {
+    repeated EventTypeDetail event_types = 1;
+}
+
+message GetAllEventTypesResponse {
+    MultipleEventTypesResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateEventTypeRequest {
+    EventTypeDetail event_type_detail = 1;
+}
+
+message CreateEventTypeResponse {
+    SingleEventTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetEventTypeByIdRequest {
+    string _id = 1;
+}
+
+message GetEventTypeByIdResponse {
+    SingleEventTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateEventTypeByIdRequest {
+    string _id = 1;
+    EventTypeDetail event_type_detail = 2;
+}
+
+message UpdateEventTypeByIdResponse {
+    SingleEventTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteEventTypeByIdRequest {
+    string _id = 1;
+}
+
+message DeleteEventTypeByIdResponse {
+    SingleEventTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service EventTypeService {
+    rpc GetAllEventTypes (Empty) returns (GetAllEventTypesResponse) {};
+    rpc CreateEventType (CreateEventTypeRequest) returns (CreateEventTypeResponse) {};
+    rpc GetEventTypeById (GetEventTypeByIdRequest) returns (GetEventTypeByIdResponse) {};
+    rpc UpdateEventTypeById (UpdateEventTypeByIdRequest) returns (UpdateEventTypeByIdResponse) {};
+    rpc DeleteEventTypeById (DeleteEventTypeByIdRequest) returns (DeleteEventTypeByIdResponse) {};
+}
+
+message Empty {}

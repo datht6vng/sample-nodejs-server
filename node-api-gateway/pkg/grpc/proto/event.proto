@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleEventResponseData {
+    EventDetail event_detail = 1;
+}
+
+message MultipleEventsResponseData {
+    repeated EventDetail events = 1;
+}
+
+message GetAllEventsResponse {
+    MultipleEventsResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateEventRequest {
+    EventDetail event_detail = 1;
+}
+
+message CreateEventResponse {
+    SingleEventResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetEventByIdRequest {
+    string _id = 1;
+}
+
+message GetEventByIdResponse {
+    SingleEventResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateEventByIdRequest {
+    string _id = 1;
+    EventDetail event_detail = 2;
+}
+
+message UpdateEventByIdResponse {
+    SingleEventResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteEventByIdRequest {
+    string _id = 1;
+}
+
+message DeleteEventByIdResponse {
+    SingleEventResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service EventService {
+    rpc GetAllEvents (Empty) returns (GetAllEventsResponse) {};
+    rpc CreateEvent (CreateEventRequest) returns (CreateEventResponse) {};
+    rpc GetEventById (GetEventByIdRequest) returns (GetEventByIdResponse) {};
+    rpc UpdateEventById (UpdateEventByIdRequest) returns (UpdateEventByIdResponse) {};
+    rpc DeleteEventById (DeleteEventByIdRequest) returns (DeleteEventByIdResponse) {};
+}
+
+message Empty {}

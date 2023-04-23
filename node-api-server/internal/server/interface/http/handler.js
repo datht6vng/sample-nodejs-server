@@ -5,9 +5,9 @@ const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const healthController = require("./controllers/health_controller");
-const metricsController = require("./controllers/metrics_controller");
-const errorController = require("./controllers/error_controller");
+const healthController = require("./controller/health_controller");
+const metricsController = require("./controller/metrics_controller");
+const errorController = require("./controller/error_controller");
 
 const healthSerivce = require("../../service/health_service");
 
@@ -23,14 +23,14 @@ class Handler {
   // Middlewares
 }
 
-function NewHandler() {
+function newHandler() {
   let h = new Handler();
 
-  h.healthContronller = healthController.NewHealthController(
+  h.healthContronller = healthController.newHealthController(
     healthSerivce.NewHealthService()
   );
-  h.metricsController = metricsController.NewMetricsController(null);
-  h.errorController = errorController.NewErrorController();
+  h.metricsController = metricsController.newMetricsController(null);
+  h.errorController = errorController.newErrorController();
 
   h.app = express();
   h.app.use(
@@ -69,4 +69,4 @@ function NewHandler() {
 }
 
 module.exports.Handler = Handler;
-module.exports.NewHandler = NewHandler;
+module.exports.newHandler = newHandler;

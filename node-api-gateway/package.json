@@ -1,0 +1,30 @@
+{
+  "name": "node-api-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon -L cmd/server/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.7.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.6.0",
+    "fs": "^0.0.1-security",
+    "helmet": "^6.0.0",
+    "http-proxy-middleware": "^2.0.6",
+    "http-status": "^1.5.3",
+    "mqtt": "^4.3.7",
+    "prom-client": "^14.1.0",
+    "request": "^2.88.2",
+    "toml": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleCameraResponseData {
+    CameraDetail camera_detail = 1;
+}
+
+message MultipleCamerasResponseData {
+    repeated CameraDetail cameras = 1;
+}
+
+message GetAllCamerasResponse {
+    MultipleCamerasResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateCameraRequest {
+    CameraDetail camera_detail = 1;
+}
+
+message CreateCameraResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetCameraByIdRequest {
+    string _id = 1;
+}
+
+message GetCameraByIdResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateCameraByIdRequest {
+    string _id = 1;
+    CameraDetail camera_detail = 2;
+}
+
+message UpdateCameraByIdResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteCameraByIdRequest {
+    string _id = 1;
+}
+
+message DeleteCameraByIdResponse {
+    SingleCameraResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service CameraService {
+    rpc GetAllCameras (Empty) returns (GetAllCamerasResponse) {};
+    rpc CreateCamera (CreateCameraRequest) returns (CreateCameraResponse) {};
+    rpc GetCameraById (GetCameraByIdRequest) returns (GetCameraByIdResponse) {};
+    rpc UpdateCameraById (UpdateCameraByIdRequest) returns (UpdateCameraByIdResponse) {};
+    rpc DeleteCameraById (DeleteCameraByIdRequest) returns (DeleteCameraByIdResponse) {};
+}
+
+message Empty {}

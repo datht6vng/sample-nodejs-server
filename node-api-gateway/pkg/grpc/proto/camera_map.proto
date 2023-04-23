@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleCameraMapResponseData {
+    CameraMapDetail camera_map_detail = 1;
+}
+
+message MultipleCameraMapsResponseData {
+    repeated CameraMapDetail camera_maps = 1;
+}
+
+message GetAllCameraMapsResponse {
+    MultipleCameraMapsResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateCameraMapRequest {
+    CameraMapDetail camera_map_detail = 1;
+}
+
+message CreateCameraMapResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetCameraMapByIdRequest {
+    string _id = 1;
+}
+
+message GetCameraMapByIdResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateCameraMapByIdRequest {
+    string _id = 1;
+    CameraMapDetail camera_map_detail = 2;
+}
+
+message UpdateCameraMapByIdResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteCameraMapByIdRequest {
+    string _id = 1;
+}
+
+message DeleteCameraMapByIdResponse {
+    SingleCameraMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service CameraMapService {
+    rpc GetAllCameraMaps (Empty) returns (GetAllCameraMapsResponse) {};
+    rpc CreateCameraMap (CreateCameraMapRequest) returns (CreateCameraMapResponse) {};
+    rpc GetCameraMapById (GetCameraMapByIdRequest) returns (GetCameraMapByIdResponse) {};
+    rpc UpdateCameraMapById (UpdateCameraMapByIdRequest) returns (UpdateCameraMapByIdResponse) {};
+    rpc DeleteCameraMapById (DeleteCameraMapByIdRequest) returns (DeleteCameraMapByIdResponse) {};
+}
+
+message Empty {}

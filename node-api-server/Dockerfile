@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR /service/app/server
+WORKDIR /usr/app
 
 COPY . .
 COPY ./configs /configs
@@ -19,4 +19,4 @@ RUN apk --no-cache add ca-certificates && apk --no-cache add curl
 
 ENV CONFIG_PATH="./configs/server.toml"
 
-CMD ["node", "cmd/server/main.js"]
+CMD ["npm", "run", "dev"]

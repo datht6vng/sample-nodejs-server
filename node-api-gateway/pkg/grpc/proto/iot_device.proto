@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleIotDeviceResponseData {
+    IotDeviceDetail iot_device_detail = 1;
+}
+
+message MultipleIotDevicesResponseData {
+    repeated IotDeviceDetail iot_devices = 1;
+}
+
+message GetAllIotDevicesResponse {
+    MultipleIotDevicesResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateIotDeviceRequest {
+    IotDeviceDetail iot_device_detail = 1;
+}
+
+message CreateIotDeviceResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetIotDeviceByIdRequest {
+    string _id = 1;
+}
+
+message GetIotDeviceByIdResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateIotDeviceByIdRequest {
+    string _id = 1;
+    IotDeviceDetail iot_device_detail = 2;
+}
+
+message UpdateIotDeviceByIdResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteIotDeviceByIdRequest {
+    string _id = 1;
+}
+
+message DeleteIotDeviceByIdResponse {
+    SingleIotDeviceResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service IotDeviceService {
+    rpc GetAllIotDevices (Empty) returns (GetAllIotDevicesResponse) {};
+    rpc CreateIotDevice (CreateIotDeviceRequest) returns (CreateIotDeviceResponse) {};
+    rpc GetIotDeviceById (GetIotDeviceByIdRequest) returns (GetIotDeviceByIdResponse) {};
+    rpc UpdateIotDeviceById (UpdateIotDeviceByIdRequest) returns (UpdateIotDeviceByIdResponse) {};
+    rpc DeleteIotDeviceById (DeleteIotDeviceByIdRequest) returns (DeleteIotDeviceByIdResponse) {};
+}
+
+message Empty {}

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleCameraTypeResponseData {
+    CameraTypeDetail camera_type_detail = 1;
+}
+
+message MultipleCameraTypesResponseData {
+    repeated CameraTypeDetail camera_types = 1;
+}
+
+message GetAllCameraTypesResponse {
+    MultipleCameraTypesResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateCameraTypeRequest {
+    CameraTypeDetail camera_type_detail = 1;
+}
+
+message CreateCameraTypeResponse {
+    SingleCameraTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetCameraTypeByIdRequest {
+    string _id = 1;
+}
+
+message GetCameraTypeByIdResponse {
+    SingleCameraTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateCameraTypeByIdRequest {
+    string _id = 1;
+    CameraTypeDetail camera_type_detail = 2;
+}
+
+message UpdateCameraTypeByIdResponse {
+    SingleCameraTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteCameraTypeByIdRequest {
+    string _id = 1;
+}
+
+message DeleteCameraTypeByIdResponse {
+    SingleCameraTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service CameraTypeService {
+    rpc GetAllCameraTypes (Empty) returns (GetAllCameraTypesResponse) {};
+    rpc CreateCameraType (CreateCameraTypeRequest) returns (CreateCameraTypeResponse) {};
+    rpc GetCameraTypeById (GetCameraTypeByIdRequest) returns (GetCameraTypeByIdResponse) {};
+    rpc UpdateCameraTypeById (UpdateCameraTypeByIdRequest) returns (UpdateCameraTypeByIdResponse) {};
+    rpc DeleteCameraTypeById (DeleteCameraTypeByIdRequest) returns (DeleteCameraTypeByIdResponse) {};
+}
+
+message Empty {}

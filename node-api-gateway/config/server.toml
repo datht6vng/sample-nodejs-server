@@ -1,0 +1,9 @@
+[server]
+    [server.http]
+        host = "http://localhost"
+        port = "3001"
+
+[api_server]
+    [api_server.grpc]
+        host = "node-api-server"
+        port = "50051"

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleIotDeviceMapResponseData {
+    IotDeviceMapDetail iot_device_map_detail = 1;
+}
+
+message MultipleIotDeviceMapsResponseData {
+    repeated IotDeviceMapDetail iot_device_maps = 1;
+}
+
+message GetAllIotDeviceMapsResponse {
+    MultipleIotDeviceMapsResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateIotDeviceMapRequest {
+    IotDeviceMapDetail iot_device_map_detail = 1;
+}
+
+message CreateIotDeviceMapResponse {
+    SingleIotDeviceMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetIotDeviceMapByIdRequest {
+    string _id = 1;
+}
+
+message GetIotDeviceMapByIdResponse {
+    SingleIotDeviceMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateIotDeviceMapByIdRequest {
+    string _id = 1;
+    IotDeviceMapDetail iot_device_map_detail = 2;
+}
+
+message UpdateIotDeviceMapByIdResponse {
+    SingleIotDeviceMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteIotDeviceMapByIdRequest {
+    string _id = 1;
+}
+
+message DeleteIotDeviceMapByIdResponse {
+    SingleIotDeviceMapResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service IotDeviceMapService {
+    rpc GetAllIotDeviceMaps (Empty) returns (GetAllIotDeviceMapsResponse) {};
+    rpc CreateIotDeviceMap (CreateIotDeviceMapRequest) returns (CreateIotDeviceMapResponse) {};
+    rpc GetIotDeviceMapById (GetIotDeviceMapByIdRequest) returns (GetIotDeviceMapByIdResponse) {};
+    rpc UpdateIotDeviceMapById (UpdateIotDeviceMapByIdRequest) returns (UpdateIotDeviceMapByIdResponse) {};
+    rpc DeleteIotDeviceMapById (DeleteIotDeviceMapByIdRequest) returns (DeleteIotDeviceMapByIdResponse) {};
+}
+
+message Empty {}
