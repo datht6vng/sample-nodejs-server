@@ -21,39 +21,41 @@ class EventRepository {
         try {
             eventDocs = await EventModel.find({});
         }
-        catch(err) {
+        catch (err) {
             throw newInternalServerError("Database error", err);
         }
         return eventDocs.map(eventDoc => {
             return this.fromDatabaseConverter.visit(newEvent(), eventDoc);
         })
     }
-    
+
     async create(eventEntity) {
         const eventDoc = this.toDatabaseConverter.visit(eventEntity);
+        console.log("eventDoc: ", eventDoc)
         let newEventDoc;
         try {
             newEventDoc = await EventModel.create(eventDoc);
+            console.log("newEventDoc: ", newEventDoc)
         }
-        catch(err) {
+        catch (err) {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newEvent(), newEventDoc);
     }
-    
+
     async findById(eventId) {
         let eventDoc;
         eventId = eventId.getValue();
         try {
             eventDoc = await EventModel.findById(eventId).exec();
         }
-        catch(err) {
+        catch (err) {
             throw newInternalServerError("Database error", err);
         }
-        
+
         return this.fromDatabaseConverter.visit(newEvent(), eventDoc);
     }
-    
+
     async findByIdAndUpdate(eventId, eventEntity) {
         const eventDoc = this.toDatabaseConverter.visit(eventEntity);
         const filter = {
@@ -63,7 +65,7 @@ class EventRepository {
         try {
             newEventDoc = await EventModel.findOneAndUpdate(filter, eventDoc, { new: true }); // set new to true to return new document after update
         }
-        catch(err) {
+        catch (err) {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newEvent(), newEventDoc);
@@ -77,7 +79,7 @@ class EventRepository {
         try {
             deleteEventDoc = await EventModel.findOneAndDelete(filter); // set new to true to return new document after update
         }
-        catch(err) {
+        catch (err) {
             throw newInternalServerError("Database error", err);
         }
         return this.fromDatabaseConverter.visit(newEvent(), deleteEventDoc);

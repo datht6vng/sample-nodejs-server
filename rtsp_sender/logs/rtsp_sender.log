@@ -497,3 +497,23 @@
 2023-04-23T20:36:58.486  INFO rtsp_sender_ae2f2969f630 Peer connection state changed: connected 
 2023-04-23T20:37:02.358  INFO rtsp_sender_ae2f2969f630 gather candidate done 
 2023-04-23T20:37:02.667  INFO rtsp_sender_ae2f2969f630 gather candidate done 
+2023-04-25T14:39:00.112  INFO rtsp_sender_5583f6c503eb Serve gRPC on: 0.0.0.0:5551 
+2023-04-25T14:39:00.117  INFO rtsp_sender_5583f6c503eb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-25T14:39:00.118  INFO rtsp_sender_5583f6c503eb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-25T14:39:00.119  INFO rtsp_sender_5583f6c503eb Server is running and awaiting signal for shutdown ... 
+2023-04-25T14:39:26.004  INFO rtsp_sender_5583f6c503eb Serve gRPC on: 0.0.0.0:5551 
+2023-04-25T14:39:26.015  INFO rtsp_sender_5583f6c503eb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-25T14:39:26.016  INFO rtsp_sender_5583f6c503eb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-25T14:39:26.018  INFO rtsp_sender_5583f6c503eb Server is running and awaiting signal for shutdown ... 
+2023-04-25T15:50:24.602  INFO rtsp_sender_5583f6c503eb Serve gRPC on: 0.0.0.0:5551 
+2023-04-25T15:50:24.605  INFO rtsp_sender_5583f6c503eb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-25T15:50:24.605  INFO rtsp_sender_5583f6c503eb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-25T15:50:24.607  INFO rtsp_sender_5583f6c503eb Server is running and awaiting signal for shutdown ... 
+2023-04-25T21:18:53.230  INFO rtsp_sender_5583f6c503eb Serve gRPC on: 0.0.0.0:5551 
+2023-04-25T21:18:53.232  INFO rtsp_sender_5583f6c503eb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-25T21:18:53.232  INFO rtsp_sender_5583f6c503eb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-25T21:18:53.233  INFO rtsp_sender_5583f6c503eb Server is running and awaiting signal for shutdown ... 
+2023-04-25T21:32:43.192  INFO rtsp_sender_5583f6c503eb Serve gRPC on: 0.0.0.0:5551 
+2023-04-25T21:32:43.194  INFO rtsp_sender_5583f6c503eb Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-04-25T21:32:43.194  INFO rtsp_sender_5583f6c503eb Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-04-25T21:32:43.195  INFO rtsp_sender_5583f6c503eb Server is running and awaiting signal for shutdown ... 

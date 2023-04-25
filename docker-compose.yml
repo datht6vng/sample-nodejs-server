@@ -70,6 +70,22 @@ services:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
 
+  event-simulator:
+    build:
+      context: event-simulator
+      dockerfile: Dockerfile
+    volumes:
+      - ./event-simulator:/usr/app
+      - event_node_modules:/usr/app/node_modules
+    working_dir: /usr/app
+    command: >
+      sh -c "npm run dev"
+    restart: always
+    ports:
+      - "3006:3006"
+    depends_on:
+      - mongodb
+
   node-api-server:
     build:
       context: node-api-server
@@ -112,6 +128,7 @@ services:
 volumes:
   api_node_modules:
   gateway_node_modules:
+  event_node_modules:
   mongodb_data:
 
 
