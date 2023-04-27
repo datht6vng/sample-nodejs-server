@@ -1,5 +1,7 @@
 
 const { newCameraRepository } = require("../repository/camera_repository");
+const { newSfuRtspStreamHandler } = require("../grpc_client/handler/sfu_rtsp_stream_handler");
+
 
 class CameraService {
     constructor(repository=newCameraRepository()) {
@@ -30,6 +32,17 @@ class CameraService {
     async deleteCameraById(cameraId) {
         const cameraEntity = await this.repository.findByIdAndDelete(cameraId);
         return cameraEntity;
+    }
+
+    async getNewSfuRtspUrl(camera) {
+        const handler = newSfuRtspStreamHandler();
+        const url = handler.connect(camera);
+        return url;
+    }
+
+    async deleteSfuRtspUrl(camera) {
+        const handler = newSfuRtspStreamHandler();
+        handler.disconnect(camera);
     }
 }
 

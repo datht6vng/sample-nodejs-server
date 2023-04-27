@@ -99,6 +99,20 @@ class CameraRepository {
         }
         return this.fromDatabaseConverter.visit(newCamera(), deleteCameraDoc);
     }
+
+
+    async getAllWithEventType() {
+        let cameraDocs;
+        try {
+            cameraDocs = await CameraModel.find({}).populate('event_type');
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return cameraDocs.map(cameraDoc => {
+            return this.fromDatabaseConverter.visit(newCamera(), cameraDoc);
+        })
+    }
 }
 
 

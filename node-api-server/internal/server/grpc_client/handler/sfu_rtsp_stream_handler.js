@@ -1,4 +1,4 @@
-const GrpcHandler = require("./grpc_handler");
+const { GrpcHandler } = require("./grpc_handler");
 
 const { config } = require("../../../../pkg/config/config");
 
@@ -19,7 +19,8 @@ class SfuRtspStreamHandler extends GrpcHandler {
             connectClientAddress: camera.getRtspStreamUrl(),
             username: camera.getUsername(),
             password: camera.getPassword(),
-            enableRTSPRelay: true
+            enableRTSPRelay: true,
+            enableRecord: true
         }
         const response = await this.callRpc(this.clientStuff.connect, arg);
         return response.data.replayAddress;
@@ -31,13 +32,13 @@ class SfuRtspStreamHandler extends GrpcHandler {
             clientID: camera.getId().getValue(),
             connectClientAddress: camera.getRtspStreamUrl()
         }
-        const response = await this.callRpc(this.clientStuff.connect, arg);
+        const response = await this.callRpc(this.clientStuff.disconnect, arg);
         return response;
     }
 }
 
 function newSfuRtspStreamHandler(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {
-    return new SfuRtspStreamHandler;
+    return new SfuRtspStreamHandler(protoFile, serviceName, targetHost, targetPort);
 }
 
 module.exports.newSfuRtspStreamHandler = newSfuRtspStreamHandler;

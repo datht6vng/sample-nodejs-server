@@ -8,6 +8,7 @@ const { newEvent } = require("../entity/event");
 const { newIotDeviceMap } = require("../entity/iot_device_map");
 const { newIotDeviceType } = require("../entity/iot_device_type");
 const { newIotDevice } = require("../entity/iot_device");
+const { newUser } = require("../entity/user");
 
 
 
@@ -156,6 +157,16 @@ class FromProtobufConverter {
             .setImageUrl(doc.image_url)
             .setDescription(doc.description);
         return iotDeviceType;
+    }
+
+    visitUser(user, doc, env) {
+        if (!doc) return user;
+
+        user.setId(this.visit(newId(), doc._id))
+            .setUsername(doc.username)
+            .setPassword(doc.password)
+            .setRole(doc.role);
+        return user;
     }
 
     setEntityWithRefType(entity, setEntityMethod, value, newEntity) {

@@ -9,7 +9,11 @@ const cameraSchema = new Schema (
             unique: true,
             required: true
         },
-        status: String,
+        status: {
+            type: String,
+            enum: ['used', 'free'],
+            default: 'free'
+        },
 
         rtsp_stream_url: String,
         sfu_rtsp_stream_url: String,

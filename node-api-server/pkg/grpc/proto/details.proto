@@ -109,3 +109,10 @@ message IotDeviceTypeDetail {
     optional string image_url = 3;
     optional string description = 4;
 }
+
+message UserDetail {
+    optional string _id = 1;
+    optional string username = 2;
+    optional string password = 3;
+    optional string role = 4;
+}

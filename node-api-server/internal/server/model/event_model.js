@@ -23,8 +23,14 @@ const eventSchema = new Schema (
             type: Schema.Types.ObjectID,
             ref: 'CameraMap'
         },
-        ai_true_alarm: Boolean,
-        human_true_alarm: Boolean,
+        ai_true_alarm: {
+            type: Boolean,
+            default: false
+        },
+        human_true_alarm: {
+            type: Boolean,
+            default: false
+        },
 
 
         normal_image_url: String,

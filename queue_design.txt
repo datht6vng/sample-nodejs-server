@@ -96,3 +96,20 @@ check connect_camera_config với connect_iot_config trong 2 cái đó
 coi có kết nối config hay không
 
 nếu có thì update lại cái field "status" trong camera config, iot config thành "used"
+
+
+
+Chua handle socket gui ve event
+
+
+Write all iot event, camera event, event verified
+Complete all grpc server
+Complete all grpc client (sample test)
+Control camera api
+
+Gateway traffic forwarding
+
+
+Them line_coords khi publish event camera ben AI server
+khi nhan event (iot va camera) chi can luu thong tin cua iot va camera tuong ung. Schema dung middleware create de them thong tin cua map va type
+Giai quyet camera_map quan sat iot_map (database đang lưu như thế) => khi cần query ra camera config nào đang quan sát iot config tốn chi phí
