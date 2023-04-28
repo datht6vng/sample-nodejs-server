@@ -113,3 +113,173 @@ Gateway traffic forwarding
 Them line_coords khi publish event camera ben AI server
 khi nhan event (iot va camera) chi can luu thong tin cua iot va camera tuong ung. Schema dung middleware create de them thong tin cua map va type
 Giai quyet camera_map quan sat iot_map (database đang lưu như thế) => khi cần query ra camera config nào đang quan sát iot config tốn chi phí
+
+
+
+
+Area:
+
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        area_name: "Area 1",
+        area_type: "area"
+    },
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        area_name: "Area 2",
+        area_type: "area"
+    },
+
+]
+
+
+
+Camera
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        camera_name: "Camera 1"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        camera_name: "Camera 2"
+    }
+    
+
+]
+
+
+
+
+Camera map
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        camera_name: "Camera map 1",
+        area: "6162f9b9be1661cb32a1c447",
+        connect_camera: "6162f9b9be1661cb32a1c447"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        camera_name: "Camera map 2",
+        area: "6162f9b9be1661cb32a1c448",
+        connect_camera: "6162f9b9be1661cb32a1c447"
+    }
+    
+
+]
+
+
+
+
+
+
+
+
+Iot Device
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        iot_device_name: "Iot device 1"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        iot_device_name: "Iot Device 2"
+    }
+    
+
+]
+
+
+
+
+Iot Device Type
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        iot_device_type_name: "Iot device type 1"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        iot_device_type_name: "Iot Device type 2"
+    }
+    
+
+]
+
+
+
+
+Iot device map
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        iot_device_name: "Iot device map 1",
+        area: "6162f9b9be1661cb32a1c447",
+        connect_iot: "6162f9b9be1661cb32a1c447"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        iot_device_name: "Iot Device map 2",
+        area: "6162f9b9be1661cb32a1c448",
+        connect_iot: "6162f9b9be1661cb32a1c448"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c449",
+        iot_device_name: "Iot Device map 3",
+        area: "6162f9b9be1661cb32a1c448",
+        connect_iot: "6162f9b9be1661cb32a1c448"
+    }
+    
+
+]
+
+
+
+Event Type 
+
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        event_key: "movement"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        event_key: "door_open"
+    }
+]
+
+
+
+
+
+Event
+
+
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        event_type: "6162f9b9be1661cb32a1c447",
+        iot_device: "6162f9b9be1661cb32a1c447",
+        iot_device_map: "6162f9b9be1661cb32a1c447"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        event_type: "6162f9b9be1661cb32a1c448",
+        iot_device: "6162f9b9be1661cb32a1c448",
+        iot_device_map: "6162f9b9be1661cb32a1c448"
+    }
+]
+
+
+socket: event_new, event_verified
+Lấy full event detail

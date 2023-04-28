@@ -12,6 +12,19 @@ main();
 
 
 
+// const { newReportRepository } = require("../../internal/server/repository/report_repository");
+// async function main1() {
+//     const db = newMongoDB();
+//     await db.start();
+
+//     let repo = newReportRepository();
+//     repo.findNumberOfIotEventWithAreaAndTime();
+// }
+
+// main1();
+
+
+
 
 
 
