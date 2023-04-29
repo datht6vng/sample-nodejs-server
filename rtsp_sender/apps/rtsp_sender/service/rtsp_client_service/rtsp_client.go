@@ -3,19 +3,27 @@ package rtsp_client_service
 import (
 	"fmt"
 	"io"
+	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
 
+	"github.com/aler9/gortsplib/v2"
+	"github.com/aler9/gortsplib/v2/pkg/format"
+	"github.com/aler9/gortsplib/v2/pkg/media"
+	"github.com/aler9/gortsplib/v2/pkg/url"
+	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/entity"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
 	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/rtsp_to_webrtc"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
-	"github.com/deepch/vdk/av"
-	"github.com/deepch/vdk/format/rtspv2"
+	jujuErr "github.com/juju/errors"
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/webrtc/v3"
 )
+
+const maxRetry = 5
 
 type Client struct {
 	mu               sync.RWMutex
@@ -34,11 +42,14 @@ type Client struct {
 
 	connector *sdk.Connector
 
-	audioTrack, videoTrack *webrtc.TrackLocalStaticSample
-	codecs                 []av.CodecData
-	pipeline               gst.Pipeline
-	closed                 chan bool
-	onCloseHandler         atomic.Value
+	codecs         []format.Format
+	pipeline       atomic.Value
+	closed         chan bool
+	onCloseHandler atomic.Value
+
+	retryCount atomic.Int32
+	retryTimer *time.Timer
+	metadata   *entity.Metadata
 }
 
 func NewClient(clientID, clientAddress, rtspRelayAddress, username, password, sfuAddress, sessionName string, enableAudio bool, enableRTSPRelay bool, enableRecord bool) *Client {
@@ -74,34 +85,54 @@ func (c *Client) Connect() error {
 	formatRTSPURL := formatRTSPURL(c.clientAddress, c.username, c.password)
 	logger.Infof("[%v] RTSP URL: %s", c.clientAddress, formatRTSPURL)
 
-	rtspClient, err := rtspv2.Dial(rtspv2.RTSPClientOptions{URL: formatRTSPURL, DisableAudio: !c.enableAudio, DialTimeout: 10 * time.Second, ReadWriteTimeout: 3 * time.Second, Debug: false})
+	u, err := url.Parse(formatRTSPURL)
 	if err != nil {
 		return err
 	}
 
-	c.codecs = rtspClient.CodecData
-	go rtspClient.Close()
-
+	rtspClient := &gortsplib.Client{
+		// the stream transport (UDP, Multicast or TCP). If nil, it is chosen automatically
+		Transport: nil,
+		// timeout of read operations
+		ReadTimeout: 10 * time.Second,
+		// timeout of write operations
+		WriteTimeout: 10 * time.Second,
+	}
+	// connect to the server
+	err = rtspClient.Start(u.Scheme, u.Host)
+	if err != nil {
+		return err
+	}
 	audioOnly := true
+	// setup all medias
+	medias, _, _, err := rtspClient.Describe(u)
+	if err != nil {
+		return err
+	}
+	for _, m := range medias {
+		if m.Type == media.TypeAudio {
+			audioOnly = false
+		}
+		c.codecs = append(c.codecs, m.Formats...)
+	}
+
+	go rtspClient.Close()
 
 	var videoCodec, audioCodec string
 	var videoDepay, audioDepay string
 	var videoDecoder, audioDecoder string
 
 	for _, codec := range c.codecs {
-		if codec.Type().IsAudio() {
-			audioOnly = false
-		}
-		switch codec.Type() {
-		case av.H264:
+		switch codec.(type) {
+		case *format.H264:
 			videoCodec = webrtc.MimeTypeH264
 			videoDepay = "rtph264depay"
 			videoDecoder = "avdec_h264"
-		case av.VP8:
+		case *format.VP8:
 			videoCodec = webrtc.MimeTypeVP8
 			videoDepay = "rtpvp8depay"
 			videoDecoder = "avdec_vp8"
-		case av.OPUS:
+		case *format.Opus:
 			audioCodec = webrtc.MimeTypeOpus
 			audioDepay = "rtpopusdepay"
 			audioDecoder = "avdec_opus"
@@ -117,16 +148,15 @@ func (c *Client) Connect() error {
 	if err != nil {
 		return err
 	}
-	c.videoTrack = videoTrack
-	publishTrack = append(publishTrack, c.videoTrack)
+	publishTrack = append(publishTrack, videoTrack)
 
+	var audioTrack *webrtc.TrackLocalStaticSample
 	if !audioOnly {
 		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", c.clientAddress)
 		if err != nil {
 			return err
 		}
-		c.audioTrack = audioTrack
-		publishTrack = append(publishTrack, c.audioTrack)
+		publishTrack = append(publishTrack, audioTrack)
 	}
 
 	var wg sync.WaitGroup
@@ -138,45 +168,31 @@ func (c *Client) Connect() error {
 	go func() {
 		defer wg.Done()
 
-		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true", c.clientAddress, c.username, c.password, gst.SrcName)
-		videoSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
-		audioSrc := fmt.Sprintf(" %v. ! queue ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
+		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true add-reference-timestamp-meta=true latency=5000 max-rtcp-rtp-time-diff=-1 onvif-mode=true", c.clientAddress, c.username, c.password, gst.SrcName)
+		videoSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
+		audioSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
 
-		pipeline, err := gst.CreatePipeline(
+		clientDir := filepath.Join("/videos", c.clientID)
+		sessionDir := filepath.Join(clientDir, fmt.Sprintf("%v", time.Now().UnixNano()))
+		if c.enableRecord {
+			os.Mkdir(clientDir, 0777)
+			os.Mkdir(sessionDir, 0777)
+		}
+		pipeline, err := c.createPipelineWithRetry(
 			rtspSrc,
 			audioSrc, videoSrc,
 			audioCodec, videoCodec,
-			c.audioTrack, c.videoTrack,
+			audioTrack, videoTrack,
 			c.enableRTSPRelay,
 			c.rtspRelayAddress,
 			c.enableRecord,
-			c.clientID,
+			sessionDir,
 		)
 		if err != nil {
 			pipelineErr = err
 			return
 		}
-
-		if audioCodec != "" {
-			pipeline.OnAudioSample(c.audioTrack.WriteSample)
-			if err := pipeline.EmitAudioSample(); err != nil {
-				pipelineErr = err
-				return
-			}
-		}
-
-		if videoCodec != "" {
-			pipeline.OnVideoSample(c.videoTrack.WriteSample)
-			if err := pipeline.EmitVideoSample(); err != nil {
-				pipelineErr = err
-				return
-			}
-		}
-		pipeline.OnClose(func() {
-			c.close()
-		})
-		pipeline.Start()
-		c.pipeline = pipeline
+		c.pipeline.Store(pipeline)
 	}()
 
 	var bwe cc.BandwidthEstimator
@@ -240,16 +256,18 @@ func (c *Client) Connect() error {
 
 	if pipelineErr != nil {
 		c.close()
-		return pipelineErr
+		return jujuErr.Annotate(pipelineErr, "pipeline error")
 	}
 
 	if rtcErr != nil {
 		c.close()
-		return rtcErr
+		return jujuErr.Annotate(pipelineErr, "rtc error")
 	}
 
 	bwe.OnTargetBitrateChange(func(bitrate int) {
-		c.pipeline.ChangeEncoderBitrate(int(bitrate / 2000))
+		if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
+			p.ChangeEncoderBitrate(int(bitrate / 2000))
+		}
 	})
 
 	return nil
@@ -295,8 +313,8 @@ func (c *Client) close() {
 	if c.connector != nil {
 		c.connector.Close()
 	}
-	if c.pipeline != nil {
-		c.pipeline.Stop()
+	if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
+		p.Stop()
 	}
 	c.onClose()
 }
@@ -315,4 +333,100 @@ func (c *Client) onClose() {
 
 func (c *Client) OnClose(f func()) {
 	c.onCloseHandler.Store(f)
+}
+
+func (c *Client) createPipelineWithRetry(
+	rtspSrc string,
+	audioSrc, videoSrc string,
+	audioCodec, videoCodec string,
+	audioTrack, videoTrack *webrtc.TrackLocalStaticSample,
+	enableRTSPRelay bool,
+	rtspRelayAddress string,
+	enableRecord bool,
+	sessionDir string,
+) (gst.Pipeline, error) {
+
+	pipeline, err := gst.CreatePipeline(
+		rtspSrc,
+		audioSrc, videoSrc,
+		audioCodec, videoCodec,
+		audioTrack, videoTrack,
+		c.enableRTSPRelay,
+		c.rtspRelayAddress,
+		c.enableRecord,
+		sessionDir,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if audioCodec != "" {
+		pipeline.OnAudioSample(audioTrack.WriteSample)
+		if err := pipeline.EmitAudioSample(); err != nil {
+			return nil, err
+		}
+	}
+
+	if videoCodec != "" {
+		pipeline.OnVideoSample(videoTrack.WriteSample)
+		if err := pipeline.EmitVideoSample(); err != nil {
+			return nil, err
+		}
+	}
+
+	if enableRecord && c.metadata == nil {
+		c.metadata = &entity.Metadata{
+			Filename:       filepath.Join(sessionDir, "metadata.json"),
+			Session:        sessionDir,
+			RecordMetadata: []entity.RecordMetadata{},
+		}
+		c.metadata.Write()
+	}
+
+	if enableRecord {
+		pipeline.Connect(gst.SplitMuxSinkName, "format-location", func(mux any, index uint) {
+			currentFile := fmt.Sprintf("record_%v.mkv", index)
+			c.metadata.PushRecord(
+				currentFile,
+				time.Now(),
+			)
+			c.metadata.Write()
+		})
+	}
+
+	pipeline.Start()
+
+	pipeline.OnClose(func(err error) {
+		if c.retryTimer != nil {
+			c.retryTimer.Stop()
+		}
+
+		if err != nil {
+			retryCount := c.retryCount.Load()
+			if c.retryCount.Load() == maxRetry {
+				logger.Errorf("Pipeline retry count exceeded: %v times, stop retrying", retryCount)
+				c.close()
+				return
+			}
+			sleep := time.Duration(retryCount) * time.Second
+			logger.Errorf("Retry count: %v, sleep: %v and continue to retry", retryCount, sleep)
+			c.retryCount.Add(1)
+			time.Sleep(sleep)
+			c.createPipelineWithRetry(
+				rtspSrc,
+				audioSrc, videoSrc,
+				audioCodec, videoCodec,
+				audioTrack, videoTrack,
+				c.enableRTSPRelay,
+				c.rtspRelayAddress,
+				c.enableRecord,
+				c.clientID,
+			)
+			c.retryTimer = time.AfterFunc(10*time.Second, func() {
+				// If not failed, reset in 10s
+				c.retryCount.Store(0)
+			})
+		}
+	})
+	return pipeline, nil
 }

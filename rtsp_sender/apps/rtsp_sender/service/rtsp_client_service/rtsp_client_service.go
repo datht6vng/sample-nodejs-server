@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
+	"time"
 
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
@@ -16,9 +17,9 @@ var (
 )
 
 type RTSPClientService struct {
-	rtspSenderLock sync.RWMutex
-	clients        map[string]*Client
-	autoDomain     atomic.Int64
+	sync.RWMutex
+	clients    map[string]*Client
+	autoDomain atomic.Int64
 }
 
 func NewRTSPClientService() (*RTSPClientService, error) {
@@ -33,8 +34,8 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 		client.Close()
 	}
 
-	r.rtspSenderLock.Lock()
-	defer r.rtspSenderLock.Unlock()
+	r.Lock()
+	defer r.Unlock()
 
 	rtspRelayAddress := "Disable"
 	if enableRTSPRelay {
@@ -57,8 +58,8 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 }
 
 func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client, error) {
-	r.rtspSenderLock.RLock()
-	defer r.rtspSenderLock.RUnlock()
+	r.RLock()
+	defer r.RUnlock()
 
 	if client, ok := r.clients[connectClientAddress]; ok {
 		return client, nil
@@ -71,10 +72,14 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 		return err
 	}
 
-	r.rtspSenderLock.Lock()
-	defer r.rtspSenderLock.Unlock()
+	r.Lock()
+	defer r.Unlock()
 
 	r.clients[connectClientAddress].Close()
 	delete(r.clients, connectClientAddress)
 	return nil
+}
+
+func (r *RTSPClientService) FindRecordFile(clientID string, atTime time.Time) (string, error) {
+	return "", nil
 }

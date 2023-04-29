@@ -3,6 +3,7 @@ package grpc_interface
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -50,7 +51,8 @@ func parseRTSPAddress(url string, username string, password string) (string, str
 func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
 	var rtspRelayAddress string
 	var err error
-
+	x, _ := json.Marshal(&request)
+	fmt.Println(string(x))
 	clientAddress, username, password, err := parseRTSPAddress(
 		request.ConnectClientAddress,
 		request.Username,

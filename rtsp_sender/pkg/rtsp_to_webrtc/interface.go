@@ -3,27 +3,25 @@ package gst
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 	"time"
 
-	"github.com/juju/errors"
-
 	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/util"
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/pkg/media"
 )
 
 const (
-	MaxAliveTime  = 2 * time.Hour
-	SrcName       = "demux"
-	encoderName   = "encoder"
-	audioSinkName = "audiosink"
-	videoSinkName = "videosink"
-
-	videoClockRate = 90000
-	audioClockRate = 48000
-	pcmClockRate   = 8000
+	MaxAliveTime     = 2 * time.Hour
+	SrcName          = "demux"
+	encoderName      = "encoder"
+	audioSinkName    = "audiosink"
+	videoSinkName    = "videosink"
+	SplitMuxSinkName = "splitmuxsink"
+	videoClockRate   = 90000
+	audioClockRate   = 48000
+	pcmClockRate     = 8000
 
 	recordFileDuration = int64(30 * time.Second)
 	maxRecordFiles     = 10
@@ -41,8 +39,9 @@ type Pipeline interface {
 	EmitVideoSample() error
 	OnAudioSample(func(media.Sample) error)
 	OnVideoSample(func(media.Sample) error)
+	Connect(string, string, any) error
 	ChangeEncoderBitrate(bitrate int) error
-	OnClose(func())
+	OnClose(func(error))
 }
 
 // CreatePipeline creates a GStreamer Pipeline
@@ -54,7 +53,7 @@ func CreatePipeline(
 	enableRTSPRelay bool,
 	rtspRelayAddress string,
 	enableRecord bool,
-	dir string,
+	sessionDir string,
 ) (Pipeline, error) {
 	//var clockRate float32
 
@@ -70,59 +69,48 @@ func CreatePipeline(
 		}
 	}
 	if videoCodec != "" {
-		var videoEncoder, caps string
+		var videoEncoder, caps, parser string
 		switch videoCodec {
 		case webrtc.MimeTypeVP8:
 			videoEncoder = fmt.Sprintf(" ! vp8enc bitrate=1024 error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v", encoderName)
 			caps = "video/x-vp8,stream-format=byte-stream"
-
 		case webrtc.MimeTypeVP9:
 			videoEncoder = fmt.Sprintf(" ! vp9enc bitrate=1024 name=%v", encoderName)
 			caps = "video/x-vp9,stream-format=byte-stream"
-
 		case webrtc.MimeTypeH264:
 			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=%v", encoderName)
 			caps = "video/x-h264,stream-format=byte-stream"
-
+			parser = "h264parse"
 		default:
 			return nil, webrtc.ErrCodecNotFound
 		}
 		var videoSink string
 
 		if enableRTSPRelay {
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! rtspclientsink location=%v", caps, videoSinkName, rtspRelayAddress)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! rtspclientsink location=%v", caps, parser, videoSinkName, parser, rtspRelayAddress)
 			if enableRecord {
-				dir1 := filepath.Join("/videos", dir)
-				dir2 := filepath.Join("/videos", dir, time.Now().Format(time.RFC1123))
-				if err := os.Mkdir(dir1, 0777); err != nil {
-					//return nil, errors.Annotate(err, "cannot create directory")
+				path := `"` + filepath.Join(sessionDir, "record_%d.mkv") + `"`
+				index, err := util.GetIndex(sessionDir)
+				if err != nil {
+					return nil, err
 				}
-				if err := os.Mkdir(dir2, 0777); err != nil {
-					return nil, errors.Annotate(err, "cannot create directory")
-				}
-
-				filepath := `"` + filepath.Join(dir2, "record_%d.mkv") + `"`
-				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! rtspclientsink location=%v video_tee_2. ! queue ! h264parse ! splitmuxsink muxer=matroskamux location=%v max-size-time=%v max-files=%v", caps, videoSinkName, rtspRelayAddress, filepath, recordFileDuration, maxRecordFiles)
+				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! %v ! rtspclientsink location=%v video_tee_2. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, rtspRelayAddress, parser, SplitMuxSinkName, path, recordFileDuration, maxRecordFiles, index)
 			}
 		} else if enableRecord {
-			dir1 := filepath.Join("/videos", dir)
-			dir2 := filepath.Join("/videos", dir, time.Now().Format(time.RFC1123))
-			if err := os.Mkdir(dir1, 0777); err != nil {
-				//return nil, errors.Annotate(err, "cannot create directory")
+			path := `"` + filepath.Join(sessionDir, "record_%d.mkv") + `"`
+			index, err := util.GetIndex(sessionDir)
+			if err != nil {
+				return nil, err
 			}
-			if err := os.Mkdir(dir2, 0777); err != nil {
-				return nil, errors.Annotate(err, "cannot create directory")
-			}
-			filepath := `"` + filepath.Join(dir2, "record_%d.mkv") + `"`
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! h264parse ! splitmuxsink muxer=matroskamux location=%v max-size-time=%v max-files=%v", caps, videoSinkName, filepath, recordFileDuration, maxRecordFiles)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, SplitMuxSinkName, path, recordFileDuration, maxRecordFiles, index)
 		} else {
-			videoSink = fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=%v sync=false", videoSinkName)
+			videoSink = fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! %v ! appsink name=%v sync=false", parser, videoSinkName)
 		}
 
 		pipelineStr += videoSrc + videoEncoder + videoSink
 	}
 
-	logger.Infof("Create pipeline: %v", pipelineStr)
+	logger.Infof("Create pipeline: %v, enable record: %v, enable relay: %v", pipelineStr, enableRecord, enableRTSPRelay)
 
 	pipeline, err := CreatePipeline2(pipelineStr)
 	if err != nil {

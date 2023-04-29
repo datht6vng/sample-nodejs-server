@@ -13,10 +13,11 @@ import (
 )
 
 /*
-	State flow
-	VOID PENDING --> NULL --> READY --> PAUSED --> PLAYING
-						|					|		|
-					    -----------------------------
+State flow
+VOID PENDING --> NULL --> READY --> PAUSED --> PLAYING
+
+		|					|		|
+	    -----------------------------
 */
 
 type Pipeline2 struct {
@@ -27,6 +28,7 @@ type Pipeline2 struct {
 	audioCodec, videoCodec                     string
 	onAudioSampleHandler, onVideoSampleHandler atomic.Value
 	onCloseHandler                             atomic.Value
+	audioNSPerRTP, videoNSPerRTP               float64
 }
 
 func CreatePipeline2(pipelineStr string) (*Pipeline2, error) {
@@ -88,12 +90,12 @@ func (p *Pipeline2) Start() {
 		p.pipeline.GetPipelineBus().AddWatch(p.MessageWatch())
 		p.pipeline.SetState(gst.StatePlaying)
 		p.main.Run()
-		p.onClose()
 	}()
 }
 
 func (p *Pipeline2) MessageWatch() func(msg *gst.Message) bool {
-	stop := func() {
+	stop := func(err error) {
+		logger.Infof("Call stop pipeline with error: %v", err)
 		if p.main != nil {
 			p.main.Quit()
 		}
@@ -101,23 +103,26 @@ func (p *Pipeline2) MessageWatch() func(msg *gst.Message) bool {
 		if p.autoCleaner != nil {
 			p.autoCleaner.Stop()
 		}
+		p.onClose(err)
 	}
 
 	p.autoCleaner = time.AfterFunc(MaxAliveTime, func() {
-		stop()
+		stop(nil)
 	})
 
 	return func(msg *gst.Message) bool {
 		switch msg.Type() {
 		case gst.MessageEOS:
-			stop()
+			stop(nil)
 			return false
 
 		case gst.MessageError:
 			// handle error if possible, otherwise close and return
 			logger.Errorf("[GST-ERROR]%v", msg)
-			stop()
-			return false
+			if msg.Source() == SrcName || msg.Source() == SplitMuxSinkName {
+				stop(msg.ParseError())
+				return false
+			}
 
 		case gst.MessageStateChanged:
 			_, newState := msg.ParseStateChanged()
@@ -232,12 +237,27 @@ func (p *Pipeline2) ChangeEncoderBitrate(bitrate int) error {
 	return encoder.SetProperty("bitrate", uint(bitrate))
 }
 
-func (p *Pipeline2) OnClose(f func()) {
+func (p *Pipeline2) OnClose(f func(error)) {
 	p.onCloseHandler.Store(f)
 }
 
-func (p *Pipeline2) onClose() {
-	if handler, ok := p.onCloseHandler.Load().(func()); ok {
-		handler()
+func (p *Pipeline2) onClose(err error) {
+	if handler, ok := p.onCloseHandler.Load().(func(error)); ok {
+		handler(err)
 	}
+}
+
+func (p *Pipeline2) Connect(name string, signal string, f any) error {
+	if p.pipeline == nil {
+		return errors.New("No pipeline connected")
+	}
+	element, err := p.pipeline.GetElementByName(name)
+	if err != nil {
+		return err
+	}
+	_, err = element.Connect(signal, f)
+	if err != nil {
+		return err
+	}
+	return nil
 }

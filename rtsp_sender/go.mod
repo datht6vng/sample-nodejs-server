@@ -26,6 +26,7 @@ require (
 )
 
 require (
+	github.com/aler9/gortsplib/v2 v2.2.2 // indirect
 	github.com/certifi/gocertifi v0.0.0-20210507211836-431795d63e8d // indirect
 	github.com/ebml-go/ebml v0.0.0-20221114152929-d226b1da0cc9 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
