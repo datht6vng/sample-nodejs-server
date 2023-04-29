@@ -10,6 +10,7 @@ const { EventNewCallback } = require("./event_new_callback");
 class CameraEventNewCallback extends EventNewCallback {
 
     constructor() {
+        super();
         this.execute = this.execute.bind(this);
         this.cameraService = newCameraService();
         this.cameraMapService = newCameraMapService();
@@ -17,7 +18,7 @@ class CameraEventNewCallback extends EventNewCallback {
     }
 
     parseMessage(message) {
-        jsonMessage = JSON.parse(message);
+        let jsonMessage = JSON.parse(message);
         let cameraEventMessage = newCameraEventNewMessage(jsonMessage.camera_id, jsonMessage.event_time, jsonMessage.image_url, jsonMessgae.detection_image_url, jsonMessage.event_key);
         if (jsonMessage.line_coords) {
             cameraEventMessage.setLineCoords(jsonMessage.line_coords);

@@ -21,9 +21,9 @@ class Consumers {
                 if (callbackObj) {
                     const argExchange = newExchange(exchange.name);
                     const argQueue = newQueue(queue.name, queue.binding_keys);
-                    const consumer = newAMQPConsumer(argExchange, argQueue, callbackFunc);
+                    const consumer = newAMQPConsumer(argExchange, argQueue, callbackObj.execute);
                     this.consumers.push(consumer);
-                    this.consumer.start();
+                    consumer.start();
                 }
             })
         })

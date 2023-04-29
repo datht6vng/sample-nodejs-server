@@ -5,12 +5,14 @@ const { newIotDeviceMapService } = require("../../service/iot_device_map_service
 const { newCameraMapService } = require("../../service/camera_map_service");
 const { newCameraService } = require("../../service/camera_service");
 const { newEventService } = require("../../service/event_service");
+const { EventNewCallback } = require("./event_new_callback");
 
 const USED_STATUS = "used";
 
-class IotEventNewCallback {
+class IotEventNewCallback extends EventNewCallback {
 
     constructor() {
+        super();
         this.execute = this.execute.bind(this);
         this.iotDeviceService = newIotDeviceService();
         this.iotDeviceMapService = newIotDeviceMapService();
@@ -20,7 +22,7 @@ class IotEventNewCallback {
     }
 
     parseMessage(message) {
-        jsonMessage = JSON.parse(message);
+        let jsonMessage = JSON.parse(message);
         if (!jsonMessage.zone || !jsonMessage.time) return false;
         return newIotEventNewMessage(jsonMessage.zone, jsonMessage.time);
     }
@@ -39,7 +41,8 @@ class IotEventNewCallback {
                 const cameraMap = await this.cameraMapService.findCameraMapWithCameraByObserveIot(iotDeviceMapId)
                 const cameraMapId = cameraMap.getId();
                 if (cameraMapId && cameraMap.getConnectCamera() && cameraMap.getConnectCamera().getId()) {            
-                    const cameraId = cameraMap.getConnectCamera().getId();
+                    const camera = cameraMap.getConnectCamera();
+                    const cameraId = camera.getId();
                     let event = newEvent();
                     event.setEventType(eventType)
                         .setIotDevice(iotDeviceId)
@@ -47,8 +50,8 @@ class IotEventNewCallback {
                         .setEventTime(eventMessage.eventTime)
 
                     event = await this.eventService.createEvent(event);
-                    const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventTime);
-                    this.publishEvent(event, iotDevice, videoRecordingInfo, eventKey);
+                    const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventMessage.eventTime);
+                    this.publishEvent(event, camera, videoRecordingInfo, eventKey);
                 }
             }
         }

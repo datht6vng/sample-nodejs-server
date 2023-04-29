@@ -23,7 +23,7 @@ origin = "*"
 
 
 [rabbitmq]
-host = "localhost"
+host = "message-broker-server"
 username = "guest"
 password = "guest"
 port = "5672"

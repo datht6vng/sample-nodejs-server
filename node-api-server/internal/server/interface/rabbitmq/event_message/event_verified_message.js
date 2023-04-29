@@ -1,5 +1,5 @@
 
-class EventVerifiedMessgage {
+class EventVerifiedMessage {
     constructor(eventId, normalImageUrl, detectionImageUrl, normalVideoUrl, detectionVideoUrl, trueAlarm) {
         this.eventId = eventId;
         this.normalImageUrl = normalImageUrl;
@@ -10,8 +10,8 @@ class EventVerifiedMessgage {
     } 
 }
 
-function newEventVerifiedMessgage(eventId, normalImageUrl, detectionImageUrl, normalVideoUrl, detectionVideoUrl, trueAlarm) {
-    return new EventVerifiedMessgage(eventId, normalImageUrl, detectionImageUrl, normalVideoUrl, detectionVideoUrl, trueAlarm);
+function newEventVerifiedMessage(eventId, normalImageUrl, detectionImageUrl, normalVideoUrl, detectionVideoUrl, trueAlarm) {
+    return new EventVerifiedMessage(eventId, normalImageUrl, detectionImageUrl, normalVideoUrl, detectionVideoUrl, trueAlarm);
 }
 
-module.exports.newEventVerifiedMessgage = newEventVerifiedMessgage;
+module.exports.newEventVerifiedMessage = newEventVerifiedMessage;

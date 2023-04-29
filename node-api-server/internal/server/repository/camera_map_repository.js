@@ -101,11 +101,11 @@ class CameraMapRepository {
         }
         let cameraMapDoc;
         try {
-            cameraMapDoc = await CameraMapModel.findOne(filter);
+            cameraMapDoc = CameraMapModel.findOne(filter);
             if (withConnectCamera) {
-                cameraMapDoc = await cameraDoc.populate("connect_camera");
+                cameraMapDoc = cameraMapDoc.populate("connect_camera");
             }
-            cameraMapDoc = cameraDoc.exec();
+            cameraMapDoc = await cameraMapDoc.exec();
         }
         catch(err) {
             throw newInternalServerError("Database error", err);

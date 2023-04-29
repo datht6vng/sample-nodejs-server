@@ -1,4 +1,4 @@
-const RabbitMQ = require("./rabbitmq");
+const { RabbitMQ } = require("./rabbitmq");
 
 
 class AMQPConsumer extends RabbitMQ {
@@ -12,11 +12,10 @@ class AMQPConsumer extends RabbitMQ {
     async start() {
         await this.initConnection();
         await this.initChannel();
-        await this.initExchange(this.exchange.name, this.exchange.typ);
+        await this.initExchange(this.exchange.name, this.exchange.typ, this.exchange.params);
         await this.initQueue(this.exchange.name, this.queue.name, this.queue.bindingKeys, this.queue.params);
-
         // Temporarily set noAck to true
-        this.channel.consume(this.queue.name, callback, { noAck: true });
+        this.channel.consume(this.queue.name, this.callback, { noAck: true });
     }
 
 }

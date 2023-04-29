@@ -1,4 +1,4 @@
-const { config } = require("../../../../../config/config");
+const { config } = require("../../../../../pkg/config/config");
 const amqp = require('amqplib');
 
 const rabbitmqConf = config.rabbitmq;

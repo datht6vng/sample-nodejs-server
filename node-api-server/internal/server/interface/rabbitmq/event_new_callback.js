@@ -2,8 +2,8 @@ const { newProducer } = require("./producer");
 const { config } = require("../../../../pkg/config/config");
 const { newExchange } = require("./handler/exchange");
 const { newQueue } = require("./handler/queue");
-const { newCameraEventNewPublishMessage } = require("./event_message/camera_event_new_publish_mesage");
-const{ newIotEventNewPublishMessage } = require("./event_message/iot_event_new_publish_mesage");
+const { newCameraEventNewPublishMessage } = require("./event_message/camera_event_new_publish_message");
+const{ newIotEventNewPublishMessage } = require("./event_message/iot_event_new_publish_message");
 
 
 const brokerConfig = config.rabbitmq;
@@ -17,18 +17,19 @@ class EventNewCallback {
             Call grpc client handler here
         */
         return {
-            startTime: "",
-            endTime: "",
+            startTime: "2023-04-29T11:00:00Z",
+            endTime: "2023-04-29T11:00:50Z",
             normalVideoUrl: "https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/people-detection.mp4"
         }
     }
     
     isCameraEvent(event) {
-        return event.getIotDevice();
+        return event.getCamera();
     }
 
-    getPublishEventMessage(event, eventDevice, videoRecordingInfo) {
+    getPublishEventMessage(event, cameraDevice, videoRecordingInfo, eventKey) {
         const isCamera = this.isCameraEvent(event);
+        
         const eventId = event.getId().getValue();
         const eventTime = event.getEventTime();
         const normalVideoUrl = videoRecordingInfo.normalVideoUrl;
@@ -36,27 +37,29 @@ class EventNewCallback {
         const endTime = videoRecordingInfo.endTime;
         const normalImageUrl = isCamera ? event.getNormalImageUrl() : null;
         const detectionImageUrl = isCamera ? event.getDetectionImageUrl() : null;
-        const lineCoords = isCamera ? [eventDevice.getOffsetXBegin(), eventDevice.getOffsetXEnd(), eventDevice.getOffsetYBegin(), eventDevice.getOffsetYEnd()] : null;
+
+        let lineCoords = [cameraDevice.getOffsetXBegin(), cameraDevice.getOffsetXEnd(), cameraDevice.getOffsetYBegin(), cameraDevice.getOffsetYEnd()];
+        lineCoords = isCamera && lineCoords.every(e => e != null && e != undefined) ? lineCoords : null;
 
         let publishMessage = null;
         if (isCamera) {
-            publishMessage = newCameraEventNewPublishMessage(eventId, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords);
+            publishMessage = newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords);
         }
         else {
-            publishMessage = newIotEventNewPublishMessage(eventId, eventTime, normalVideoUrl, startTime, endTime);
+            publishMessage = newIotEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime);
         }
         return publishMessage;
     }
 
-    async publishEvent(event, eventDevice, videoRecordingInfo, eventKey) {
-        let publishEventMessage = this.getPublishEventMessage(event, eventDevice, videoRecordingInfo);
+    async publishEvent(event, cameraDevice, videoRecordingInfo, eventKey) {
+        let publishEventMessage = this.getPublishEventMessage(event, cameraDevice, videoRecordingInfo, eventKey);
         let exchange = exchanges.event_processing
         let queue = exchange.queues.event_created_with_media;
         let argExchange = newExchange(exchange.name)
         let argQueue = newQueue(queue.name, queue.binding_keys);
         const routingKey = `${queue.routing_key_prefix.event_created_with_media_iot}.${eventKey}`;
         const producer = newProducer(argExchange, argQueue);
-        producer.produceMessage(routingKey, publishEventMessage.toJson());
+        producer.produceMessage(routingKey, Buffer.from(publishEventMessage.toJson()));
     }
 
 }

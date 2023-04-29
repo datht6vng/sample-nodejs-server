@@ -1,7 +1,8 @@
 
 class IotEventNewPublishMessage {
-    constructor(eventId, eventTime, normalVideoUrl, startTime, endTime) {
+    constructor(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime) {
         this.eventId = eventId;
+        this.eventKey = eventKey;
         this.eventTime = eventTime;
         this.normalVideoUrl = normalVideoUrl;
         this.startTime = startTime;
@@ -11,6 +12,7 @@ class IotEventNewPublishMessage {
     toJson() {
         let message = {
             _id: this.eventId,
+            event_key: this.eventKey,
             event_time: this.eventTime,
             normal_video_url: this.normalVideoUrl,
             start_time: this.startTime,
@@ -20,8 +22,8 @@ class IotEventNewPublishMessage {
     }
 }
 
-function newIotEventNewPublishMessage(eventId, eventTime, normalVideoUrl, startTime, endTime) {
-    return new IotEventNewPublishMessage(eventId, eventTime, normalVideoUrl, startTime, endTime);
+function newIotEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime) {
+    return new IotEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime);
 }
 
 module.exports.newIotEventNewPublishMessage = newIotEventNewPublishMessage;

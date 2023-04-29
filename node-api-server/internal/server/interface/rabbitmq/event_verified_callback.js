@@ -7,11 +7,14 @@ const { newEventService } = require("../../service/event_service");
 class EventVerifiedCallback {
 
     constructor() {
+        this.execute = this.execute.bind(this);
         this.eventService = newEventService();
     }
 
     parseMessage(message) {
-        return newEventVerifiedMessage(message.event_id, message.normal_image_url, message.detection_image_url, message.normal_video_url, message.detection_video_url, message.true_alarm);
+        let jsonMessage = JSON.parse(message);
+        console.log(jsonMessage)
+        return newEventVerifiedMessage(jsonMessage.event_id, jsonMessage.normal_image_url, jsonMessage.detection_image_url, jsonMessage.normal_video_url, jsonMessage.detection_video_url, jsonMessage.true_alarm);
     }
 
     async execute(message) {
@@ -23,6 +26,7 @@ class EventVerifiedCallback {
             .setDetectionVideoUrl(eventMessage.detectionVideoUrl)
             .setAiTrueAlarm(eventMessage.trueAlarm);
         const updatedEvent = await this.eventService.updateEventById(newId(eventMessage.eventId), event);
+        console.log(updatedEvent)
     }
 
 }

@@ -131,6 +131,15 @@ Area:
         area_type: "area"
     },
 
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        area_name: "Area 3",
+        area_type: "area"
+    },
+
 ]
 
 
@@ -145,6 +154,13 @@ Camera
     {
         _id: "6162f9b9be1661cb32a1c448",
         camera_name: "Camera 2"
+    },
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        camera_name: "Camera 3"
     }
     
 
@@ -164,10 +180,23 @@ Camera map
 
     {
         _id: "6162f9b9be1661cb32a1c448",
-        camera_name: "Camera map 2",
+        camera_name: "Camera map 3",
         area: "6162f9b9be1661cb32a1c448",
         connect_camera: "6162f9b9be1661cb32a1c447"
-    }
+    },
+
+
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        camera_name: "Camera map 3",
+        area: "6162f9b9be1661cb32a1c459",
+        connect_camera: "6162f9b9be1661cb32a1c459",
+        observe_iot: "6162f9b9be1661cb32a1c459"
+    },
+
     
 
 ]
@@ -189,8 +218,18 @@ Iot Device
     {
         _id: "6162f9b9be1661cb32a1c448",
         iot_device_name: "Iot Device 2"
-    }
+    },
     
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        iot_device_name: "Iot Device 3", 
+        zone: 3,
+        event_type: "6162f9b9be1661cb32a1c447",
+        status: "used"
+    }
 
 ]
 
@@ -207,6 +246,13 @@ Iot Device Type
     {
         _id: "6162f9b9be1661cb32a1c448",
         iot_device_type_name: "Iot Device type 2"
+    },
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        iot_device_type_name: "Iot Device type 3"
     }
     
 
@@ -236,6 +282,17 @@ Iot device map
         iot_device_name: "Iot Device map 3",
         area: "6162f9b9be1661cb32a1c448",
         connect_iot: "6162f9b9be1661cb32a1c448"
+    },
+
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        iot_device_name: "Iot Device map 4",
+        area: "6162f9b9be1661cb32a1c459",
+        connect_iot: "6162f9b9be1661cb32a1c459",
+        observed_status: "used"
     }
     
 
@@ -283,3 +340,11 @@ Event
 
 socket: event_new, event_verified
 Lấy full event detail
+
+
+
+{
+    "time": "2023-04-29T11:00:01Z",
+    "zone": 3
+}
+

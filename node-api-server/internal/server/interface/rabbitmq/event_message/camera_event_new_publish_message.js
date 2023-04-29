@@ -1,7 +1,8 @@
 
 class CameraEventNewPublishMessage {
-    constructor(eventId, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords=null) {
+    constructor(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords=null) {
         this.eventId = eventId;
+        this.eventKey = eventKey;
         this.eventTime = eventTime;
         this.normalVideoUrl = normalVideoUrl;
         this.startTime = startTime;
@@ -15,6 +16,7 @@ class CameraEventNewPublishMessage {
         let message = {
             _id: this.eventId,
             event_time: this.eventTime,
+            event_key: this.eventKey,
             normal_video_url: this.normalVideoUrl,
             start_time: this.startTime,
             end_time: this.endTime,
@@ -26,8 +28,8 @@ class CameraEventNewPublishMessage {
     }
 }
 
-function newCameraEventNewPublishMessage(eventId, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords=null) {
-    return new CameraEventNewPublishMessage(eventId, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords);
+function newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords=null) {
+    return new CameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords);
 }
 
 module.exports.newCameraEventNewPublishMessage = newCameraEventNewPublishMessage;

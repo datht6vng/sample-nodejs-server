@@ -98,13 +98,17 @@ class IotDeviceRepository {
         return this.fromDatabaseConverter.visit(newIotDevice(), deleteIotDeviceDoc);
     }
 
-    async findByZone(zone) {
+    async findByZone(zone, withEventType=false) {
         let iotDeviceDoc;
         const filter = {
             zone: zone
         }
         try {
-            iotDeviceDoc = await IotDeviceModel.findOne(filter).exec();
+            iotDeviceDoc = IotDeviceModel.findOne(filter);
+            if (withEventType) {
+                iotDeviceDoc = iotDeviceDoc.populate('event_type')
+            }
+            iotDeviceDoc = await iotDeviceDoc.exec();
         }
         catch(err) {
             throw newInternalServerError("Database error", err);

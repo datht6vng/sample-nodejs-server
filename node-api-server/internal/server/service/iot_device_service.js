@@ -33,7 +33,7 @@ class IotDeviceService {
     }
 
     async findIotDeviceByZone(zone) {
-        const iotDeviceEntity = await this.repository.findByZone(zone);
+        const iotDeviceEntity = await this.repository.findByZone(zone, true);
         return iotDeviceEntity;
     }
 }
