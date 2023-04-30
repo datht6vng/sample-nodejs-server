@@ -4,7 +4,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/juju/errors"
 	"github.com/pion/webrtc/v3/pkg/media"
 	"github.com/tinyzimmer/go-glib/glib"

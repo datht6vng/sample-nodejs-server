@@ -6,11 +6,11 @@ import (
 	"net"
 	"os/exec"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
-	grpc_pb "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
+	grpc_pb "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/grpc"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/juju/errors"
 	"google.golang.org/grpc"
 )

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	log "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/ebml-go/webm"
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/pkg/media"

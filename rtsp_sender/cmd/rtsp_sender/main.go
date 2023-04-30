@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/tinyzimmer/go-gst/gst"
 )
 

@@ -1,8 +1,9 @@
-module github.com/datht6vng/hcmut-thexis/rtsp-sender
+module github.com/dathuynh1108/hcmut-thexis/rtsp-sender
 
-go 1.19
+go 1.20
 
 require (
+	github.com/aler9/gortsplib/v2 v2.2.2
 	github.com/deepch/vdk v0.0.20
 	github.com/ebml-go/webm v0.0.0-20221117133942-84fa5245cf70
 	github.com/evalphobia/logrus_sentry v0.8.2
@@ -10,11 +11,11 @@ require (
 	github.com/juju/errors v1.0.0
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
 	github.com/pion/ice/v2 v2.3.2
-	github.com/pion/interceptor v0.1.12
+	github.com/pion/interceptor v0.1.16
 	github.com/pion/ion v1.10.0
 	github.com/pion/ion-sdk-go v0.7.0
 	github.com/pion/sdp/v3 v3.0.6
-	github.com/pion/webrtc/v3 v3.1.60
+	github.com/pion/webrtc/v3 v3.2.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.15.0
 	github.com/tinyzimmer/go-glib v0.0.25
@@ -26,7 +27,6 @@ require (
 )
 
 require (
-	github.com/aler9/gortsplib/v2 v2.2.2 // indirect
 	github.com/certifi/gocertifi v0.0.0-20210507211836-431795d63e8d // indirect
 	github.com/ebml-go/ebml v0.0.0-20221114152929-d226b1da0cc9 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
@@ -47,7 +47,7 @@ require (
 	github.com/pion/randutil v0.1.0 // indirect
 	github.com/pion/rtcp v1.2.10 // indirect
 	github.com/pion/rtp v1.7.13 // indirect
-	github.com/pion/sctp v1.8.6 // indirect
+	github.com/pion/sctp v1.8.7 // indirect
 	github.com/pion/srtp/v2 v2.0.12 // indirect
 	github.com/pion/stun v0.4.0 // indirect
 	github.com/pion/transport/v2 v2.2.0 // indirect

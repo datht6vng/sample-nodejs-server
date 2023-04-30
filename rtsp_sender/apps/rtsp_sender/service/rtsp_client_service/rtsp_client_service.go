@@ -3,12 +3,17 @@ package rtsp_client_service
 import (
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
+	"sort"
+	"strconv"
+	"strings"
 	"sync"
 	"sync/atomic"
-	"time"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/entity"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	jujuErr "github.com/juju/errors"
 )
 
@@ -71,15 +76,43 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 	if _, err := r.GetRTSPClient(connectClientAddress); err != nil {
 		return err
 	}
+	r.clients[connectClientAddress].Close()
 
 	r.Lock()
-	defer r.Unlock()
-
-	r.clients[connectClientAddress].Close()
 	delete(r.clients, connectClientAddress)
+	r.Unlock()
+
 	return nil
 }
 
-func (r *RTSPClientService) FindRecordFile(clientID string, atTime time.Time) (string, error) {
-	return "", nil
+func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, error) {
+	clientDir := filepath.Join("/videos", clientID)
+	sessionDirs, err := os.ReadDir(clientDir)
+	if err != nil {
+		return "", jujuErr.Annotate(err, "cannot read dir")
+	}
+
+	sort.Slice(sessionDirs, func(i, j int) bool {
+		return strings.Compare(sessionDirs[i].Name(), sessionDirs[j].Name()) <= 0
+	})
+
+	// Binary search find target sesssion for TS
+	sessionIndex := sort.Search(len(sessionDirs), func(i int) bool {
+		sesssionTS, _ := strconv.ParseInt(sessionDirs[i].Name(), 10, 64)
+		return ts <= sesssionTS
+	})
+
+	sessionDir := filepath.Join(clientDir, sessionDirs[sessionIndex].Name())
+
+	metaDataFilepath := filepath.Join(sessionDir, "metadata.json")
+	metadata, err := entity.ReadMetadata(metaDataFilepath)
+	if err != nil {
+		return "", err
+	}
+
+	index := sort.Search(len(metadata.RecordMetadata), func(i int) bool {
+		return ts <= metadata.RecordMetadata[i].Timestamp.UnixNano()
+	})
+
+	return metadata.RecordMetadata[index].RecordFilename, nil
 }

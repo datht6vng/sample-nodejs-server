@@ -1,7 +1,7 @@
 package sdk
 
 import (
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/config"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/juju/errors"
 	"github.com/pion/interceptor"
 	"github.com/pion/interceptor/pkg/cc"

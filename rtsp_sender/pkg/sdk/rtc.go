@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	log "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	log "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/pion/webrtc/v3"
@@ -153,11 +153,13 @@ type RTC struct {
 	cancel     context.CancelFunc
 	handleOnce sync.Once
 	sync.Mutex
+	waitJoin chan struct{}
 }
 
 func withConfig(config ...RTCConfig) *RTC {
 	r := &RTC{
-		notify: make(chan struct{}),
+		notify:   make(chan struct{}),
+		waitJoin: make(chan struct{}),
 	}
 	r.ctx, r.cancel = context.WithCancel(context.Background())
 
@@ -320,7 +322,10 @@ func (r *RTC) Publish(tracks ...webrtc.TrackLocal) ([]*webrtc.RTPSender, error) 
 		}
 
 	}
-	r.onNegotiationNeeded()
+	go func() {
+		<-r.waitJoin
+		r.onNegotiationNeeded()
+	}()
 	return rtpSenders, nil
 }
 
@@ -666,6 +671,11 @@ func (r *RTC) onSingalHandle() error {
 				log.Errorf("[%v] [join] error %s", r.uid, err)
 				return err
 			}
+			select {
+			case <-r.waitJoin:
+			default:
+				close(r.waitJoin)
+			}
 		case *rtc.Reply_Description:
 			var sdpType webrtc.SDPType
 			if payload.Description.Type == "offer" {
@@ -934,4 +944,8 @@ func (r *RTC) Close() {
 		r.sub.pc.Close()
 	}
 	r.cancel()
+}
+
+func (r *RTC) WaitJoin() <-chan struct{} {
+	return r.waitJoin
 }

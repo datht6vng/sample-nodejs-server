@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/util"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/util"
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/pkg/media"
 )

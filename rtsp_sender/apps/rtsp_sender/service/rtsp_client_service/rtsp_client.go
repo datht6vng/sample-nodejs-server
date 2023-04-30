@@ -14,10 +14,10 @@ import (
 	"github.com/aler9/gortsplib/v2/pkg/format"
 	"github.com/aler9/gortsplib/v2/pkg/media"
 	"github.com/aler9/gortsplib/v2/pkg/url"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/entity"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
-	gst "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/rtsp_to_webrtc"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/sdk"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/entity"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
+	gst "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/rtsp_to_webrtc"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/sdk"
 	jujuErr "github.com/juju/errors"
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/webrtc/v3"
@@ -261,7 +261,7 @@ func (c *Client) Connect() error {
 
 	if rtcErr != nil {
 		c.close()
-		return jujuErr.Annotate(pipelineErr, "rtc error")
+		return jujuErr.Annotate(rtcErr, "rtc error")
 	}
 
 	bwe.OnTargetBitrateChange(func(bitrate int) {
@@ -385,7 +385,7 @@ func (c *Client) createPipelineWithRetry(
 
 	if enableRecord {
 		pipeline.Connect(gst.SplitMuxSinkName, "format-location", func(mux any, index uint) {
-			currentFile := fmt.Sprintf("record_%v.mkv", index)
+			currentFile := filepath.Join(sessionDir, fmt.Sprintf("record_%v.mkv", index))
 			c.metadata.PushRecord(
 				currentFile,
 				time.Now(),

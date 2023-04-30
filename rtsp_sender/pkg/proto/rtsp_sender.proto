@@ -1,13 +1,15 @@
 syntax = "proto3";
 
-option go_package = "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc";
+option go_package = "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/grpc";
 
 // The greeting service definition.
 service RTSPSender {
   // Tell RTSPSender to connect to rtsp server and join sfu
   rpc Connect (ConnectRequest) returns (ConnectReply) {}
-    // Tell RTSPSender to disconnect to rtsp server
+  // Tell RTSPSender to disconnect to rtsp server
   rpc Disconnect (DisconnectRequest) returns (DisconnectReply) {}
+  // Tell RTSPSender to reply the file path corresponding to request
+  rpc GetRecordFile(GetRecordFileRequest) returns (GetRecordFileReply) {}
 }
 
 // Connect Request from client
@@ -41,4 +43,17 @@ message DisconnectRequest {
 message DisconnectReply {
   int32 code = 1;
   string message = 2;
+}
+
+// GetRecordFile Request from client
+message GetRecordFileRequest {
+  string clientID = 1;
+  int64 timestamp = 2;
+}
+
+// GetRecordFile Reply from server
+message GetRecordFileReply {
+  int32 code = 1;
+  string message = 2;
+  string filename=3;
 }

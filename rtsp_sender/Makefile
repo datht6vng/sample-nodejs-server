@@ -21,6 +21,6 @@ proto:
 	docker build -t protoc-builder ./pkg/proto && \
 	docker run -v $(CURDIR):/workspace protoc-builder \
 	protoc \
-	--go_opt=module=github.com/datht6vng/hcmut-thexis/rtsp-sender --go_out=. \
-	--go-grpc_opt=module=github.com/datht6vng/hcmut-thexis/rtsp-sender --go-grpc_out=. \
+	--go_opt=module=github.com/dathuynh1108/hcmut-thexis/rtsp-sender --go_out=. \
+	--go-grpc_opt=module=github.com/dathuynh1108/hcmut-thexis/rtsp-sender --go-grpc_out=. \
 	pkg/proto/*.proto

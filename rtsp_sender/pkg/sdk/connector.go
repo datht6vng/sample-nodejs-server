@@ -10,7 +10,7 @@ import (
 
 	"github.com/pion/ion/proto/rtc"
 
-	log "github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	log "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"

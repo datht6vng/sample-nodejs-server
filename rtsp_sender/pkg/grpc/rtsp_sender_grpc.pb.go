@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	RTSPSender_Connect_FullMethodName    = "/RTSPSender/Connect"
-	RTSPSender_Disconnect_FullMethodName = "/RTSPSender/Disconnect"
+	RTSPSender_Connect_FullMethodName       = "/RTSPSender/Connect"
+	RTSPSender_Disconnect_FullMethodName    = "/RTSPSender/Disconnect"
+	RTSPSender_GetRecordFile_FullMethodName = "/RTSPSender/GetRecordFile"
 )
 
 // RTSPSenderClient is the client API for RTSPSender service.
@@ -31,6 +32,8 @@ type RTSPSenderClient interface {
 	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectReply, error)
 	// Tell RTSPSender to disconnect to rtsp server
 	Disconnect(ctx context.Context, in *DisconnectRequest, opts ...grpc.CallOption) (*DisconnectReply, error)
+	// Tell RTSPSender to reply the file path corresponding to request
+	GetRecordFile(ctx context.Context, in *GetRecordFileRequest, opts ...grpc.CallOption) (*GetRecordFileReply, error)
 }
 
 type rTSPSenderClient struct {
@@ -59,6 +62,15 @@ func (c *rTSPSenderClient) Disconnect(ctx context.Context, in *DisconnectRequest
 	return out, nil
 }
 
+func (c *rTSPSenderClient) GetRecordFile(ctx context.Context, in *GetRecordFileRequest, opts ...grpc.CallOption) (*GetRecordFileReply, error) {
+	out := new(GetRecordFileReply)
+	err := c.cc.Invoke(ctx, RTSPSender_GetRecordFile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RTSPSenderServer is the server API for RTSPSender service.
 // All implementations must embed UnimplementedRTSPSenderServer
 // for forward compatibility
@@ -67,6 +79,8 @@ type RTSPSenderServer interface {
 	Connect(context.Context, *ConnectRequest) (*ConnectReply, error)
 	// Tell RTSPSender to disconnect to rtsp server
 	Disconnect(context.Context, *DisconnectRequest) (*DisconnectReply, error)
+	// Tell RTSPSender to reply the file path corresponding to request
+	GetRecordFile(context.Context, *GetRecordFileRequest) (*GetRecordFileReply, error)
 	mustEmbedUnimplementedRTSPSenderServer()
 }
 
@@ -79,6 +93,9 @@ func (UnimplementedRTSPSenderServer) Connect(context.Context, *ConnectRequest) (
 }
 func (UnimplementedRTSPSenderServer) Disconnect(context.Context, *DisconnectRequest) (*DisconnectReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disconnect not implemented")
+}
+func (UnimplementedRTSPSenderServer) GetRecordFile(context.Context, *GetRecordFileRequest) (*GetRecordFileReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecordFile not implemented")
 }
 func (UnimplementedRTSPSenderServer) mustEmbedUnimplementedRTSPSenderServer() {}
 
@@ -129,6 +146,24 @@ func _RTSPSender_Disconnect_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RTSPSender_GetRecordFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecordFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RTSPSenderServer).GetRecordFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RTSPSender_GetRecordFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RTSPSenderServer).GetRecordFile(ctx, req.(*GetRecordFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RTSPSender_ServiceDesc is the grpc.ServiceDesc for RTSPSender service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -143,6 +178,10 @@ var RTSPSender_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Disconnect",
 			Handler:    _RTSPSender_Disconnect_Handler,
+		},
+		{
+			MethodName: "GetRecordFile",
+			Handler:    _RTSPSender_GetRecordFile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

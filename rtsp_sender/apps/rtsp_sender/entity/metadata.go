@@ -1,12 +1,13 @@
 package entity
 
 import (
+	"bytes"
 	"encoding/json"
-	"os"
 	"strings"
 	"time"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/util"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/util"
+	"github.com/rogpeppe/go-internal/lockedfile"
 )
 
 type RecordMetadata struct {
@@ -22,7 +23,7 @@ type Metadata struct {
 
 func (m *Metadata) Write() error {
 	file, _ := json.MarshalIndent(m, "", "\t")
-	return os.WriteFile(m.Filename, file, 0777)
+	return lockedfile.Write(m.Filename, bytes.NewBuffer(file), 0777)
 }
 
 func (m *Metadata) PushRecord(recordFilename string, timestamp time.Time) {
@@ -45,4 +46,16 @@ func (m *Metadata) RemoveRecord(recordFilename string) {
 			return strings.Compare(recordFilename, m.RecordMetadata[i].RecordFilename)
 		},
 	)
+}
+
+func ReadMetadata(filename string) (*Metadata, error) {
+	bytesContent, err := lockedfile.Read(filename)
+	if err != nil {
+		return nil, err
+	}
+	m := &Metadata{}
+	if err := json.Unmarshal(bytesContent, m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }

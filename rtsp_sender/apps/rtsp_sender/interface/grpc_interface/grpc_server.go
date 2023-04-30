@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/grpc"
-	"github.com/datht6vng/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/grpc"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 )
 
 func NewGRPCRTSPSenderServer(rtspClientService *rtsp_client_service.RTSPClientService) grpc.RTSPSenderServer {
@@ -98,5 +98,20 @@ func (r *rtspSender) Disconnect(ctx context.Context, request *grpc.DisconnectReq
 	return &grpc.DisconnectReply{
 		Code:    http.StatusOK,
 		Message: fmt.Sprintf("Disconnect successfully to %v", request.ConnectClientAddress),
+	}, nil
+}
+
+func (r *rtspSender) GetRecordFile(ctx context.Context, request *grpc.GetRecordFileRequest) (*grpc.GetRecordFileReply, error) {
+	filname, err := r.rtspClientService.GetRecordFile(request.ClientID, request.Timestamp)
+	if err != nil {
+		return &grpc.GetRecordFileReply{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+		}, nil
+	}
+	return &grpc.GetRecordFileReply{
+		Code:     http.StatusOK,
+		Message:  fmt.Sprintf("Get record file successfully for %v", request.ClientID),
+		Filename: filname,
 	}, nil
 }
