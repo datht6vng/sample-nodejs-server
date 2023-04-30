@@ -1,6 +1,0 @@
-[submodule "smart-security-system"]
-	path = smart-security-system
-	url = https://github.com/nhanvo031001/smart-security-system
-[submodule "smart-security-system-mobile"]
-	path = smart-security-system-mobile
-	url = https://github.com/nhanvo031001/smart-security-system-mobile
