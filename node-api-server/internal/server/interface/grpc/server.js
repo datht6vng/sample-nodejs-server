@@ -14,6 +14,8 @@ const { newIotDeviceTypeHandler } = require("./handler/iot_device_type_handler")
 const { newIotDeviceHandler } = require("./handler/iot_device_handler");
 const { newSystemUtilityHandler } = require("./handler/system_utility_handler");
 
+const { newReportHandler } = require("./handler/report_handler");
+
 class GrpcServer {
     constructor() {
         this.server = new grpc.Server();
@@ -35,6 +37,8 @@ GrpcServer.prototype.initService = function() {
     this.server.addService(this.protoLoader.getService('iot_device_type.proto', 'IotDeviceTypeService'), newIotDeviceTypeHandler());
     this.server.addService(this.protoLoader.getService('iot_device.proto', 'IotDeviceService'), newIotDeviceHandler());
     this.server.addService(this.protoLoader.getService('system_utility.proto', 'SystemUtilityService'), newSystemUtilityHandler());
+
+    this.server.addService(this.protoLoader.getService('report.proto', 'ReportService'), newReportHandler());
 }
 
 GrpcServer.prototype.start = function(host=this.conf.host, port=this.conf.port) {

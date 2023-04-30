@@ -4,6 +4,8 @@ const { newEvent } = require("../../entity/event");
 const { newId } = require("../../entity/id");
 const { newEventService } = require("../../service/event_service");
 
+AI_VERIFIED_STATUS = "ai_verified"
+
 class EventVerifiedCallback {
 
     constructor() {
@@ -24,9 +26,9 @@ class EventVerifiedCallback {
             .setNormalVideoUrl(eventMessage.normalVideoUrl)
             .setDetectionImageUrl(eventMessage.detectionImageUrl)
             .setDetectionVideoUrl(eventMessage.detectionVideoUrl)
-            .setAiTrueAlarm(eventMessage.trueAlarm);
+            .setAiTrueAlarm(eventMessage.trueAlarm)
+            .setEventStatus(AI_VERIFIED_STATUS);
         const updatedEvent = await this.eventService.updateEventById(newId(eventMessage.eventId), event);
-        console.log(updatedEvent)
     }
 
 }

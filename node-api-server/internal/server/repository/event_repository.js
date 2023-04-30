@@ -33,6 +33,7 @@ class EventRepository {
         const eventDoc = this.toDatabaseConverter.visit(eventEntity);
         let newEventDoc;
         try {
+            console.log(eventDoc)
             newEventDoc = await EventModel.create(eventDoc);
         }
         catch(err) {

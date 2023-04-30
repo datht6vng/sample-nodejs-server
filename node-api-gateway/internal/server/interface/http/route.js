@@ -56,6 +56,8 @@ Handler.prototype.initRoute = function() {
   this.app.delete('/api/iot_device_types/:id', this.iotDeviceTypeController.deleteIotDeviceTypeById);
 
   this.app.post('/api/system_utilities', this.systemUtilityController.crudAllMapUtils);
+
+  this.app.get('/api/reports', this.reportControlller.getReportByCondition);
 }
 
 

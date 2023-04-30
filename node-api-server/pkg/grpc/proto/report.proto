@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message FindNumberOfIotEventByTypeRequest {
+    string area_id = 1;
+    string start_time = 2;
+    string end_time = 3;
+}
+
+
+message FindNumberOfIotEventByTypeAndTrueAlarmRequest {
+    string area_id = 1;
+    string start_time = 2;
+    string end_time = 3;
+}
+
+message FindNumberOfIotEventByIntervalRequest {
+    string area_id = 1;
+    string start_time = 2;
+    string end_time = 3;
+    string iot_device_type_id = 4;
+    string interval_type = 5; // among these values: date, week, month, year
+}
+
+
+
+message FindNumberOfIotEventByTypeGroupId {
+    IotDeviceTypeDetail iot_device_type = 1;
+}
+
+message FindNumberOfIotEventByTypeResponseData {
+    FindNumberOfIotEventByTypeGroupId _id = 1;
+    int32 event_count = 2;
+}
+
+message FindNumberOfIotEventByTypeResponse {
+    repeated FindNumberOfIotEventByTypeResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+
+
+
+
+message FindNumberOfIotEventByTypeAndTrueAlarmGroupId {
+    IotDeviceTypeDetail iot_device_type = 1;
+    bool ai_true_alarm = 2;
+}
+
+message FindNumberOfIotEventByTypeAndTrueAlarmResponseData {
+    FindNumberOfIotEventByTypeAndTrueAlarmGroupId _id = 1;
+    int32 event_count = 2;
+}
+
+message FindNumberOfIotEventByTypeAndTrueAlarmResponse {
+    repeated FindNumberOfIotEventByTypeAndTrueAlarmResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+
+
+
+
+
+
+
+message FindNumberOfIotEventByIntervalGroupId {
+    optional int32 year = 1;
+    optional int32 month = 2;
+    optional int32 week = 3;
+    optional int32 day = 4;
+}
+
+message FindNumberOfIotEventByIntervalResponseData {
+    FindNumberOfIotEventByIntervalGroupId _id = 1;
+    int32 event_count = 2;
+}
+
+message FindNumberOfIotEventByIntervalResponse {
+    repeated FindNumberOfIotEventByIntervalResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+
+message FindAllEventStatisticCountResponseData {
+    int32 total_event_count = 1;
+    int32 ai_verified_event_count = 2;
+    int32 ai_true_alarm_event_count = 3;
+    int32 ai_false_alarm_event_count = 4;
+}
+
+
+message FindAllEventStatisticCountResponse {
+    FindAllEventStatisticCountResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+
+
+
+
+service ReportService {
+    rpc FindNumberOfIotEventByType (FindNumberOfIotEventByTypeRequest) returns (FindNumberOfIotEventByTypeResponse) {};
+    rpc FindNumberOfIotEventByTypeAndTrueAlarm (FindNumberOfIotEventByTypeAndTrueAlarmRequest) returns (FindNumberOfIotEventByTypeAndTrueAlarmResponse) {};
+    rpc FindNumberOfIotEventByInterval (FindNumberOfIotEventByIntervalRequest) returns (FindNumberOfIotEventByIntervalResponse) {};
+
+    rpc FindAllEventStatisticCount (Empty) returns (FindAllEventStatisticCountResponse) {};
+}
+
+message Empty {}
+
