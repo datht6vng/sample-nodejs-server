@@ -4,13 +4,17 @@ const { newExchange } = require("./handler/exchange");
 const { newQueue } = require("./handler/queue");
 const { newCameraEventNewPublishMessage } = require("./event_message/camera_event_new_publish_message");
 const{ newIotEventNewPublishMessage } = require("./event_message/iot_event_new_publish_message");
-
+const { EventCallback } = require("./event_callback");
 
 const brokerConfig = config.rabbitmq;
 const exchanges = brokerConfig.exchanges;
 
 
-class EventNewCallback {
+class EventNewCallback extends EventCallback {
+
+    constructor() {
+        super();
+    }
 
     async getVideoRecordingInfo(cameraId, eventTime) {
         /*

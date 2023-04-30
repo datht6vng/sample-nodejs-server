@@ -1,6 +1,7 @@
 [server]
 [server.http]
-host = "http://localhost"
+scheme = "http"
+host = "localhost"
 port = "3000"
 
 [server.grpc]
@@ -16,6 +17,14 @@ host = "mongodb"
 port = "27017"
 db_name = "iot_security_app"
 options = { auth_source = "admin", use_new_url_parser = true, use_unified_topology = true }
+
+
+
+[socket_io]
+[socket_io.events]
+event_new = "event_new"
+event_verified = "event_verified"
+
 
 [cors]
 [cors.websocket]

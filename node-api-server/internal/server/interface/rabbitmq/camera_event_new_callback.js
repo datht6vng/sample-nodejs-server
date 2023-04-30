@@ -45,6 +45,10 @@ class CameraEventNewCallback extends EventNewCallback {
                     .setNormalImageUrl(eventMessage.normalImageUrl)
                     .setDetectionImageUrl(eventMessage.detectionImageUrl)
                 event = await this.eventService.createEvent(event);
+
+                const notifyMessage = await this.getAllEventRelationDetailsById(event.getId());
+                this.notifyNewEventToClients(notifyMessage);
+
                 const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventMessage.eventTime);
                 this.publishEvent(event, camera, videoRecordingInfo, eventKey);
             }

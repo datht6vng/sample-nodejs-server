@@ -382,3 +382,9 @@ http://localhost:3001/api/reports?action=find_all_event_statistic_count
 http://localhost:3001/api/reports?action=find_number_of_iot_event_by_interval&area_id=6162f9b9be1661cb32a1c459&start_time=2023-04-30T03:38:17.904Z&end_time=2023-04-30T05:38:17.904Z&iot_device_type_id=6162f9b9be1661cb32a1c459&interval_type=week
 http://localhost:3001/api/reports?action=find_number_of_iot_event_by_type&area_id=6162f9b9be1661cb32a1c459&start_time=2023-04-30T03:38:17.904Z&end_time=2023-04-30T05:38:17.904Z
 http://localhost:3001/api/reports?action=find_number_of_iot_event_by_type_and_true_alarm&area_id=6162f9b9be1661cb32a1c459&start_time=2023-04-30T03:38:17.904Z&end_time=2023-04-30T05:38:17.904Z
+
+
+
+fix event type
+fix data_converter cua event type
+fix $unwind event_type trong report_repository

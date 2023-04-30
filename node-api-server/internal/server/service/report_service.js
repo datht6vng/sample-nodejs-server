@@ -7,6 +7,11 @@ class ReportService {
         this.repository = repository;
     }
 
+    async getAllEventRelationDetailsById(eventId) {
+        const doc = await this.repository.getAllEventRelationDetailsById(eventId);
+        return doc;
+    }
+
     async findNumberOfIotEventByType(areaId, startTime, endTime) {
         const doc = await this.repository.findNumberOfIotEventByType(areaId, startTime, endTime);
         return doc;

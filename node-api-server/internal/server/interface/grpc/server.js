@@ -1,6 +1,7 @@
 const grpc = require("@grpc/grpc-js");
 const { newProtoLoader } = require("../../../../pkg/grpc/proto/proto_loader");
 
+const { socketIO } = require("../../socket_io/socket_io");
 const { config } = require("../../../../pkg/config/config");
 
 const { newAreaHandler } = require("./handler/area_handler");

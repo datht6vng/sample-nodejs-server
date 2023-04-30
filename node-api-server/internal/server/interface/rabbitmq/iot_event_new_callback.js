@@ -44,12 +44,14 @@ class IotEventNewCallback extends EventNewCallback {
                     const camera = cameraMap.getConnectCamera();
                     const cameraId = camera.getId();
                     let event = newEvent();
-                    event.setEventType(eventType)
+                    event.setEventType(eventType.getId())
                         .setIotDevice(iotDeviceId)
                         .setIotDeviceMap(iotDeviceMapId)
                         .setEventTime(eventMessage.eventTime)
-
                     event = await this.eventService.createEvent(event);
+                    const notifyMessage = await this.getAllEventRelationDetailsById(event.getId());
+                    this.notifyNewEventToClients(notifyMessage);
+
                     const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventMessage.eventTime);
                     this.publishEvent(event, camera, videoRecordingInfo, eventKey);
                 }

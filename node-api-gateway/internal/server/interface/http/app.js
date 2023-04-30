@@ -1,6 +1,6 @@
 const { newHandler } = require("./handler");
 const route = require("./route");
-
+const { wsProxy } = require("../../service/proxy/websocket_proxy");
 
 const { config } = require("../../../../pkg/config/config");
 
@@ -23,6 +23,7 @@ HttpApp.prototype.start = function(host=this.conf.host, port=this.conf.port) {
       `Http server is running at ${host}:${port}`
     )
   );
+  server.on('upgrade', wsProxy.upgrade);
   return server; 
 }
 

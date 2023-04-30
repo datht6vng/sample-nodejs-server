@@ -74,19 +74,35 @@ class ReportRepository {
 
     async getAllEventRelationDetailsById(eventId) {
         eventId = eventId.getValue();
+        let lookupPipeline = this.getIotEventLookupPipeline();
+        let extralookupPipeline = [
+            {
+                $lookup: {
+                    from: "eventtypes",
+                    localField: 'event_type',
+                    foreignField: '_id',
+                    as: 'event_type'   
+                }
+            },
+            // {
+            //     $unwind: "$event_type"
+            // }
+        ];
         let matchPipeline = [
             {
                 $match: {
-                    _id: { $eq: eventId }
+                    _id: { $eq: this.toMongooseId(eventId) }
                 }
             }
         ];
 
-        let pipeline = lookupPipeline.concat(matchPipeline);
+        let pipeline = lookupPipeline.concat(extralookupPipeline, matchPipeline);
 
         let doc;
         try {
             doc = await EventModel.aggregate(pipeline).exec();
+            if (doc.length > 0) doc = doc[0];
+            else doc = {};
         }
         catch(err) {
             throw newInternalServerError("Database error", err);
