@@ -23,7 +23,7 @@ const (
 	audioClockRate   = 48000
 	pcmClockRate     = 8000
 
-	recordFileDuration = int64(30 * time.Second)
+	RecordFileDuration = int64(30 * time.Second)
 	maxRecordFiles     = 10
 )
 
@@ -94,7 +94,7 @@ func CreatePipeline(
 				if err != nil {
 					return nil, err
 				}
-				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! %v ! rtspclientsink location=%v video_tee_2. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, rtspRelayAddress, parser, SplitMuxSinkName, path, recordFileDuration, maxRecordFiles, index)
+				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! %v ! rtspclientsink location=%v video_tee_2. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, rtspRelayAddress, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
 			}
 		} else if enableRecord {
 			path := `"` + filepath.Join(sessionDir, "record_%d.mkv") + `"`
@@ -102,7 +102,7 @@ func CreatePipeline(
 			if err != nil {
 				return nil, err
 			}
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, SplitMuxSinkName, path, recordFileDuration, maxRecordFiles, index)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
 		} else {
 			videoSink = fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! %v ! appsink name=%v sync=false", parser, videoSinkName)
 		}

@@ -1,0 +1,3 @@
+[submodule "smart-security-system"]
+	path = smart-security-system
+	url = git@github.com:nhanvo031001/smart-security-system.git

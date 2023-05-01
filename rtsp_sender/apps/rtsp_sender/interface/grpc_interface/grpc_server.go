@@ -102,7 +102,7 @@ func (r *rtspSender) Disconnect(ctx context.Context, request *grpc.DisconnectReq
 }
 
 func (r *rtspSender) GetRecordFile(ctx context.Context, request *grpc.GetRecordFileRequest) (*grpc.GetRecordFileReply, error) {
-	filname, err := r.rtspClientService.GetRecordFile(request.ClientID, request.Timestamp)
+	filname, startTime, endTime, err := r.rtspClientService.GetRecordFile(request.ClientID, request.Timestamp)
 	if err != nil {
 		return &grpc.GetRecordFileReply{
 			Code:    http.StatusInternalServerError,
@@ -110,8 +110,10 @@ func (r *rtspSender) GetRecordFile(ctx context.Context, request *grpc.GetRecordF
 		}, nil
 	}
 	return &grpc.GetRecordFileReply{
-		Code:     http.StatusOK,
-		Message:  fmt.Sprintf("Get record file successfully for %v", request.ClientID),
-		Filename: filname,
+		Code:      http.StatusOK,
+		Message:   fmt.Sprintf("Get record file successfully for %v", request.ClientID),
+		Filename:  filname,
+		StartTime: startTime,
+		EndTime:   endTime,
 	}, nil
 }

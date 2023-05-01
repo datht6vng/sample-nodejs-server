@@ -10,10 +10,12 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
+	"time"
 
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/entity"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
+	gst "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/rtsp_to_webrtc"
 	jujuErr "github.com/juju/errors"
 )
 
@@ -85,11 +87,11 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 	return nil
 }
 
-func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, error) {
+func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, int64, int64, error) {
 	clientDir := filepath.Join("/videos", clientID)
 	sessionDirs, err := os.ReadDir(clientDir)
 	if err != nil {
-		return "", jujuErr.Annotate(err, "cannot read dir")
+		return "", 0, 0, jujuErr.Annotate(err, "cannot read dir")
 	}
 
 	sort.Slice(sessionDirs, func(i, j int) bool {
@@ -107,12 +109,16 @@ func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, er
 	metaDataFilepath := filepath.Join(sessionDir, "metadata.json")
 	metadata, err := entity.ReadMetadata(metaDataFilepath)
 	if err != nil {
-		return "", err
+		return "", 0, 0, err
 	}
 
 	index := sort.Search(len(metadata.RecordMetadata), func(i int) bool {
 		return ts <= metadata.RecordMetadata[i].Timestamp.UnixNano()
 	})
-
-	return metadata.RecordMetadata[index].RecordFilename, nil
+	startTime := metadata.RecordMetadata[0].Timestamp.UnixNano()
+	endTime := metadata.RecordMetadata[0].Timestamp.Add(time.Duration(gst.RecordFileDuration)).UnixNano()
+	if ts > endTime || ts < startTime {
+		return "", 0, 0, jujuErr.Annotate(ErrNotFound, "not found record file")
+	}
+	return metadata.RecordMetadata[index].RecordFilename, startTime, endTime, nil
 }
