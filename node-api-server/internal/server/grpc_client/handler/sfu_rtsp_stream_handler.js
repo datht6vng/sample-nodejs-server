@@ -23,7 +23,7 @@ class SfuRtspStreamHandler extends GrpcHandler {
             enableRecord: true
         }
         const response = await this.callRpc(this.clientStuff.connect, arg);
-        return response.data.replayAddress;
+        return response.data.relayAddress;
     }
 
 

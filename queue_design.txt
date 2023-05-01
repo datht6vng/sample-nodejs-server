@@ -388,3 +388,13 @@ http://localhost:3001/api/reports?action=find_number_of_iot_event_by_type_and_tr
 fix event type
 fix data_converter cua event type
 fix $unwind event_type trong report_repository
+
+
+Real camera data
+{
+    "_id": "6162f9b9be1661cb32a1c459",
+    "camera_name": "DTG Camera PTZ",
+    "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    "username": "admin",
+    "password": "Dientoan@123"
+}

@@ -71,14 +71,19 @@ class CameraRepository {
     }
     
     
-    async findByIdAndUpdate(cameraId, cameraEntity) {
+    async findByIdAndUpdate(cameraId, cameraEntity, returnOldValue=false) {
         const cameraDoc = this.toDatabaseConverter.visit(cameraEntity);
         const filter = {
             _id: cameraId.getValue()
         }
         let newCameraDoc;
         try {
-            newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc, { new: true }); // set new to true to return new document after update
+            if (returnOldValue) {
+                newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc);
+            }
+            else {
+                newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc, { new: true }); // set new to true to return new document after update
+            }
         }
         catch(err) {
             throw newInternalServerError("Database error", err);
