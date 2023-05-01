@@ -40,7 +40,7 @@ class ReportRepository {
             {
                 $lookup: {
                     from: "iotdevicetypes",
-                    localField: 'iot_device._id',
+                    localField: 'iot_device.iot_device_type',
                     foreignField: '_id',
                     as: 'iot_device_type'   
                 }

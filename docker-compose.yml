@@ -1,5 +1,50 @@
-version: "3.98"
 services:
+  sfu:
+    container_name: sfu
+    image: golang:alpine
+    volumes:
+      - ./ion-sfu:/service/ion-sfu
+      - ./ion-sfu/sfu.toml:/configs/sfu.toml
+      - ./ion-sfu/logs:/logs
+    working_dir: /service/ion-sfu
+    # restart: always
+    command: >
+      sh -c "cat /configs/sfu.toml && go run ./cmd/signal/allrpc/main.go -c /configs/sfu.toml"
+    environment:
+      - gaddr=:5551
+      - jaddr=:7000
+    ports:
+      - 7000:7000 # JSON RPC port
+      - 5551:5551 # gRPC port
+      - 5000:5000 # ICE mux port
+    networks:
+      - backend 
+    
+  rtsp-sender:
+    container_name: rtsp_sender
+    build:
+      dockerfile: ./rtsp_sender/Dockerfile.local
+      context: .
+    volumes:
+      - ./rtsp_sender:/service/rtsp_sender
+      - ./rtsp_sender/rtsp_sender.toml:/configs/rtsp_sender.toml
+      - ./rtsp_sender/rtsp-simple-server:/configs/rtsp-simple-server
+      - ./rtsp_sender/rtsp-simple-server.yml:/configs/rtsp-simple-server.yml
+      - ./rtsp_sender/logs:/logs
+      - ./videos:/videos
+    working_dir: /service/rtsp_sender
+    # restart: always
+    command: >
+      sh -c "go run ./cmd/rtsp_sender/main.go -c /configs/rtsp_sender.toml"
+    ports:
+      - 5552:5551 # gRPC port
+      - 8554:8554 # RTSP port
+      - 8322:8322 # RTP port
+      - 8000-8003:8000-8003 # multicast 
+    environment:
+    - GST_DEBUG=1
+    networks:
+      - backend
 
   mongodb:
     image: mongo
@@ -24,6 +69,22 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  event-simulator:
+    build:
+      context: event-simulator
+      dockerfile: Dockerfile
+    volumes:
+      - ./event-simulator:/usr/app
+      - event_node_modules:/usr/app/node_modules
+    working_dir: /usr/app
+    command: >
+      sh -c "npm run dev"
+    restart: always
+    ports:
+      - "3006:3006"
+    depends_on:
+      - mongodb
 
   node-api-server:
     build:
@@ -67,4 +128,12 @@ services:
 volumes:
   api_node_modules:
   gateway_node_modules:
+  event_node_modules:
   mongodb_data:
+
+
+networks:
+  backend:
+    external: true
+    name: backend
+    driver: bridge
