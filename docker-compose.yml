@@ -70,8 +70,8 @@ services:
         - 15672:15672
         - 1883:1883
     volumes:
-        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+        - ./docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ./docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - backend 
 

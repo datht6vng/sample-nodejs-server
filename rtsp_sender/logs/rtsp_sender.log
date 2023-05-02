@@ -124,3 +124,7 @@
 2023-05-02T00:14:54.765  INFO rtsp_sender_8e1a69f9b5ec ICE connection state changed: closed 
 2023-05-02T00:14:54.765  INFO rtsp_sender_8e1a69f9b5ec ICEConnectionStateDisconnected closed 
 2023-05-02T00:14:59.761  INFO rtsp_sender_8e1a69f9b5ec Call stop pipeline with error: <nil> 
+2023-05-03T01:59:20.661  INFO rtsp_sender_1f24254cded9 Serve gRPC on: 0.0.0.0:5551 
+2023-05-03T01:59:20.661  INFO rtsp_sender_1f24254cded9 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-03T01:59:20.661  INFO rtsp_sender_1f24254cded9 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-03T01:59:20.661  INFO rtsp_sender_1f24254cded9 Server is running and awaiting signal for shutdown ... 
