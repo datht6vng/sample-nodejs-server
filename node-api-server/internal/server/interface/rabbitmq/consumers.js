@@ -15,24 +15,37 @@ class Consumers {
 
     start() {
         const callbackContext = newCallbackContext();
-        for (let exchange of this.exchanges) {
-            for (let queue of exchange.queues) {
+        Object.values(this.exchanges).forEach(exchange => {
+            Object.values(exchange.queues).forEach(queue => {
                 const callbackObj = callbackContext.getEventCallback(exchange.name, queue.name);
                 if (callbackObj) {
                     const argExchange = newExchange(exchange.name);
                     const argQueue = newQueue(queue.name, queue.binding_keys);
-                    const callbackFunc = callbackObj.execute.bind(callbackObj);
-                    const consumer = newAMQPConsumer(argExchange, argQueue, callbackFunc);
+                    const consumer = newAMQPConsumer(argExchange, argQueue, callbackObj.execute);
                     this.consumers.push(consumer);
-                    this.consumer.start();
+                    consumer.start();
                 }
-            }
-        }
+            })
+        })
+
+
+        // for (let exchange in this.exchanges) {
+        //     for (let queue of exchange.queues) {
+        //         const callbackObj = callbackContext.getEventCallback(exchange.name, queue.name);
+        //         if (callbackObj) {
+        //             const argExchange = newExchange(exchange.name);
+        //             const argQueue = newQueue(queue.name, queue.binding_keys);
+        //             const consumer = newAMQPConsumer(argExchange, argQueue, callbackFunc);
+        //             this.consumers.push(consumer);
+        //             this.consumer.start();
+        //         }
+        //     }
+        // }
     }
 }
 
 function newConsumers(exchanges=defaultExchanges) {
-    return new Consumers();
+    return new Consumers(exchanges);
 }
 
 module.exports.newConsumers = newConsumers;

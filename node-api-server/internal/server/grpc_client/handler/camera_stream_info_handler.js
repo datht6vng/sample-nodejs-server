@@ -1,4 +1,4 @@
-const GrpcHandler = require("./grpc_handler");
+const { GrpcHandler } = require("./grpc_handler");
 
 const { config } = require("../../../../pkg/config/config");
 
@@ -45,7 +45,7 @@ class CameraStreamInfoHandler extends GrpcHandler {
 }
 
 function newCameraStreamInfoHandler(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {
-    return new CameraStreamInfoHandler;
+    return new CameraStreamInfoHandler(protoFile, serviceName, targetHost, targetPort);
 }
 
 module.exports.newCameraStreamInfoHandler = newCameraStreamInfoHandler;

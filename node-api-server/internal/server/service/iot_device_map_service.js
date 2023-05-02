@@ -31,6 +31,11 @@ class IotDeviceMapService {
         const iotDeviceMapEntity = await this.repository.findByIdAndDelete(iotDeviceMapId);
         return iotDeviceMapEntity;
     }
+
+    async findIotDeviceMapByConnectIot(connectIotId) {
+        const iotDeviceMapEntity = await this.repository.findByConnectIot(connectIotId);
+        return iotDeviceMapEntity;
+    }
 }
 
 

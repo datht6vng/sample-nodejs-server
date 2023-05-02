@@ -17,6 +17,8 @@ const { newIotDeviceController } = require("./controller/iot_device_controller")
 
 const { newSystemUtilityController } = require("./controller/system_utility_controller");
 
+const { newReportController } = require("./controller/report_controller");
+
 const { createProxyMiddleware } = require('http-proxy-middleware');
 // const { newCameraMapController } = require("./controller/camera_map_controller");
 
@@ -42,6 +44,8 @@ Handler.prototype.initController = function() {
   this.iotDeviceController = newIotDeviceController();
 
   this.systemUtilityController = newSystemUtilityController();
+
+  this.reportControlller = newReportController();
 }
 
 Handler.prototype.initMiddleware = function() {

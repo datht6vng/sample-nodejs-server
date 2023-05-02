@@ -5,7 +5,7 @@ const { newEventVerifiedCallback } = require("./event_verified_callback");
 class CallbackContext {
 
     getEventCallback(exchangeName, queueName) {
-        if (exchangeName == "amp.topic" && queueName == "iot_event_new") {
+        if (exchangeName == "amq.topic" && queueName == "iot_event_new") {
             return newIotEventNewCallback();
         }
         if (exchangeName == "event_processing" && queueName == "event_verified") {

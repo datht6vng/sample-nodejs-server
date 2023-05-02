@@ -2,7 +2,8 @@
 class IotEventNewMessage {
     constructor(zone, eventTime) {
         this.zone = zone;
-        this.eventTime = eventTime;
+        eventTime = new Date(eventTime);
+        this.eventTime = eventTime.toISOString();
     }
 }
 

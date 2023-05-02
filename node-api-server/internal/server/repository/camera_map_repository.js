@@ -80,6 +80,40 @@ class CameraMapRepository {
         return this.fromDatabaseConverter.visit(newCameraMap(), deleteCameraMapDoc);
     }
 
+    async findCameraMapByConnectCamera(connectCameraId) {
+        const filter = {
+            connect_camera: connectCameraId.getValue()
+        }
+        let cameraMapDoc;
+        try {
+            cameraMapDoc = await CameraMapModel.findOne(filter).exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
+        return this.fromDatabaseConverter.visit(newCameraMap(), cameraMapDoc);
+    }
+    
+    async findCameraMapByObserveIot(observeIotMapId, withConnectCamera=false) {
+        const filter = {
+            observe_iot: observeIotMapId.getValue()
+        }
+        let cameraMapDoc;
+        try {
+            cameraMapDoc = CameraMapModel.findOne(filter);
+            if (withConnectCamera) {
+                cameraMapDoc = cameraMapDoc.populate("connect_camera");
+            }
+            cameraMapDoc = await cameraMapDoc.exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
+        return this.fromDatabaseConverter.visit(newCameraMap(), cameraMapDoc);
+    }
+
 }
 
 

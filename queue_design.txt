@@ -96,3 +96,330 @@ check connect_camera_config với connect_iot_config trong 2 cái đó
 coi có kết nối config hay không
 
 nếu có thì update lại cái field "status" trong camera config, iot config thành "used"
+
+
+
+Chua handle socket gui ve event
+
+
+Write all iot event, camera event, event verified
+Complete all grpc server
+Complete all grpc client (sample test)
+Control camera api
+
+Gateway traffic forwarding
+
+
+Them line_coords khi publish event camera ben AI server
+khi nhan event (iot va camera) chi can luu thong tin cua iot va camera tuong ung. Schema dung middleware create de them thong tin cua map va type
+Giai quyet camera_map quan sat iot_map (database đang lưu như thế) => khi cần query ra camera config nào đang quan sát iot config tốn chi phí
+
+
+
+
+Area:
+
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        area_name: "Area 1",
+        area_type: "area"
+    },
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        area_name: "Area 2",
+        area_type: "area"
+    },
+
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        area_name: "Area 3",
+        area_type: "area"
+    },
+
+]
+
+
+
+Camera
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        camera_name: "Camera 1"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        camera_name: "Camera 2"
+    },
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        camera_name: "Camera 3",
+        event_type: "6162f9b9be1661cb32a1c447",
+        status: "used",
+        offset_x_begin: 20,
+        offset_x_end: 30,
+        offset_y_begin: 40,
+        offset_y_end: 50
+    }
+    
+
+]
+
+
+
+
+Camera map
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        camera_name: "Camera map 1",
+        area: "6162f9b9be1661cb32a1c447",
+        connect_camera: "6162f9b9be1661cb32a1c447"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        camera_name: "Camera map 3",
+        area: "6162f9b9be1661cb32a1c448",
+        connect_camera: "6162f9b9be1661cb32a1c447"
+    },
+
+
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        camera_name: "Camera map 3",
+        area: "6162f9b9be1661cb32a1c459",
+        connect_camera: "6162f9b9be1661cb32a1c459",
+        observe_iot: "6162f9b9be1661cb32a1c459"
+    },
+
+    
+
+]
+
+
+
+
+
+
+
+
+Iot Device
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        iot_device_name: "Iot device 1"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        iot_device_name: "Iot Device 2"
+    },
+    
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        iot_device_name: "Iot Device 3", 
+        zone: 3,
+        event_type: "6162f9b9be1661cb32a1c447",
+        status: "used"
+    }
+
+]
+
+
+
+
+Iot Device Type
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        iot_device_type_name: "Iot device type 1"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        iot_device_type_name: "Iot Device type 2"
+    },
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        iot_device_type_name: "Iot Device type 3"
+    }
+    
+
+]
+
+
+
+
+Iot device map
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        iot_device_name: "Iot device map 1",
+        area: "6162f9b9be1661cb32a1c447",
+        connect_iot: "6162f9b9be1661cb32a1c447"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        iot_device_name: "Iot Device map 2",
+        area: "6162f9b9be1661cb32a1c448",
+        connect_iot: "6162f9b9be1661cb32a1c448"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c449",
+        iot_device_name: "Iot Device map 3",
+        area: "6162f9b9be1661cb32a1c448",
+        connect_iot: "6162f9b9be1661cb32a1c448"
+    },
+
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        iot_device_name: "Iot Device map 4",
+        area: "6162f9b9be1661cb32a1c459",
+        connect_iot: "6162f9b9be1661cb32a1c459",
+        observed_status: "used"
+    }
+    
+
+]
+
+
+
+Event Type 
+
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        event_key: "movement"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        event_key: "door_open"
+    }
+]
+
+
+
+
+
+Event
+
+
+[
+    {
+        _id: "6162f9b9be1661cb32a1c447",
+        event_type: "6162f9b9be1661cb32a1c447",
+        iot_device: "6162f9b9be1661cb32a1c447",
+        iot_device_map: "6162f9b9be1661cb32a1c447"
+    },
+
+    {
+        _id: "6162f9b9be1661cb32a1c448",
+        event_type: "6162f9b9be1661cb32a1c448",
+        iot_device: "6162f9b9be1661cb32a1c448",
+        iot_device_map: "6162f9b9be1661cb32a1c448"
+    },
+
+
+
+
+
+
+
+    {
+        _id: "6162f9b9be1661cb32a1c459",
+        event_type: "6162f9b9be1661cb32a1c447",
+        iot_device: "6162f9b9be1661cb32a1c459",
+        iot_device_map: "6162f9b9be1661cb32a1c459"
+    }
+]
+
+
+socket: event_new, event_verified
+Lấy full event detail
+
+
+Exchange: amq.topic
+Binding keys: home.alarm.zone_open
+{
+    "time": "2023-04-29T11:00:01Z",
+    "zone": 3
+}
+
+
+Exchange: stream_processing
+Binding keys: event.new.camera.*
+{
+    "camera_id": "6162f9b9be1661cb32a1c459",
+    "event_time": "2023-04-29T11:00:01Z",
+    "image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "detection_image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "event_key": "crowd_gathering"
+}
+
+{
+    "camera_id": "6162f9b9be1661cb32a1c459",
+    "event_time": "2023-04-29T11:00:01Z",
+    "image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "detection_image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "event_key": "line_crossing"
+}
+
+
+
+
+
+
+
+report
+event_type and iot_device_type
+trong event model, iot_device và camera chỉ tồn tại 1 trong 2
+event socket
+
+
+
+
+
+Report:
+http://localhost:3001/api/reports?action=find_all_event_statistic_count
+http://localhost:3001/api/reports?action=find_number_of_iot_event_by_interval&area_id=6162f9b9be1661cb32a1c459&start_time=2023-04-30T03:38:17.904Z&end_time=2023-04-30T05:38:17.904Z&iot_device_type_id=6162f9b9be1661cb32a1c459&interval_type=week
+http://localhost:3001/api/reports?action=find_number_of_iot_event_by_type&area_id=6162f9b9be1661cb32a1c459&start_time=2023-04-30T03:38:17.904Z&end_time=2023-04-30T05:38:17.904Z
+http://localhost:3001/api/reports?action=find_number_of_iot_event_by_type_and_true_alarm&area_id=6162f9b9be1661cb32a1c459&start_time=2023-04-30T03:38:17.904Z&end_time=2023-04-30T05:38:17.904Z
+
+
+
+fix event type
+fix data_converter cua event type
+fix $unwind event_type trong report_repository
+
+
+Real camera data
+{
+    "_id": "6162f9b9be1661cb32a1c459",
+    "camera_name": "DTG Camera PTZ",
+    "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    "username": "admin",
+    "password": "Dientoan@123"
+}

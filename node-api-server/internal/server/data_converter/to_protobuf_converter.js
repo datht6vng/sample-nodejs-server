@@ -180,6 +180,16 @@ class ToProtobufConverter {
         return doc;
     }
 
+    visitUser(user, o, env) {
+        let doc = {};
+
+        this.setDocAttribute(user, user.getId, "_id", doc, true);
+        this.setDocAttribute(user, user.getUsername, "username", doc);
+        this.setDocAttribute(user, user.getPassword, "password", doc);
+        this.setDocAttribute(user, user.getRole, "role", doc);
+
+        return doc;
+    }
 
     setDocAttribute(entity, getEntityMethod, docAttributeName, doc, isRefType=false) {
         getEntityMethod = getEntityMethod.bind(entity);

@@ -11,8 +11,8 @@ class RabbitMQ {
         this.channel = await this.connection.createChannel();
     }
 
-    async initExchange(exchangeName, exchangeType) {
-        await this.channel.assertExchange(exchangeName, exchangeType);
+    async initExchange(exchangeName, exchangeType, exchangeParams) {
+        await this.channel.assertExchange(exchangeName, exchangeType, exchangeParams);
     }
 
     async initQueue(exchangeName, queueName, bindingKeys, queueParams) {

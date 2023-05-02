@@ -1,13 +1,14 @@
-const socket_io = require("socket.io");
+const socketIO = require("socket.io");
+const { httpServer } = require("../http/http_server");
 
 const defaultOptions = { 
     cors: { origin: "*" } 
 };
 
 class SocketIO {
-    constructor(httpServer, options=defaultOptions) {
+    constructor(server=httpServer, options=defaultOptions) {
         this.options = options
-        this.io = socket_io(httpServer, options);
+        this.io = socketIO(server, options);
         this.initConnection();
     }
 

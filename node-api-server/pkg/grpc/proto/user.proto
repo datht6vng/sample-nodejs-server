@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "details.proto";
+
+message SingleUserResponseData {
+    UserDetail user_detail = 1;
+}
+
+message MultipleUsersResponseData {
+    repeated UserDetail users = 1;
+}
+
+message GetAllUsersResponse {
+    MultipleUsersResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message CreateUserRequest {
+    UserDetail user_detail = 1;
+}
+
+message CreateUserResponse {
+    SingleUserResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message GetUserByIdRequest {
+    string _id = 1;
+}
+
+message GetUserByIdResponse {
+    SingleUserResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+message UpdateUserByIdRequest {
+    string _id = 1;
+    UserDetail user_detail = 2;
+}
+
+message UpdateUserByIdResponse {
+    SingleUserResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+message DeleteUserByIdRequest {
+    string _id = 1;
+}
+
+message DeleteUserByIdResponse {
+    SingleUserResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
+service UserService {
+    rpc GetAllUsers (Empty) returns (GetAllUsersResponse) {};
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {};
+    rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse) {};
+    rpc UpdateUserById (UpdateUserByIdRequest) returns (UpdateUserByIdResponse) {};
+    rpc DeleteUserById (DeleteUserByIdRequest) returns (DeleteUserByIdResponse) {};
+}
+
+message Empty {}

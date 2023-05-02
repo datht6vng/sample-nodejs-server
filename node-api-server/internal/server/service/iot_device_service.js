@@ -31,6 +31,11 @@ class IotDeviceService {
         const iotDeviceEntity = await this.repository.findByIdAndDelete(iotDeviceId);
         return iotDeviceEntity;
     }
+
+    async findIotDeviceByZone(zone) {
+        const iotDeviceEntity = await this.repository.findByZone(zone, true);
+        return iotDeviceEntity;
+    }
 }
 
 

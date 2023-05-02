@@ -79,6 +79,21 @@ class IotDeviceMapRepository {
         }
         return this.fromDatabaseConverter.visit(newIotDeviceMap(), deleteIotDeviceMapDoc);
     }
+
+    async findByConnectIot(connectIotId) {
+        let iotDeviceMapDoc;
+        const filter = {
+            connect_iot: connectIotId.getValue()
+        }
+        try {
+            iotDeviceMapDoc = await IotDeviceMapModel.findOne(filter).exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
+        return this.fromDatabaseConverter.visit(newIotDeviceMap(), iotDeviceMapDoc);
+    }
 }
 
 

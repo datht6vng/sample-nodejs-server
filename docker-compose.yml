@@ -47,6 +47,7 @@ services:
       - backend
 
   mongodb:
+    container_name: mongodb
     image: mongo
     restart: always
     environment:
@@ -56,6 +57,8 @@ services:
       - 27017:27017
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - backend 
 
   message-broker-server:
     build:
@@ -69,6 +72,8 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - backend 
 
   event-simulator:
     build:
@@ -87,6 +92,7 @@ services:
       - mongodb
 
   node-api-server:
+    container_name: node_api_server
     build:
       context: node-api-server
       dockerfile: Dockerfile
@@ -105,8 +111,11 @@ services:
     depends_on:
       - message-broker-server
       - mongodb
+    networks:
+      - backend 
 
   node-api-gateway:
+    container_name: node_api_gateway
     build:
       context: node-api-gateway
       dockerfile: Dockerfile
@@ -124,6 +133,8 @@ services:
       - "3001:3001"
     # depends_on:
     #   - node-api-server
+    networks:
+      - backend 
 
 volumes:
   api_node_modules:

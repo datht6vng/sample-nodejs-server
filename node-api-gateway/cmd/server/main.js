@@ -40,10 +40,6 @@ main();
 //   */
 //  const wsProxy = createProxyMiddleware({
 //    target: 'http://node-api-server:3000' ,
-//    // pathRewrite: {
-//    //  '^/websocket' : '/socket',        // rewrite path.
-//    //  '^/removepath' : ''               // remove path.
-//    // },
 //    changeOrigin: true, // for vhosted sites, changes host header to match to target's host
 //    ws: true, // enable websocket proxy
 //    logger: console,
@@ -53,7 +49,6 @@ main();
 //  console.log(wsProxy)
 
 //  const app = express();
-//  app.use(wsProxy); // add the proxy to express
  
 //  const server = app.listen(3001);
 //  server.on('upgrade', wsProxy.upgrade); // optional: upgrade externally

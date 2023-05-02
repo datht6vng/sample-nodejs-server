@@ -1,7 +1,7 @@
 const { newQueueParams } = require("./queue_params");
 
 class Queue {
-    contructor(name, bindingKeys, params=newQueueParams()) {
+    constructor(name, bindingKeys, params=newQueueParams()) {
         this.name = name;
         this.bindingKeys = bindingKeys;
         this.params = params;

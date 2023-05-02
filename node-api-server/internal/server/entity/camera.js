@@ -96,7 +96,7 @@ class Camera {
     }
     
     setRtspStreamUrl(rtspStreamUrl) {
-        this.rtspStreamUrl = this.rtspStreamUrl;
+        this.rtspStreamUrl = rtspStreamUrl;
         return this;
     }
     

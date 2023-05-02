@@ -7,3 +7,7 @@
     [api_server.grpc]
         host = "node-api-server"
         port = "50051"
+    [api_server.http]
+        scheme = "http"
+        host = "node-api-server"
+        port = "3000"

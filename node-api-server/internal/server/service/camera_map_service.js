@@ -31,6 +31,16 @@ class CameraMapService {
         const cameraMapEntity = await this.repository.findByIdAndDelete(cameraMapId);
         return cameraMapEntity;
     }
+
+    async findCameraMapByConnectCamera(connectCameraId) {
+        const cameraMapEntity = await this.repository.findCameraMapByConnectCamera(connectCameraId);
+        return cameraMapEntity;
+    }
+
+    async findCameraMapWithCameraByObserveIot(observeIotMapId) {
+        const cameraMapEntity = await this.repository.findCameraMapByObserveIot(observeIotMapId, true);
+        return cameraMapEntity;
+    }
 }
 
 
