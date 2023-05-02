@@ -153,3 +153,13 @@
 2023-05-03T02:46:36.693  INFO rtsp_sender_3de1816d5cb7 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
 2023-05-03T02:46:36.693  INFO rtsp_sender_3de1816d5cb7 Serve HTTP on address: 0.0.0.0:8080 
 2023-05-03T02:46:36.694  INFO rtsp_sender_3de1816d5cb7 Server is running and awaiting signal for shutdown ... 
+2023-05-03T02:52:08.530  INFO rtsp_sender_3de1816d5cb7 Serve gRPC on: 0.0.0.0:5551 
+2023-05-03T02:52:08.530  INFO rtsp_sender_3de1816d5cb7 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-03T02:52:08.531  INFO rtsp_sender_3de1816d5cb7 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-03T02:52:08.531  INFO rtsp_sender_3de1816d5cb7 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-03T02:52:08.532  INFO rtsp_sender_3de1816d5cb7 Server is running and awaiting signal for shutdown ... 
+2023-05-03T02:52:39.034  INFO rtsp_sender_3de1816d5cb7 Serve gRPC on: 0.0.0.0:5551 
+2023-05-03T02:52:39.034  INFO rtsp_sender_3de1816d5cb7 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-03T02:52:39.034  INFO rtsp_sender_3de1816d5cb7 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-03T02:52:39.034  INFO rtsp_sender_3de1816d5cb7 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-03T02:52:39.034  INFO rtsp_sender_3de1816d5cb7 Server is running and awaiting signal for shutdown ... 
