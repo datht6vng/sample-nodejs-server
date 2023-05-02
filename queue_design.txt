@@ -160,7 +160,13 @@ Camera
 
     {
         _id: "6162f9b9be1661cb32a1c459",
-        camera_name: "Camera 3"
+        camera_name: "Camera 3",
+        event_type: "6162f9b9be1661cb32a1c447",
+        status: "used",
+        offset_x_begin: 20,
+        offset_x_end: 30,
+        offset_y_begin: 40,
+        offset_y_end: 50
     }
     
 
@@ -355,12 +361,31 @@ socket: event_new, event_verified
 Lấy full event detail
 
 
-
+Exchange: amq.topic
+Binding keys: home.alarm.zone_open
 {
     "time": "2023-04-29T11:00:01Z",
     "zone": 3
 }
 
+
+Exchange: stream_processing
+Binding keys: event.new.camera.*
+{
+    "camera_id": "6162f9b9be1661cb32a1c459",
+    "event_time": "2023-04-29T11:00:01Z",
+    "image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "detection_image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "event_key": "crowd_gathering"
+}
+
+{
+    "camera_id": "6162f9b9be1661cb32a1c459",
+    "event_time": "2023-04-29T11:00:01Z",
+    "image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "detection_image_url": "https://media.timeout.com/images/105923036/750/562/image.jpg",
+    "event_key": "line_crossing"
+}
 
 
 

@@ -19,7 +19,7 @@ class CameraEventNewCallback extends EventNewCallback {
 
     parseMessage(message) {
         let jsonMessage = JSON.parse(message);
-        let cameraEventMessage = newCameraEventNewMessage(jsonMessage.camera_id, jsonMessage.event_time, jsonMessage.image_url, jsonMessgae.detection_image_url, jsonMessage.event_key);
+        let cameraEventMessage = newCameraEventNewMessage(jsonMessage.camera_id, jsonMessage.event_time, jsonMessage.image_url, jsonMessage.detection_image_url, jsonMessage.event_key);
         if (jsonMessage.line_coords) {
             cameraEventMessage.setLineCoords(jsonMessage.line_coords);
         }
@@ -34,18 +34,17 @@ class CameraEventNewCallback extends EventNewCallback {
         const eventKey = eventMessage.eventKey;
         const eventType = camera.getEventType();
         if (cameraId && eventType) {
-            const cameraMap = this.cameraMapService.findCameraMapByConnectCamera(cameraId);
+            const cameraMap = await this.cameraMapService.findCameraMapByConnectCamera(cameraId);
             const cameraMapId = cameraMap.getId();
             if (cameraMapId) {
                 let event = newEvent();
                 event.setCamera(cameraId)
                     .setCameraMap(cameraMapId)
                     .setEventTime(eventMessage.eventTime)
-                    .setEventType(camera.getEventType())
+                    .setEventType(eventType)
                     .setNormalImageUrl(eventMessage.normalImageUrl)
                     .setDetectionImageUrl(eventMessage.detectionImageUrl)
                 event = await this.eventService.createEvent(event);
-
                 const notifyMessage = await this.getAllEventRelationDetailsById(event.getId());
                 this.notifyNewEventToClients(notifyMessage);
 

@@ -35,6 +35,23 @@ class SfuRtspStreamHandler extends GrpcHandler {
         const response = await this.callRpc(this.clientStuff.disconnect, arg);
         return response;
     }
+
+    async getRecordFile(cameraId, eventTime) {
+        cameraId = cameraId.getvalue();
+        eventTime = new Date(eventTime).getTime() / 1000;
+        const arg = {
+            clientId: cameraId,
+            timestamp: eventTime
+        }
+        const response = await this.callRpc(this.clientStuff.getRecordFile, arg);
+        const responseData = response.data;
+        const result = {
+            startTime: new Date(responseData.startTime * 1000).toISOString(),
+            endTime: new Date(responseData.endTime * 1000).toISOString(),
+            // normalVideoUrl: ,
+        }
+        return result;
+    }
 }
 
 function newSfuRtspStreamHandler(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {
