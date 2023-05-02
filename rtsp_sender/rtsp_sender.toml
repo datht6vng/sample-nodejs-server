@@ -12,6 +12,9 @@ rtsp_relay_server_config_path = "/configs/rtsp-simple-server.yml"
 rtsp_relay_ip = "127.0.0.1" # Don't use localhost
 rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server_sdk
 
+[rtsp_sender.http]
+port = "8080"
+
 [log]
 level = "info"
 filePath= "logs/rtsp_sender.log"

@@ -49,3 +49,13 @@
 2023/05/02 00:14:59 INF [RTSP] [session 1679b397] destroyed (not in use)
 2023/05/03 01:59:20 INF rtsp-simple-server v0.21.2
 2023/05/03 01:59:20 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/03 02:29:16 INF rtsp-simple-server v0.21.2
+2023/05/03 02:29:16 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/03 02:38:15 INF rtsp-simple-server v0.21.2
+2023/05/03 02:38:15 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/03 02:43:46 INF rtsp-simple-server v0.21.2
+2023/05/03 02:43:46 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/03 02:46:11 INF rtsp-simple-server v0.21.2
+2023/05/03 02:46:11 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/03 02:46:36 INF rtsp-simple-server v0.21.2
+2023/05/03 02:46:36 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)

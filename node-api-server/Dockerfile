@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR /usr/app
+WORKDIR /usr/apps
 
 COPY . .
 COPY ./config /config

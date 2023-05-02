@@ -55,7 +55,7 @@ message GetRecordFileRequest {
 message GetRecordFileReply {
   int32 code = 1;
   string message = 2;
-  string filename=3;
+  string fileAddress=3;
   int64 startTime = 4;
   int64 endTime = 5;
 }

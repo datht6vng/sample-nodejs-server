@@ -15,10 +15,16 @@ type AppConfig struct {
 type RTSPSenderConfig struct {
 	GRPCConfig      RTSPSenderGRPCConfig      `mapstructure:"grpc"`
 	RTSPRelayConfig RTSPSenderRTSPRelayConfig `mapstructure:"rtsp_relay"`
+	HTTPConfig      RTSPSenderHTTPConfig      `mapstructure:"http"`
 }
+
 type RTSPSenderGRPCConfig struct {
 	Port int `mapstructure:"port"`
 }
+type RTSPSenderHTTPConfig struct {
+	Port int `mapstructure:"port"`
+}
+
 type RTSPSenderRTSPRelayConfig struct {
 	RTSPRelayServerPath       string `mapstructure:"rtsp_relay_server_path"`
 	RTSPRelayServerConfigPath string `mapstructure:"rtsp_relay_server_config_path"`

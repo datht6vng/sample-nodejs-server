@@ -1,12 +1,12 @@
 package rtsp_sender
 
 import (
-	"bytes"
 	"fmt"
 	"net"
 	"os/exec"
 
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/http_interface"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	grpc_pb "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/grpc"
@@ -21,6 +21,7 @@ type Handler struct {
 	// gRPC interface
 	grpcRTSPSenderServer grpc_pb.RTSPSenderServer
 	// HTTP interface
+	httpRTSPSenderServer http_interface.HTTPRTSPSenderServer
 	// RTSP interface
 	// Repository
 }
@@ -37,6 +38,8 @@ func NewHandler(nodeID string) (*Handler, error) {
 	// gRPC Server
 	handler.grpcRTSPSenderServer = grpc_interface.NewGRPCRTSPSenderServer(rtspClientService)
 
+	// HTTP Server
+	handler.httpRTSPSenderServer = http_interface.NewHTTPRTSPSenderServer()
 	return &handler, nil
 }
 
@@ -51,6 +54,13 @@ func (h *Handler) Start() error {
 	if err := h.ServeRTSP(); err != nil {
 		return errors.Annotate(err, "cannot start RTSP service")
 	}
+
+	// HTTP Interface
+	if err := h.ServeHTTP(); err != nil {
+		return errors.Annotate(err, "cannot start HTTP service")
+	}
+
+	return nil
 	return nil
 }
 
@@ -76,14 +86,23 @@ func (h *Handler) ServeGRPC() error {
 
 func (h *Handler) ServeRTSP() error {
 	logger.Infof("Serve RTSP with rtsp simple server, config path:%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
-	var out bytes.Buffer
 	cmd := exec.Command("./rtsp-simple-server", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
-	cmd.Stdout = &out
 	cmd.Dir = fmt.Sprintf("%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerPath)
 	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
 	go func() {
 		if err := cmd.Run(); err != nil {
 			logger.Errorf("RTSP Relay Server Error: %v", err)
+		}
+	}()
+	return nil
+}
+
+func (h *Handler) ServeHTTP() error {
+	address := fmt.Sprintf("0.0.0.0:%v", config.Config.RTSPSenderConfig.HTTPConfig.Port)
+	logger.Infof("Serve HTTP on address: %v", address)
+	go func() {
+		if err := h.httpRTSPSenderServer.Start(address); err != nil {
+			logger.Errorf("HTTP Server Error: %v", err)
 		}
 	}()
 	return nil
