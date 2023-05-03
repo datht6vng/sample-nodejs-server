@@ -3,6 +3,9 @@ const { newConsumers } = require("../../internal/server/interface/rabbitmq/consu
 const { newMongoDB } = require("../../internal/server/database/mongodb");
 
 async function main() {
+
+    console.log(`Current timestamp: ${new Date().toISOString()}`);
+
     const db = newMongoDB();
     const grpcServer = newGrpcServer();
     const consumers = newConsumers();

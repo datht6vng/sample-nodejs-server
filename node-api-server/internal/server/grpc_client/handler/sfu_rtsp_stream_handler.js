@@ -8,6 +8,8 @@ const defaultServiceName = "RTSPSender";
 const defaultTargetHost = rtspSenderServerConfig.grpc.host;
 const defaultTargetPort = rtspSenderServerConfig.grpc.port;
 
+const rtspSenderHttp = rtspSenderServerConfig.http;
+
 class SfuRtspStreamHandler extends GrpcHandler {
     constructor(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {
         super(protoFile, serviceName, targetHost, targetPort);
@@ -37,18 +39,24 @@ class SfuRtspStreamHandler extends GrpcHandler {
     }
 
     async getRecordFile(cameraId, eventTime) {
-        cameraId = cameraId.getvalue();
+        cameraId = cameraId.getValue();
         eventTime = new Date(eventTime).getTime() / 1000;
         const arg = {
             clientId: cameraId,
             timestamp: eventTime
         }
+        console.log("Grpc arg record file");
+        console.log(arg)
         const response = await this.callRpc(this.clientStuff.getRecordFile, arg);
         const responseData = response.data;
+
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$")
+        console.log(responseData)
+
         const result = {
             startTime: new Date(responseData.startTime * 1000).toISOString(),
             endTime: new Date(responseData.endTime * 1000).toISOString(),
-            // normalVideoUrl: ,
+            normalVideoUrl: `${rtspSenderHttp.scheme}://${rtspSenderHttp.host}:${rtspSenderHttp.port}${responseData.fileAddress}`
         }
         return result;
     }

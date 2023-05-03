@@ -6,6 +6,8 @@ const { newCameraEventNewPublishMessage } = require("./event_message/camera_even
 const{ newIotEventNewPublishMessage } = require("./event_message/iot_event_new_publish_message");
 const { EventCallback } = require("./event_callback");
 
+const { newSfuRtspStreamHandler } = require("../../grpc_client/handler/sfu_rtsp_stream_handler");
+
 const brokerConfig = config.rabbitmq;
 const exchanges = brokerConfig.exchanges;
 
@@ -20,11 +22,14 @@ class EventNewCallback extends EventCallback {
         /*
             Call grpc client handler here
         */
-        return {
-            startTime: "2023-04-29T11:00:00Z",
-            endTime: "2023-04-29T11:00:50Z",
-            normalVideoUrl: "https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/people-detection.mp4"
-        }
+        const handler = newSfuRtspStreamHandler();
+        const res = await handler.getRecordFile(cameraId, eventTime);
+        return res;
+        // return {
+        //     startTime: "2023-04-29T11:00:00Z",
+        //     endTime: "2023-04-29T11:00:50Z",
+        //     normalVideoUrl: "https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/people-detection.mp4"
+        // }
     }
     
     isCameraEvent(event) {

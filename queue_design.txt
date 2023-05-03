@@ -415,11 +415,100 @@ fix data_converter cua event type
 fix $unwind event_type trong report_repository
 
 
-Real camera data
+
+
+
+
+
+
+
+
+
+
+===============REAL camera data TEST COMMUNICATION
+
 {
-    "_id": "6162f9b9be1661cb32a1c459",
+    "time": "",
+    "zone": 64
+}
+
+Event type
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c447"),
+    event_key: 'door_open'
+}
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c448"),
+    event_key: 'movement'
+}
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c449"),
+    event_key: 'crowd_gathering'
+}
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c450"),
+    event_key: 'line_crossing'
+}
+
+
+
+Iot device 
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    iot_device_name: 'Cảm biến chuyển động PARADOX test',
+    zone: 64,
+    event_type: ObjectId("6162f9b9be1661cb32a1c447"),
+    status: 'used'
+}
+
+Iot Device Map
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    iot_device_name: 'Cảm biến chuyển động khu vực test',
+    address: 'Cảm biến ở địa chỉ ...',
+    lat: 25,
+    lng: -45,
+    type: 'iot',
+    observed_status: 'used',
+    connect_iot: ObjectId("6162f9b9be1661cb32a1c461"),
+    area: ObjectId("6162f9b9be1661cb32a1c461")
+}
+
+
+Camera Map 
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    camera_name: 'DTG Camera map PTZ',
+    type: 'camera',
+    connect_camera: ObjectId("6162f9b9be1661cb32a1c461"),
+    observe_iot: ObjectId("6162f9b9be1661cb32a1c461"),
+    area: ObjectId("6162f9b9be1661cb32a1c461") 
+}
+
+Camera
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    camera_name: "DTG Camera PTZ",
+    rtsp_stream_url: "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    username: "admin",
+    password: "Dientoan@123",
+    event_type: ObjectId("6162f9b9be1661cb32a1c449")
+}
+
+
+
+
+=================================================
+Camera
+{
+    "_id": "6162f9b9be1661cb32a1c461",
     "camera_name": "DTG Camera PTZ",
     "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
     "username": "admin",
-    "password": "Dientoan@123"
+    "password": "Dientoan@123",
+    "event_type": "6162f9b9be1661cb32a1c449"
 }
