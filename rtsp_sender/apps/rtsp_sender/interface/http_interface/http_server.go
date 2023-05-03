@@ -45,7 +45,6 @@ func (s *httpRTSPSenderServer) initRoute() error {
 		Compress:  true,
 		ByteRange: true,
 		Browse:    true,
-		Download:  true,
 	})
 	return nil
 }

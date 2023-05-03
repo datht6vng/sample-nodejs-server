@@ -89,7 +89,7 @@ func CreatePipeline(
 		if enableRTSPRelay {
 			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! rtspclientsink location=%v", caps, parser, videoSinkName, parser, rtspRelayAddress)
 			if enableRecord {
-				path := `"` + filepath.Join(sessionDir, "record_%d.mkv") + `"`
+				path := `"` + filepath.Join(sessionDir, "record_%d.mp4") + `"`
 				index, err := util.GetIndex(sessionDir)
 				if err != nil {
 					return nil, err
@@ -97,7 +97,7 @@ func CreatePipeline(
 				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! %v ! rtspclientsink location=%v video_tee_2. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, rtspRelayAddress, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
 			}
 		} else if enableRecord {
-			path := `"` + filepath.Join(sessionDir, "record_%d.mkv") + `"`
+			path := `"` + filepath.Join(sessionDir, "record_%d.mp4") + `"`
 			index, err := util.GetIndex(sessionDir)
 			if err != nil {
 				return nil, err

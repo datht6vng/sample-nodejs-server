@@ -3,6 +3,7 @@ package rtsp_client_service
 import (
 	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"sort"
@@ -16,6 +17,7 @@ import (
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	gst "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/rtsp_to_webrtc"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/util"
 	jujuErr "github.com/juju/errors"
 )
 
@@ -98,11 +100,14 @@ func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, in
 		return strings.Compare(sessionDirs[i].Name(), sessionDirs[j].Name()) <= 0
 	})
 
-	// Binary search find target sesssion for TS
-	sessionIndex := sort.Search(len(sessionDirs), func(i int) bool {
-		sesssionTS, _ := strconv.ParseInt(sessionDirs[i].Name(), 10, 64)
-		return ts <= sesssionTS
+	sessionIndex := util.SearchElementOrSmaller(sessionDirs, ts, func(value int64, sessionDir fs.DirEntry) int64 {
+		sesssionTS, _ := strconv.ParseInt(sessionDir.Name(), 10, 64)
+		return ts - sesssionTS
 	})
+
+	if sessionIndex < 0 || sessionIndex >= len(sessionDirs) {
+		return "", 0, 0, jujuErr.Annotate(ErrNotFound, "not found session folder")
+	}
 
 	sessionDir := filepath.Join(clientDir, sessionDirs[sessionIndex].Name())
 
@@ -112,13 +117,15 @@ func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, in
 		return "", 0, 0, err
 	}
 
-	index := sort.Search(len(metadata.RecordMetadata), func(i int) bool {
-		return ts <= metadata.RecordMetadata[i].Timestamp.UnixNano()
+	index := util.SearchElementOrSmaller(metadata.RecordMetadata, ts, func(value int64, recordMetadata entity.RecordMetadata) int64 {
+		return value - recordMetadata.Timestamp.UnixNano()
 	})
-	startTime := metadata.RecordMetadata[0].Timestamp.UnixNano()
-	endTime := metadata.RecordMetadata[0].Timestamp.Add(time.Duration(gst.RecordFileDuration)).UnixNano()
-	if ts > endTime || ts < startTime {
+
+	if index < 0 || index >= len(metadata.RecordMetadata) {
 		return "", 0, 0, jujuErr.Annotate(ErrNotFound, "not found record file")
 	}
+
+	startTime := metadata.RecordMetadata[index].Timestamp.UnixNano()
+	endTime := metadata.RecordMetadata[index].Timestamp.Add(time.Duration(gst.RecordFileDuration)).UnixNano()
 	return metadata.RecordMetadata[index].RecordFilename, startTime, endTime, nil
 }

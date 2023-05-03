@@ -61,7 +61,6 @@ func (h *Handler) Start() error {
 	}
 
 	return nil
-	return nil
 }
 
 func (h *Handler) ServeGRPC() error {
