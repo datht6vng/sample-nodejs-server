@@ -92,3 +92,37 @@
 2023-05-03T16:01:30.697  INFO rtsp_sender_3de1816d5cb7 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
 2023-05-03T16:01:30.697  INFO rtsp_sender_3de1816d5cb7 Serve HTTP on address: 0.0.0.0:8080 
 2023-05-03T16:01:30.697  INFO rtsp_sender_3de1816d5cb7 Server is running and awaiting signal for shutdown ... 
+2023-05-03T17:06:17.147  INFO rtsp_sender_3de1816d5cb7 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-05-03T17:06:17.147  INFO rtsp_sender_3de1816d5cb7 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-03T17:06:17.220  INFO rtsp_sender_3de1816d5cb7 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-05-03T17:06:17.221  INFO rtsp_sender_3de1816d5cb7 Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux is-live=true add-reference-timestamp-meta=true latency=5000 max-rtcp-rtp-time-diff=-1 onvif-mode=true demux. ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,is-live=true  ! x264enc bitrate=1024 speed-preset=ultrafast interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=encoder ! tee name=video_tee ! queue ! video/x-h264,stream-format=byte-stream ! h264parse ! appsink name=videosink sync=false video_tee. ! queue ! h264parse ! splitmuxsink name=splitmuxsink muxer-factory=matroskamux muxer=matroskamux location="/videos/Camera PTZ/1683108377221026644/record_%d.mp4" max-size-time=30000000000 max-files=10 start-index=0 async-finalize=true, enable record: true, enable relay: false 
+2023-05-03T17:06:17.222  INFO rtsp_sender_3de1816d5cb7 gRPC connected: sfu:5551 
+2023-05-03T17:06:17.223  INFO rtsp_sender_3de1816d5cb7 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-03T17:06:17.224  INFO rtsp_sender_3de1816d5cb7 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-03T17:06:17.233  INFO rtsp_sender_3de1816d5cb7 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-05-03T17:06:17.233  INFO rtsp_sender_3de1816d5cb7 ICE connection state changed: checking 
+2023-05-03T17:06:17.233  INFO rtsp_sender_3de1816d5cb7 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:3219940777 1 udp 2130706431 172.19.0.3 5000 typ host 0xc0005b6690 0xc00024a3c8 <nil>} 
+2023-05-03T17:06:17.234  INFO rtsp_sender_3de1816d5cb7 Peer connection state changed: connecting 
+2023-05-03T17:06:17.235  INFO rtsp_sender_3de1816d5cb7 ICE connection state changed: connected 
+2023-05-03T17:06:17.237  INFO rtsp_sender_3de1816d5cb7 Peer connection state changed: connected 
+2023-05-03T17:06:17.313  INFO rtsp_sender_3de1816d5cb7 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:3742355381 1 udp 1694498815 183.81.124.189 9442 typ srflx raddr 0.0.0.0 rport 43542 0xc0002de300 0xc00027e178 <nil>} 
+2023-05-03T17:06:17.351  INFO rtsp_sender_3de1816d5cb7 [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-05-03T17:06:17.483  INFO rtsp_sender_3de1816d5cb7 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:3219940777 1 udp 2130706431 172.19.0.3 5000 typ host 0xc0005b7490 0xc00024b168 <nil>} 
+2023-05-03T17:06:17.565  INFO rtsp_sender_3de1816d5cb7 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:3742355381 1 udp 1694498815 183.81.124.189 9444 typ srflx raddr 0.0.0.0 rport 43780 0xc000334ad0 0xc0007148a0 <nil>} 
+2023-05-03T17:06:22.239  INFO rtsp_sender_3de1816d5cb7 gather candidate done 
+2023-05-03T17:06:22.485  INFO rtsp_sender_3de1816d5cb7 gather candidate done 
+2023-05-03T17:06:32.633  INFO rtsp_sender_3de1816d5cb7 id=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-03T17:06:32.633  INFO rtsp_sender_3de1816d5cb7 ICE connection state changed: closed 
+2023-05-03T17:06:32.633  INFO rtsp_sender_3de1816d5cb7 Peer connection state changed: closed 
+2023-05-03T17:06:32.633  INFO rtsp_sender_3de1816d5cb7 ICEConnectionStateDisconnected closed 
+2023-05-03T17:06:32.635  INFO rtsp_sender_3de1816d5cb7 Call stop pipeline with error: <nil> 
+2023-05-03T17:08:48.151  INFO rtsp_sender_3de1816d5cb7 Serve gRPC on: 0.0.0.0:5551 
+2023-05-03T17:08:48.152  INFO rtsp_sender_3de1816d5cb7 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-03T17:08:48.152  INFO rtsp_sender_3de1816d5cb7 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-03T17:08:48.152  INFO rtsp_sender_3de1816d5cb7 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-03T17:08:48.153  INFO rtsp_sender_3de1816d5cb7 Server is running and awaiting signal for shutdown ... 
+2023-05-03T17:27:53.661  INFO rtsp_sender_3de1816d5cb7 Serve gRPC on: 0.0.0.0:5551 
+2023-05-03T17:27:53.662  INFO rtsp_sender_3de1816d5cb7 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-03T17:27:53.662  INFO rtsp_sender_3de1816d5cb7 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-03T17:27:53.662  INFO rtsp_sender_3de1816d5cb7 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-03T17:27:53.663  INFO rtsp_sender_3de1816d5cb7 Server is running and awaiting signal for shutdown ... 

@@ -90,7 +90,15 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 }
 
 func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, int64, int64, error) {
+	if clientID == "" {
+		return "", 0, 0, fmt.Errorf("clientID is missing")
+	}
+
 	clientDir := filepath.Join("/videos", clientID)
+	if _, err := os.Stat(clientDir); os.IsNotExist(err) {
+		return "", 0, 0, jujuErr.Annotate(ErrNotFound, fmt.Sprintf("client dir for client ID:'%v' is missing", clientID))
+	}
+
 	sessionDirs, err := os.ReadDir(clientDir)
 	if err != nil {
 		return "", 0, 0, jujuErr.Annotate(err, "cannot read dir")
