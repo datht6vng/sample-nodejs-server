@@ -143,3 +143,23 @@ func GetIndex(dir string) (int, error) {
 	}
 	return index, nil
 }
+
+// SearchElementOrSmaller return the index of the element if it exists, otherwise return the index of smaller element
+// compare fucntion return -1, 0, 1 in case smaller, equal, or greater
+func SearchElementOrSmaller[ArrayType any, TargetType any](arr []ArrayType, target TargetType, compare func(a TargetType, b ArrayType) int64) int {
+	i := sort.Search(len(arr), func(i int) bool {
+		return compare(target, arr[i]) <= 0
+	})
+
+	if i >= len(arr) {
+		// Target is larger than all elements in array, return the last element
+		return len(arr) - 1
+	}
+
+	// Nearest element is either arr[i-1] or arr[i]
+	if compare(target, arr[i]) == 0 {
+		return i
+	}
+
+	return i - 1
+}

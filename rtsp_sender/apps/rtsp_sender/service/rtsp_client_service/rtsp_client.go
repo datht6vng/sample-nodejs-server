@@ -385,7 +385,7 @@ func (c *Client) createPipelineWithRetry(
 
 	if enableRecord {
 		pipeline.Connect(gst.SplitMuxSinkName, "format-location", func(mux any, index uint) {
-			currentFile := filepath.Join(sessionDir, fmt.Sprintf("record_%v.mkv", index))
+			currentFile := filepath.Join(sessionDir, fmt.Sprintf("record_%v.mp4", index))
 			c.metadata.PushRecord(
 				currentFile,
 				time.Now(),
