@@ -15,9 +15,12 @@ class CameraStreamInfoHandler extends GrpcHandler {
 
     async createCameraStream(cameraStreamInfo) {
         cameraStreamInfo = this.toProtobufConverter.visit(cameraStreamInfo);
+        cameraStreamInfo.event_key = cameraStreamInfo.event_type.event_key;
         const arg = {
             camera_stream_detail: cameraStreamInfo
         }
+        console.log("createCameraStream")
+        console.log(arg);
         const response = await this.callRpc(this.clientStuff.createCameraStream, arg);
         return response;
     }

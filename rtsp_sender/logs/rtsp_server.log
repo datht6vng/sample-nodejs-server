@@ -30,3 +30,81 @@
 2023/05/03 17:08:48 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
 2023/05/03 17:27:53 INF rtsp-simple-server v0.21.2
 2023/05/03 17:27:53 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 12:55:56 INF rtsp-simple-server v0.21.2
+2023/05/04 12:55:56 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 12:58:47 INF [RTSP] [conn 127.0.0.1:49986] opened
+2023/05/04 12:58:49 INF [RTSP] [session 5623eacb] created by 127.0.0.1:49986
+2023/05/04 12:58:50 INF [RTSP] [session 5623eacb] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 13:05:11 INF rtsp-simple-server v0.21.2
+2023/05/04 13:05:11 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 13:05:40 INF [RTSP] [conn 127.0.0.1:50136] opened
+2023/05/04 13:05:41 INF [RTSP] [session a35f545f] created by 127.0.0.1:50136
+2023/05/04 13:05:43 INF [RTSP] [session a35f545f] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 13:29:29 INF rtsp-simple-server v0.21.2
+2023/05/04 13:29:29 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 13:30:16 INF [RTSP] [conn 127.0.0.1:50850] opened
+2023/05/04 13:30:17 INF [RTSP] [session 63c473f1] created by 127.0.0.1:50850
+2023/05/04 13:30:18 INF [RTSP] [session 63c473f1] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 14:27:07 INF rtsp-simple-server v0.21.2
+2023/05/04 14:27:07 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 14:29:47 INF [RTSP] [conn 127.0.0.1:37028] opened
+2023/05/04 14:29:48 INF [RTSP] [session bfa688d0] created by 127.0.0.1:37028
+2023/05/04 14:29:50 INF [RTSP] [session bfa688d0] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 14:33:44 INF rtsp-simple-server v0.21.2
+2023/05/04 14:33:44 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 14:34:10 INF [RTSP] [conn 127.0.0.1:37176] opened
+2023/05/04 14:34:11 INF [RTSP] [session cdb15249] created by 127.0.0.1:37176
+2023/05/04 14:34:12 INF [RTSP] [session cdb15249] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 14:38:57 INF rtsp-simple-server v0.21.2
+2023/05/04 14:38:57 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 14:41:09 INF [RTSP] [conn 127.0.0.1:37316] opened
+2023/05/04 14:41:10 INF [RTSP] [session d4085830] created by 127.0.0.1:37316
+2023/05/04 14:41:11 INF [RTSP] [session d4085830] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 14:45:56 INF rtsp-simple-server v0.21.2
+2023/05/04 14:45:56 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 14:46:47 INF [RTSP] [conn 127.0.0.1:37422] opened
+2023/05/04 14:46:48 INF [RTSP] [session 04eb06e8] created by 127.0.0.1:37422
+2023/05/04 14:46:49 INF [RTSP] [session 04eb06e8] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 14:49:34 INF rtsp-simple-server v0.21.2
+2023/05/04 14:49:34 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 15:01:50 INF [RTSP] [conn 127.0.0.1:37806] opened
+2023/05/04 15:01:51 INF [RTSP] [session 8cd2feca] created by 127.0.0.1:37806
+2023/05/04 15:01:52 INF [RTSP] [session 8cd2feca] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 15:22:46 INF rtsp-simple-server v0.21.2
+2023/05/04 15:22:47 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 15:24:52 INF [RTSP] [conn 127.0.0.1:38618] opened
+2023/05/04 15:24:53 INF [RTSP] [session 2ce09c49] created by 127.0.0.1:38618
+2023/05/04 15:24:54 INF [RTSP] [session 2ce09c49] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 15:25:36 WAR [RTSP] [session 2ce09c49] 38 RTP packet(s) lost
+2023/05/04 15:25:36 WAR [RTSP] [session 2ce09c49] 363 RTP packet(s) lost
+2023/05/04 15:38:14 INF [RTSP] [conn 127.0.0.1:38618] closed (read tcp 127.0.0.1:8554->127.0.0.1:38618: read: connection reset by peer)
+2023/05/04 15:38:14 INF [RTSP] [session 2ce09c49] destroyed (teared down by 127.0.0.1:38618)
+2023/05/04 15:56:34 INF [RTSP] [conn 127.0.0.1:39680] opened
+2023/05/04 15:56:34 INF [RTSP] [session f15acbf7] created by 127.0.0.1:39680
+2023/05/04 15:56:36 INF [RTSP] [session f15acbf7] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 16:20:02 INF [RTSP] [conn 127.0.0.1:39680] closed (read tcp 127.0.0.1:8554->127.0.0.1:39680: read: connection reset by peer)
+2023/05/04 16:20:02 INF [RTSP] [session f15acbf7] destroyed (teared down by 127.0.0.1:39680)
+2023/05/04 16:37:46 INF [RTSP] [conn 127.0.0.1:41544] opened
+2023/05/04 16:37:47 INF [RTSP] [session a4d6faf1] created by 127.0.0.1:41544
+2023/05/04 16:37:48 INF [RTSP] [session a4d6faf1] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 16:50:02 INF [RTSP] [conn 127.0.0.1:41544] closed (EOF)
+2023/05/04 16:50:02 INF [RTSP] [session a4d6faf1] destroyed (teared down by 127.0.0.1:41544)
+2023/05/04 20:00:17 INF [RTSP] [conn 127.0.0.1:45572] opened
+2023/05/04 20:00:17 INF [RTSP] [session d0f26834] created by 127.0.0.1:45572
+2023/05/04 20:00:18 INF [RTSP] [session d0f26834] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 20:05:12 WAR [RTSP] [session d0f26834] 64 RTP packet(s) lost
+2023/05/04 20:05:17 WAR [RTSP] [session d0f26834] 1721 RTP packet(s) lost
+2023/05/04 20:05:18 INF [RTSP] [conn 127.0.0.1:45572] closed (EOF)
+2023/05/04 20:05:18 INF [RTSP] [session d0f26834] destroyed (teared down by 127.0.0.1:45572)
+2023/05/04 20:21:38 INF [RTSP] [conn 127.0.0.1:46396] opened
+2023/05/04 20:21:39 INF [RTSP] [session 08184112] created by 127.0.0.1:46396
+2023/05/04 20:21:41 INF [RTSP] [session 08184112] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 20:21:41 WAR [RTSP] [session 08184112] 260 RTP packet(s) lost
+2023/05/04 20:21:41 WAR [RTSP] [session 08184112] 313 RTP packet(s) lost
+2023/05/04 20:29:12 INF [RTSP] [conn 127.0.0.1:46396] closed (EOF)
+2023/05/04 20:29:12 INF [RTSP] [session 08184112] destroyed (teared down by 127.0.0.1:46396)
+2023/05/04 20:37:37 INF [RTSP] [conn 127.0.0.1:46722] opened
+2023/05/04 20:37:40 INF [RTSP] [session 3cb11d72] created by 127.0.0.1:46722
+2023/05/04 20:37:42 INF [RTSP] [session 3cb11d72] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/04 20:40:12 INF [RTSP] [session 3cb11d72] destroyed (teared down by 127.0.0.1:46722)
+2023/05/04 20:40:14 INF [RTSP] [conn 127.0.0.1:46722] closed (EOF)

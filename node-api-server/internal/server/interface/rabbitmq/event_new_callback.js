@@ -68,6 +68,9 @@ class EventNewCallback extends EventCallback {
         let argQueue = newQueue(queue.name, queue.binding_keys);
         const routingKey = `${queue.routing_key_prefix.event_created_with_media_iot}.${eventKey}`;
         const producer = newProducer(argExchange, argQueue);
+
+        console.log("Publish event message: ", publishEventMessage);
+        
         producer.produceMessage(routingKey, Buffer.from(publishEventMessage.toJson()));
     }
 

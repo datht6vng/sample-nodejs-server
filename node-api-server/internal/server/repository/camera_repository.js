@@ -91,6 +91,28 @@ class CameraRepository {
         return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
     }
 
+
+    async findByIdAndUpdateWithEventType(cameraId, cameraEntity, returnOldValue=false) {
+        const cameraDoc = this.toDatabaseConverter.visit(cameraEntity);
+        const filter = {
+            _id: cameraId.getValue()
+        }
+        let newCameraDoc;
+        try {
+            if (returnOldValue) {
+                newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc).populate("event_type");
+            }
+            else {
+                newCameraDoc = await CameraModel.findOneAndUpdate(filter, cameraDoc, { new: true }).populate("event_type"); // set new to true to return new document after update
+            }
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
+    }
+
+
     async findByIdAndDelete(cameraId) {
         const filter = {
             _id: cameraId.getValue()

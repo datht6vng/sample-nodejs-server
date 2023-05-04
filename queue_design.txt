@@ -509,6 +509,28 @@ Camera
     "camera_name": "DTG Camera PTZ",
     "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
     "username": "admin",
+    "status": "used",
     "password": "Dientoan@123",
     "event_type": "6162f9b9be1661cb32a1c449"
 }
+
+
+
+
+
+
+Problem:
++ Service name and host name => Use file url address of rtsp sender
+    + Tạm thời để dữ liệu test: 
+        + camera_service.js
+        + sfu_rtsp_stream_handler.js (getRecordFile, normalVideoUrl)
++ Event spam
++ Draw line when detection for line crossing
++ Handle update camera stream (cả của grpc client)
++ Fix denied mkdir logger
++ socket => DONE
++ Static file ben AI => DONE (Need to refactor)
+
+
+
++ ai event

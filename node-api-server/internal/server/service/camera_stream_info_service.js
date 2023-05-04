@@ -8,8 +8,14 @@ class CameraStreamInfoService {
 
     async getAllCamerasWithEventType() {
         const cameras = await this.repository.getAllWithEventType();
+        let result = new Array();
         // filter object here
-        return cameras;
+        for (let camera of cameras) {
+            if (camera.getSfuRtspStreamUrl() && camera.getEventType() && camera.getEventType().getId()) {
+                result.push(camera);
+            }
+        }
+        return result;
     }
 }
 

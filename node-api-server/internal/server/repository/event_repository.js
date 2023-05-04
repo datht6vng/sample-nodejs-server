@@ -31,11 +31,9 @@ class EventRepository {
 
     async create(eventEntity) {
         const eventDoc = this.toDatabaseConverter.visit(eventEntity);
-        console.log("eventDoc: ", eventDoc)
         let newEventDoc;
         try {
             newEventDoc = await EventModel.create(eventDoc);
-            console.log("newEventDoc: ", newEventDoc)
         }
         catch (err) {
             throw newInternalServerError("Database error", err);

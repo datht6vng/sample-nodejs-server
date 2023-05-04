@@ -45,18 +45,15 @@ class SfuRtspStreamHandler extends GrpcHandler {
             clientID: cameraId,
             timestamp: eventTime
         }
-        console.log("Grpc arg record file");
-        console.log(arg)
         const response = await this.callRpc(this.clientStuff.getRecordFile, arg);
 
-        console.log(rtspSenderHttp)
         const result = {
             startTime: new Date(response.startTime / 1000000).toISOString(),
             endTime: new Date(response.endTime / 1000000).toISOString(),
             normalVideoUrl: `${rtspSenderHttp.scheme}://${rtspSenderHttp.host}:${rtspSenderHttp.port}${response.fileAddress}`
         }
 
-        console.log(result)
+        console.log("Event recording video response from RTSP sender: ", result)
         return result;
     }
 }

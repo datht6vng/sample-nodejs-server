@@ -12,6 +12,12 @@ async function main() {
     db.start();
     grpcServer.start();
     consumers.start();
+
+
+
+    // const { newCameraStreamInfoHandler } = require("../../internal/server/grpc_client/handler/camera_stream_info_handler");
+    // const handler = newCameraStreamInfoHandler();
+    // handler.createCameraStream({})
 }
 
 main();

@@ -64,7 +64,7 @@ message DeleteCameraStreamByIdRequest {
 message GetAllCameraStreamsResponse {
     repeated CameraStreamDetail camera_streams = 1;
     string message = 2;
-    string status = 3;
+    string code = 3;
 }
 
 service CameraStreamInfoService {

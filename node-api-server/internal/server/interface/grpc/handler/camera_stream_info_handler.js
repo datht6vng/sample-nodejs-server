@@ -9,8 +9,8 @@ class CameraStreamInfoHandler extends Handler {
         this.service = service;
     }
 
-    getAllCameras(call, callback) {
-        this.service.getAllCameras()
+    getAllCameraStreams(call, callback) {
+        this.service.getAllCamerasWithEventType()
         .then(cameras => {
                
             cameras = cameras.map(camera => {
@@ -18,10 +18,15 @@ class CameraStreamInfoHandler extends Handler {
                 cameraStream.event_key = cameraStream.event_type.event_key;
                 return cameraStream;
             })
-
-            this.success({ 
-                camera_streams: cameras 
-            }, callback);
+            const response = {
+                message: "Success",
+                camera_streams: cameras,
+                code: 0
+            }
+            callback(null, response);
+            // this.success({ 
+            //     camera_streams: cameras 
+            // }, callback);
         })
         .catch(err => {
             this.failure(err, callback);
