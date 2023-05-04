@@ -168,7 +168,7 @@ func (c *Client) Connect() error {
 	go func() {
 		defer wg.Done()
 
-		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true add-reference-timestamp-meta=true latency=5000 max-rtcp-rtp-time-diff=-1 onvif-mode=true", c.clientAddress, c.username, c.password, gst.SrcName)
+		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true add-reference-timestamp-meta=true latency=10000 max-rtcp-rtp-time-diff=-1 ntp-sync=true onvif-mode=true", c.clientAddress, c.username, c.password, gst.SrcName)
 		videoSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
 		audioSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
 
