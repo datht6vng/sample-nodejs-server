@@ -69,7 +69,7 @@ func CreatePipeline(
 		}
 	}
 	if videoCodec != "" {
-		var videoEncoder, caps, parser string
+		var videoEncoder, caps string
 		switch videoCodec {
 		case webrtc.MimeTypeVP8:
 			videoEncoder = fmt.Sprintf(" ! vp8enc bitrate=1024 error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v", encoderName)
@@ -78,23 +78,22 @@ func CreatePipeline(
 			videoEncoder = fmt.Sprintf(" ! vp9enc bitrate=1024 name=%v", encoderName)
 			caps = "video/x-vp9,stream-format=byte-stream"
 		case webrtc.MimeTypeH264:
-			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast interlaced=true key-int-max=20 tune=zerolatency byte-stream=true name=%v", encoderName)
+			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast key-int-max=10 tune=zerolatency byte-stream=true name=%v ! h264parse ", encoderName)
 			caps = "video/x-h264,stream-format=byte-stream"
-			parser = "h264parse"
 		default:
 			return nil, webrtc.ErrCodecNotFound
 		}
 		var videoSink string
 
 		if enableRTSPRelay {
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! rtspclientsink location=%v", caps, parser, videoSinkName, parser, rtspRelayAddress)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! rtspclientsink location=%v", caps, videoSinkName, rtspRelayAddress)
 			if enableRecord {
 				path := `"` + filepath.Join(sessionDir, "record_%d.mp4") + `"`
 				index, err := util.GetIndex(sessionDir)
 				if err != nil {
 					return nil, err
 				}
-				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! %v ! rtspclientsink location=%v video_tee_2. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, rtspRelayAddress, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
+				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! tee name=video_tee_2 ! queue ! rtspclientsink location=%v video_tee_2. ! queue ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, rtspRelayAddress, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
 			}
 		} else if enableRecord {
 			path := `"` + filepath.Join(sessionDir, "record_%d.mp4") + `"`
@@ -102,9 +101,9 @@ func CreatePipeline(
 			if err != nil {
 				return nil, err
 			}
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! %v ! appsink name=%v sync=false video_tee. ! queue ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, parser, videoSinkName, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
 		} else {
-			videoSink = fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! %v ! appsink name=%v sync=false", parser, videoSinkName)
+			videoSink = fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=%v sync=false", videoSinkName)
 		}
 
 		pipelineStr += videoSrc + videoEncoder + videoSink

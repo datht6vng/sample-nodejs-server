@@ -1,0 +1,20 @@
+2023/05/04 23:20:37 INF rtsp-simple-server v0.21.2
+2023/05/04 23:20:37 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 23:23:14 INF rtsp-simple-server v0.21.2
+2023/05/04 23:23:14 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 23:24:00 INF rtsp-simple-server v0.21.2
+2023/05/04 23:24:00 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 23:25:25 INF rtsp-simple-server v0.21.2
+2023/05/04 23:25:25 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 23:28:48 INF rtsp-simple-server v0.21.2
+2023/05/04 23:28:48 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/04 23:29:32 INF [RTSP] [conn 127.0.0.1:54300] opened
+2023/05/04 23:29:32 INF [RTSP] [session b0491c08] created by 127.0.0.1:54300
+2023/05/04 23:29:33 INF [RTSP] [session b0491c08] is publishing to path '0', with UDP, 1 track (H264)
+2023/05/04 23:29:45 INF [RTSP] [conn 172.19.0.1:50228] opened
+2023/05/04 23:29:45 INF [RTSP] [session f61dc0fc] created by 172.19.0.1:50228
+2023/05/04 23:29:45 INF [RTSP] [session f61dc0fc] is reading from path '0', with UDP, 1 track (H264)
+2023/05/04 23:30:26 INF [RTSP] [conn 172.19.0.1:50228] closed (EOF)
+2023/05/04 23:31:15 INF [RTSP] [session f61dc0fc] destroyed (terminated)
+2023/05/04 23:31:15 INF [RTSP] [session b0491c08] destroyed (teared down by 127.0.0.1:54300)
+2023/05/04 23:31:15 INF [RTSP] [conn 127.0.0.1:54300] closed (EOF)
