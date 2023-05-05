@@ -516,10 +516,10 @@ Camera
 
 
 
+sudo lsof -n -i :27017 | grep LISTEN
 
 
-
-Problem:
+============Problem=========:
 + Service name and host name => Use file url address of rtsp sender
     + Tạm thời để dữ liệu test: 
         + camera_service.js
@@ -531,6 +531,28 @@ Problem:
 + socket => DONE
 + Static file ben AI => DONE (Need to refactor)
 
++ Change datatype to Buffer for image in mongoose, with these models: area, iot_device_type, camera_type
++ Display opencv image in browser
 
 
 + ai event
+
+
+
++ Flow logic (Các logic này đang gỉa sử không có ngoại lệ xảy ra khi communication giữa các service):
+    + Update:
+        + (1 trong username, password, url, status đổi và cú là used) 
+            + Nếu event_type cũ đang có && event_type mới khác event_type cũ
+                + Delete AI
+            + Disconnect rtsp
+
+        + Nếu mới là used và kiểm tra thỏa mã các đk của (username, password, url) 
+            + Connect rtsp
+            + Nếu có event_type
+                + Create bên AI
+
+    + Thêm try...catch cho AI khi 1 stream tự động disconnect
+    + Thêm xử lý ngoại lệ cho các communication giữa các server
+
+    ==> Các logic sẽ đươc thực thi trong middleware của camera_model
++ Camera control

@@ -80,7 +80,7 @@ cameraMapSchema.pre('findOneAndUpdate', async function(next) {
             }
         }
 
-
+        await mongoose.model("Camera").findOneAndUpdate({ _id: updateDoc.connect_camera }, { status: "used" });
 
         if (updateDoc.observe_iot && doc.observe_iot != updateDoc.observe_iot) {
             let docs = await this.model.find({ observe_iot: doc.observe_iot });
@@ -88,6 +88,8 @@ cameraMapSchema.pre('findOneAndUpdate', async function(next) {
                 await mongoose.model("IotDeviceMap").findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "free" });
             }
         }
+
+        await mongoose.model("IotDeviceMap").findOneAndUpdate({ _id: updateDoc.observe_iot }, { observed_status: "used" });
     }
 
     next();

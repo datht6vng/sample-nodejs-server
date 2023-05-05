@@ -79,8 +79,10 @@ Handler.prototype.initMiddleware = function() {
     })
   );
   this.app.use(helmet());
-  this.app.use(bodyParser.json());
-  this.app.use(bodyParser.urlencoded({ extended: false }));
+  // this.app.use(bodyParser.json());
+  // this.app.use(bodyParser.urlencoded({ extended: false }));
+  this.app.use(express.json({limit: '50mb'}));
+  this.app.use(express.urlencoded({limit: '50mb', extended: false}));
   
   
 
