@@ -87,7 +87,7 @@ const gotoPreset = (camera, {
 }
 
 const setHomePosition = (camera, options) => {
-    camera.setHomePosition();
+    camera.setHomePosition(options);
 };
 
 const gotoHomePosition = (camera, options) => {
