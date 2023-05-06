@@ -6,6 +6,7 @@ import (
 
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
 	"github.com/juju/errors"
+	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/pkg/media"
 	"github.com/tinyzimmer/go-glib/glib"
 	"github.com/tinyzimmer/go-gst/gst"
@@ -234,7 +235,13 @@ func (p *Pipeline2) ChangeEncoderBitrate(bitrate int) error {
 	if err != nil {
 		return err
 	}
-	return encoder.SetProperty("bitrate", uint(bitrate))
+	switch p.videoCodec {
+	case webrtc.MimeTypeH264:
+		return encoder.SetProperty("bitrate", uint(bitrate))
+	case webrtc.MimeTypeVP8:
+		return encoder.SetProperty("target-bitrate", uint(bitrate))
+	}
+	return nil
 }
 
 func (p *Pipeline2) OnClose(f func(error)) {
