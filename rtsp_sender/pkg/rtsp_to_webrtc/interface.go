@@ -72,7 +72,7 @@ func CreatePipeline(
 		var videoEncoder, caps string
 		switch videoCodec {
 		case webrtc.MimeTypeVP8:
-			videoEncoder = fmt.Sprintf(" ! vp8enc bitrate=1024 error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v", encoderName)
+			videoEncoder = fmt.Sprintf(" ! vp8enc target-bitrate=1024 error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 name=%v", encoderName)
 			caps = "video/x-vp8,stream-format=byte-stream"
 		case webrtc.MimeTypeVP9:
 			videoEncoder = fmt.Sprintf(" ! vp9enc bitrate=1024 name=%v", encoderName)
@@ -103,7 +103,7 @@ func CreatePipeline(
 			}
 			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue ! %v ! appsink name=%v sync=false video_tee. ! queue ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
 		} else {
-			videoSink = fmt.Sprintf(" ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=%v sync=false", videoSinkName)
+			videoSink = fmt.Sprintf(" ! queue ! %v ! appsink name=%v sync=false", caps, videoSinkName)
 		}
 
 		pipelineStr += videoSrc + videoEncoder + videoSink
