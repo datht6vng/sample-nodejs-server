@@ -12,11 +12,11 @@ const ConnectionSetKey = "redis_connection_set"
 const roomPrefix = "redis_room"
 
 func BuildKeepAliveKey(nodeID string) string {
-	return keepAlivePrefix + nodeID
+	return keepAlivePrefix + ":" + nodeID
 }
 
 func BuildRoomKey(roomName string) string {
-	return roomPrefix + roomName
+	return roomPrefix + ":" + roomName
 }
 
 func KeepAlive(redis *redis.Client, nodeID string) {

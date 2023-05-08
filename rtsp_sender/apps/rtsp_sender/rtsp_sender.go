@@ -1,9 +1,11 @@
 package rtsp_sender
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"os/exec"
+	"time"
 
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/http_interface"
@@ -12,8 +14,8 @@ import (
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	grpc_pb "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
-	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/redis"
 	"github.com/juju/errors"
+	"github.com/redis/go-redis/v9"
 	"google.golang.org/grpc"
 )
 
@@ -26,7 +28,7 @@ type Handler struct {
 	httpRTSPSenderServer http_interface.HTTPRTSPSenderServer
 	// RTSP interface
 
-	redis *redis.Redis
+	redis *redis.Client
 
 	// Repository
 }
@@ -34,7 +36,23 @@ type Handler struct {
 func NewHandler(nodeID string) (*Handler, error) {
 	handler := Handler{}
 	handler.nodeID = nodeID
-	handler.redis = redis.Connect()
+
+	ctx := context.Background()
+	r := redis.NewClient(
+		&redis.Options{
+			Addr:         config.Config.RedisConfig.Address[0], // use default Addr
+			Password:     config.Config.RedisConfig.Password,   // no password set
+			DB:           config.Config.RedisConfig.Database,   // use default DB
+			DialTimeout:  3 * time.Second,
+			ReadTimeout:  5 * time.Second,
+			WriteTimeout: 5 * time.Second,
+		})
+	_, err := r.Ping(ctx).Result()
+	if err != nil {
+		return nil, fmt.Errorf("Cannot connect to redis: %v", err)
+	}
+
+	handler.redis = r
 
 	// Service
 	rtspClientService, err := rtsp_client_service.NewRTSPClientService()

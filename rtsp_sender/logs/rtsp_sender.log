@@ -80,3 +80,8 @@
 2023-05-08T16:18:11.766  INFO rtsp_sender_145c57271d4f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
 2023-05-08T16:18:11.766  INFO rtsp_sender_145c57271d4f Serve HTTP on address: 0.0.0.0:8080 
 2023-05-08T16:18:11.767  INFO rtsp_sender_145c57271d4f Server is running and awaiting signal for shutdown ... 
+2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Server is running and awaiting signal for shutdown ... 
