@@ -26,7 +26,7 @@ func NewRoomController(roomService service.RoomService) *RoomController {
 	}
 }
 
-func (c *RoomController) GetSFUNode(ctx *fiber.Ctx) error {
+func (c *RoomController) SetOrGetSFUNode(ctx *fiber.Ctx) error {
 	request := GetSFUNodeRequest{}
 	err := ctx.BodyParser(request)
 	if err != nil {
@@ -34,7 +34,7 @@ func (c *RoomController) GetSFUNode(ctx *fiber.Ctx) error {
 			ctx, http.StatusBadRequest, http.StatusBadRequest, err.Error(),
 		)
 	}
-	nodeAddr, err := c.roomService.GetSFUNode(request.RoomName)
+	nodeAddr, err := c.roomService.SetOrGetSFUNode(request.RoomName)
 	if err != nil {
 		return c.Failure(
 			ctx, http.StatusInternalServerError, http.StatusBadRequest, err.Error(),

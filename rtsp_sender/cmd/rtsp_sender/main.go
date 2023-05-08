@@ -10,6 +10,7 @@ import (
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/google/uuid"
 	"github.com/tinyzimmer/go-gst/gst"
 )
 
@@ -38,10 +39,13 @@ func main() {
 	nodeID := "rtsp_sender"
 	if hostName := os.Getenv("HOSTNAME"); hostName != "" {
 		nodeID += "_" + hostName
+	} else {
+		nodeID += "_" + uuid.NewString()
 	}
 	if !parse() {
 		return
 	}
+	config.Config.NodeID = nodeID
 	logger.InitFileLogger(nodeID, *config.Config.LogConfig, "")
 	gst.Init(nil)
 	handler, err := rtsp_sender.NewHandler(nodeID)

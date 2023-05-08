@@ -11,6 +11,7 @@ type AppConfig struct {
 	LogConfig        *logger.LogConf   `mapstructure:"log"`
 	NetworkConfig    *NetworkConfig    `mapstructure:"network"`
 	RedisConfig      *RedisConfig      `mapstructure:"redis"`
+	NodeID           string            `mapstructure:"node_id"`
 }
 
 type RTSPSenderConfig struct {

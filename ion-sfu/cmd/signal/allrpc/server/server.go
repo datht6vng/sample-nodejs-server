@@ -1,15 +1,10 @@
 package server
 
 import (
-	"context"
-	"fmt"
 	"net"
 	"net/http"
-	"time"
 
 	"github.com/go-logr/logr"
-	"github.com/google/uuid"
-	"github.com/redis/go-redis/v9"
 
 	"github.com/dathuynh1108/redisrpc"
 	"github.com/pion/ion-sfu/cmd/signal/grpc/server"
@@ -89,25 +84,11 @@ func (s *Server) ServeJSONRPC(jaddr, cert, key string) error {
 }
 
 func (s *Server) ServeRedisRPC(conf sfu.Config) error {
-	ctx := context.Background()
-	r := redis.NewClient(
-		&redis.Options{
-			Addr:         conf.Redis.Addrs[0], // use default Addr
-			Password:     "",                  // no password set
-			DB:           0,                   // use default DB
-			DialTimeout:  3 * time.Second,
-			ReadTimeout:  5 * time.Second,
-			WriteTimeout: 5 * time.Second,
-		})
-	_, err := r.Ping(ctx).Result()
-	if err != nil {
-		return fmt.Errorf("Cannot connect to redis: %v", err)
-	}
-
-	nodeID := "sfu_" + uuid.NewString()
-	redisPkg.KeepAlive(r, nodeID)
-	redisPkg.StartCleaner(r)
-	service := redisrpc.NewServer(r, nodeID)
+	s.logger.Info("RedisRPC Listening", "node", s.sfu.NodeID)
+	nodeID := s.sfu.NodeID
+	redisPkg.KeepAlive(s.sfu.Redis, nodeID)
+	redisPkg.StartCleaner(s.sfu.Redis)
+	service := redisrpc.NewServer(s.sfu.Redis, nodeID)
 	server := server.NewSFUServer(s.sfu)
 	rtc.RegisterRTCServer(service, server)
 	return nil

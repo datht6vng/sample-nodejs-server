@@ -85,3 +85,152 @@
 2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
 2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Serve HTTP on address: 0.0.0.0:8080 
 2023-05-08T17:54:13.321  INFO rtsp_sender_145c57271d4f Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:22:21.340  INFO rtsp_sender_547b9761c8fe Cannot init rtsp sender handler with error: rtsp_sender_547b9761c8fe%!(EXTRA *errors.errorString=Cannot connect to redis: dial tcp: lookup redis on 127.0.0.11:53: server misbehaving) 
+2023-05-08T19:23:26.306  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:23:26.306  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:23:26.306  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:23:26.306  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:23:26.306  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:38:07.025  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:38:07.025  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:38:07.025  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:38:07.025  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:38:07.025  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:41:44.738  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:41:44.739  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:41:44.739  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:41:44.739  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:41:44.740  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:42:33.252  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:42:33.252  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:42:33.252  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:42:33.252  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:42:33.252  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:43:20.170  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:43:20.170  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:43:20.171  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:43:20.171  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:43:20.171  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:56:20.017  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:56:20.017  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:56:20.017  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:56:20.017  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:56:20.017  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:56:35.550  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:56:35.550  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:56:35.550  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:56:35.550  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:56:35.550  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T19:57:46.535  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T19:57:46.535  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T19:57:46.535  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T19:57:46.535  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T19:57:46.536  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T20:22:02.022  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T20:22:02.022  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T20:22:02.022  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T20:22:02.022  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T20:22:02.023  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T20:22:34.391  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T20:22:34.391  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T20:22:34.391  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T20:22:34.391  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T20:22:34.392  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T20:26:09.104  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T20:26:09.104  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T20:26:09.104  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T20:26:09.104  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T20:26:09.105  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T20:27:46.010  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T20:27:46.010  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T20:27:46.010  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T20:27:46.010  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T20:27:46.010  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:08:44.258  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:08:44.258  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:08:44.259  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:08:44.259  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:08:44.259  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:09:27.006  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:09:27.006  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:09:27.006  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:09:27.006  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:09:27.006  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:09:42.061  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:09:42.061  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:09:42.061  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:09:42.061  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:09:42.061  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:10:01.600  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:10:01.600  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:10:01.600  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:10:01.600  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:10:01.600  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:10:19.698  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:10:19.698  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:10:19.698  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:10:19.698  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:10:19.698  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:10:37.593  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:10:37.594  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:10:37.594  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:10:37.594  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:10:37.594  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:13:09.447  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:13:09.448  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:13:09.448  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:13:09.448  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:13:09.448  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T21:58:13.931  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T21:58:13.931  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T21:58:13.931  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T21:58:13.931  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T21:58:13.931  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T22:36:24.931  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T22:36:24.932  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T22:36:24.932  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T22:36:24.932  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T22:36:24.932  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T22:36:28.550  INFO rtsp_sender_547b9761c8fe [03aaf1dd-8b6b-4077-b029-c833fb60f49f] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc0002cd030 0xc0001ca6d8 <nil>} 
+2023-05-08T22:36:28.634  INFO rtsp_sender_547b9761c8fe [03aaf1dd-8b6b-4077-b029-c833fb60f49f] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 47527 typ srflx raddr 0.0.0.0 rport 47527 0xc0002cdcf0 0xc0001caee8 <nil>} 
+2023-05-08T22:36:28.800  INFO rtsp_sender_547b9761c8fe [03aaf1dd-8b6b-4077-b029-c833fb60f49f] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc0002cde90 0xc0001caf48 <nil>} 
+2023-05-08T22:36:28.862  INFO rtsp_sender_547b9761c8fe [03aaf1dd-8b6b-4077-b029-c833fb60f49f] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 54567 typ srflx raddr 0.0.0.0 rport 54567 0xc0001be370 0xc0001cb138 <nil>} 
+2023-05-08T22:51:10.472  INFO rtsp_sender_547b9761c8fe [4aef7707-05c5-416c-9a38-26bf3d987322] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000482470 0xc000522318 <nil>} 
+2023-05-08T22:51:10.554  INFO rtsp_sender_547b9761c8fe [4aef7707-05c5-416c-9a38-26bf3d987322] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 50042 typ srflx raddr 0.0.0.0 rport 50042 0xc000482820 0xc0005225e8 <nil>} 
+2023-05-08T22:51:10.722  INFO rtsp_sender_547b9761c8fe [4aef7707-05c5-416c-9a38-26bf3d987322] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000482aa0 0xc000522648 <nil>} 
+2023-05-08T22:51:10.785  INFO rtsp_sender_547b9761c8fe [4aef7707-05c5-416c-9a38-26bf3d987322] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 47957 typ srflx raddr 0.0.0.0 rport 47957 0xc0000897a0 0xc00037e5d8 <nil>} 
+2023-05-08T22:52:46.122  INFO rtsp_sender_547b9761c8fe [a3f42329-e24f-45dc-94ca-10594acb3971] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc00060e330 0xc000522298 <nil>} 
+2023-05-08T22:52:46.200  INFO rtsp_sender_547b9761c8fe [a3f42329-e24f-45dc-94ca-10594acb3971] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 52383 typ srflx raddr 0.0.0.0 rport 52383 0xc000089920 0xc00037e498 <nil>} 
+2023-05-08T22:52:46.373  INFO rtsp_sender_547b9761c8fe [a3f42329-e24f-45dc-94ca-10594acb3971] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000089b30 0xc00037e4f8 <nil>} 
+2023-05-08T22:52:46.515  INFO rtsp_sender_547b9761c8fe [a3f42329-e24f-45dc-94ca-10594acb3971] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 39037 typ srflx raddr 0.0.0.0 rport 39037 0xc000089f60 0xc00037e698 <nil>} 
+2023-05-08T22:55:27.894  INFO rtsp_sender_547b9761c8fe [3dd35ed8-74dd-4014-a3fb-e47dba0e7d4f] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc0002cdfa0 0xc00003a8f8 <nil>} 
+2023-05-08T22:55:27.985  INFO rtsp_sender_547b9761c8fe [3dd35ed8-74dd-4014-a3fb-e47dba0e7d4f] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 47038 typ srflx raddr 0.0.0.0 rport 47038 0xc000482570 0xc00003aa28 <nil>} 
+2023-05-08T22:55:28.147  INFO rtsp_sender_547b9761c8fe [3dd35ed8-74dd-4014-a3fb-e47dba0e7d4f] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc00060e650 0xc000522690 <nil>} 
+2023-05-08T22:55:28.221  INFO rtsp_sender_547b9761c8fe [3dd35ed8-74dd-4014-a3fb-e47dba0e7d4f] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 50923 typ srflx raddr 0.0.0.0 rport 50923 0xc00060ea80 0xc000522828 <nil>} 
+2023-05-08T22:56:31.745  INFO rtsp_sender_547b9761c8fe [0ba94a2c-956c-4b98-8e82-1ce953156cc3] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc00060e770 0xc00003a748 <nil>} 
+2023-05-08T23:07:37.955  INFO rtsp_sender_547b9761c8fe Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T23:07:37.955  INFO rtsp_sender_547b9761c8fe Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T23:07:37.955  INFO rtsp_sender_547b9761c8fe Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T23:07:37.955  INFO rtsp_sender_547b9761c8fe Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T23:07:37.956  INFO rtsp_sender_547b9761c8fe Server is running and awaiting signal for shutdown ... 
+2023-05-08T23:07:40.276  INFO rtsp_sender_547b9761c8fe [32963b44-df93-4f59-b7a1-0c24cb2b31ca] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc0002a6810 0xc0001ca6d8 <nil>} 
+2023-05-08T23:07:40.396  INFO rtsp_sender_547b9761c8fe [32963b44-df93-4f59-b7a1-0c24cb2b31ca] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 58112 typ srflx raddr 0.0.0.0 rport 58112 0xc00011e520 0xc0006866a8 <nil>} 
+2023-05-08T23:07:40.527  INFO rtsp_sender_547b9761c8fe [32963b44-df93-4f59-b7a1-0c24cb2b31ca] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000616800 0xc00037e578 <nil>} 
+2023-05-08T23:07:40.585  INFO rtsp_sender_547b9761c8fe [32963b44-df93-4f59-b7a1-0c24cb2b31ca] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 53492 typ srflx raddr 0.0.0.0 rport 53492 0xc000616c40 0xc00037e758 <nil>} 
+2023-05-08T23:08:39.775  INFO rtsp_sender_547b9761c8fe [ccc1c9e6-cdce-4ea3-8f95-49dae321c2dd] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc0002cc140 0xc0001cad68 <nil>} 
+2023-05-08T23:08:39.838  INFO rtsp_sender_547b9761c8fe [ccc1c9e6-cdce-4ea3-8f95-49dae321c2dd] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 55911 typ srflx raddr 0.0.0.0 rport 55911 0xc00011eb90 0xc000686a98 <nil>} 
+2023-05-08T23:08:40.026  INFO rtsp_sender_547b9761c8fe [ccc1c9e6-cdce-4ea3-8f95-49dae321c2dd] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc00011eda0 0xc000686ae8 <nil>} 
+2023-05-08T23:08:40.106  INFO rtsp_sender_547b9761c8fe [ccc1c9e6-cdce-4ea3-8f95-49dae321c2dd] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 59610 typ srflx raddr 0.0.0.0 rport 59610 0xc00011f1e0 0xc000686c88 <nil>} 
+2023-05-08T23:09:30.482  INFO rtsp_sender_547b9761c8fe [0ec9a2b0-38f9-4c5b-ac73-a230146c46db] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000482be0 0xc000124808 <nil>} 
+2023-05-08T23:09:30.573  INFO rtsp_sender_547b9761c8fe [0ec9a2b0-38f9-4c5b-ac73-a230146c46db] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 49676 typ srflx raddr 0.0.0.0 rport 49676 0xc000482d50 0xc000124858 <nil>} 
+2023-05-08T23:09:30.733  INFO rtsp_sender_547b9761c8fe [0ec9a2b0-38f9-4c5b-ac73-a230146c46db] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000482f60 0xc0001248a8 <nil>} 
+2023-05-08T23:09:30.814  INFO rtsp_sender_547b9761c8fe [0ec9a2b0-38f9-4c5b-ac73-a230146c46db] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 49022 typ srflx raddr 0.0.0.0 rport 49022 0xc000483390 0xc000124a48 <nil>} 
+2023-05-08T23:11:17.535  INFO rtsp_sender_547b9761c8fe [ccec2e94-2901-4d52-9dde-a76bb185cb0c] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000482880 0xc000124488 <nil>} 
+2023-05-08T23:11:17.603  INFO rtsp_sender_547b9761c8fe [ccec2e94-2901-4d52-9dde-a76bb185cb0c] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 47985 typ srflx raddr 0.0.0.0 rport 47985 0xc000482bb0 0xc000124628 <nil>} 
+2023-05-08T23:11:17.785  INFO rtsp_sender_547b9761c8fe [ccec2e94-2901-4d52-9dde-a76bb185cb0c] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000482dc0 0xc000124678 <nil>} 
+2023-05-08T23:11:17.864  INFO rtsp_sender_547b9761c8fe [ccec2e94-2901-4d52-9dde-a76bb185cb0c] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 59450 typ srflx raddr 0.0.0.0 rport 59450 0xc0004831f0 0xc000124818 <nil>} 
+2023-05-08T23:11:56.534  INFO rtsp_sender_547b9761c8fe [63786510-5033-4690-9213-83bb96a09f58] [trickle] type=PUBLISHER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000616310 0xc00003a508 <nil>} 
+2023-05-08T23:11:56.641  INFO rtsp_sender_547b9761c8fe [63786510-5033-4690-9213-83bb96a09f58] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 40321 typ srflx raddr 0.0.0.0 rport 40321 0xc000616690 0xc00003a748 <nil>} 
+2023-05-08T23:11:56.784  INFO rtsp_sender_547b9761c8fe [63786510-5033-4690-9213-83bb96a09f58] [trickle] type=SUBSCRIBER candidate={candidate:816615433 1 udp 2130706431 172.19.0.5 5000 typ host 0xc000616900 0xc00003a7a8 <nil>} 
+2023-05-08T23:11:56.864  INFO rtsp_sender_547b9761c8fe [63786510-5033-4690-9213-83bb96a09f58] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 49609 typ srflx raddr 0.0.0.0 rport 49609 0xc000616d50 0xc00003a968 <nil>} 
+2023-05-08T23:12:07.251  INFO rtsp_sender_547b9761c8fe Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 

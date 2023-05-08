@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/websocket/v2"
 )
 
 type HTTPRTSPSenderServer interface {
@@ -26,14 +27,16 @@ func NewHTTPRTSPSenderServer(
 		}),
 	}
 	h.roomController = controller.NewRoomController(roomService)
+	h.webSocketController = controller.NewWebSocketController(roomService)
 	h.initMiddleware()
 	h.initRoute()
 	return h
 }
 
 type httpRTSPSenderServer struct {
-	app            *fiber.App
-	roomController *controller.RoomController
+	app                 *fiber.App
+	roomController      *controller.RoomController
+	webSocketController *controller.WebSocketController
 }
 
 func (s *httpRTSPSenderServer) Start(address string) error {
@@ -52,6 +55,11 @@ func (s *httpRTSPSenderServer) initRoute() error {
 		ByteRange: true,
 		Browse:    true,
 	})
-	s.app.Get("/api/v1/sfu_node", s.roomController.GetSFUNode)
+	s.app.Get("/api/v1/sfu_node", s.roomController.SetOrGetSFUNode)
+
+	s.app.Get("/ws", websocket.New(func(c *websocket.Conn) {
+		// Websocket logic
+		s.webSocketController.Handle(c)
+	}))
 	return nil
 }

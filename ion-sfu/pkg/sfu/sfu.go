@@ -1,6 +1,8 @@
 package sfu
 
 import (
+	"context"
+	"fmt"
 	"math/rand"
 	"net"
 	"os"
@@ -9,11 +11,14 @@ import (
 	"time"
 
 	"github.com/go-logr/logr"
+	"github.com/google/uuid"
 	"github.com/pion/ice/v2"
 	"github.com/pion/ion-sfu/pkg/buffer"
+	redisPkg "github.com/pion/ion-sfu/pkg/redis"
 	"github.com/pion/ion-sfu/pkg/stats"
 	"github.com/pion/turn/v2"
 	"github.com/pion/webrtc/v3"
+	"github.com/redis/go-redis/v9"
 )
 
 // Logger is an implementation of logr.Logger. If is not provided - will be turned off.
@@ -89,6 +94,8 @@ type SFU struct {
 	sessions     map[string]Session
 	datachannels []*Datachannel
 	withStats    bool
+	Redis        *redis.Client
+	NodeID       string
 }
 
 // NewWebRTCTransportConfig parses our settings and returns a usable WebRTCTransportConfig for creating PeerConnections
@@ -223,7 +230,26 @@ func NewSFU(c Config) *SFU {
 		}
 		sfu.turn = ts
 	}
-
+	r := redis.NewClient(
+		&redis.Options{
+			Addr:         c.Redis.Addrs[0], // use default Addr
+			Password:     "",               // no password set
+			DB:           0,                // use default DB
+			DialTimeout:  3 * time.Second,
+			ReadTimeout:  5 * time.Second,
+			WriteTimeout: 5 * time.Second,
+		})
+	_, err := r.Ping(context.Background()).Result()
+	if err != nil {
+		panic(fmt.Errorf("Cannot connect to redis: %v", err))
+	}
+	hostname := os.Getenv("HOSTNAME")
+	if hostname == "" {
+		hostname = uuid.NewString()
+	}
+	sfu.NodeID = "sfu_" + hostname
+	sfu.Redis = r
+	redisPkg.KeepAlive(r, sfu.NodeID)
 	runtime.KeepAlive(ballast)
 	return sfu
 }
@@ -240,6 +266,7 @@ func (s *SFU) newSession(id string) Session {
 		if s.withStats {
 			stats.Sessions.Dec()
 		}
+		s.Redis.Del(context.Background(), redisPkg.BuildRoomKey(id))
 	})
 
 	s.Lock()
