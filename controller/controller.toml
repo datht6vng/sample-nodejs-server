@@ -1,0 +1,33 @@
+[controller]
+
+[controller.grpc]
+port = "5551"
+
+[controller.rtsp_relay]
+rtsp_relay_server_path = "/configs"
+rtsp_relay_server_config_path = "/configs/rtsp-simple-server.yml"
+rtsp_relay_ip = "127.0.0.1" # Don't use localhost
+rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server_sdk
+
+[controller.http]
+port = "8080"
+
+[log]
+level = "info"
+filePath= "logs/controller.log"
+maxSize=50
+maxBackups=10
+maxAge=28
+
+[network]
+max_bitrate = "2048"
+min_bitrate = "128"
+twcc_interval = "100" #Miliseconds
+
+[redis]
+# address = "0.0.0.0:6379"
+address = "redis:6379"
+# Split address by COMMA, Example: address = "0.0.0.0:6379, 0.0.0.0:6379"
+database = "0"
+is_cluster = "false"
+password = ""

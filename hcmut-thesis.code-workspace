@@ -1,7 +1,7 @@
 {
     "folders": [
 		{
-			"path": "rtsp_sender"
+			"path": "controller"
 		},
 		{
 			"path": "ion-sfu"
@@ -10,13 +10,10 @@
 			"path": "node-api-server"
 		},
 		{
-			"path": "smart-security-system"
-		},
-		{
 			"path": "."
 		},
 		{
-			"path": "../videocall/videocall-processor-worker"
+			"path": "../smart-security-system"
 		}
 	],
     "settings": {

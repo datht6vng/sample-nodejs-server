@@ -14,7 +14,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/pion/ice/v2"
 	"github.com/pion/ion-sfu/pkg/buffer"
-	redisPkg "github.com/pion/ion-sfu/pkg/redis"
+	"github.com/pion/ion-sfu/pkg/node"
 	"github.com/pion/ion-sfu/pkg/stats"
 	"github.com/pion/turn/v2"
 	"github.com/pion/webrtc/v3"
@@ -96,6 +96,7 @@ type SFU struct {
 	withStats    bool
 	Redis        *redis.Client
 	NodeID       string
+	Node         *node.Node
 }
 
 // NewWebRTCTransportConfig parses our settings and returns a usable WebRTCTransportConfig for creating PeerConnections
@@ -247,9 +248,13 @@ func NewSFU(c Config) *SFU {
 	if hostname == "" {
 		hostname = uuid.NewString()
 	}
+
 	sfu.NodeID = "sfu_" + hostname
 	sfu.Redis = r
-	redisPkg.KeepAlive(r, sfu.NodeID)
+	sfu.Node = node.NewNode(r, node.ServiceSFU, sfu.NodeID)
+
+	sfu.Node.KeepAlive(3 * time.Second)
+
 	runtime.KeepAlive(ballast)
 	return sfu
 }
@@ -266,7 +271,8 @@ func (s *SFU) newSession(id string) Session {
 		if s.withStats {
 			stats.Sessions.Dec()
 		}
-		s.Redis.Del(context.Background(), redisPkg.BuildRoomKey(id))
+		Logger.Info("Remove room", "room name", id)
+		node.RemoveRoom(s.Redis, id)
 	})
 
 	s.Lock()

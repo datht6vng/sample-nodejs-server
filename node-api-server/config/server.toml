@@ -126,6 +126,6 @@ port = "5000"
 
 [rtsp_sender_server]
 [rtsp_sender_server.grpc]
-host = "rtsp-sender"
+host = "controller"
 port = "5551"
 
