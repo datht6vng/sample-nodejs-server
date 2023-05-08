@@ -1,15 +1,23 @@
 package server
 
 import (
+	"context"
+	"fmt"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/go-logr/logr"
-	"github.com/pion/ion-sfu/pkg/middlewares/datachannel"
+	"github.com/google/uuid"
+	"github.com/redis/go-redis/v9"
 
+	"github.com/dathuynh1108/redisrpc"
 	"github.com/pion/ion-sfu/cmd/signal/grpc/server"
 	jsonrpcServer "github.com/pion/ion-sfu/cmd/signal/json-rpc/server"
+	"github.com/pion/ion-sfu/pkg/middlewares/datachannel"
+	redisPkg "github.com/pion/ion-sfu/pkg/redis"
 	"github.com/pion/ion-sfu/pkg/sfu"
+	"github.com/pion/ion/proto/rtc"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	// pprof
@@ -78,6 +86,31 @@ func (s *Server) ServeJSONRPC(jaddr, cert, key string) error {
 		s.logger.Error(err, "JsonRPC starting error")
 	}
 	return err
+}
+
+func (s *Server) ServeRedisRPC(conf sfu.Config) error {
+	ctx := context.Background()
+	r := redis.NewClient(
+		&redis.Options{
+			Addr:         conf.Redis.Addrs[0], // use default Addr
+			Password:     "",                  // no password set
+			DB:           0,                   // use default DB
+			DialTimeout:  3 * time.Second,
+			ReadTimeout:  5 * time.Second,
+			WriteTimeout: 5 * time.Second,
+		})
+	_, err := r.Ping(ctx).Result()
+	if err != nil {
+		return fmt.Errorf("Cannot connect to redis: %v", err)
+	}
+
+	nodeID := "sfu_" + uuid.NewString()
+	redisPkg.KeepAlive(r, nodeID)
+	redisPkg.StartCleaner(r)
+	service := redisrpc.NewServer(r, nodeID)
+	server := server.NewSFUServer(s.sfu)
+	rtc.RegisterRTCServer(service, server)
+	return nil
 }
 
 // ServePProf

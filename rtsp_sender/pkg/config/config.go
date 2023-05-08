@@ -10,6 +10,7 @@ type AppConfig struct {
 	SFUConfig        *SFUConfig        `mapstructure:"sfu"`
 	LogConfig        *logger.LogConf   `mapstructure:"log"`
 	NetworkConfig    *NetworkConfig    `mapstructure:"network"`
+	RedisConfig      *RedisConfig      `mapstructure:"redis"`
 }
 
 type RTSPSenderConfig struct {
@@ -40,6 +41,13 @@ type NetworkConfig struct {
 	MaxBitrate   int `mapstructure:"max_bitrate"`
 	MinBitrate   int `mapstructure:"min_bitrate"`
 	TWCCInterval int `mapstructure:"twcc_interval"`
+}
+
+type RedisConfig struct {
+	Address   []string `mapstructure:"address"`
+	Password  string   `mapstructure:"password"`
+	Database  int      `mapstructure:"database"`
+	IsCluster bool     `mapstructure:"is_cluster"`
 }
 
 var (

@@ -7,10 +7,12 @@ import (
 
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/grpc_interface"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/http_interface"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/room_service"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/rtsp_client_service"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/config"
 	grpc_pb "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/pkg/redis"
 	"github.com/juju/errors"
 	"google.golang.org/grpc"
 )
@@ -23,23 +25,33 @@ type Handler struct {
 	// HTTP interface
 	httpRTSPSenderServer http_interface.HTTPRTSPSenderServer
 	// RTSP interface
+
+	redis *redis.Redis
+
 	// Repository
 }
 
 func NewHandler(nodeID string) (*Handler, error) {
 	handler := Handler{}
 	handler.nodeID = nodeID
+	handler.redis = redis.Connect()
 
 	// Service
 	rtspClientService, err := rtsp_client_service.NewRTSPClientService()
 	if err != nil {
 		return nil, errors.Annotate(err, "cannot create rtsp client service")
 	}
+
+	roomService, err := room_service.NewRoomService(handler.redis)
+	if err != nil {
+		return nil, errors.Annotate(err, "cannot create room service")
+	}
+
 	// gRPC Server
 	handler.grpcRTSPSenderServer = grpc_interface.NewGRPCRTSPSenderServer(rtspClientService)
 
 	// HTTP Server
-	handler.httpRTSPSenderServer = http_interface.NewHTTPRTSPSenderServer()
+	handler.httpRTSPSenderServer = http_interface.NewHTTPRTSPSenderServer(roomService)
 	return &handler, nil
 }
 

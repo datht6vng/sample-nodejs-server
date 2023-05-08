@@ -1,6 +1,3 @@
-[sfu]
-sfu_address = "sfu:5551"
-
 [rtsp_sender]
 
 [rtsp_sender.grpc]
@@ -26,3 +23,11 @@ maxAge=28
 max_bitrate = "2048"
 min_bitrate = "128"
 twcc_interval = "100" #Miliseconds
+
+[redis]
+# address = "0.0.0.0:6379"
+address = "redis:6379"
+# Split address by COMMA, Example: address = "0.0.0.0:6379, 0.0.0.0:6379"
+database = "0"
+is_cluster = "false"
+password = ""

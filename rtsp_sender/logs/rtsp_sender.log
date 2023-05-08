@@ -70,3 +70,13 @@
 2023-05-07T01:44:15.662  INFO rtsp_sender_547b9761c8fe [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:2677719443 1 udp 1694498815 1.53.126.169 29901 typ srflx raddr 0.0.0.0 rport 55813 0xc0002cdb70 0xc000122f98 <nil>} 
 2023-05-07T01:44:20.363  INFO rtsp_sender_547b9761c8fe gather candidate done 
 2023-05-07T01:44:20.616  INFO rtsp_sender_547b9761c8fe gather candidate done 
+2023-05-08T16:08:54.745  INFO rtsp_sender_145c57271d4f Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T16:08:54.746  INFO rtsp_sender_145c57271d4f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T16:08:54.746  INFO rtsp_sender_145c57271d4f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T16:08:54.746  INFO rtsp_sender_145c57271d4f Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T16:08:54.746  INFO rtsp_sender_145c57271d4f Server is running and awaiting signal for shutdown ... 
+2023-05-08T16:18:11.766  INFO rtsp_sender_145c57271d4f Serve gRPC on: 0.0.0.0:5551 
+2023-05-08T16:18:11.766  INFO rtsp_sender_145c57271d4f Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-08T16:18:11.766  INFO rtsp_sender_145c57271d4f Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-08T16:18:11.766  INFO rtsp_sender_145c57271d4f Serve HTTP on address: 0.0.0.0:8080 
+2023-05-08T16:18:11.767  INFO rtsp_sender_145c57271d4f Server is running and awaiting signal for shutdown ... 

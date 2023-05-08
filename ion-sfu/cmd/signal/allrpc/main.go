@@ -164,5 +164,6 @@ func main() {
 		go node.ServeMetrics(maddr)
 	}
 
+	go node.ServeRedisRPC(conf.Config)
 	select {}
 }

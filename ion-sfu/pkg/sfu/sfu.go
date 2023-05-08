@@ -67,6 +67,14 @@ type Config struct {
 	Turn          TurnConfig   `mapstructure:"turn"`
 	BufferFactory *buffer.Factory
 	TurnAuth      func(username string, realm string, srcAddr net.Addr) ([]byte, bool)
+	Redis         RedisConfig `mapstructure:"redis"`
+}
+
+type RedisConfig struct {
+	Addrs     []string `mapstructure:"address"`
+	Pwd       string   `mapstructure:"password"`
+	DB        int      `mapstructure:"database"`
+	IsCluster bool     `mapstructure:"is_cluster"`
 }
 
 var (

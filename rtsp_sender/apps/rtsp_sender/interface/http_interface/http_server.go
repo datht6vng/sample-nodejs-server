@@ -3,6 +3,8 @@ package http_interface
 import (
 	"encoding/json"
 
+	"github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/interface/http_interface/controller"
+	service "github.com/dathuynh1108/hcmut-thexis/rtsp-sender/apps/rtsp_sender/service/room_service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
@@ -14,20 +16,24 @@ type HTTPRTSPSenderServer interface {
 	initMiddleware() error
 }
 
-func NewHTTPRTSPSenderServer() HTTPRTSPSenderServer {
+func NewHTTPRTSPSenderServer(
+	roomService service.RoomService,
+) HTTPRTSPSenderServer {
 	h := &httpRTSPSenderServer{
 		app: fiber.New(fiber.Config{
 			JSONEncoder: json.Marshal,
 			JSONDecoder: json.Unmarshal,
 		}),
 	}
+	h.roomController = controller.NewRoomController(roomService)
 	h.initMiddleware()
 	h.initRoute()
 	return h
 }
 
 type httpRTSPSenderServer struct {
-	app *fiber.App
+	app            *fiber.App
+	roomController *controller.RoomController
 }
 
 func (s *httpRTSPSenderServer) Start(address string) error {
@@ -46,5 +52,6 @@ func (s *httpRTSPSenderServer) initRoute() error {
 		ByteRange: true,
 		Browse:    true,
 	})
+	s.app.Get("/api/v1/sfu_node", s.roomController.GetSFUNode)
 	return nil
 }

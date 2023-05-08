@@ -4,3 +4,7 @@
 2023/05/07 01:39:11 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
 2023/05/07 01:45:36 INF [RTSP] [conn 172.19.0.1:49514] opened
 2023/05/07 01:45:36 INF [RTSP] [conn 172.19.0.1:49514] closed (no one is publishing to path '0')
+2023/05/08 16:08:54 INF rtsp-simple-server v0.21.2
+2023/05/08 16:08:54 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/08 16:18:11 INF rtsp-simple-server v0.21.2
+2023/05/08 16:18:11 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)

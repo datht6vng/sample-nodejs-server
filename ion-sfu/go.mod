@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/bep/debounce v1.2.1
+	github.com/dathuynh1108/redisrpc v0.1.0
 	github.com/gammazero/deque v0.2.1
 	github.com/gammazero/workerpool v1.1.3
 	github.com/go-logr/logr v1.2.4
@@ -24,6 +25,7 @@ require (
 	github.com/pion/turn/v2 v2.1.0
 	github.com/pion/webrtc/v3 v3.1.60
 	github.com/prometheus/client_golang v1.15.0
+	github.com/redis/go-redis/v9 v9.0.4
 	github.com/rs/zerolog v1.29.1
 	github.com/soheilhy/cmux v0.1.5
 	github.com/sourcegraph/jsonrpc2 v0.2.0
@@ -40,6 +42,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/frankban/quicktest v1.14.4 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gin-gonic/gin v1.9.0 // indirect

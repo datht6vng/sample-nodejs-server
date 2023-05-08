@@ -24,3 +24,6 @@ proto:
 	--go_opt=module=github.com/dathuynh1108/hcmut-thexis/rtsp-sender --go_out=. \
 	--go-grpc_opt=module=github.com/dathuynh1108/hcmut-thexis/rtsp-sender --go-grpc_out=. \
 	pkg/proto/*.proto
+
+build-docker:
+	docker build -t rtsp_sender .
