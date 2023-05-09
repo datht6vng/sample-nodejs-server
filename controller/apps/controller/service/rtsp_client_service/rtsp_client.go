@@ -210,7 +210,6 @@ func (c *Client) Connect() error {
 						{
 							URLs: []string{
 								"stun:stun.l.google.com:19302",
-								"stun:stun.stunprotocol.org:3478",
 							},
 						},
 					},

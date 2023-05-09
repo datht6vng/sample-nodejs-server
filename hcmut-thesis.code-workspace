@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "../smart-security-system"
+		},
+		{
+			"path": "../hcmut-thesis-deploy"
 		}
 	],
     "settings": {
