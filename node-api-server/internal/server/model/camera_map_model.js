@@ -72,6 +72,7 @@ cameraMapSchema.pre('save', async function(next) {
 cameraMapSchema.pre('findOneAndUpdate', async function(next) {
     const doc = await this.model.findOne(this.getFilter());
     const updateDoc = this.getUpdate();
+
     if (doc) {
         if (updateDoc.connect_camera && doc.connect_camera != updateDoc.connect_camera) {
             let docs = await this.model.find({ connect_camera: doc.connect_camera });

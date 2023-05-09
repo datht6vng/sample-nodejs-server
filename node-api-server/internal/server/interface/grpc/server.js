@@ -3,6 +3,7 @@ const { newProtoLoader } = require("../../../../pkg/grpc/proto/proto_loader");
 
 const { socketIO } = require("../../socket_io/socket_io");
 const { config } = require("../../../../pkg/config/config");
+const { logger } = require("../../../../pkg/logger/logger");
 
 const { newAreaHandler } = require("./handler/area_handler");
 const { newCameraMapHandler } = require("./handler/camera_map_handler");
@@ -50,7 +51,7 @@ GrpcServer.prototype.start = function(host=this.conf.host, port=this.conf.port) 
         grpc.ServerCredentials.createInsecure(),
         (error, port) => {
             this.server.start();
-            console.log(`Grpc server is running at ${host}:${port}`);
+            logger.info(`Grpc server is running at ${host}:${port}`);
         }
     );
 }

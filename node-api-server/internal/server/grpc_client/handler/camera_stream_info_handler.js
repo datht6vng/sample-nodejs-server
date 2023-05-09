@@ -19,9 +19,15 @@ class CameraStreamInfoHandler extends GrpcHandler {
         const arg = {
             camera_stream_detail: cameraStreamInfo
         }
-        console.log("createCameraStream")
-        console.log(arg);
-        const response = await this.callRpc(this.clientStuff.createCameraStream, arg);
+
+        let response;
+        try {
+            response = await this.callRpc(this.clientStuff.createCameraStream, arg);
+        }
+        catch(err) {
+            const message = `Failed to create new stream in AI server with camera ${cameraStreamInfo._id}. Detail: ${err.toString()}`;
+            this.handleError(err, message);
+        }
         return response;
     }
 
@@ -32,7 +38,14 @@ class CameraStreamInfoHandler extends GrpcHandler {
             _id: id,
             camera_stream_detail: cameraStreamInfo
         }
-        const response = await this.callRpc(this.clientStuff.updateCameraStreamInfoById, arg);
+        let response;
+        try {
+            response = await this.callRpc(this.clientStuff.updateCameraStreamInfoById, arg);
+        }
+        catch(err) {
+            const message = `Failed to update stream in AI server with camera ${arg._id}. Detail: ${err.toString()}`;
+            this.handleError(err, message);
+        }
         return response;
     }
 
@@ -42,7 +55,14 @@ class CameraStreamInfoHandler extends GrpcHandler {
         const arg = {
             _id: id
         }
-        const response = await this.callRpc(this.clientStuff.deleteCameraStreamById, arg);
+        let response;
+        try {
+            response = await this.callRpc(this.clientStuff.deleteCameraStreamById, arg);
+        }
+        catch(err) {
+            const message = `Failed to delete stream in AI server with camera ${arg._id}. Detail: ${err.toString()}`;
+            this.handleError(err, message);
+        }
         return response;
     }
 }

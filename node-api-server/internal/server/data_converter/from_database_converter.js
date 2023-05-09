@@ -71,7 +71,9 @@ class FromDatabaseConverter {
             .setOffsetXBegin(doc.offset_x_begin)
             .setOffsetXEnd(doc.offset_x_end)
             .setOffsetYBegin(doc.offset_y_begin)
-            .setOffsetYEnd(doc.offset_y_end);
+            .setOffsetYEnd(doc.offset_y_end)
+            .setConnectToRtspSender(doc.connect_to_rtsp_sender)
+            .setConnectToAi(doc.connect_to_ai)
 
         this.setEntityWithRefType(camera, camera.setCameraType, doc.camera_type, newCameraType())
         this.setEntityWithRefType(camera, camera.setEventType, doc.event_type, newEventType());

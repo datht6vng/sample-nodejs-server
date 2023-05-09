@@ -1,0 +1,112 @@
+info: May-08-2023 20:18:39: 	Server start
+info: May-08-2023 20:24:36: 	Server start
+May-08-2023 20:27:44-INFO 	Server start
+May-08-2023 20:28:09 - INFO 	Server start
+May-08-2023 20:28:45 - INFO: Server start
+May-08-2023 20:38:18 - INFO: undefined
+May-08-2023 20:40:32 - ERROR: undefined
+May-08-2023 20:40:53 - ERROR: undefined
+May-08-2023 20:41:45 - ERROR: Error: database failed to connect
+May-08-2023 20:43:43 - ERROR: Error: database failed to connect
+    at main (/usr/app/cmd/server/main.js:12:15)
+    at Object.<anonymous> (/usr/app/cmd/server/main.js:33:1)
+    at Module._compile (node:internal/modules/cjs/loader:1159:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1213:10)
+    at Module.load (node:internal/modules/cjs/loader:1037:32)
+    at Module._load (node:internal/modules/cjs/loader:878:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:82:12)
+    at node:internal/main/run_main_module:23:47
+May-09-2023 23:58:57 - [INFO]: Grpc server is running at http://localhost:50051
+May-09-2023 23:58:57 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:00:07 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:00:07 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:00:07 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:03:43 - [ERROR]: undefined
+May-10-2023 00:03:48 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 00:03:48 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:12:19 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:12:19 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:12:20 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:18:29 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 2 UNKNOWN: Exception calling application: bad argument type for built-in operation
+May-10-2023 00:18:29 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:19:45 - [ERROR]: undefined
+May-10-2023 00:22:33 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:22:33 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:22:33 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:24:21 - [ERROR]: undefined
+May-10-2023 00:24:26 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 00:24:26 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:30:25 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:30:25 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:30:25 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:30:28 - [ERROR]: undefined
+May-10-2023 00:30:33 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 00:30:33 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:33:14 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:33:14 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:33:14 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:33:21 - [ERROR]: undefined
+May-10-2023 00:33:26 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 00:33:26 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:34:00 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:34:00 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:34:00 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:34:47 - [ERROR]: undefined
+May-10-2023 00:35:10 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:35:10 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:35:10 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:36:03 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:36:03 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:36:03 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:36:13 - [ERROR]: MongoServerError: E11000 duplicate key error collection: iot_security_app.cameras index: _id_ dup key: { _id: ObjectId('6162f9b9be1661cb32a1c461') }
+May-10-2023 00:36:18 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 00:36:18 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:41:20 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:41:20 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:41:20 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:41:58 - [ERROR]: MongoServerError: E11000 duplicate key error collection: iot_security_app.cameras index: _id_ dup key: { _id: ObjectId('6162f9b9be1661cb32a1c461') }
+May-10-2023 00:42:03 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 00:42:03 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 00:53:04 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 00:53:04 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 00:53:04 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 00:53:27 - [ERROR]: MongoServerError: E11000 duplicate key error collection: iot_security_app.cameras index: _id_ dup key: { _id: ObjectId('6162f9b9be1661cb32a1c461') }
+May-10-2023 01:03:41 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 2 UNKNOWN: Exception calling application: bad argument type for built-in operation
+May-10-2023 01:03:41 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 01:17:28 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 01:17:28 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 01:17:28 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 01:21:21 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 2 UNKNOWN: Exception calling application: bad argument type for built-in operation
+May-10-2023 01:21:21 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 01:31:26 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 01:31:26 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 01:31:26 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 01:31:35 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 01:31:35 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 01:34:52 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 01:34:52 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 01:34:52 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 01:35:31 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-10-2023 01:35:31 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 01:36:46 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 01:36:46 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 01:36:46 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 01:36:57 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 01:36:57 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 01:37:33 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 01:37:33 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 01:37:33 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 01:38:23 - [ERROR]: MongoServerError: E11000 duplicate key error collection: iot_security_app.cameras index: _id_ dup key: { _id: ObjectId('6162f9b9be1661cb32a1c461') }
+May-10-2023 01:38:42 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-10-2023 01:38:42 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 01:42:04 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 2 UNKNOWN: Exception calling application: bad argument type for built-in operation
+May-10-2023 01:42:04 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 02:04:07 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: Exception calling application: 'Exception' object has no attribute 'encode'
+May-10-2023 02:04:07 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 02:13:00 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: Failed to open  for detection
+May-10-2023 02:13:00 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 02:26:26 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: Failed to open  for detection
+May-10-2023 02:26:26 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 02:29:12 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 02:29:12 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 02:29:13 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app

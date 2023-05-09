@@ -23,10 +23,13 @@ class Handler {
     }
 
     failure(error, callback) {
-        console.log(error)
         if (error instanceof BaseError) {
             const errorHandler = newErrorHandler();
-            errorHandler.execute(error);
+            if (typeof error.toString() == "string") {
+                errorHandler.execute(error);
+            }
+            else errorHandler.execute(error.toString())
+            
             const response = errorHandler.getMessage(error);
             callback(response);
         }

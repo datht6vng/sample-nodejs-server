@@ -4,7 +4,7 @@ const grpcStatus = grpc.status;
 
 const { NotFoundError } = require("../entity/error/not_found_error");
 const { InternalServerError } = require("../entity/error/internal_server_error");
-
+const { logger } = require("../../../pkg/logger/logger");
 
 class ErrorHandler {
     constructor() {
@@ -13,6 +13,8 @@ class ErrorHandler {
 }
 
 ErrorHandler.prototype.execute = function(error) {
+    logger.error(error.toString());
+
     
 }
 

@@ -15,6 +15,24 @@ class Camera {
     cameraType = undefined;
     eventType = undefined;
 
+    connectToRtspSender = false;
+    connectToAi = false;
+
+    mergeCopy(camera) {
+        for (let attr in this) {
+            if (key != "connectToRtspSender" && key != "connectToAi") {
+                this.copyIfUndefined(attr, camera);
+            }
+            
+        }
+    }
+
+    copyIfUndefined(attributeName, fromCamera) {
+        if (this[attributeName] == undefined) {
+            this[attributeName] = fromCamera[attributeName];
+        }
+    }
+
 
     accept(visitor, o, env) {
         return visitor.visitCamera(this, o, env);
@@ -76,7 +94,13 @@ class Camera {
         return this.eventType;
     }
     
-    
+    getConnectToRtspSender() {
+        return this.connectToRtspSender;
+    }
+
+    getConnectToAi() {
+        return this.connectToAi;
+    }
     
     
     
@@ -153,6 +177,16 @@ class Camera {
         else {
             this.eventType = eventType;
         }
+        return this;
+    }
+
+    setConnectToRtspSender(connectToRtspSender) {
+        this.connectToRtspSender = connectToRtspSender;
+        return this;
+    }
+
+    setConnectToAi(connectToAi) {
+        this.connectToAi = connectToAi;
         return this;
     }
 }

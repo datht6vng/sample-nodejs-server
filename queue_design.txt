@@ -556,3 +556,7 @@ sudo lsof -n -i :27017 | grep LISTEN
 
     ==> Các logic sẽ đươc thực thi trong middleware của camera_model
 + Camera control
+
+
++ Set timezone logging AI
++ Fix post middleware for updating

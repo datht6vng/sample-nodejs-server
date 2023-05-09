@@ -13,7 +13,7 @@ const rtspSenderHttp = rtspSenderServerConfig.http;
 class SfuRtspStreamHandler extends GrpcHandler {
     constructor(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {
         super(protoFile, serviceName, targetHost, targetPort);
-    }    
+    }
 
     async connect(camera) {
         const arg = {
@@ -24,7 +24,15 @@ class SfuRtspStreamHandler extends GrpcHandler {
             enableRTSPRelay: true,
             enableRecord: true
         }
-        const response = await this.callRpc(this.clientStuff.connect, arg);
+        let response;
+        try {
+            response = await this.callRpc(this.clientStuff.connect, arg);
+        }
+        catch(err) {
+            const message = `Failed to connect to rtsp sender with cliendID = ${arg.clientID}. Detail: ${err.toString()}`;
+            this.handleError(err, message);
+        }
+        
         return response.data.relayAddress;
     }
 
@@ -34,7 +42,14 @@ class SfuRtspStreamHandler extends GrpcHandler {
             clientID: camera.getId().getValue(),
             connectClientAddress: camera.getRtspStreamUrl()
         }
-        const response = await this.callRpc(this.clientStuff.disconnect, arg);
+        let response;
+        try {
+            response = await this.callRpc(this.clientStuff.disconnect, arg);
+        }
+        catch(err) {
+            const message = `Failed to connect to rtsp sender with cliendID = ${arg.clientID}. Detail: ${err.toString()}`;
+            this.handleError(err, message);
+        }
         return response;
     }
 
@@ -45,7 +60,15 @@ class SfuRtspStreamHandler extends GrpcHandler {
             clientID: cameraId,
             timestamp: eventTime
         }
-        const response = await this.callRpc(this.clientStuff.getRecordFile, arg);
+        let response;
+        try {
+            response = await this.callRpc(this.clientStuff.getRecordFile, arg);
+        }
+        catch(err) {
+            const message = `Failed to get record from rtsp sender with camera = ${arg.clientID}. Detail: ${err.toString()}`;
+            this.handleError(err, message);
+        }
+        
 
         const result = {
             startTime: new Date(response.startTime / 1000000).toISOString(),
@@ -53,7 +76,7 @@ class SfuRtspStreamHandler extends GrpcHandler {
             normalVideoUrl: `${rtspSenderHttp.scheme}://${rtspSenderHttp.host}:${rtspSenderHttp.port}${response.fileAddress}`
         }
 
-        console.log("Event recording video response from RTSP sender: ", result)
+        
         return result;
     }
 }

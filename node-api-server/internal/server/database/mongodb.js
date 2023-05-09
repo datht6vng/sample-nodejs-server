@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const { config } = require("../../../pkg/config/config");
+const { logger } = require("../../../pkg/logger/logger");
 
 class MongoDB {
     constructor() {     
@@ -16,10 +17,10 @@ class MongoDB {
         const url = `mongodb://${user}:${password}@${host}:${port}/${db}`;
         try {
             await mongoose.connect(url, this.options);
-            console.log(`MongoDB is connected on ${url}`);
+            logger.info(`MongoDB is connected on ${url}`);
         }
         catch(error) {
-            console.log(error);
+            logger.error(error);
         }
     }
     
