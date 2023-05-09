@@ -1,0 +1,56 @@
+2023-05-09T22:52:56.095  INFO controller_5a505c555313 Serve gRPC on: 0.0.0.0:5551 
+2023-05-09T22:52:56.095  INFO controller_5a505c555313 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-09T22:52:56.095  INFO controller_5a505c555313 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-09T22:52:56.095  INFO controller_5a505c555313 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-09T22:52:56.095  INFO controller_5a505c555313 Server is running and awaiting signal for shutdown ... 
+2023-05-09T22:53:22.693  INFO controller_5a505c555313 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-05-09T22:53:22.694  INFO controller_5a505c555313 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:53:22.863  INFO controller_5a505c555313 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-05-09T22:53:22.863  INFO controller_5a505c555313 Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux is-live=true add-reference-timestamp-meta=true latency=10000 max-rtcp-rtp-time-diff=-1 ntp-sync=true onvif-mode=true demux. ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,is-live=true  ! x264enc bitrate=1024 speed-preset=ultrafast key-int-max=10 tune=zerolatency byte-stream=true name=encoder ! h264parse  ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=videosink sync=false, enable record: false, enable relay: false 
+2023-05-09T22:53:22.864  INFO controller_5a505c555313 gRPC connected: sfu_4dac2a3ad51d 
+2023-05-09T22:53:22.866  INFO controller_5a505c555313 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:53:22.866  INFO controller_5a505c555313 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:53:22.889  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-05-09T22:53:22.890  INFO controller_5a505c555313 ICE connection state changed: checking 
+2023-05-09T22:53:22.890  INFO controller_5a505c555313 Peer connection state changed: connecting 
+2023-05-09T22:53:22.890  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:4116479240 1 udp 2130706431 172.19.0.9 5000 typ host 0xc0006185e0 0xc00061c048 <nil>} 
+2023-05-09T22:53:22.894  INFO controller_5a505c555313 ICE connection state changed: connected 
+2023-05-09T22:53:22.897  INFO controller_5a505c555313 Peer connection state changed: connected 
+2023-05-09T22:53:22.973  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 39072 typ srflx raddr 0.0.0.0 rport 39072 0xc0004829c0 0xc0001ca908 <nil>} 
+2023-05-09T22:53:23.030  INFO controller_5a505c555313 [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-05-09T22:53:23.139  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:4116479240 1 udp 2130706431 172.19.0.9 5000 typ host 0xc0002ce720 0xc00003a560 <nil>} 
+2023-05-09T22:53:23.198  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 52386 typ srflx raddr 0.0.0.0 rport 52386 0xc000089e70 0xc0006a2a48 <nil>} 
+2023-05-09T22:53:27.886  INFO controller_5a505c555313 gather candidate done 
+2023-05-09T22:53:28.140  INFO controller_5a505c555313 gather candidate done 
+2023-05-09T22:54:15.743  INFO controller_5a505c555313 Serve gRPC on: 0.0.0.0:5551 
+2023-05-09T22:54:15.743  INFO controller_5a505c555313 Serve RTSP with rtsp simple server, config path:/configs/rtsp-simple-server.yml 
+2023-05-09T22:54:15.743  INFO controller_5a505c555313 Start rtsp-simple-server with command: ./rtsp-simple-server /configs/rtsp-simple-server.yml 
+2023-05-09T22:54:15.743  INFO controller_5a505c555313 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-09T22:54:15.743  INFO controller_5a505c555313 Server is running and awaiting signal for shutdown ... 
+2023-05-09T22:54:21.532  INFO controller_5a505c555313 Request connect to: rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2, username: admin, password: Dientoan@123 
+2023-05-09T22:54:21.532  INFO controller_5a505c555313 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] RTSP URL: rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:54:21.668  INFO controller_5a505c555313 [rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] Audio Only: true, Video Codec: video/H264, Audio Codec:  
+2023-05-09T22:54:21.668  INFO controller_5a505c555313 Create pipeline: rtspsrc location="rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2" user-id="admin" user-pw="Dientoan@123" name=demux is-live=true add-reference-timestamp-meta=true latency=10000 max-rtcp-rtp-time-diff=-1 ntp-sync=true onvif-mode=true demux. ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,is-live=true  ! x264enc bitrate=1024 speed-preset=ultrafast key-int-max=10 tune=zerolatency byte-stream=true name=encoder ! h264parse  ! queue ! video/x-h264,stream-format=byte-stream ! appsink name=videosink sync=false, enable record: false, enable relay: false 
+2023-05-09T22:54:21.668  INFO controller_5a505c555313 gRPC connected: sfu_4dac2a3ad51d 
+2023-05-09T22:54:21.670  INFO controller_5a505c555313 [C=>S] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 uid=camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:54:21.670  INFO controller_5a505c555313 [C=>S] [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] sid=rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:54:21.677  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [join] success 
+2023-05-09T22:54:21.677  INFO controller_5a505c555313 ICE connection state changed: checking 
+2023-05-09T22:54:21.678  INFO controller_5a505c555313 Peer connection state changed: connecting 
+2023-05-09T22:54:21.678  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:4116479240 1 udp 2130706431 172.19.0.9 5000 typ host 0xc0005ac010 0xc0005b0008 <nil>} 
+2023-05-09T22:54:21.679  INFO controller_5a505c555313 ICE connection state changed: connected 
+2023-05-09T22:54:21.682  INFO controller_5a505c555313 Peer connection state changed: connected 
+2023-05-09T22:54:21.721  INFO controller_5a505c555313 [GST-STATE-CHANGE][demux] STATE-CHANGED - State changed from PAUSED to PLAYING 
+2023-05-09T22:54:21.752  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=PUBLISHER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 39819 typ srflx raddr 0.0.0.0 rport 39819 0xc0005d45f0 0xc0002aa238 <nil>} 
+2023-05-09T22:54:21.926  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:4116479240 1 udp 2130706431 172.19.0.9 5000 typ host 0xc0002a6090 0xc000512070 <nil>} 
+2023-05-09T22:54:21.992  INFO controller_5a505c555313 [camera:rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2] [trickle] type=SUBSCRIBER candidate={candidate:4250263480 1 udp 1694498815 113.161.53.87 44556 typ srflx raddr 0.0.0.0 rport 44556 0xc0002a6050 0xc0001fe018 <nil>} 
+2023-05-09T22:54:26.673  INFO controller_5a505c555313 gather candidate done 
+2023-05-09T22:54:26.927  INFO controller_5a505c555313 gather candidate done 
+2023-05-09T22:55:07.997  INFO controller_5a505c555313 26a6145b-676d-40dc-a93c-121ea240bd01 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:55:16.114  INFO controller_5a505c555313 891fa5cd-2228-4296-a4ef-ff9cda4bf31d join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:55:22.562 ERROR controller_5a505c555313 [891fa5cd-2228-4296-a4ef-ff9cda4bf31d] error sending close: Client Streaming already closed 
+2023-05-09T22:55:25.716  INFO controller_5a505c555313 c65a937d-892e-4605-8435-d3f27a9c396d join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:55:25.722  INFO controller_5a505c555313 3684046b-b85b-4a61-a9fc-e9ba86b41a8d join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:55:28.927 ERROR controller_5a505c555313 [26a6145b-676d-40dc-a93c-121ea240bd01] error sending close: Client Streaming already closed 
+2023-05-09T22:55:32.840  INFO controller_5a505c555313 7c2fe32d-d809-45f3-8f14-cd15e2e148f2 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:55:32.841  INFO controller_5a505c555313 5a180c74-9fed-4db1-bc00-4eb776c6f00d join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 

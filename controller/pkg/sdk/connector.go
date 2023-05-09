@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/google/uuid"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/redis/go-redis/v9"
 
@@ -98,7 +99,7 @@ func NewConnector(redis *redis.Client, addr string, cfg ...ConnectorConfig) (*Co
 	// 	c.grpcConn, err = grpc.DialContext(ctx, addr, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
 	// }
 
-	c.grpcConn = redisrpc.NewClient(redis, addr, config.Config.NodeID)
+	c.grpcConn = redisrpc.NewClient(redis, addr, config.Config.NodeID+":"+uuid.NewString())
 	if err != nil {
 		return nil, fmt.Errorf("did not connect: %v", err)
 	}

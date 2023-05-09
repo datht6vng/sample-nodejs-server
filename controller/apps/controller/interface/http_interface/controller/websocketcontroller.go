@@ -10,6 +10,7 @@ import (
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/gofiber/websocket/v2"
+	"github.com/google/uuid"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/pion/webrtc/v3"
 	"github.com/sourcegraph/jsonrpc2"
@@ -111,7 +112,7 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 				onErr(req, err)
 				break
 			}
-			sfuClient := c.roomService.MakeRedisRPCClientStream(sfuNode, config.Config.NodeID)
+			sfuClient := c.roomService.MakeRedisRPCClientStream(sfuNode, config.Config.NodeID+":"+uuid.NewString())
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
 			signaller, err := sfuClient.Signal(ctx)
