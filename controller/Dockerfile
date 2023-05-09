@@ -42,5 +42,5 @@ RUN apk --no-cache add ca-certificates && apk --no-cache add curl
 
 COPY --from=builder /services/hcmut-thesis/controller/cmd/controller/main .
 COPY --from=builder /services/hcmut-thesis/controller/controller.toml /configs/controller.toml
-ENTRYPOINT ["main"]
+ENTRYPOINT ["./main"]
 CMD ["-c", "/configs/controller.toml"]

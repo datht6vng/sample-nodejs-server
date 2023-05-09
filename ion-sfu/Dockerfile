@@ -26,5 +26,5 @@ RUN apk --no-cache add ca-certificates
 COPY --from=builder /services/hcmut-thesis/ion-sfu/cmd/signal/allrpc/main .
 COPY --from=builder /services/hcmut-thesis/ion-sfu/sfu.toml /configs/sfu.toml
 
-ENTRYPOINT ["main"]
+ENTRYPOINT ["./main"]
 CMD ["-c", "/configs/sfu.toml"]
