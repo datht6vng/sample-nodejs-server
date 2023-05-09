@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/util"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/pkg/media"
 )

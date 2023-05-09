@@ -7,8 +7,8 @@ import (
 	"github.com/pion/ion/proto/rtc"
 	"github.com/redis/go-redis/v9"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/config"
-	log "github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
+	log "github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/redisrpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

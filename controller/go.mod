@@ -1,4 +1,4 @@
-module github.com/dathuynh1108/hcmut-thexis/controller
+module github.com/dathuynh1108/hcmut-thesis/controller
 
 go 1.20
 

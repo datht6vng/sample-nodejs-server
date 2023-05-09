@@ -1,8 +1,8 @@
 package sdk
 
 import (
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/config"
-	log "github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
+	log "github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/juju/errors"
 	"github.com/pion/ice/v2"
 	"github.com/pion/webrtc/v3"

@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/apps/controller/service/rtsp_client_service"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/grpc"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/rtsp_client_service"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 )
 
 func NewGRPCRTSPSenderServer(rtspClientService *rtsp_client_service.RTSPClientService) grpc.RTSPSenderServer {

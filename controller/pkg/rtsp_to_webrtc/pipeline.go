@@ -4,7 +4,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/juju/errors"
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/pkg/media"

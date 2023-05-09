@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/apps/controller"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/config"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/google/uuid"
 	"github.com/tinyzimmer/go-gst/gst"
 )

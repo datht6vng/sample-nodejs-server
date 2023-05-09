@@ -1,7 +1,7 @@
 package room_service
 
 import (
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/node"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
 	"github.com/dathuynh1108/redisrpc"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/redis/go-redis/v9"

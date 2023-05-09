@@ -10,7 +10,7 @@ import (
 
 	"google.golang.org/grpc/metadata"
 
-	log "github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	log "github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	room "github.com/pion/ion/apps/room/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

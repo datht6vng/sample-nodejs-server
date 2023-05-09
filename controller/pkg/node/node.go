@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/redis/go-redis/v9"
 )
 

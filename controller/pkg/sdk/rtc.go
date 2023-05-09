@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	log "github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
+	log "github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/pion/webrtc/v3"

@@ -3,8 +3,8 @@ package http_interface
 import (
 	"encoding/json"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/apps/controller/interface/http_interface/controller"
-	service "github.com/dathuynh1108/hcmut-thexis/controller/apps/controller/service/room_service"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/http_interface/controller"
+	service "github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/room_service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"

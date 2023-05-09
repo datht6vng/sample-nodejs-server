@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/dathuynh1108/hcmut-thexis/controller/apps/controller/entity"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
 	"github.com/gofiber/fiber/v2"
 )
 

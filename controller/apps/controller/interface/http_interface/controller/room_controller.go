@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	service "github.com/dathuynh1108/hcmut-thexis/controller/apps/controller/service/room_service"
+	service "github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/room_service"
 	"github.com/gofiber/fiber/v2"
 )
 

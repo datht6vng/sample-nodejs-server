@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/util"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	"github.com/rogpeppe/go-internal/lockedfile"
 )
 

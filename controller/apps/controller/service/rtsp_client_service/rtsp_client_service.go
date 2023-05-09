@@ -13,11 +13,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/dathuynh1108/hcmut-thexis/controller/apps/controller/entity"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/config"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/logger"
-	gst "github.com/dathuynh1108/hcmut-thexis/controller/pkg/rtsp_to_webrtc"
-	"github.com/dathuynh1108/hcmut-thexis/controller/pkg/util"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
+	gst "github.com/dathuynh1108/hcmut-thesis/controller/pkg/rtsp_to_webrtc"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	jujuErr "github.com/juju/errors"
 	"github.com/redis/go-redis/v9"
 )

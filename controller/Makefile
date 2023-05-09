@@ -21,8 +21,8 @@ proto:
 	docker build -t protoc-builder ./pkg/proto && \
 	docker run -v $(CURDIR):/workspace protoc-builder \
 	protoc \
-	--go_opt=module=github.com/dathuynh1108/hcmut-thexis/controller --go_out=. \
-	--go-grpc_opt=module=github.com/dathuynh1108/hcmut-thexis/controller --go-grpc_out=. \
+	--go_opt=module=github.com/dathuynh1108/hcmut-thesis/controller --go_out=. \
+	--go-grpc_opt=module=github.com/dathuynh1108/hcmut-thesis/controller --go-grpc_out=. \
 	pkg/proto/*.proto
 
 build-docker:
