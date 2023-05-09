@@ -5,20 +5,20 @@ WORKDIR /services/hcmut-thesis/controller
 ENV GO111MODULE=on
 ENV CGO_ENABLED=1
 ENV GOOS=linux
-RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+
 RUN apk add go
 RUN apk add \
     gstreamer \
     gstreamer-dev \
-    gst-plugins-base \
-    gst-plugins-base-dev \
-    gst-plugins-good \
-    gst-plugins-bad \
-    gst-plugins-ugly \
-    gstreamer-tools \
-    gst-libav \
-    gst-rtsp-server \
-    ffmpeg
+    gst-plugins-base-dev
+    # gst-plugins-base \
+    # gst-plugins-good \
+    # gst-plugins-bad \
+    # gst-plugins-ugly \
+    # gstreamer-tools \
+    # gst-libav \
+    # gst-rtsp-server \
+    # ffmpeg
 
 RUN apk add \
 build-base \
@@ -30,7 +30,7 @@ RUN go mod download
 RUN go build -a -installsuffix cgo -o ./cmd/controller/main ./cmd/controller
 
 ## OS
-FROM alpine
+FROM alpine:edge
 
 WORKDIR /services/hcmut-thesis/controller
 
@@ -39,6 +39,20 @@ RUN apk add --no-cache tzdata
 RUN cp /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime 
 RUN echo "Asia/Ho_Chi_Minh" > /etc/timezone  
 RUN apk --no-cache add ca-certificates && apk --no-cache add curl
+RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+RUN apk add \
+    gstreamer \
+    # gstreamer-dev \
+    # gst-plugins-base \
+    # gst-plugins-base-dev \
+    gst-plugins-good \
+    gst-plugins-bad \
+    gst-plugins-ugly \
+    gstreamer-tools \
+    gst-libav \
+    gst-rtsp-server \
+    ffmpeg 
+
 
 COPY --from=builder /services/hcmut-thesis/controller/cmd/controller/main .
 COPY --from=builder /services/hcmut-thesis/controller/controller.toml /configs/controller.toml
