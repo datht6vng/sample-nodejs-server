@@ -32,7 +32,7 @@ RUN go build -a -installsuffix cgo -o ./cmd/controller/main ./cmd/controller
 ## OS
 FROM alpine
 
-WORKDIR /services/hcmut-thesis/ion-sfu
+WORKDIR /services/hcmut-thesis/controller
 
 RUN apk add --no-cache bash
 RUN apk add --no-cache tzdata 
