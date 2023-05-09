@@ -2,6 +2,7 @@ package node
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -32,6 +33,7 @@ func (n *Node) KeepAlive(duration time.Duration) {
 		for {
 			select {
 			case <-ticker.C:
+				n.redis.SAdd(ctx, connectionSetKey, key)
 				n.redis.Set(ctx, key, "", 9*time.Second)
 			}
 		}
@@ -51,12 +53,14 @@ func (n *Node) StartCleaner(duration time.Duration) {
 					if n.redis.TTL(ctx, connection).Val() > 0 {
 						continue
 					}
+					logger.Info(fmt.Sprintf("Node: %v is dead", connection))
 					// Check if this node is a SFU node
 					if IsServiceNode(ServiceSFU, connection) {
 						// Clean dangling room address
 						roomOfServiceKey := BuildRoomSetKeyOfService(connection)
 						roomKeys := n.redis.SMembers(ctx, roomOfServiceKey).Val()
 						for _, roomKey := range roomKeys {
+							logger.Info(fmt.Sprintf("Deleta dangling room: %v", roomKey))
 							pipeline.Del(ctx, roomKey)
 						}
 						pipeline.Del(ctx, roomOfServiceKey)

@@ -7,8 +7,11 @@ import (
 	"strings"
 	"time"
 
+	log "github.com/pion/ion-sfu/pkg/logger"
 	"github.com/redis/go-redis/v9"
 )
+
+var logger = log.New()
 
 const keepAliveServicePrefix = "redis_service_keep_alive"
 const keepAliveRoomPrefix = "redis_service_room_alive"
@@ -54,10 +57,21 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 	sfuNodeID := r.Get(ctx, roomKey).Val()
 	if sfuNodeID == "" {
 		currentSFUIDs := r.SMembers(ctx, connectionSetKey).Val()
+		if len(currentSFUIDs) == 0 {
+			logger.Error(errors.New("No SFU node found"), "No SFU node found")
+			return "", errors.New("No SFU node found")
+		}
+
 		min := 0
 		max := len(currentSFUIDs)
 
-		connectionID := currentSFUIDs[rand.Intn(max-min)+min]
+		var connectionID string
+		if max == 0 {
+			connectionID = currentSFUIDs[0]
+		} else {
+			connectionID = currentSFUIDs[rand.Intn(max-min)+min]
+		}
+
 		sfuNodeID = GetNodeID(connectionID)
 
 		ok := r.SetNX(ctx, roomKey, sfuNodeID, 24*time.Hour).Val()

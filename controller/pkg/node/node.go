@@ -33,6 +33,7 @@ func (n *Node) KeepAlive(duration time.Duration) {
 		for {
 			select {
 			case <-ticker.C:
+				n.redis.SAdd(ctx, connectionSetKey, key)
 				n.redis.Set(ctx, key, "", 9*time.Second)
 			}
 		}
