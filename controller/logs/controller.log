@@ -54,3 +54,15 @@
 2023-05-09T22:55:28.927 ERROR controller_5a505c555313 [26a6145b-676d-40dc-a93c-121ea240bd01] error sending close: Client Streaming already closed 
 2023-05-09T22:55:32.840  INFO controller_5a505c555313 7c2fe32d-d809-45f3-8f14-cd15e2e148f2 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
 2023-05-09T22:55:32.841  INFO controller_5a505c555313 5a180c74-9fed-4db1-bc00-4eb776c6f00d join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:59:37.325  INFO controller_5a505c555313 0d5a2b75-2b52-449c-a354-725d598b77e3 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:59:37.326  INFO controller_5a505c555313 cd274f92-f950-4be8-9a4e-587b66c76a81 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:59:37.358  INFO controller_5a505c555313 5376f9c7-671c-426b-a807-b4856ff10e5f join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T22:59:43.809  INFO controller_5a505c555313 9abe252d-73e7-413c-b245-5cdb06070831 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T23:01:57.931 ERROR controller_5a505c555313 [0d5a2b75-2b52-449c-a354-725d598b77e3] error sending close: Client Streaming already closed 
+2023-05-09T23:01:57.937 ERROR controller_5a505c555313 [cd274f92-f950-4be8-9a4e-587b66c76a81] error sending close: Client Streaming already closed 
+2023-05-09T23:01:57.947 ERROR controller_5a505c555313 [5376f9c7-671c-426b-a807-b4856ff10e5f] error sending close: Client Streaming already closed 
+2023-05-09T23:02:02.510  INFO controller_5a505c555313 efcd6348-142f-4c19-a9f4-96f040dc7262 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T23:08:08.975 ERROR controller_5a505c555313 [efcd6348-142f-4c19-a9f4-96f040dc7262] error sending close: Client Streaming already closed 
+2023-05-09T23:08:10.934  INFO controller_5a505c555313 72a3cb67-292c-468a-a718-037cd1cadabe join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
+2023-05-09T23:08:11.767 ERROR controller_5a505c555313 [72a3cb67-292c-468a-a718-037cd1cadabe] error sending close: Client Streaming already closed 
+2023-05-09T23:08:14.256  INFO controller_5a505c555313 406ee372-5ccd-472e-b4ed-3d42297d1f96 join socket rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2 
