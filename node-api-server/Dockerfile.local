@@ -17,6 +17,6 @@ RUN  apk add --no-cache bash \
 
 RUN apk --no-cache add ca-certificates && apk --no-cache add curl
 
-ENV CONFIG_PATH="./config/server.toml"
+ENV CONFIG_PATH="./config/node-api-server.toml"
 
 CMD ["npm", "run", "dev"]

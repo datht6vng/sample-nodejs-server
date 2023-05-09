@@ -94,7 +94,7 @@ services:
     container_name: node_api_server
     build:
       context: node-api-server
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     environment:
       - BROKER_HOST=rabbitmq
     volumes:
@@ -117,7 +117,7 @@ services:
     container_name: node_api_gateway
     build:
       context: node-api-gateway
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
       # dockerfile: TestDockerfile
     # environment:
     #   - BROKER_HOST=rabbitmq

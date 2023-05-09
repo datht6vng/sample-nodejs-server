@@ -1,5 +1,6 @@
-FROM node:alpine
-WORKDIR /usr/apps
+FROM node:18-alpine
+
+WORKDIR /service/hcmut-thesis/node-api-server
 
 COPY . .
 COPY ./config /config
@@ -17,6 +18,10 @@ RUN  apk add --no-cache bash \
 
 RUN apk --no-cache add ca-certificates && apk --no-cache add curl
 
-ENV CONFIG_PATH="./config/server.toml"
+ENV CONFIG_PATH="/config/node-api-server.toml" 
+ENV BROKER_HOST="rabbitmq"
 
-CMD ["npm", "run", "dev"]
+RUN npm install -g pkg
+RUN pkg package.json --targets node18-alpine
+
+ENTRYPOINT [ "./node-api-server" ]

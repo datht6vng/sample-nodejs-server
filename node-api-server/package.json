@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "bin": "cmd/server/main.js",
   "scripts": {
     "dev": "node cmd/server/main.js"
   },
@@ -28,5 +29,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "pkg": {
+    "assets": ["pkg/**/*.proto"]
   }
 }
