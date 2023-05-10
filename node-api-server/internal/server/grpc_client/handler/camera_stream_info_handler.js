@@ -20,6 +20,8 @@ class CameraStreamInfoHandler extends GrpcHandler {
             camera_stream_detail: cameraStreamInfo
         }
 
+        console.log("Create new stream in AI server: ", arg);
+
         let response;
         try {
             response = await this.callRpc(this.clientStuff.createCameraStream, arg);

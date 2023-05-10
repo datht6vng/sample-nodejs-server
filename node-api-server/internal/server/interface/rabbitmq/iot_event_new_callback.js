@@ -9,6 +9,8 @@ const { EventNewCallback } = require("./event_new_callback");
 
 const USED_STATUS = "used";
 
+const OPEN_EVENT = "zone_open";
+
 class IotEventNewCallback extends EventNewCallback {
 
     constructor() {
@@ -28,6 +30,10 @@ class IotEventNewCallback extends EventNewCallback {
     }
 
     async execute(message) {
+        const routingKey = routingKey;
+        const routingKeyArr = routingKey.split(".");
+        if (routingKeyArr[routingKeyArr.length - 1] != OPEN_EVENT) return;
+
         const eventMessage = this.parseMessage(message.content);
         if (!eventMessage) return;
         const iotDevice = await this.iotDeviceService.findIotDeviceByZone(eventMessage.zone);

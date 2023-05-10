@@ -7,3 +7,92 @@ May-10-2023 16:43:13 - [INFO]: MongoDB is connected on mongodb://root:12345@mong
 May-10-2023 17:08:58 - [INFO]: Http server is running at http://localhost:3000
 May-10-2023 17:08:58 - [INFO]: Grpc server is running at http://localhost:50051
 May-10-2023 17:08:59 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 21:59:23 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 21:59:23 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 21:59:23 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 22:20:21 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 22:20:21 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 22:20:21 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 22:21:28 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-10-2023 22:21:28 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 22:24:46 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 22:24:46 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 22:24:46 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 22:29:59 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 22:29:59 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 22:29:59 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 22:36:55 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 22:36:55 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 22:36:55 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 22:37:33 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 22:37:33 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 22:37:34 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 22:49:06 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 22:49:06 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 22:49:06 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:06:52 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:06:52 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:06:52 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:07:22 - [ERROR]: Failed to connect to rtsp sender with cliendID = 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:rtsp-sender:5551
+May-10-2023 23:07:22 - [ERROR]: Error: Failed when creating stream connection to other servers
+May-10-2023 23:11:38 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:11:38 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:11:38 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:18:17 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:18:17 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:18:18 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:18:59 - [ERROR]: ReferenceError: Cannot access 'updatedCamera' before initialization
+May-10-2023 23:18:59 - [ERROR]: Error: Failed when updating stream connection to other servers
+May-10-2023 23:19:59 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:19:59 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:19:59 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:20:17 - [ERROR]: ReferenceError: oldCamera is not defined
+May-10-2023 23:20:17 - [ERROR]: Error: Failed when updating stream connection to other servers
+May-10-2023 23:22:30 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:22:30 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:22:30 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:22:34 - [ERROR]: ReferenceError: oldCamera is not defined
+May-10-2023 23:22:34 - [ERROR]: Error: Failed when updating stream connection to other servers
+May-10-2023 23:24:02 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:24:02 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:24:02 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:25:11 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:25:11 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:25:11 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:32:20 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:32:20 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:32:20 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:35:43 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:35:43 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:35:43 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:41:27 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:41:27 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:41:27 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:42:34 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:42:34 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:42:34 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:44:01 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:44:01 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:44:01 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-10-2023 23:52:16 - [INFO]: Http server is running at http://localhost:3000
+May-10-2023 23:52:16 - [INFO]: Grpc server is running at http://localhost:50051
+May-10-2023 23:52:16 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-11-2023 00:10:26 - [INFO]: Http server is running at http://localhost:3000
+May-11-2023 00:10:26 - [INFO]: Grpc server is running at http://localhost:50051
+May-11-2023 00:10:26 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-11-2023 00:44:24 - [ERROR]: Failed to delete stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-11-2023 00:44:24 - [ERROR]: Error: Failed when updating stream connection to other servers
+May-11-2023 00:48:45 - [INFO]: Http server is running at http://localhost:3000
+May-11-2023 00:48:45 - [INFO]: Grpc server is running at http://localhost:50051
+May-11-2023 00:48:46 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-11-2023 00:54:41 - [INFO]: Http server is running at http://localhost:3000
+May-11-2023 00:54:41 - [INFO]: Grpc server is running at http://localhost:50051
+May-11-2023 00:54:41 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-11-2023 00:59:10 - [INFO]: Http server is running at http://localhost:3000
+May-11-2023 00:59:10 - [INFO]: Grpc server is running at http://localhost:50051
+May-11-2023 00:59:10 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-11-2023 01:17:49 - [INFO]: Http server is running at http://localhost:3000
+May-11-2023 01:17:49 - [INFO]: Grpc server is running at http://localhost:50051
+May-11-2023 01:17:49 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-11-2023 01:43:25 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: 'RTSPStream' object has no attribute 'is_set_line'
+May-11-2023 01:43:25 - [ERROR]: Error: Failed when updating stream connection to other servers

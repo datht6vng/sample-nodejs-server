@@ -32,7 +32,6 @@ class SfuRtspStreamHandler extends GrpcHandler {
             const message = `Failed to connect to rtsp sender with cliendID = ${arg.clientID}. Detail: ${err.toString()}`;
             this.handleError(err, message);
         }
-        
         return response.data.relayAddress;
     }
 

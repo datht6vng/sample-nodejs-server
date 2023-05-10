@@ -6,12 +6,16 @@ class CameraStreamInfoService {
         this.repository = repository;
     }
 
+    statisfyAiCondition(camera) {
+        return camera.getSfuRtspStreamUrl() && camera.getEventType() && camera.getEventType().getId() && camera.getStatus() == "used";
+    }
+
     async getAllCamerasWithEventType() {
         const cameras = await this.repository.getAllWithEventType();
         let result = new Array();
         // filter object here
         for (let camera of cameras) {
-            if (camera.getSfuRtspStreamUrl() && camera.getEventType() && camera.getEventType().getId()) {
+            if (this.statisfyAiCondition(camera)) {
                 result.push(camera);
             }
         }

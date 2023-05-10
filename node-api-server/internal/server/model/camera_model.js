@@ -74,6 +74,7 @@ async function createStreamConnection(schema) {
     let state = newCamera();
     try {
         const doc = await mongoose.model("Camera").findOne({ _id: schema._id }).populate("event_type");
+
         const camera = fromDatabaseConverter.visit(newCamera(), doc);
         await streamConnectionService.handleCreateStream(camera, state);
     }
@@ -105,14 +106,13 @@ async function deleteStreamConnection(doc) {
 
 
 async function updateStreamConnection(updateDoc, updatedDoc) {
+    if (!updatedDoc || updateDoc.connect_to_rtsp_sender != undefined || updateDoc.connect_to_ai != undefined) return;
     let state = newCamera();
-    try {   
-        if (updatedDoc && updateDoc.connect_to_rtsp_sender == undefined && updateDoc.connect_to_ai == undefined) {
-            const updateCamera = fromDatabaseConverter.visit(newCamera(), updateDoc);
-            await streamConnectionService.handleDeleteStream(updateCamera, state);
-            const updatedCamera = fromDatabaseConverter.visit(newCamera(), updatedDoc);
-            await streamConnectionService.handleCreateStream(updatedCamera, state);
-        }
+    try {
+        updatedDoc = await mongoose.model("Camera").findOne({ _id: updatedDoc._id }).populate("event_type");
+        const updatedCamera = fromDatabaseConverter.visit(newCamera(), updatedDoc);
+        await streamConnectionService.handleDeleteStream(updatedCamera, state);
+        await streamConnectionService.handleCreateStream(updatedCamera, state);
     }
     catch(err) {
         errorHandler.execute(err);
@@ -120,6 +120,7 @@ async function updateStreamConnection(updateDoc, updatedDoc) {
     }
     finally {
         state = toDatabaseConverter.visit(state);
+        
         await mongoose.model('Camera').findOneAndUpdate({ _id: state._id }, state);
     }
 }

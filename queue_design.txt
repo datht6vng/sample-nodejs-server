@@ -514,6 +514,21 @@ Camera
     "event_type": "6162f9b9be1661cb32a1c449"
 }
 
+{
+    "_id": "6162f9b9be1661cb32a1c461",
+    "camera_name": "DTG Camera PTZ",
+    "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    "username": "admin",
+    "status": "used",
+    "password": "Dientoan@123",
+    "event_type": "6162f9b9be1661cb32a1c450",
+    "offset_x_begin": 40,
+    "offset_x_end": 50,
+    "offset_y_begin": 60,
+    "offset_y_end": 70,
+    "is_set_line": true
+}
+
 
 
 sudo lsof -n -i :27017 | grep LISTEN
@@ -560,3 +575,5 @@ sudo lsof -n -i :27017 | grep LISTEN
 
 + Set timezone logging AI
 + Fix post middleware for updating
+
++ Pre middleware for is_set_line
