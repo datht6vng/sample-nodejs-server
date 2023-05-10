@@ -189,3 +189,46 @@
 2023/05/10 02:41:44 INF [RTSP] [session a5444637] destroyed (terminated)
 2023/05/10 02:41:45 INF [RTSP] [session d0336fcd] is publishing to path '1', with UDP, 1 track (H264)
 2023/05/10 02:41:47 INF [RTSP] [conn 127.0.0.1:47024] closed (read tcp 127.0.0.1:8554->127.0.0.1:47024: read: connection reset by peer)
+2023/05/10 12:27:19 INF rtsp-simple-server v0.21.2
+2023/05/10 12:27:19 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/10 12:31:31 INF [RTSP] [conn 127.0.0.1:57000] opened
+2023/05/10 12:31:32 INF [RTSP] [session e61f2602] created by 127.0.0.1:57000
+2023/05/10 12:31:34 INF [RTSP] [session e61f2602] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/10 12:42:50 INF rtsp-simple-server v0.21.2
+2023/05/10 12:42:50 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/10 13:33:10 INF [RTSP] [conn 127.0.0.1:57746] opened
+2023/05/10 13:33:11 INF [RTSP] [session 88a88748] created by 127.0.0.1:57746
+2023/05/10 13:33:13 INF [RTSP] [session 88a88748] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/10 13:38:00 INF rtsp-simple-server v0.21.2
+2023/05/10 13:38:00 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/10 16:05:19 INF rtsp-simple-server v0.21.2
+2023/05/10 16:05:19 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/10 16:06:27 INF [RTSP] [conn 127.0.0.1:60774] opened
+2023/05/10 16:06:28 INF [RTSP] [session e0c52a64] created by 127.0.0.1:60774
+2023/05/10 16:06:29 INF [RTSP] [session e0c52a64] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/10 16:08:13 WAR [RTSP] [session e0c52a64] 710 RTP packet(s) lost
+2023/05/10 16:08:14 WAR [RTSP] [session e0c52a64] 1984 RTP packet(s) lost
+2023/05/10 16:08:25 WAR [RTSP] [session e0c52a64] 112 RTP packet(s) lost
+2023/05/10 16:08:31 WAR [RTSP] [session e0c52a64] 278 RTP packet(s) lost
+2023/05/10 16:08:44 INF [RTSP] [conn 127.0.0.1:60774] closed (read tcp 127.0.0.1:8554->127.0.0.1:60774: read: connection reset by peer)
+2023/05/10 16:08:44 INF [RTSP] [session e0c52a64] destroyed (teared down by 127.0.0.1:60774)
+2023/05/10 16:18:31 INF [RTSP] [conn 127.0.0.1:32914] opened
+2023/05/10 16:18:32 INF [RTSP] [session 0db1e270] created by 127.0.0.1:32914
+2023/05/10 16:18:33 INF [RTSP] [session 0db1e270] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/10 16:25:02 INF [RTSP] [session 0db1e270] destroyed (teared down by 127.0.0.1:32914)
+2023/05/10 16:25:03 INF [RTSP] [conn 127.0.0.1:32914] closed (read tcp 127.0.0.1:8554->127.0.0.1:32914: read: connection reset by peer)
+2023/05/10 16:28:47 INF [RTSP] [conn 127.0.0.1:33204] opened
+2023/05/10 16:28:48 INF [RTSP] [session 1f90c0b8] created by 127.0.0.1:33204
+2023/05/10 16:28:49 INF [RTSP] [session 1f90c0b8] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/10 16:31:11 INF [RTSP] [conn 127.0.0.1:33204] closed (EOF)
+2023/05/10 16:31:17 INF [RTSP] [session 1f90c0b8] destroyed (no UDP packets received in a while)
+2023/05/10 16:44:03 INF rtsp-simple-server v0.21.2
+2023/05/10 16:44:03 INF [RTSP] listener opened on :8554 (TCP), :8000 (UDP/RTP), :8001 (UDP/RTCP)
+2023/05/10 16:46:02 INF [RTSP] [conn 127.0.0.1:34050] opened
+2023/05/10 16:46:03 INF [RTSP] [session 2b475f44] created by 127.0.0.1:34050
+2023/05/10 16:46:04 INF [RTSP] [session 2b475f44] is publishing to path '1', with UDP, 1 track (H264)
+2023/05/10 16:47:55 INF [RTSP] [conn 127.0.0.1:34050] closed (EOF)
+2023/05/10 16:47:55 INF [RTSP] [session 2b475f44] destroyed (not in use)
+2023/05/10 17:10:38 INF [RTSP] [conn 127.0.0.1:34556] opened
+2023/05/10 17:10:39 INF [RTSP] [session ce0437ed] created by 127.0.0.1:34556
+2023/05/10 17:10:40 INF [RTSP] [session ce0437ed] is publishing to path '1', with UDP, 1 track (H264)

@@ -89,27 +89,8 @@ async function createStreamConnection(schema) {
 }
 
 
-async function updateStreamConnection(schema) {
+async function deleteStreamConnection(doc) {
     try {
-        const doc = await schema.model.findOne(schema.getFilter());
-        const updateDoc = schema.getUpdate();
-        if (updateDoc.connect_to_rtsp_sender = undefined && updateDoc.connect_to_ai == undefined && doc) {
-            const oldCamera = fromDatabaseConverter.visit(newCamera(), doc);
-            const updateCamera = fromDatabaseConverter.visit(newCamera(), updateDoc);
-            let state = await streamConnectionService.handleUpdateStream(oldCamera, updateCamera);
-            state = toDatabaseConverter.visit(state);
-            await mongoose.model('Camera').findOneAndUpdate({ _id: state._id }, state);
-        }
-    }
-    catch(err) {
-        errorHandler.execute(err);
-        errorHandler.execute(new Error("Failed when updating stream connection to other servers"));
-    }
-}
-
-async function deleteStreamConnection(schema) {
-    try {
-        const doc = await schema.model.findOne(schema.getFilter());
         if (doc) {
             const camera = fromDatabaseConverter.visit(newCamera(), doc);
             await streamConnectionService.handleDeleteStream(camera);
@@ -122,26 +103,84 @@ async function deleteStreamConnection(schema) {
 
 }
 
-cameraSchema.post('save', async function(doc) {
+
+async function updateStreamConnection(updateDoc, updatedDoc) {
+    let state = newCamera();
+    try {   
+        if (updatedDoc && updateDoc.connect_to_rtsp_sender == undefined && updateDoc.connect_to_ai == undefined) {
+            const updateCamera = fromDatabaseConverter.visit(newCamera(), updateDoc);
+            await streamConnectionService.handleDeleteStream(updateCamera, state);
+            const updatedCamera = fromDatabaseConverter.visit(newCamera(), updatedDoc);
+            await streamConnectionService.handleCreateStream(updatedCamera, state);
+        }
+    }
+    catch(err) {
+        errorHandler.execute(err);
+        errorHandler.execute(new Error("Failed when updating stream connection to other servers"));
+    }
+    finally {
+        state = toDatabaseConverter.visit(state);
+        await mongoose.model('Camera').findOneAndUpdate({ _id: state._id }, state);
+    }
+}
+
+
+// async function updateStreamConnection(schema) {
+//     try {
+//         const doc = await schema.model.findOne(schema.getFilter());
+//         const updateDoc = schema.getUpdate();
+//         if (updateDoc.connect_to_rtsp_sender = undefined && updateDoc.connect_to_ai == undefined && doc) {
+//             const oldCamera = fromDatabaseConverter.visit(newCamera(), doc);
+//             const updateCamera = fromDatabaseConverter.visit(newCamera(), updateDoc);
+//             let state = await streamConnectionService.handleUpdateStream(oldCamera, updateCamera);
+//             state = toDatabaseConverter.visit(state);
+//             await mongoose.model('Camera').findOneAndUpdate({ _id: state._id }, state);
+//         }
+//     }
+//     catch(err) {
+//         errorHandler.execute(err);
+//         errorHandler.execute(new Error("Failed when updating stream connection to other servers"));
+//     }
+// }
+
+
+
+cameraSchema.post('save', async function(doc, next) {
     createStreamConnection(this);
 })
 
-cameraSchema.pre('findOneAndUpdate', async function(next) {
-    updateStreamConnection(this);
-    next();
+// cameraSchema.pre('findOneAndUpdate', async function(next) {
+//     updateStreamConnection(this);
+//     next();
+// })
+
+cameraSchema.post('findOneAndUpdate', async function(doc, next) {
+    const updateDoc = this.getUpdate().$set;
+    const updatedDoc = doc;
+    updateStreamConnection(updateDoc, updatedDoc);
+    // console.log(doc);
+    // console.log(this.getFilter());
+    // console.log(this.getUpdate().$set);
 })
 
 
 cameraSchema.pre('findOneAndDelete', async function(next) {
     await deleteCameraRelation(this);
-    deleteStreamConnection(this);
     next();
 })
 
 cameraSchema.pre('deleteMany', async function(next) {
     await deleteCameraRelation(this);
-    deleteStreamConnection(this);
     next();
+})
+
+
+cameraSchema.post('findOneAndDelete', async function(doc, next) {
+    deleteStreamConnection(doc);
+})
+
+cameraSchema.post('deleteMany', async function(doc, next) {
+    deleteStreamConnection(doc);
 })
 
 // cameraSchema.pre("remove", async function(next) {

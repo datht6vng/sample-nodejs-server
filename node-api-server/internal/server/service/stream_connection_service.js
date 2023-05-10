@@ -49,35 +49,35 @@ class StreamConnectionService {
         return state;
     }
 
-    async handleUpdateStream(oldCamera, updateCamera, state=newCamera()) {
-        /*
-            Pre: updatecamera must contain all information of the camera, not a part of it
-        */
-        this.setState(oldCamera, state);
-        updateCamera.mergeCopy(oldCamera);
+    // async handleUpdateStream(oldCamera, updateCamera, state=newCamera()) {
+    //     /*
+    //         Pre: updatecamera must contain all information of the camera, not a part of it
+    //     */
+    //     this.setState(oldCamera, state);
+    //     updateCamera.mergeCopy(oldCamera);
 
-        if (oldCamera.getConnectToRtspSender() == true) {
-            if (this.hasDifferentStreamInfo(oldCamera, updateCamera)) {
-                await this.handleDeleteStream(oldCamera, state);
-                await this.handleCreateStream(updateCamera, state);
-            }
-            else {
-                const cameraStreamInfoHandler = newCameraStreamInfoHandler();
-                if (oldCamera.getConnectToAi()) {
-                    await cameraStreamInfoHandler.deleteCameraStreamById(oldCamera.getId()); 
-                    state.setConnectToAi(false);
-                }
-                if (newCamera.getEventType()) {
-                    await cameraStreamInfoHandler.createCameraStream(camera);
-                    state.setConnectToAi(true);
-                }
-            }
-        }
-        else {
-            await this.handleCreateStream(updateCamera, state);
-        }
-        return state;
-    }
+    //     if (oldCamera.getConnectToRtspSender() == true) {
+    //         if (this.hasDifferentStreamInfo(oldCamera, updateCamera)) {
+    //             await this.handleDeleteStream(oldCamera, state);
+    //             await this.handleCreateStream(updateCamera, state);
+    //         }
+    //         else {
+    //             const cameraStreamInfoHandler = newCameraStreamInfoHandler();
+    //             if (oldCamera.getConnectToAi()) {
+    //                 await cameraStreamInfoHandler.deleteCameraStreamById(oldCamera.getId()); 
+    //                 state.setConnectToAi(false);
+    //             }
+    //             if (newCamera.getEventType()) {
+    //                 await cameraStreamInfoHandler.createCameraStream(camera);
+    //                 state.setConnectToAi(true);
+    //             }
+    //         }
+    //     }
+    //     else {
+    //         await this.handleCreateStream(updateCamera, state);
+    //     }
+    //     return state;
+    // }
 
     async handleDeleteStream(camera, state=newCamera()) {
         this.setState(camera, state);
@@ -87,8 +87,10 @@ class StreamConnectionService {
             await cameraStreamInfoHandler.deleteCameraStreamById(oldCamera.getId()); 
             state.setConnectToAi(false);
         }
-        await rtspSenderHandler.disconnect(oldCamera);
-        state.setConnectToRtspSender(false);
+        if (camera.getConnectToRtspSender()) {
+            await rtspSenderHandler.disconnect(oldCamera);
+            state.setConnectToRtspSender(false);
+        }
         return state;
     }
 }
