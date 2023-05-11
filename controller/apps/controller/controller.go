@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net"
-	"os/exec"
 	"time"
 
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/grpc_interface"
@@ -86,9 +85,9 @@ func (h *Handler) Start() error {
 	// HTTP Interface
 
 	// RTSP Interface
-	if err := h.ServeRTSP(); err != nil {
-		return errors.Annotate(err, "cannot start RTSP service")
-	}
+	// if err := h.ServeRTSP(); err != nil {
+	// 	return errors.Annotate(err, "cannot start RTSP service")
+	// }
 
 	// HTTP Interface
 	if err := h.ServeHTTP(); err != nil {
@@ -118,18 +117,18 @@ func (h *Handler) ServeGRPC() error {
 	return nil
 }
 
-func (h *Handler) ServeRTSP() error {
-	logger.Infof("Serve RTSP with rtsp simple server, config path:%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
-	cmd := exec.Command("./rtsp-simple-server", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
-	cmd.Dir = fmt.Sprintf("%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerPath)
-	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
-	go func() {
-		if err := cmd.Run(); err != nil {
-			logger.Errorf("RTSP Relay Server Error: %v", err)
-		}
-	}()
-	return nil
-}
+// func (h *Handler) ServeRTSP() error {
+// 	logger.Infof("Serve RTSP with rtsp simple server, config path:%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
+// 	cmd := exec.Command("./rtsp-simple-server", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
+// 	cmd.Dir = fmt.Sprintf("%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerPath)
+// 	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
+// 	go func() {
+// 		if err := cmd.Run(); err != nil {
+// 			logger.Errorf("RTSP Relay Server Error: %v", err)
+// 		}
+// 	}()
+// 	return nil
+// }
 
 func (h *Handler) ServeHTTP() error {
 	address := fmt.Sprintf("0.0.0.0:%v", config.Config.RTSPSenderConfig.HTTPConfig.Port)

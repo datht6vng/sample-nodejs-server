@@ -6,7 +6,7 @@ port = "5551"
 [controller.rtsp_relay]
 rtsp_relay_server_path = "/configs"
 rtsp_relay_server_config_path = "/configs/rtsp-simple-server.yml"
-rtsp_relay_ip = "127.0.0.1" # Don't use localhost
+rtsp_relay_ip = "rtsp_server" # Don't use localhost
 rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server_sdk
 
 [controller.http]
