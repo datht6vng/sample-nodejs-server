@@ -2,6 +2,8 @@ package http_interface
 
 import (
 	"encoding/json"
+	"net/http"
+	"os"
 
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/http_interface/controller"
 	service "github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/room_service"
@@ -61,5 +63,14 @@ func (s *httpRTSPSenderServer) initRoute() error {
 		// Websocket logic
 		s.webSocketController.Handle(c)
 	}))
+
+	s.app.Get("/*", func(ctx *fiber.Ctx) error {
+		return ctx.Status(http.StatusOK).JSON(
+			fiber.Map{
+				"from":     os.Getenv("HOSTNAME"),
+				"messsage": "OK",
+			},
+		)
+	})
 	return nil
 }
