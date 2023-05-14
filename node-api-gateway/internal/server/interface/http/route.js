@@ -25,6 +25,8 @@ Handler.prototype.initRoute = function() {
   this.app.put('/api/cameras/:id', this.cameraController.updateCameraById);
   this.app.delete('/api/cameras/:id', this.cameraController.deleteCameraById);
 
+  this.app.put('/api/cameras', this.cameraController.updateCamera);
+
   this.app.get('/api/event_types', this.eventTypeController.getAllEventTypes);
   this.app.get('/api/event_types/:id', this.eventTypeController.getEventTypeById);
   this.app.post('/api/event_types', this.eventTypeController.createEventType);

@@ -18,6 +18,12 @@ class Camera {
     connectToRtspSender = false;
     connectToAi = false;
 
+    hostname = undefined;
+    port = undefined;
+    streamResolution = undefined;
+    iotEventZoneCoords = undefined;
+    cameraEventZoneCoords = undefined;
+
     mergeCopy(camera) {
         for (let attr in this) {
             if (key != "connectToRtspSender" && key != "connectToAi") {
@@ -101,6 +107,31 @@ class Camera {
     getConnectToAi() {
         return this.connectToAi;
     }
+
+
+
+
+
+    getHostname() {
+        return this.hostname;
+    }
+
+    getPort() {
+        return this.port;
+    }
+
+    getStreamResolution() {
+        return this.streamResolution;
+    }
+
+    getIotEventZoneCoords() {
+        return this.iotEventZoneCoords;
+    }
+
+    getCameraEventZoneCoords() {
+        return this.cameraEventZoneCoords;
+    }
+
     
     
     
@@ -187,6 +218,35 @@ class Camera {
 
     setConnectToAi(connectToAi) {
         this.connectToAi = connectToAi;
+        return this;
+    }
+
+
+
+
+    setHostname(hostname) {
+        this.hostname = hostname;
+        return this;
+    }
+
+    setPort(port) {
+        this.port = port;
+        return this;
+    }
+
+
+    setStreamResolution(streamResolution) {
+        this.streamResolution = streamResolution;
+        return this;
+    }
+
+    setIotEventZoneCoords(iotEventZoneCoords) {
+        this.iotEventZoneCoords = iotEventZoneCoords;
+        return this;
+    }
+
+    setCameraEventZoneCoords(cameraEventZoneCoords) {
+        this.cameraEventZoneCoords = cameraEventZoneCoords;
         return this;
     }
 }

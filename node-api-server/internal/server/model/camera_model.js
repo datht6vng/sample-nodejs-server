@@ -55,7 +55,15 @@ const cameraSchema = new Schema (
         connect_to_ai: {
             type: Boolean, 
             default: false
-        }
+        },
+
+
+
+        hostname: String, // camera server host name 
+        port: Number,
+        stream_resolution: [Number], // [width, height]
+        iot_event_zone_coords: [Number], // from_x, from_y, to_x, to_y
+        camera_event_zone_coords: [Number]
     }
 )
 

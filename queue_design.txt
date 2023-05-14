@@ -577,3 +577,6 @@ sudo lsof -n -i :27017 | grep LISTEN
 + Fix post middleware for updating
 
 + Pre middleware for is_set_line
+
+
++ Trả về lỗi cho user khi các vấn đề liên quan đến stream không đúng info
