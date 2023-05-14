@@ -67,8 +67,8 @@ func (s *httpRTSPSenderServer) initRoute() error {
 	s.app.Get("/*", func(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusOK).JSON(
 			fiber.Map{
-				"from":     os.Getenv("HOSTNAME"),
-				"messsage": "OK",
+				"from": os.Getenv("HOSTNAME"),
+				"uri":  ctx.Context().URI(),
 			},
 		)
 	})
