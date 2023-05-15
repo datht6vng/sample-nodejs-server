@@ -5,11 +5,13 @@ import (
 	"net/http"
 
 	"github.com/go-logr/logr"
-	"github.com/pion/ion-sfu/pkg/middlewares/datachannel"
 
+	"github.com/dathuynh1108/redisrpc"
 	"github.com/pion/ion-sfu/cmd/signal/grpc/server"
 	jsonrpcServer "github.com/pion/ion-sfu/cmd/signal/json-rpc/server"
+	"github.com/pion/ion-sfu/pkg/middlewares/datachannel"
 	"github.com/pion/ion-sfu/pkg/sfu"
+	"github.com/pion/ion/proto/rtc"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	// pprof
@@ -78,6 +80,15 @@ func (s *Server) ServeJSONRPC(jaddr, cert, key string) error {
 		s.logger.Error(err, "JsonRPC starting error")
 	}
 	return err
+}
+
+func (s *Server) ServeRedisRPC(conf sfu.Config) error {
+	s.logger.Info("RedisRPC Listening", "node", s.sfu.NodeID)
+	nodeID := s.sfu.NodeID
+	service := redisrpc.NewServer(s.sfu.Redis, nodeID)
+	server := server.NewSFUServer(s.sfu)
+	rtc.RegisterRTCServer(service, server)
+	return nil
 }
 
 // ServePProf

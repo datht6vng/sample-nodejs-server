@@ -26,3 +26,6 @@ test: go_init
 		-timeout 240s \
 		-coverprofile=cover.out -covermode=atomic \
 		-v -race ${GO_TESTPKGS} 
+
+build-docker:
+	docker build -t ion-sfu .

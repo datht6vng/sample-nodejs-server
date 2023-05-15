@@ -10,38 +10,31 @@ services:
     # restart: always
     command: >
       sh -c "cat /configs/sfu.toml && go run ./cmd/signal/allrpc/main.go -c /configs/sfu.toml"
-    environment:
-      - gaddr=:5551
-      - jaddr=:7000
     ports:
-      - 7000:7000 # JSON RPC port
-      - 5551:5551 # gRPC port
       - 5000:5000 # ICE mux port
     networks:
       - backend 
     
-  rtsp-sender:
-    container_name: rtsp_sender
+  controller:
+    container_name: controller
     build:
-      dockerfile: ./rtsp_sender/Dockerfile.local
+      dockerfile: ./controller/Dockerfile.local
       context: .
     volumes:
-      - ./rtsp_sender:/service/rtsp_sender
-      - ./rtsp_sender/rtsp_sender.toml:/configs/rtsp_sender.toml
-      - ./rtsp_sender/rtsp-simple-server:/configs/rtsp-simple-server
-      - ./rtsp_sender/rtsp-simple-server.yml:/configs/rtsp-simple-server.yml
-      - ./rtsp_sender/logs:/logs
-      - ./rtsp_sender/videos:/videos
-    working_dir: /service/rtsp_sender
+      - ./controller:/service/controller
+      - ./controller/controller.toml:/configs/controller.toml
+      - ./controller/rtsp-simple-server:/configs/rtsp-simple-server
+      - ./controller/rtsp-simple-server.yml:/configs/rtsp-simple-server.yml
+      - ./controller/logs:/logs
+      - ./controller/videos:/videos
+    working_dir: /service/controller
     # restart: always
     command: >
-      sh -c "go run ./cmd/rtsp_sender/main.go -c /configs/rtsp_sender.toml"
+      sh -c "go run ./cmd/controller/main.go -c /configs/controller.toml"
     ports:
-      - 5552:5551 # gRPC port
-      - 8554:8554 # RTSP port
-      - 8322:8322 # RTP port
-      - 8080:8080 # HTTP port
-      - 8000-8003:8000-8003 # multicast 
+      - 5551:5551 # gRPC port
+      - 8080:8080 # HTTP + WS port
+
     environment:
     - GST_DEBUG=1
     networks:
@@ -77,6 +70,7 @@ services:
       - backend 
 
   event-simulator:
+    container_name: event-simulator
     build:
       context: event-simulator
       dockerfile: Dockerfile
@@ -91,12 +85,14 @@ services:
       - "3006:3006"
     depends_on:
       - mongodb
+    networks:
+      - backend 
 
   node-api-server:
     container_name: node_api_server
     build:
       context: node-api-server
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     environment:
       - BROKER_HOST=rabbitmq
     volumes:
@@ -119,7 +115,7 @@ services:
     container_name: node_api_gateway
     build:
       context: node-api-gateway
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
       # dockerfile: TestDockerfile
     # environment:
     #   - BROKER_HOST=rabbitmq
@@ -136,12 +132,38 @@ services:
     #   - node-api-server
     networks:
       - backend 
+    
+  redis:
+    container_name: redis
+    image: "redis"
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory-policy allkeys-lru --maxmemory 4G
+    restart: always
+    networks:
+      - backend 
+    volumes:
+      - redis-data:/data
+
+  rtsp_server:
+    build:
+      context: rtsp_server
+      dockerfile: Dockerfile
+    volumes:
+      - ./rtsp_server/rtsp-simple-server.yml:/configs/rtsp_server/rtsp-simple-server.yml
+    networks:
+     - backend
+    ports:
+      - 8554:8554 # RTSP port
+      - 8322:8322 # RTP port
+      - 8000-8003:8000-8003 # multicast 
 
 volumes:
   api_node_modules:
   gateway_node_modules:
   event_node_modules:
   mongodb_data:
+  redis-data:
 
 
 networks:

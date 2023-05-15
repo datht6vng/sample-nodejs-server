@@ -1,7 +1,7 @@
 {
     "folders": [
 		{
-			"path": "rtsp_sender"
+			"path": "controller"
 		},
 		{
 			"path": "ion-sfu"
@@ -10,10 +10,13 @@
 			"path": "node-api-server"
 		},
 		{
-			"path": "smart-security-system"
+			"path": "."
 		},
 		{
-			"path": "."
+			"path": "../smart-security-system"
+		},
+		{
+			"path": "../hcmut-thesis-deploy"
 		}
 	],
     "settings": {

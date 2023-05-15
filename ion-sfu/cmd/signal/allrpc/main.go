@@ -112,9 +112,9 @@ func parse() bool {
 	}
 
 	// at least set one
-	if gaddr == "" && jaddr == "" {
-		return false
-	}
+	// if gaddr == "" && jaddr == "" {
+	// 	return false
+	// }
 
 	if !load() {
 		return false
@@ -164,5 +164,7 @@ func main() {
 		go node.ServeMetrics(maddr)
 	}
 
+	go node.ServeRedisRPC(conf.Config)
+	// Lock forever
 	select {}
 }

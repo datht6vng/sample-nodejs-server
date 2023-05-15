@@ -109,7 +109,6 @@ func (s *SFUServer) Signal(sig rtc.RTC_SignalServer) error {
 
 	for {
 		in, err := sig.Recv()
-
 		if err != nil {
 			peer.Close()
 
