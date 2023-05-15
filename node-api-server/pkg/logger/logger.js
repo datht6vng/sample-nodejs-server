@@ -13,7 +13,7 @@ const consoleTransport = new transports.Console(
 
 const fileTransport = new transports.File(
     {
-        filename: 'logs/server.log',
+        filename: 'logs/node-api-server.log',
         format: logFormat
     }
 )
