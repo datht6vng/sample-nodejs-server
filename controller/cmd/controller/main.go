@@ -34,7 +34,7 @@ func parse() bool {
 }
 
 func main() {
-	fmt.Println("------------ Start RTSP Sender ------------")
+	fmt.Println("------------ Start Controller Node ------------")
 
 	nodeID := "controller"
 	if hostName := os.Getenv("HOSTNAME"); hostName != "" {
@@ -46,7 +46,7 @@ func main() {
 		return
 	}
 	config.Config.NodeID = nodeID
-	logger.InitFileLogger(nodeID, *config.Config.LogConfig, "")
+	logger.InitStdOutLogger(nodeID, *config.Config.LogConfig, "")
 	gst.Init(nil)
 	handler, err := controller.NewHandler(nodeID)
 	if err != nil {

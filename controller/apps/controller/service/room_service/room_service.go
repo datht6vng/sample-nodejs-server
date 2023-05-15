@@ -1,6 +1,7 @@
 package room_service
 
 import (
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
 	"github.com/dathuynh1108/redisrpc"
 	"github.com/pion/ion/proto/rtc"
@@ -27,5 +28,5 @@ func (s *service) SetOrGetSFUNode(roomName string) (string, error) {
 }
 
 func (s *service) MakeRedisRPCClientStream(svcid string, nid string) rtc.RTCClient {
-	return rtc.NewRTCClient(redisrpc.NewClient(s.r, svcid, nid))
+	return rtc.NewRTCClient(redisrpc.NewClient(s.r, svcid, nid, logger.GetLogger()))
 }

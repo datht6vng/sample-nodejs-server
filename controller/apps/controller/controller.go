@@ -2,10 +2,12 @@ package controller
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net"
 	"time"
 
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/grpc_interface"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/http_interface"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/room_service"
@@ -14,6 +16,7 @@ import (
 	grpc_pb "github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
+	"github.com/dathuynh1108/redisrpc"
 	"github.com/juju/errors"
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/grpc"
@@ -53,9 +56,11 @@ func NewHandler(nodeID string) (*Handler, error) {
 		return nil, fmt.Errorf("Cannot connect to redis: %v", err)
 	}
 
+	logger.Infof("Redis conneced on: %v", config.Config.RedisConfig.Address[0])
+
 	handler.redis = r
 	handler.Node = node.NewNode(r, node.ServiceController, handler.nodeID)
-	// handler.Node.KeepAlive(3 * time.Second) // Current not neccessary
+	handler.Node.KeepAlive(3 * time.Second) // Current not neccessary
 	handler.Node.StartCleaner(9 * time.Second)
 
 	// Service
@@ -74,6 +79,27 @@ func NewHandler(nodeID string) (*Handler, error) {
 
 	// HTTP Server
 	handler.httpRTSPSenderServer = http_interface.NewHTTPRTSPSenderServer(roomService)
+
+	listenForRedisEvents := func() {
+		go func() {
+			pubsub := r.Subscribe(context.Background(), entity.RedisEventChannel)
+			for msg := range pubsub.Channel() {
+				go func(msg *redis.Message) {
+					message := &entity.Message{}
+					err := json.Unmarshal([]byte(msg.Payload), &message)
+					if err != nil {
+						logger.Errorf("Unmarshal error: %v", err)
+					}
+					switch message.Type {
+					case entity.TypeDisconnect:
+						payload := message.Payload.(*entity.DisconnectPayload)
+						rtspClientService.InternalDisconnectRTSPClient(payload.ClientID, payload.ConnectClientAddress)
+					}
+				}(msg)
+			}
+		}()
+	}
+	listenForRedisEvents()
 	return &handler, nil
 }
 
@@ -94,6 +120,10 @@ func (h *Handler) Start() error {
 		return errors.Annotate(err, "cannot start HTTP service")
 	}
 
+	// HTTP Interface
+	// if err := h.ServeRedisRPC(); err != nil {
+	// 	return errors.Annotate(err, "cannot start Redis RPC service")
+	// }
 	return nil
 }
 
@@ -138,5 +168,13 @@ func (h *Handler) ServeHTTP() error {
 			logger.Errorf("HTTP Server Error: %v", err)
 		}
 	}()
+	return nil
+}
+
+func (h *Handler) ServeRedisRPC() error {
+	nodeID := config.Config.NodeID
+	logger.Infof("Serve RedisRPC on: %v", nodeID)
+	service := redisrpc.NewServer(h.redis, nodeID, logger.GetLogger())
+	grpc_pb.RegisterRTSPSenderServer(service, h.grpcRTSPSenderServer)
 	return nil
 }

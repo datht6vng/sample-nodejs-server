@@ -7,15 +7,20 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/redis/go-redis/v9"
 )
 
 const keepAliveServicePrefix = "redis_service_keep_alive"
 const keepAliveRoomPrefix = "redis_service_room_alive"
+
 const connectionSetKey = "redis_service_connection_set"
+
 const roomPrefix = "redis_sfu_room"
 const roomSetPrefix = "redis_sfu_room_set"
+
+const rtspConnectionPrefix = "redis_rtsp_connection"
+const rtspConnectionSetPrefix = "redis_rtsp_connection_set"
+
 const seperator = ":"
 
 func BuildKeepAliveServiceKey(service, nodeID string) string {
@@ -54,9 +59,8 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 	roomKey := BuildRoomKey(roomName)
 	sfuNodeID := r.Get(ctx, roomKey).Val()
 	if sfuNodeID == "" {
-		currentSFUIDs := r.SMembers(ctx, connectionSetKey).Val()
+		currentSFUIDs := GetNodesOfService(r, ServiceSFU)
 		if len(currentSFUIDs) == 0 {
-			logger.Errorf("%v", "No SFU node found")
 			return "", errors.New("No SFU node found")
 		}
 
@@ -95,4 +99,45 @@ func RemoveRoom(r *redis.Client, roomName string) error {
 	pipeline.SRem(ctx, sfuNodeID, roomKey)
 	pipeline.Exec(ctx)
 	return nil
+}
+
+func GetNodesOfService(r *redis.Client, service string) []string {
+	connectionSet := r.SMembers(context.Background(), connectionSetKey).Val()
+	currentNodeIDs := []string{}
+	for _, connectionID := range connectionSet {
+		if IsServiceNode(service, connectionID) {
+			// Clean dangling room address
+			currentNodeIDs = append(currentNodeIDs, connectionID)
+		}
+	}
+	return currentNodeIDs
+}
+
+func BuildRTSPConnectionSetKey(postFix string) string {
+	return rtspConnectionSetPrefix + seperator + postFix
+}
+
+func BuildRTSPConnectionKey(connectionURL string) string {
+	return rtspConnectionPrefix + seperator + connectionURL
+}
+
+func SetRTSPConnection(r *redis.Client, connectionURL string, nodeID string) bool {
+	rtspConnectionKey := BuildRTSPConnectionKey(connectionURL)
+	ok := r.SetNX(context.Background(), rtspConnectionKey, nodeID, 0).Val()
+	if ok {
+		go func() {
+			connectionID := BuildKeepAliveServiceKey(ServiceController, nodeID)
+			rtspConenctionSetKey := BuildRTSPConnectionSetKey(connectionID)
+			r.SAdd(context.Background(), rtspConenctionSetKey, rtspConnectionKey)
+		}()
+	}
+	return ok
+}
+
+func DeleteRTSPConnection(r *redis.Client, connectionURL string) error {
+	return r.Del(context.Background(), BuildRTSPConnectionKey(connectionURL)).Err()
+}
+
+func GetRTSPConnectionNodeID(r *redis.Client, connectionURL string) string {
+	return r.Get(context.Background(), BuildRTSPConnectionKey(connectionURL)).Val()
 }

@@ -114,15 +114,16 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			}
 			sfuClient := c.roomService.MakeRedisRPCClientStream(sfuNode, config.Config.NodeID+":"+uuid.NewString())
 			ctx, cancel := context.WithCancel(context.Background())
-			defer cancel()
 			signaller, err := sfuClient.Signal(ctx)
 			if err != nil {
+				cancel()
 				onErr(req, err)
 				break
 			}
 
 			closed := make(chan bool)
 			defer func() {
+				cancel()
 				err := signaller.CloseSend()
 				if err != nil {
 					logger.Errorf("Close send error: %v", err)

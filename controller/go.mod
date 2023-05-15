@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/aler9/gortsplib/v2 v2.2.2
-	github.com/dathuynh1108/redisrpc v0.1.0
+	github.com/dathuynh1108/redisrpc v0.1.2
 	github.com/deepch/vdk v0.0.20
 	github.com/evalphobia/logrus_sentry v0.8.2
 	github.com/gofiber/fiber/v2 v2.45.0

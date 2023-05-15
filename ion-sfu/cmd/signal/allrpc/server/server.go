@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-logr/logr"
+	"github.com/sirupsen/logrus"
 
 	"github.com/dathuynh1108/redisrpc"
 	"github.com/pion/ion-sfu/cmd/signal/grpc/server"
@@ -85,7 +86,9 @@ func (s *Server) ServeJSONRPC(jaddr, cert, key string) error {
 func (s *Server) ServeRedisRPC(conf sfu.Config) error {
 	s.logger.Info("RedisRPC Listening", "node", s.sfu.NodeID)
 	nodeID := s.sfu.NodeID
-	service := redisrpc.NewServer(s.sfu.Redis, nodeID)
+	logger := logrus.StandardLogger()
+	logger.SetLevel(logrus.DebugLevel)
+	service := redisrpc.NewServer(s.sfu.Redis, nodeID, logger)
 	server := server.NewSFUServer(s.sfu)
 	rtc.RegisterRTCServer(service, server)
 	return nil
