@@ -1,2 +1,2 @@
 docker-conf
-controller/*logs
+/controller/logs
