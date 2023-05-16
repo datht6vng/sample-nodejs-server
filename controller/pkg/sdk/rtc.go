@@ -12,8 +12,6 @@ import (
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/ion/proto/rtc"
 	"github.com/pion/webrtc/v3"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 const (
@@ -625,26 +623,30 @@ func (r *RTC) onSingalHandle() error {
 		//only one goroutine for recving from stream, no need to lock
 		stream, err := r.signaller.Recv()
 		if err != nil {
-			if err == io.EOF {
-				log.Infof("[%v] WebRTC Transport Closed", r.uid)
-				if err := r.signaller.CloseSend(); err != nil {
-					log.Errorf("[%v] error sending close: %s", r.uid, err)
-				}
-				return err
-			}
+			// if err == io.EOF {
+			// 	log.Infof("[%v] WebRTC Transport Closed", r.uid)
+			// 	if err := r.signaller.CloseSend(); err != nil {
+			// 		log.Errorf("[%v] error sending close: %s", r.uid, err)
+			// 	}
+			// 	return err
+			// }
 
-			errStatus, _ := status.FromError(err)
-			if errStatus.Code() == codes.Canceled {
-				if err := r.signaller.CloseSend(); err != nil {
-					log.Errorf("[%v] error sending close: %s", r.uid, err)
-				}
-				return err
-			}
+			// errStatus, _ := status.FromError(err)
+			// if errStatus.Code() == codes.Canceled {
+			// 	if err := r.signaller.CloseSend(); err != nil {
+			// 		log.Errorf("[%v] error sending close: %s", r.uid, err)
+			// 	}
+			// 	return err
+			// }
 
 			log.Errorf("[%v] Error receiving RTC response: %v", r.uid, err)
-			if r.OnError != nil {
-				r.OnError(err)
+			// if r.OnError != nil {
+			// 	r.OnError(err)
+			// }
+			if err := r.signaller.CloseSend(); err != nil {
+				log.Errorf("[%v] error sending close: %s", r.uid, err)
 			}
+
 			return err
 		}
 
@@ -940,6 +942,7 @@ func (r *RTC) Close() {
 	if r.sub != nil {
 		r.sub.pc.Close()
 	}
+	r.signaller.CloseSend()
 	r.cancel()
 }
 

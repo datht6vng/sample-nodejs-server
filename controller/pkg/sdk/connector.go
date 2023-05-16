@@ -9,6 +9,7 @@ import (
 	"github.com/redis/go-redis/v9"
 
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	log "github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/redisrpc"
 	"google.golang.org/grpc/codes"
@@ -99,7 +100,7 @@ func NewConnector(redis *redis.Client, addr string, cfg ...ConnectorConfig) (*Co
 	// 	c.grpcConn, err = grpc.DialContext(ctx, addr, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
 	// }
 
-	c.grpcConn = redisrpc.NewClient(redis, addr, config.Config.NodeID+":"+uuid.NewString())
+	c.grpcConn = redisrpc.NewClient(redis, addr, config.Config.NodeID+":"+uuid.NewString(), logger.GetLogger())
 	if err != nil {
 		return nil, fmt.Errorf("did not connect: %v", err)
 	}

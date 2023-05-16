@@ -1,6 +1,7 @@
 package rtsp_client_service
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/fs"
@@ -10,12 +11,12 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"sync/atomic"
 	"time"
 
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
 	gst "github.com/dathuynh1108/hcmut-thesis/controller/pkg/rtsp_to_webrtc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	jujuErr "github.com/juju/errors"
@@ -26,11 +27,12 @@ var (
 	ErrNotFound = errors.New("not found")
 )
 
+const domainCounterKey = "redis_rtsp_relay_domain_counter"
+
 type RTSPClientService struct {
 	sync.RWMutex
-	clients    map[string]*Client
-	autoDomain atomic.Int64
-	r          *redis.Client
+	clients map[string]*Client
+	r       *redis.Client
 }
 
 func NewRTSPClientService(r *redis.Client) (*RTSPClientService, error) {
@@ -42,8 +44,12 @@ func NewRTSPClientService(r *redis.Client) (*RTSPClientService, error) {
 
 func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, username, password string, enableRTSPRelay bool, enableRecord bool) (string, error) {
 	// Force end
-	if client, err := r.GetRTSPClient(connectClientAddress); err == nil {
-		client.Close()
+	// if client, err := r.GetRTSPClient(connectClientAddress); err == nil {
+	// 	client.Close()
+	// }
+	// Check for previous connection and get lock
+	if !node.SetRTSPConnection(r.r, connectClientAddress, config.Config.NodeID) {
+		return "", fmt.Errorf("Client is connected")
 	}
 
 	r.Lock()
@@ -51,7 +57,8 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 
 	rtspRelayAddress := "Disable"
 	if enableRTSPRelay {
-		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, r.autoDomain.Add(1))
+		counter := r.r.Incr(context.Background(), domainCounterKey)
+		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, counter)
 	}
 
 	client := NewClient(r.r, clientID, connectClientAddress, rtspRelayAddress, username, password, connectClientAddress, true, enableRTSPRelay, enableRecord)
@@ -62,7 +69,8 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	}
 
 	client.OnClose(func() {
-		r.autoDomain.Add(-1)
+		// node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+		r.r.Decr(context.Background(), domainCounterKey)
 	})
 
 	r.clients[connectClientAddress] = client
@@ -81,6 +89,18 @@ func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client,
 }
 
 func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress string) error {
+	node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+	return r.r.Publish(context.Background(), entity.RedisEventChannel, entity.Message{
+		Type: entity.TypeDisconnect,
+		Payload: &entity.DisconnectPayload{
+			ClientID:             clientID,
+			ConnectClientAddress: connectClientAddress,
+		},
+	}).Err()
+}
+
+func (r *RTSPClientService) InternalDisconnectRTSPClient(clientID, connectClientAddress string) error {
+	logger.Infof("Disconnecting from rtsp client %s", connectClientAddress)
 	if _, err := r.GetRTSPClient(connectClientAddress); err != nil {
 		return err
 	}

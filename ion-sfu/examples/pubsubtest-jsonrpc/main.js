@@ -3,7 +3,7 @@ const remotesDiv = document.getElementById("remotes");
 
 const params = new URLSearchParams(window.location.search)
 
-const serverUrl = "ws://localhost:7000/ws";
+const serverUrl = "ws://localhost:8080/ws";
 
 /* eslint-env browser */
 const joinBtns = document.getElementById("start-btns");

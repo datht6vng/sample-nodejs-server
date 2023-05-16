@@ -47,9 +47,9 @@ func (n *Node) StartCleaner(duration time.Duration) {
 		for {
 			select {
 			case <-ticker.C:
-				connectionSets := n.redis.SMembers(ctx, connectionSetKey).Val()
+				connectionSet := n.redis.SMembers(ctx, connectionSetKey).Val()
 				pipeline := n.redis.Pipeline()
-				for _, connection := range connectionSets {
+				for _, connection := range connectionSet {
 					if n.redis.TTL(ctx, connection).Val() > 0 {
 						continue
 					}
@@ -60,10 +60,21 @@ func (n *Node) StartCleaner(duration time.Duration) {
 						roomOfServiceKey := BuildRoomSetKeyOfService(connection)
 						roomKeys := n.redis.SMembers(ctx, roomOfServiceKey).Val()
 						for _, roomKey := range roomKeys {
-							logger.Infof("Deleta dangling room: %v", roomKey)
+							logger.Infof("Delete dangling room: %v", roomKey)
 							pipeline.Del(ctx, roomKey)
 						}
 						pipeline.Del(ctx, roomOfServiceKey)
+					}
+					// Check if this node is a Controller node
+					if IsServiceNode(ServiceController, connection) {
+						// Clean dangling rtsp connection address
+						rtspConnectionSet := BuildRTSPConnectionSetKey(connection)
+						rtspConnectionKeys := n.redis.SMembers(ctx, rtspConnectionSet).Val()
+						for _, rtspConnection := range rtspConnectionKeys {
+							logger.Infof("Delete dangling rtsp connection %v", rtspConnection)
+							pipeline.Del(ctx, rtspConnection)
+						}
+						pipeline.Del(ctx, rtspConnectionSet)
 					}
 					// Clean dead node
 					pipeline.SRem(ctx, connectionSetKey, connection)

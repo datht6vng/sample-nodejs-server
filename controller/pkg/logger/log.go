@@ -186,6 +186,44 @@ func InitFileLogger(prefix string, conf LogConf, sentryDsn string) {
 	}
 }
 
+func InitStdOutLogger(prefix string, conf LogConf, sentryDsn string) {
+	l := logrus.DebugLevel
+	switch conf.Level {
+	case "trace":
+		l = logrus.TraceLevel
+	case "debug":
+		l = logrus.DebugLevel
+	case "info":
+		l = logrus.InfoLevel
+	case "warn":
+		l = logrus.WarnLevel
+	case "error":
+		l = logrus.ErrorLevel
+	}
+
+	defaultLogger.SetLevel(l)
+	defaultLogger.SetFormatter(&TextFormatter{
+		Prefix:          prefix,
+		FullTimestamp:   true,
+		TimestampFormat: timeFormat,
+		ForceFormatting: true,
+		colorScheme:     defaultCompiledColorScheme,
+	})
+
+	if sentryDsn != "" {
+		hook, err := logrus_sentry.NewSentryHook(sentryDsn, []logrus.Level{
+			logrus.PanicLevel,
+			logrus.FatalLevel,
+			logrus.ErrorLevel,
+			logrus.WarnLevel,
+		})
+
+		if err == nil {
+			defaultLogger.Hooks.Add(hook)
+		}
+	}
+}
+
 type MyLogger struct {
 	logger *logrus.Logger
 	level  Level
