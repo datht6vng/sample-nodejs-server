@@ -76,7 +76,7 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 
 		sfuNodeID = GetNodeID(connectionID)
 
-		ok := r.SetNX(ctx, roomKey, sfuNodeID, 24*time.Hour).Val()
+		ok := r.SetNX(ctx, roomKey, sfuNodeID, 15*time.Minute).Val()
 
 		if !ok {
 			sfuNodeID = r.Get(ctx, roomKey).Val()
