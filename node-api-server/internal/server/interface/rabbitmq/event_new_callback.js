@@ -47,15 +47,18 @@ class EventNewCallback extends EventCallback {
         const normalImageUrl = isCamera ? event.getNormalImageUrl() : null;
         const detectionImageUrl = isCamera ? event.getDetectionImageUrl() : null;
 
+        const cameraEventZoneCoords = cameraDevice.getCameraEventZoneCoords();
+        const iotEventZoneCoords = cameraDevice.getIotEventZoneCoords(); 
+
         let lineCoords = [cameraDevice.getOffsetXBegin(), cameraDevice.getOffsetXEnd(), cameraDevice.getOffsetYBegin(), cameraDevice.getOffsetYEnd()];
         lineCoords = isCamera && lineCoords.every(e => e != null && e != undefined) ? lineCoords : null;
 
         let publishMessage = null;
         if (isCamera) {
-            publishMessage = newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords);
+            publishMessage = newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords);
         }
         else {
-            publishMessage = newIotEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime);
+            publishMessage = newIotEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, iotEventZoneCoords);
         }
         return publishMessage;
     }

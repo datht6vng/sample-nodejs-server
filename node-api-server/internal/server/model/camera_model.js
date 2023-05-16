@@ -61,9 +61,18 @@ const cameraSchema = new Schema (
 
         hostname: String, // camera server host name 
         port: Number,
-        stream_resolution: [Number], // [width, height]
-        iot_event_zone_coords: [Number], // from_x, from_y, to_x, to_y
-        camera_event_zone_coords: [Number]
+        stream_resolution: {
+            type: [Number],
+            default: []
+        }, // [width, height]
+        iot_event_zone_coords: {
+            type: [Number],
+            default: []
+        }, // from_x, from_y, to_x, to_y
+        camera_event_zone_coords: {
+            type: [Number],
+            default: []
+        }
     }
 )
 
@@ -88,7 +97,7 @@ async function createStreamConnection(schema) {
     }
     catch(err) {
         errorHandler.execute(err);
-        errorHandler.execute(new Error("Failed when creating stream connection to other servers"));
+        // errorHandler.execute(new Error("Failed when creating stream connection to other servers"));
     }
     finally {
         state = toDatabaseConverter.visit(state);
@@ -107,7 +116,7 @@ async function deleteStreamConnection(doc) {
     }
     catch(err) {
         errorHandler.execute(err);
-        errorHandler.execute(new Error("Failed when deleting stream connection to other servers"));
+        // errorHandler.execute(new Error("Failed when deleting stream connection to other servers"));
     }
 
 }
@@ -124,7 +133,7 @@ async function updateStreamConnection(updateDoc, updatedDoc) {
     }
     catch(err) {
         errorHandler.execute(err);
-        errorHandler.execute(new Error("Failed when updating stream connection to other servers"));
+        // errorHandler.execute(new Error("Failed when updating stream connection to other servers"));
     }
     finally {
         state = toDatabaseConverter.visit(state);

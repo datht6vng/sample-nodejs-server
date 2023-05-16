@@ -1,6 +1,6 @@
 
 class CameraEventNewPublishMessage {
-    constructor(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords=null) {
+    constructor(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords=null) {
         this.eventId = eventId;
         this.eventKey = eventKey;
         this.eventTime = eventTime;
@@ -9,6 +9,7 @@ class CameraEventNewPublishMessage {
         this.endTime = endTime;
         this.normalImageUrl = normalImageUrl;
         this.detectionImageUrl = detectionImageUrl;
+        this.cameraEventZoneCoords = cameraEventZoneCoords;
         this.lineCoords = lineCoords;
     }
 
@@ -21,15 +22,16 @@ class CameraEventNewPublishMessage {
             start_time: this.startTime,
             end_time: this.endTime,
             normal_image_url: this.normalImageUrl,
-            detection_image_url: this.detectionImageUrl
+            detection_image_url: this.detectionImageUrl,
+            camera_event_zone_coords: this.cameraEventZoneCoords
         }
         if (this.lineCoords) message.line_coords = this.lineCoords;
         return JSON.stringify(message);
     }
 }
 
-function newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords=null) {
-    return new CameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, lineCoords);
+function newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords=null) {
+    return new CameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords);
 }
 
 module.exports.newCameraEventNewPublishMessage = newCameraEventNewPublishMessage;

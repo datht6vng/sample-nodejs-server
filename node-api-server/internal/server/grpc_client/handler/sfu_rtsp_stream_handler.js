@@ -32,6 +32,9 @@ class SfuRtspStreamHandler extends GrpcHandler {
             const message = `Failed to connect to rtsp sender with cliendID = ${arg.clientID}. Detail: ${err.toString()}`;
             this.handleError(err, message);
         }
+
+        console.log("Response from controller when call connect: ", response);
+
         return response.data.relayAddress;
     }
 
@@ -68,6 +71,7 @@ class SfuRtspStreamHandler extends GrpcHandler {
             this.handleError(err, message);
         }
         
+        console.log("Receive from controller record file: ", response.fileAddress);
 
         const result = {
             startTime: new Date(response.startTime / 1000000).toISOString(),

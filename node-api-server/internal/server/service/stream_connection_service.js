@@ -1,13 +1,16 @@
-const { logger } = require("../../../pkg/logger/logger");
 const { newSfuRtspStreamHandler } = require("../grpc_client/handler/sfu_rtsp_stream_handler");
 const { newCameraStreamInfoHandler } = require("../grpc_client/handler/camera_stream_info_handler");
 const { newCamera } = require("../entity/camera");
-
+const { newErrorHandler } = require("../error/error_handler");
 
 USED_STATUS = "used";
 FREE_STATUS = "free";
 
 class StreamConnectionService {
+
+    constructor() {
+        this.errorHandler = newErrorHandler();
+    }
 
     hasDifferentStreamInfo(oldCamera, newCamera) {
         return oldCamera.getRtspStreamUrl() != newCamera.getRtspStreamUrl() 
@@ -40,8 +43,12 @@ class StreamConnectionService {
             const cameraStreamInfoHandler = newCameraStreamInfoHandler(); 
             const sfuRtspUrl = await rtspSenderHandler.connect(camera);
 
-            camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
-            state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+            camera.setSfuRtspStreamUrl(sfuRtspUrl);
+            state.setSfuRtspStreamUrl(sfuRtspUrl);
+
+            // camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+            // state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+            
             state.setConnectToRtspSender(true);
             if (camera.getEventType()) {
                 await cameraStreamInfoHandler.createCameraStream(camera);
@@ -86,14 +93,24 @@ class StreamConnectionService {
         const rtspSenderHandler = newSfuRtspStreamHandler();
         const cameraStreamInfoHandler = newCameraStreamInfoHandler();
         if (camera.getConnectToAi()) {
-            await cameraStreamInfoHandler.deleteCameraStreamById(camera.getId()); 
-            state.setConnectToAi(false);
+            try {
+                await cameraStreamInfoHandler.deleteCameraStreamById(camera.getId()); 
+                state.setConnectToAi(false);    
+            }
+            catch(err) {
+                this.errorHandler.execute(err);
+            }
         }
 
 
         if (camera.getConnectToRtspSender()) {
-            await rtspSenderHandler.disconnect(camera);
-            state.setConnectToRtspSender(false);
+            try {
+                await rtspSenderHandler.disconnect(camera);
+                state.setConnectToRtspSender(false); 
+            }
+            catch(err) {
+                this.errorHandler.execute(err);
+            }
         }
 
         state.setSfuRtspStreamUrl("");

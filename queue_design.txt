@@ -591,6 +591,11 @@ Tasks:
     + Implement spam policy cho các sự kiện ở message queue
     + Authen and author
 
+    + Draw line detection
+
+    + Xem lại khi download record file cần https không
+    + Xóa các temp file bên AI
+    + Sửa AI server dã connect hay disconnect vẫn trả về success
 
     + Cân nhắc:
         + Hiện thực retry giữa các connection:
