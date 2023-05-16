@@ -95,6 +95,7 @@ services:
       dockerfile: Dockerfile.local
     environment:
       - BROKER_HOST=rabbitmq
+      - CONFIG_PATH=./config/node-api-server.toml
     volumes:
       - ./node-api-server:/usr/app
       - api_node_modules:/usr/app/node_modules
@@ -117,8 +118,8 @@ services:
       context: node-api-gateway
       dockerfile: Dockerfile.local
       # dockerfile: TestDockerfile
-    # environment:
-    #   - BROKER_HOST=rabbitmq
+    environment:
+      - CONFIG_PATH=./config/node-api-gateway.toml
     volumes:
       - ./node-api-gateway:/usr/app
       - gateway_node_modules:/usr/app/node_modules

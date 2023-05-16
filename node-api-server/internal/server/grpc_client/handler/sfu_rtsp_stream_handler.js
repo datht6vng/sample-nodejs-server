@@ -24,6 +24,9 @@ class SfuRtspStreamHandler extends GrpcHandler {
             enableRTSPRelay: true,
             enableRecord: true
         }
+
+        console.log("Send to controller message: ", arg);
+
         let response;
         try {
             response = await this.callRpc(this.clientStuff.connect, arg);
