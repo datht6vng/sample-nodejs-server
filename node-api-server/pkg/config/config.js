@@ -1,10 +1,15 @@
 const toml = require("toml");
 const fs = require("fs");
 const dotenv = require("dotenv");
-delete process.env.CONFIG_PATH;
-dotenv.config();
+
+const configPath = process.env.CONFIG_PATH
+if (!configPath) {
+  delete process.env.CONFIG_PATH;
+  dotenv.config();
+}
+console.log("Config file:" + configPath);
 
 
 module.exports.config = toml.parse(
-  fs.readFileSync(process.env.CONFIG_PATH, "utf-8")
+  fs.readFileSync(configPath, "utf-8")
 );

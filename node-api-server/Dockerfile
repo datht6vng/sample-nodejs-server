@@ -1,12 +1,18 @@
-FROM node:18-alpine
+FROM node:18-alpine as builder
 
 WORKDIR /service/hcmut-thesis/node-api-server
 
 COPY . .
-COPY ./config /config
-
 
 RUN npm install
+
+RUN npm install -g pkg
+
+RUN pkg package.json --targets node18-alpine
+
+FROM alpine
+
+WORKDIR /service/hcmut-thesis/node-api-server
 
 RUN  apk add --no-cache bash \
         \
@@ -16,12 +22,14 @@ RUN  apk add --no-cache bash \
         \
         && echo "Asia/Ho_Chi_Minh" > /etc/timezone
 
+
 RUN apk --no-cache add ca-certificates && apk --no-cache add curl
 
-ENV CONFIG_PATH="/config/node-api-server.toml" 
-ENV BROKER_HOST="rabbitmq"
+COPY ./config /config
+COPY --from=builder /service/hcmut-thesis/node-api-server/node-api-server .
+COPY --from=builder /service/hcmut-thesis/node-api-server/pkg/grpc ./pkg/grpc
 
-RUN npm install -g pkg
-RUN pkg package.json --targets node18-alpine
+ENV CONFIG_PATH="/config/node-api-server.toml" 
+#ENV BROKER_HOST="rabbitmq"
 
 ENTRYPOINT [ "./node-api-server" ]
