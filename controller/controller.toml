@@ -13,7 +13,7 @@ rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server
 port = "8080"
 
 [log]
-level = "debug"
+level = "info"
 filePath= "logs/controller.log"
 maxSize=50
 maxBackups=10
