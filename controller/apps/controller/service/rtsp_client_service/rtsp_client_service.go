@@ -49,7 +49,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	// }
 	// Check for previous connection and get lock
 	if !node.SetRTSPConnection(r.r, connectClientAddress, config.Config.NodeID) {
-		return "", fmt.Errorf("Client is connected")
+		return "Client is connected on another controller node", nil
 	}
 
 	r.Lock()
@@ -57,7 +57,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 
 	rtspRelayAddress := "Disable"
 	if enableRTSPRelay {
-		counter := r.r.Incr(context.Background(), domainCounterKey)
+		counter := r.r.Incr(context.Background(), domainCounterKey).Val()
 		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, counter)
 	}
 

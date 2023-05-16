@@ -64,6 +64,7 @@ func NewWebSocketController(roomService service.RoomService) *WebSocketControlle
 }
 
 func (c *WebSocketController) Handle(con *websocket.Conn) {
+	logger.Infof("Handling websocket connection of: %v", con.RemoteAddr())
 	conn := wrapSocketConnection(con)
 	onErr := func(req *jsonrpc2.Request, err error) {
 		if err != nil {
