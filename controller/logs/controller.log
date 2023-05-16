@@ -1,0 +1,3 @@
+2023-05-15T20:55:41.369  INFO controller_cc1de554b006 Serve gRPC on: 0.0.0.0:5551 
+2023-05-15T20:55:41.369  INFO controller_cc1de554b006 Serve HTTP on address: 0.0.0.0:8080 
+2023-05-15T20:55:41.370  INFO controller_cc1de554b006 Server is running and awaiting signal for shutdown ... 

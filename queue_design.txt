@@ -580,3 +580,19 @@ sudo lsof -n -i :27017 | grep LISTEN
 
 
 + Trả về lỗi cho user khi các vấn đề liên quan đến stream không đúng info
+
+
+Tasks:
+    + Khi disconnect thì dù k disconnect rtsp trả về lỗi thì vẫn coi như thành công và disconnect tiếp AI
+    + Khi connect thì nếu rtsp connect k được thì k đi tiếp để connect AI
+    + Xóa 2 fields: is_connect_ai và is_connect_rtsp
+    + Gửi các field mới: camera_event_zone và iot_event_zone qua cho AI và thêm logic xử lý các field này bên AI
+    + Set is_set_line thành true khi mà các tọa độ line crossing có đủ
+    + Implement spam policy cho các sự kiện ở message queue
+    + Authen and author
+
+
+    + Cân nhắc:
+        + Hiện thực retry giữa các connection:
+            + Khi này DB phải lưu các trạng thái: Trạng thái connect hiện tại và trạng thái "ĐÁNG LẼ" phải xảy ra của từng connection (rtsp và AI)
+
