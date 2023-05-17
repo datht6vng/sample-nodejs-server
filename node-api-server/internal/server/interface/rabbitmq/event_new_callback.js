@@ -48,7 +48,7 @@ class EventNewCallback extends EventCallback {
         const detectionImageUrl = isCamera ? event.getDetectionImageUrl() : null;
 
         const cameraEventZoneCoords = cameraDevice.getCameraEventZoneCoords();
-        const iotEventZoneCoords = cameraDevice.getIotEventZoneCoords(); 
+        const iotEventZoneCoords = cameraDevice.getIotEventZoneCoords();
 
         let lineCoords = [cameraDevice.getOffsetXBegin(), cameraDevice.getOffsetXEnd(), cameraDevice.getOffsetYBegin(), cameraDevice.getOffsetYEnd()];
         lineCoords = isCamera && lineCoords.every(e => e != null && e != undefined) ? lineCoords : null;

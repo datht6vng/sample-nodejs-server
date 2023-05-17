@@ -20,9 +20,9 @@ class Camera {
 
     hostname = undefined;
     port = undefined;
-    streamResolution = [];
-    iotEventZoneCoords = [];
-    cameraEventZoneCoords = [];
+    streamResolution = undefined;
+    iotEventZoneCoords = undefined;
+    cameraEventZoneCoords = undefined;
 
     mergeCopy(camera) {
         for (let attr in this) {

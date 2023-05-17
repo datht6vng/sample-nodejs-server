@@ -3,3 +3,28 @@ May-17-2023 02:38:08 - [INFO]: Http server is running at http://localhost:3000
 May-17-2023 02:38:12 - [INFO]: Http server is running at http://localhost:3000
 May-17-2023 02:38:12 - [INFO]: Grpc server is running at http://localhost:50051
 May-17-2023 02:38:12 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 10:40:40 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 10:40:40 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 10:40:40 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 11:18:42 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-17-2023 11:35:28 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: Failed to open rtsp://rtsp_server:8554/4 for detection
+May-17-2023 11:44:11 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 11:44:11 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 11:44:12 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 12:04:54 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 12:04:54 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 12:04:54 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 12:36:17 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 12:36:17 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 12:36:17 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 12:42:08 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 12:42:08 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 12:42:08 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 12:50:43 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 12:50:43 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 12:50:43 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 13:22:07 - [INFO]: Http server is running at http://localhost:3000
+May-17-2023 13:22:07 - [INFO]: Grpc server is running at http://localhost:50051
+May-17-2023 13:22:08 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-17-2023 13:29:10 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: Failed to open rtsp://rtsp_server:8554/4 for detection
+May-17-2023 13:30:30 - [ERROR]: Failed to create new stream in AI server with camera 6162f9b9be1661cb32a1c461. Detail: Error: 10 ABORTED: Failed to open rtsp://rtsp_server:8554/4 for detection

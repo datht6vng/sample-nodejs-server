@@ -514,6 +514,21 @@ Camera
     "event_type": "6162f9b9be1661cb32a1c449"
 }
 
+
+{
+    "_id": "6162f9b9be1661cb32a1c461",
+    "camera_name": "DTG Camera PTZ",
+    "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    "username": "admin",
+    "status": "used",
+    "password": "Dientoan@123",
+    "event_type": "6162f9b9be1661cb32a1c449",
+    "camera_event_zone_coords": [5, 5, 630, 630],
+    "iot_event_zone_coords": [5, 5, 540, 540]
+}
+
+
+
 {
     "_id": "6162f9b9be1661cb32a1c461",
     "camera_name": "DTG Camera PTZ",

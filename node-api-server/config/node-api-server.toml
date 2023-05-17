@@ -126,7 +126,7 @@ port = "50052"
 
 [rtsp_sender_server]
 [rtsp_sender_server.http]
-host = "rtsp-sender"
+host = "controller"
 port = "8080"
 scheme = "http"
 [rtsp_sender_server.grpc]
