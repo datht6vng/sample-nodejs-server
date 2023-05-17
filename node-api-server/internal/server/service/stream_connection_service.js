@@ -43,11 +43,11 @@ class StreamConnectionService {
             const cameraStreamInfoHandler = newCameraStreamInfoHandler(); 
             const sfuRtspUrl = await rtspSenderHandler.connect(camera);
 
-            camera.setSfuRtspStreamUrl(sfuRtspUrl);
-            state.setSfuRtspStreamUrl(sfuRtspUrl);
+            // camera.setSfuRtspStreamUrl(sfuRtspUrl);
+            // state.setSfuRtspStreamUrl(sfuRtspUrl);
 
-            // camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
-            // state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+            camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+            state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
             
             state.setConnectToRtspSender(true);
             if (camera.getEventType()) {

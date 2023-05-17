@@ -515,6 +515,13 @@ Camera
 }
 
 
+/api/event_types
+{
+    "_id": "6162f9b9be1661cb32a1c449",
+    "event_key": 'crowd_gathering'
+}
+
+/api/cameras
 {
     "_id": "6162f9b9be1661cb32a1c461",
     "camera_name": "DTG Camera PTZ",
@@ -526,6 +533,9 @@ Camera
     "camera_event_zone_coords": [5, 5, 630, 630],
     "iot_event_zone_coords": [5, 5, 540, 540]
 }
+
+
+
 
 
 
