@@ -612,6 +612,8 @@ Tasks:
     + Xóa các temp file bên AI
     + Sửa AI server dã connect hay disconnect vẫn trả về success
 
+    + Tạm thời bên AI, hàm "consume_new_stream" cho time.sleep(2) trong khi chờ rtsp_server tạo ra rtsp stream. Sẽ nghĩ cách khác hay hơn
+
     + Cân nhắc:
         + Hiện thực retry giữa các connection:
             + Khi này DB phải lưu các trạng thái: Trạng thái connect hiện tại và trạng thái "ĐÁNG LẼ" phải xảy ra của từng connection (rtsp và AI)
