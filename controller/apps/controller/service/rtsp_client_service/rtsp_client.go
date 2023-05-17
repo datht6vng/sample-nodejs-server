@@ -171,8 +171,8 @@ func (c *Client) Connect() error {
 		defer wg.Done()
 
 		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true add-reference-timestamp-meta=true latency=10000 max-rtcp-rtp-time-diff=-1 ntp-sync=true onvif-mode=true", c.clientAddress, c.username, c.password, gst.SrcName)
-		videoSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
-		audioSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
+		videoSrc := fmt.Sprintf(" %v. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
+		audioSrc := fmt.Sprintf(" %v. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
 
 		clientDir := filepath.Join("/videos", c.clientID)
 		sessionDir := filepath.Join(clientDir, fmt.Sprintf("%v", time.Now().UnixNano()))
@@ -320,7 +320,9 @@ func (c *Client) close() {
 		c.connector.Close()
 	}
 	if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
-		p.Stop()
+		if p != nil {
+			p.Stop()
+		}
 	}
 	c.onClose()
 }

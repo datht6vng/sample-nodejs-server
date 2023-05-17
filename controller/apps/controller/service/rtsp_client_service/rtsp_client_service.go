@@ -65,6 +65,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
+		r.r.Decr(context.Background(), domainCounterKey)
 		return "", err
 	}
 
