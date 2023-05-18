@@ -65,11 +65,13 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
+		r.r.Decr(context.Background(), domainCounterKey)
 		return "", err
 	}
 
 	client.OnClose(func() {
 		// node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+		r.r.Del(context.Background(), node.BuildRTSPConnectionSetKey(node.BuildKeepAliveServiceKey(node.ServiceController, config.Config.NodeID)))
 		r.r.Decr(context.Background(), domainCounterKey)
 	})
 
