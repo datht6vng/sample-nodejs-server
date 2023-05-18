@@ -122,7 +122,7 @@ services:
       - CONFIG_PATH=./config/node-api-gateway.toml
     volumes:
       - ./node-api-gateway:/usr/app
-      - gateway_node_modules:/usr/app/node_modules
+      # - gateway_node_modules:/usr/app/node_modules
     working_dir: /usr/app
     command: >
       sh -c "npm run dev"
