@@ -23,8 +23,8 @@ const (
 	audioClockRate   = 48000
 	pcmClockRate     = 8000
 
-	RecordFileDuration = int64(30 * time.Second)
-	maxRecordFiles     = 10
+	RecordFileDuration = int64(10 * time.Second)
+	maxRecordFiles     = 15
 )
 
 type Pipeline interface {
@@ -82,7 +82,7 @@ func CreatePipeline(
 			parser = "vp9parse"
 
 		case webrtc.MimeTypeH264:
-			videoEncoder = fmt.Sprintf(" ! x264enc bitrate=1024 speed-preset=ultrafast key-int-max=10 tune=zerolatency byte-stream=true name=%v ! h264parse ", encoderName)
+			videoEncoder = fmt.Sprintf(" ! x264enc speed-preset=ultrafast key-int-max=20 tune=zerolatency byte-stream=true name=%v ! h264parse ", encoderName)
 			caps = "video/x-h264,stream-format=byte-stream"
 			parser = "h264parse"
 
@@ -121,6 +121,7 @@ func CreatePipeline(
 	if err != nil {
 		return nil, err
 	}
+	pipeline.videoCodec = videoCodec
 	return pipeline, nil
 }
 

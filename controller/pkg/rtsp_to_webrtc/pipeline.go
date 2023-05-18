@@ -26,7 +26,7 @@ type Pipeline2 struct {
 	main                                       *glib.MainLoop
 	autoCleaner                                *time.Timer
 	ready                                      atomic.Bool
-	audioCodec, videoCodec                     string
+	videoCodec                                 string
 	onAudioSampleHandler, onVideoSampleHandler atomic.Value
 	onCloseHandler                             atomic.Value
 	audioNSPerRTP, videoNSPerRTP               float64

@@ -71,6 +71,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 
 	client.OnClose(func() {
 		// node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+		r.r.Del(context.Background(), node.BuildRTSPConnectionSetKey(node.BuildKeepAliveServiceKey(node.ServiceController, config.Config.NodeID)))
 		r.r.Decr(context.Background(), domainCounterKey)
 	})
 
