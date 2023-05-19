@@ -60,6 +60,18 @@ func NewHandler(nodeID string) (*Handler, error) {
 
 	handler.redis = r
 	handler.Node = node.NewNode(r, node.ServiceController, handler.nodeID)
+
+	// Flush old data and keep node alive
+	rtspConnectionSetKey := node.BuildRTSPConnectionSetKey(node.BuildKeepAliveServiceKey(node.ServiceController, config.Config.NodeID))
+	rtspConnectionKeys := r.SMembers(context.Background(), rtspConnectionSetKey).Val()
+
+	pipeline := r.Pipeline()
+	for _, rtspConnectionKey := range rtspConnectionKeys {
+		pipeline.Del(context.Background(), rtspConnectionKey)
+	}
+	pipeline.Del(context.Background(), rtspConnectionSetKey)
+	pipeline.Exec(context.Background())
+
 	handler.Node.KeepAlive(3 * time.Second) // Current not neccessary
 	handler.Node.StartCleaner(9 * time.Second)
 
