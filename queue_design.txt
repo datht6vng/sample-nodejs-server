@@ -71,7 +71,7 @@ Problem:
 + Sửa camera:
 
 
-+ Thêm trường username, password của RTSP vào cho camera model (để gửi về bên rtsp_sender lấy url về)
++ Thêm trường username, password của RTSP vào cho camera model (để gửi về bên controller lấy url về)
 
 + Handler trả về entity Event
 + Use lodash hoặc prefetch để chặn spam (OpenAI)

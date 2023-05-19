@@ -6,11 +6,11 @@ const { GrpcHandler } = require("./grpc_handler");
 
 const { config } = require("../../../../pkg/config/config");
 
-const rtspSenderServerConfig = config.rtsp_sender_server;
-const defaultProtoFile = "rtsp_sender.proto";
-const defaultServiceName = "RTSPSender";
-const defaultTargetHost = rtspSenderServerConfig.grpc.host;
-const defaultTargetPort = rtspSenderServerConfig.grpc.port;
+const controllerServerConfig = config.controller_server;
+const defaultProtoFile = "controller.proto";
+const defaultServiceName = "Controller";
+const defaultTargetHost = controllerServerConfig.grpc.host;
+const defaultTargetPort = controllerServerConfig.grpc.port;
 
 class VideoRecordingHandler extends GrpcHandler {
     constructor(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {

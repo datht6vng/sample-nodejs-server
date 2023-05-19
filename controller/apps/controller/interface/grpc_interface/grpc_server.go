@@ -12,15 +12,15 @@ import (
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 )
 
-func NewGRPCRTSPSenderServer(rtspClientService *rtsp_client_service.RTSPClientService) grpc.RTSPSenderServer {
-	return &rtspSender{
+func NewGRPCControllerServer(rtspClientService *rtsp_client_service.RTSPClientService) grpc.ControllerServer {
+	return &controller{
 		rtspClientService: rtspClientService,
 	}
 }
 
 // Implementation of gRPC interface in "/pkg/grpc"
-type rtspSender struct {
-	grpc.UnimplementedRTSPSenderServer
+type controller struct {
+	grpc.UnimplementedControllerServer
 	rtspClientService *rtsp_client_service.RTSPClientService
 }
 
@@ -47,7 +47,7 @@ func parseRTSPAddress(url string, username string, password string) (string, str
 	return method + "://" + address, username, password, nil
 }
 
-func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
+func (r *controller) Connect(ctx context.Context, request *grpc.ConnectRequest) (*grpc.ConnectReply, error) {
 	var rtspRelayAddress string
 	var err error
 	clientAddress, username, password, err := parseRTSPAddress(
@@ -85,7 +85,7 @@ func (r *rtspSender) Connect(ctx context.Context, request *grpc.ConnectRequest) 
 	}, nil
 }
 
-func (r *rtspSender) Disconnect(ctx context.Context, request *grpc.DisconnectRequest) (*grpc.DisconnectReply, error) {
+func (r *controller) Disconnect(ctx context.Context, request *grpc.DisconnectRequest) (*grpc.DisconnectReply, error) {
 	if err := r.rtspClientService.DisconnectRTSPClient(request.ClientID, request.ConnectClientAddress); err != nil {
 		return &grpc.DisconnectReply{
 			Code:    http.StatusInternalServerError,
@@ -98,7 +98,7 @@ func (r *rtspSender) Disconnect(ctx context.Context, request *grpc.DisconnectReq
 	}, nil
 }
 
-func (r *rtspSender) GetRecordFile(ctx context.Context, request *grpc.GetRecordFileRequest) (*grpc.GetRecordFileReply, error) {
+func (r *controller) GetRecordFile(ctx context.Context, request *grpc.GetRecordFileRequest) (*grpc.GetRecordFileReply, error) {
 	fileAddress, startTime, endTime, err := r.rtspClientService.GetRecordFile(request.ClientID, request.Timestamp)
 	if err != nil {
 		return &grpc.GetRecordFileReply{

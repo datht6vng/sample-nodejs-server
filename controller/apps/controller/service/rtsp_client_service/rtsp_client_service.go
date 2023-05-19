@@ -58,7 +58,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	rtspRelayAddress := "Disable"
 	if enableRTSPRelay {
 		counter := r.r.Incr(context.Background(), domainCounterKey).Val()
-		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, counter)
+		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayPort, counter)
 	}
 
 	client := NewClient(r.r, clientID, connectClientAddress, rtspRelayAddress, username, password, connectClientAddress, true, enableRTSPRelay, enableRecord)

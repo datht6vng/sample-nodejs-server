@@ -47,3 +47,66 @@ May-18-2023 17:44:59 - [INFO]: MongoDB is connected on mongodb://root:12345@mong
 May-18-2023 18:27:16 - [INFO]: Http server is running at http://localhost:3000
 May-18-2023 18:27:16 - [INFO]: Grpc server is running at http://localhost:50051
 May-18-2023 18:27:16 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-19-2023 10:35:38 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:35:41 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:35:45 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:35:45 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 10:35:45 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-19-2023 10:47:15 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:47:19 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:47:22 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:47:22 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 10:47:22 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-19-2023 10:51:26 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:51:29 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:51:33 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 10:51:33 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 10:51:33 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-19-2023 20:05:25 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 20:05:25 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 20:05:38 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 20:05:38 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:05:52 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:05:52 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:06:05 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:06:05 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:06:18 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:06:18 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:06:31 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:06:31 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:06:44 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:06:44 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:06:57 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:06:57 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:07:12 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:07:12 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:07:30 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:07:30 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:07:43 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:07:43 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:07:56 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:07:56 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:08:10 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:08:10 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:08:23 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:08:23 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:08:36 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:08:36 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:08:50 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:08:50 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:09:03 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:09:03 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:09:16 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:09:16 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:09:29 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:09:29 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:09:42 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:09:42 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:09:55 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:09:55 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:10:11 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:10:11 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:10:25 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:10:29 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 13:10:29 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 13:10:29 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app

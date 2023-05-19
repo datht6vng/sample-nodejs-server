@@ -6,27 +6,27 @@ import (
 )
 
 type AppConfig struct {
-	RTSPSenderConfig *RTSPSenderConfig `mapstructure:"controller"`
+	ControllerConfig *ControllerConfig `mapstructure:"controller"`
 	LogConfig        *logger.LogConf   `mapstructure:"log"`
 	NetworkConfig    *NetworkConfig    `mapstructure:"network"`
 	RedisConfig      *RedisConfig      `mapstructure:"redis"`
 	NodeID           string            `mapstructure:"node_id"`
 }
 
-type RTSPSenderConfig struct {
-	GRPCConfig      RTSPSenderGRPCConfig      `mapstructure:"grpc"`
-	RTSPRelayConfig RTSPSenderRTSPRelayConfig `mapstructure:"rtsp_relay"`
-	HTTPConfig      RTSPSenderHTTPConfig      `mapstructure:"http"`
+type ControllerConfig struct {
+	GRPCConfig      ControllerGRPCConfig      `mapstructure:"grpc"`
+	RTSPRelayConfig ControllerRTSPRelayConfig `mapstructure:"rtsp_relay"`
+	HTTPConfig      ControllerHTTPConfig      `mapstructure:"http"`
 }
 
-type RTSPSenderGRPCConfig struct {
+type ControllerGRPCConfig struct {
 	Port int `mapstructure:"port"`
 }
-type RTSPSenderHTTPConfig struct {
+type ControllerHTTPConfig struct {
 	Port int `mapstructure:"port"`
 }
 
-type RTSPSenderRTSPRelayConfig struct {
+type ControllerRTSPRelayConfig struct {
 	RTSPRelayServerPath       string `mapstructure:"rtsp_relay_server_path"`
 	RTSPRelayServerConfigPath string `mapstructure:"rtsp_relay_server_config_path"`
 	RTSPRelayIP               string `mapstructure:"rtsp_relay_ip"`

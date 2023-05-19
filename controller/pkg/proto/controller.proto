@@ -3,12 +3,12 @@ syntax = "proto3";
 option go_package = "github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc";
 
 // The greeting service definition.
-service RTSPSender {
-  // Tell RTSPSender to connect to rtsp server and join sfu
+service Controller {
+  // Tell Controller to connect to rtsp server and join sfu
   rpc Connect (ConnectRequest) returns (ConnectReply) {}
-  // Tell RTSPSender to disconnect to rtsp server
+  // Tell Controller to disconnect to rtsp server
   rpc Disconnect (DisconnectRequest) returns (DisconnectReply) {}
-  // Tell RTSPSender to reply the file path corresponding to request
+  // Tell Controller to reply the file path corresponding to request
   rpc GetRecordFile(GetRecordFileRequest) returns (GetRecordFileReply) {}
 }
 

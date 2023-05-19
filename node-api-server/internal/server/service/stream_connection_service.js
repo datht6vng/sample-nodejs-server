@@ -29,7 +29,7 @@ class StreamConnectionService {
 
     setState(camera, state) {
         state.setId(camera.getId())
-            .setConnectToRtspSender(camera.getConnectToRtspSender())
+            .setConnectToController(camera.getConnectToController())
             .setConnectToAi(camera.getConnectToAi())
         return state;
     }
@@ -39,9 +39,9 @@ class StreamConnectionService {
         state.setId(camera.getId());
         if (this.satisfyRtspStream(camera) && this.inUsedStatus(camera)) {
 
-            const rtspSenderHandler = newSfuRtspStreamHandler();
+            const ControllerHandler = newSfuRtspStreamHandler();
             const cameraStreamInfoHandler = newCameraStreamInfoHandler(); 
-            const sfuRtspUrl = await rtspSenderHandler.connect(camera);
+            const sfuRtspUrl = await ControllerHandler.connect(camera);
 
             // camera.setSfuRtspStreamUrl(sfuRtspUrl);
             // state.setSfuRtspStreamUrl(sfuRtspUrl);
@@ -49,7 +49,7 @@ class StreamConnectionService {
             camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
             state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
             
-            state.setConnectToRtspSender(true);
+            state.setConnectToController(true);
             if (camera.getEventType()) {
                 await cameraStreamInfoHandler.createCameraStream(camera);
                 state.setConnectToAi(true);
@@ -65,7 +65,7 @@ class StreamConnectionService {
     //     this.setState(oldCamera, state);
     //     updateCamera.mergeCopy(oldCamera);
 
-    //     if (oldCamera.getConnectToRtspSender() == true) {
+    //     if (oldCamera.getConnectToController() == true) {
     //         if (this.hasDifferentStreamInfo(oldCamera, updateCamera)) {
     //             await this.handleDeleteStream(oldCamera, state);
     //             await this.handleCreateStream(updateCamera, state);
@@ -90,7 +90,7 @@ class StreamConnectionService {
 
     async handleDeleteStream(camera, state=newCamera()) {
         this.setState(camera, state);
-        const rtspSenderHandler = newSfuRtspStreamHandler();
+        const ControllerHandler = newSfuRtspStreamHandler();
         const cameraStreamInfoHandler = newCameraStreamInfoHandler();
         if (camera.getConnectToAi()) {
             try {
@@ -103,10 +103,10 @@ class StreamConnectionService {
         }
 
 
-        if (camera.getConnectToRtspSender()) {
+        if (camera.getConnectToController()) {
             try {
-                await rtspSenderHandler.disconnect(camera);
-                state.setConnectToRtspSender(false); 
+                await ControllerHandler.disconnect(camera);
+                state.setConnectToController(false); 
             }
             catch(err) {
                 this.errorHandler.execute(err);

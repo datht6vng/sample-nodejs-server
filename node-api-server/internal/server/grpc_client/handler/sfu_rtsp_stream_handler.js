@@ -2,13 +2,13 @@ const { GrpcHandler } = require("./grpc_handler");
 
 const { config } = require("../../../../pkg/config/config");
 
-const rtspSenderServerConfig = config.rtsp_sender_server;
-const defaultProtoFile = "rtsp_sender.proto";
-const defaultServiceName = "RTSPSender";
-const defaultTargetHost = rtspSenderServerConfig.grpc.host;
-const defaultTargetPort = rtspSenderServerConfig.grpc.port;
+const controllerServerConfig = config.controller_server;
+const defaultProtoFile = "controller.proto";
+const defaultServiceName = "Controller";
+const defaultTargetHost = controllerServerConfig.grpc.host;
+const defaultTargetPort = controllerServerConfig.grpc.port;
 
-const rtspSenderHttp = rtspSenderServerConfig.http;
+const controllerHttp = controllerServerConfig.http;
 
 class SfuRtspStreamHandler extends GrpcHandler {
     constructor(protoFile=defaultProtoFile, serviceName=defaultServiceName, targetHost=defaultTargetHost, targetPort=defaultTargetPort) {
@@ -79,7 +79,7 @@ class SfuRtspStreamHandler extends GrpcHandler {
         const result = {
             startTime: new Date(response.startTime / 1000000).toISOString(),
             endTime: new Date(response.endTime / 1000000).toISOString(),
-            normalVideoUrl: `${rtspSenderHttp.scheme}://${rtspSenderHttp.host}:${rtspSenderHttp.port}${response.fileAddress}`
+            normalVideoUrl: `${controllerHttp.scheme}://${controllerHttp.host}:${controllerHttp.port}${response.fileAddress}`
         }
 
         

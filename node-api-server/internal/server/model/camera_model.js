@@ -48,7 +48,7 @@ const cameraSchema = new Schema (
             type: Schema.Types.ObjectID,
             ref: 'EventType'
         },
-        connect_to_rtsp_sender: {
+        connect_to_controller: {
             type: Boolean,
             default: false
         },
@@ -123,7 +123,7 @@ async function deleteStreamConnection(doc) {
 
 
 async function updateStreamConnection(updateDoc, updatedDoc) {
-    if (!updatedDoc || updateDoc.connect_to_rtsp_sender != undefined || updateDoc.connect_to_ai != undefined) return;
+    if (!updatedDoc || updateDoc.connect_to_controller != undefined || updateDoc.connect_to_ai != undefined) return;
     let state = newCamera();
     try {
         updatedDoc = await mongoose.model("Camera").findOne({ _id: updatedDoc._id }).populate("event_type");
@@ -147,7 +147,7 @@ async function updateStreamConnection(updateDoc, updatedDoc) {
 //     try {
 //         const doc = await schema.model.findOne(schema.getFilter());
 //         const updateDoc = schema.getUpdate();
-//         if (updateDoc.connect_to_rtsp_sender = undefined && updateDoc.connect_to_ai == undefined && doc) {
+//         if (updateDoc.connect_to_controller = undefined && updateDoc.connect_to_ai == undefined && doc) {
 //             const oldCamera = fromDatabaseConverter.visit(newCamera(), doc);
 //             const updateCamera = fromDatabaseConverter.visit(newCamera(), updateDoc);
 //             let state = await streamConnectionService.handleUpdateStream(oldCamera, updateCamera);
