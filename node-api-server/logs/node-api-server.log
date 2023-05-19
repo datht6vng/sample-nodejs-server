@@ -47,3 +47,29 @@ May-18-2023 17:44:59 - [INFO]: MongoDB is connected on mongodb://root:12345@mong
 May-18-2023 18:27:16 - [INFO]: Http server is running at http://localhost:3000
 May-18-2023 18:27:16 - [INFO]: Grpc server is running at http://localhost:50051
 May-18-2023 18:27:16 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-18-2023 18:52:30 - [INFO]: Http server is running at http://localhost:3000
+May-18-2023 18:52:30 - [INFO]: Grpc server is running at http://localhost:50051
+May-18-2023 18:52:30 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-18-2023 19:08:16 - [INFO]: Http server is running at http://localhost:3000
+May-18-2023 19:08:16 - [INFO]: Grpc server is running at http://localhost:50051
+May-18-2023 19:08:16 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-18-2023 19:19:56 - [INFO]: Http server is running at http://localhost:3000
+May-18-2023 19:23:36 - [INFO]: Http server is running at http://localhost:3000
+May-18-2023 19:24:44 - [INFO]: Http server is running at http://localhost:3000
+May-18-2023 19:24:44 - [INFO]: Grpc server is running at http://localhost:50051
+May-18-2023 19:24:44 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-18-2023 19:53:28 - [INFO]: Http server is running at http://localhost:3000
+May-18-2023 19:53:28 - [INFO]: Grpc server is running at http://localhost:50051
+May-18-2023 19:53:28 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-18-2023 21:21:53 - [ERROR]: Failed to delete stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-18-2023 21:21:58 - [ERROR]: Failed to create new stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:04:37 - [ERROR]: Failed to delete stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:04:43 - [ERROR]: Failed to create new stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:06:05 - [ERROR]: Failed to delete stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:06:11 - [ERROR]: Failed to create new stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:06:30 - [ERROR]: Failed to delete stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:06:35 - [ERROR]: Failed to create new stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:07:11 - [ERROR]: Failed to delete stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:07:17 - [ERROR]: Failed to create new stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:26:55 - [ERROR]: Failed to delete stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052
+May-19-2023 13:27:00 - [ERROR]: Failed to create new stream in AI server with camera 64661ac56e2fe5c1c9ab9bd3. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052

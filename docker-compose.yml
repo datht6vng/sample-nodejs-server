@@ -13,8 +13,8 @@ services:
     ports:
       - 5000:5000 # ICE mux port
     networks:
-      - backend 
-    
+      - backend
+
   controller:
     container_name: controller
     build:
@@ -36,7 +36,7 @@ services:
       - 8080:8080 # HTTP + WS port
 
     environment:
-    - GST_DEBUG=1
+      - GST_DEBUG=1
     networks:
       - backend
 
@@ -52,7 +52,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     networks:
-      - backend 
+      - backend
 
   message-broker-server:
     build:
@@ -60,14 +60,14 @@ services:
       dockerfile: Dockerfile
     container_name: 'rabbitmq'
     ports:
-        - 5672:5672
-        - 15672:15672
-        - 1883:1883
+      - 5672:5672
+      - 15672:15672
+      - 1883:1883
     volumes:
-        - ./docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-        - ./docker-conf/rabbitmq/log/:/var/log/rabbitmq
+      - ./docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
-      - backend 
+      - backend
 
   event-simulator:
     container_name: event-simulator
@@ -86,7 +86,7 @@ services:
     depends_on:
       - mongodb
     networks:
-      - backend 
+      - backend
 
   node-api-server:
     container_name: node_api_server
@@ -110,7 +110,7 @@ services:
       - message-broker-server
       - mongodb
     networks:
-      - backend 
+      - backend
 
   node-api-gateway:
     container_name: node_api_gateway
@@ -132,8 +132,8 @@ services:
     # depends_on:
     #   - node-api-server
     networks:
-      - backend 
-    
+      - backend
+
   redis:
     container_name: redis
     image: "redis"
@@ -142,7 +142,7 @@ services:
     command: redis-server --maxmemory-policy allkeys-lru --maxmemory 4G
     restart: always
     networks:
-      - backend 
+      - backend
     volumes:
       - redis-data:/data
 
@@ -153,7 +153,7 @@ services:
     volumes:
       - ./rtsp_server/rtsp-simple-server.yml:/configs/rtsp_server/rtsp-simple-server.yml
     networks:
-     - backend
+      - backend
     ports:
       - 8554:8554 # RTSP port
       - 8322:8322 # RTP port
