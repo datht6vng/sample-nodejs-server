@@ -1,5 +1,3 @@
-
-
 [sfu]
 # Ballast size in MiB, will allocate memory to reduce the GC trigger upto 2x the
 # size of ballast. Be aware that the ballast should be less than the half of memory
@@ -42,14 +40,14 @@ singleport = 5000
 
 # Range of ports that ion accepts WebRTC traffic on
 # Format: [min, max]   and max - min >= 100
-# portrange = [5000, 5300]
+#portrange = [5000, 5200]
 # if sfu behind nat, set iceserver
 [[webrtc.iceserver]]
-urls = ["stun:stun.l.google.com:19302"]
-[[webrtc.iceserver]]
-urls = ["turn:turnserver.trueid.vn:3478?transport=udp"]
-username = "trueid01"
-credential = "password01"
+urls = ["stun:stun.stunprotocol.org:3478"]
+# [[webrtc.iceserver]]
+# urls = ["turn:turn.awsome.org:3478"]
+# username = "awsome"
+# credential = "awsome"
 
 # sdp semantics:
 # "unified-plan"
@@ -69,8 +67,8 @@ mdns = true
 # Multiple public IP addresses can be specified as a comma separated list
 # if the sfu is deployed in a DMZ between two 1-1 NAT for internal and
 # external users.
-# nat1to1 = ["127.0.0.1"]
-# icelite = true
+nat1to1 = ["103.188.244.219"]
+#icelite = true
 
 [webrtc.timeouts]
 # The duration in [sec] without network activity before a ICE Agent is considered disconnected
