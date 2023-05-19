@@ -22,9 +22,7 @@ services:
       context: .
     volumes:
       - ./controller:/service/controller
-      - ./controller/controller.toml:/configs/controller.toml
-      - ./controller/rtsp-simple-server:/configs/rtsp-simple-server
-      - ./controller/rtsp-simple-server.yml:/configs/rtsp-simple-server.yml
+      - ./controller/configs:/configs
       - ./controller/logs:/logs
       - ./controller/videos:/videos
     working_dir: /service/controller

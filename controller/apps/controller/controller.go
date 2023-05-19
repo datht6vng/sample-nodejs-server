@@ -12,6 +12,7 @@ import (
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/http_interface"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/room_service"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/rtsp_client_service"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/uploader"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	grpc_pb "github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
@@ -75,8 +76,14 @@ func NewHandler(nodeID string) (*Handler, error) {
 	handler.Node.KeepAlive(3 * time.Second) // Current not neccessary
 	handler.Node.StartCleaner(9 * time.Second)
 
+	// Uploader
+	uploader, err := uploader.NewGoogleUploader(config.Config.UploaderConfig.Creditials)
+	if err != nil {
+		return nil, errors.Annotate(err, "cannot create uploader")
+	}
+
 	// Service
-	rtspClientService, err := rtsp_client_service.NewRTSPClientService(r)
+	rtspClientService, err := rtsp_client_service.NewRTSPClientService(r, uploader)
 	if err != nil {
 		return nil, errors.Annotate(err, "cannot create rtsp client service")
 	}

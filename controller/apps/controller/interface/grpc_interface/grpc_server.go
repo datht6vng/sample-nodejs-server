@@ -99,7 +99,7 @@ func (r *controller) Disconnect(ctx context.Context, request *grpc.DisconnectReq
 }
 
 func (r *controller) GetRecordFile(ctx context.Context, request *grpc.GetRecordFileRequest) (*grpc.GetRecordFileReply, error) {
-	fileAddress, startTime, endTime, err := r.rtspClientService.GetRecordFile(request.ClientID, request.Timestamp)
+	fileAddress, startTime, endTime, err := r.rtspClientService.GetAndUploadRecordFile(request.ClientID, request.Timestamp)
 	if err != nil {
 		return &grpc.GetRecordFileReply{
 			Code:    http.StatusInternalServerError,

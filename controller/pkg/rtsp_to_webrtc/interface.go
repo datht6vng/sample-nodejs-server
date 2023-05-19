@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	"github.com/pion/webrtc/v3"
@@ -22,9 +23,6 @@ const (
 	videoClockRate   = 90000
 	audioClockRate   = 48000
 	pcmClockRate     = 8000
-
-	RecordFileDuration = int64(10 * time.Second)
-	maxRecordFiles     = 15
 )
 
 type Pipeline interface {
@@ -94,20 +92,22 @@ func CreatePipeline(
 		if enableRTSPRelay {
 			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! rtspclientsink location=%v", caps, videoSinkName, rtspRelayAddress)
 			if enableRecord {
+				RecordFileDuration := int64(time.Duration(config.Config.RecorderConfig.RecordFileDuration) * time.Second)
 				path := `"` + filepath.Join(sessionDir, "record_%d.mp4") + `"`
 				index, err := util.GetIndex(sessionDir)
 				if err != nil {
 					return nil, err
 				}
-				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 ! tee name=video_tee_2 ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! rtspclientsink location=%v latency=10000 video_tee_2. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, rtspRelayAddress, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
+				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 ! tee name=video_tee_2 ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! rtspclientsink location=%v latency=10000 video_tee_2. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, rtspRelayAddress, parser, SplitMuxSinkName, path, RecordFileDuration, config.Config.RecorderConfig.MaxRecordFiles, index)
 			}
 		} else if enableRecord {
+			RecordFileDuration := int64(time.Duration(config.Config.RecorderConfig.RecordFileDuration) * time.Second)
 			path := `"` + filepath.Join(sessionDir, "record_%d.mp4") + `"`
 			index, err := util.GetIndex(sessionDir)
 			if err != nil {
 				return nil, err
 			}
-			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, parser, SplitMuxSinkName, path, RecordFileDuration, maxRecordFiles, index)
+			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, parser, SplitMuxSinkName, path, RecordFileDuration, config.Config.RecorderConfig.MaxRecordFiles, index)
 		} else {
 			videoSink = fmt.Sprintf(" ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes = 0 ! %v ! appsink name=%v sync=false", caps, videoSinkName)
 		}
