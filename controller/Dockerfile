@@ -55,6 +55,6 @@ RUN apk add \
 
 
 COPY --from=builder /services/hcmut-thesis/controller/cmd/controller/main .
-COPY --from=builder /services/hcmut-thesis/controller/controller.toml /configs/controller.toml
+COPY --from=builder /services/hcmut-thesis/controller/configs /configs
 ENTRYPOINT ["./main"]
 CMD ["-c", "/configs/controller.toml"]
