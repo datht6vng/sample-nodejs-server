@@ -5,7 +5,7 @@ class Controller {
 }
 
 Controller.prototype.success = function(res) {
-  const inner = function(status, message, data) {
+  const inner = function(status=200, message="Success", data=null) {
     return res.status(parseInt(status)).send({
       status: status,
       message: message,
@@ -16,7 +16,7 @@ Controller.prototype.success = function(res) {
 }
 
 Controller.prototype.failure = function(res) {
-  const inner = function(status, message="Error", data=null) {
+  const inner = function(status=404, message="Error", data=null) {
     return res.status(parseInt(status)).send({
       status: status,
       message: message,

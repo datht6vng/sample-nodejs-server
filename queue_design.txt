@@ -415,11 +415,219 @@ fix data_converter cua event type
 fix $unwind event_type trong report_repository
 
 
-Real camera data
+
+
+
+
+
+
+
+
+
+
+===============REAL camera data TEST COMMUNICATION
+
 {
-    "_id": "6162f9b9be1661cb32a1c459",
+    "time": "",
+    "zone": 64
+}
+
+Event type
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c447"),
+    event_key: 'door_open'
+}
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c448"),
+    event_key: 'movement'
+}
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c449"),
+    event_key: 'crowd_gathering'
+}
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c450"),
+    event_key: 'line_crossing'
+}
+
+
+
+Iot device 
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    iot_device_name: 'Cảm biến chuyển động PARADOX test',
+    zone: 64,
+    event_type: ObjectId("6162f9b9be1661cb32a1c447"),
+    status: 'used'
+}
+
+Iot Device Map
+
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    iot_device_name: 'Cảm biến chuyển động khu vực test',
+    address: 'Cảm biến ở địa chỉ ...',
+    lat: 25,
+    lng: -45,
+    type: 'iot',
+    observed_status: 'used',
+    connect_iot: ObjectId("6162f9b9be1661cb32a1c461"),
+    area: ObjectId("6162f9b9be1661cb32a1c461")
+}
+
+
+Camera Map 
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    camera_name: 'DTG Camera map PTZ',
+    type: 'camera',
+    connect_camera: ObjectId("6162f9b9be1661cb32a1c461"),
+    observe_iot: ObjectId("6162f9b9be1661cb32a1c461"),
+    area: ObjectId("6162f9b9be1661cb32a1c461") 
+}
+
+Camera
+{
+    _id: ObjectId("6162f9b9be1661cb32a1c461"),
+    camera_name: "DTG Camera PTZ",
+    rtsp_stream_url: "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    username: "admin",
+    password: "Dientoan@123",
+    event_type: ObjectId("6162f9b9be1661cb32a1c449")
+}
+
+
+
+
+=================================================
+Camera
+{
+    "_id": "6162f9b9be1661cb32a1c461",
     "camera_name": "DTG Camera PTZ",
     "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
     "username": "admin",
-    "password": "Dientoan@123"
+    "status": "used",
+    "password": "Dientoan@123",
+    "event_type": "6162f9b9be1661cb32a1c449"
 }
+
+
+/api/event_types
+{
+    "_id": "6162f9b9be1661cb32a1c449",
+    "event_key": 'crowd_gathering'
+}
+
+/api/cameras
+{
+    "_id": "6162f9b9be1661cb32a1c461",
+    "camera_name": "DTG Camera PTZ",
+    "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    "username": "admin",
+    "status": "used",
+    "password": "Dientoan@123",
+    "event_type": "6162f9b9be1661cb32a1c449",
+    "camera_event_zone_coords": [5, 5, 630, 630],
+    "iot_event_zone_coords": [5, 5, 540, 540]
+}
+
+
+
+
+
+
+{
+    "_id": "6162f9b9be1661cb32a1c461",
+    "camera_name": "DTG Camera PTZ",
+    "rtsp_stream_url": "rtsp://tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2",
+    "username": "admin",
+    "status": "used",
+    "password": "Dientoan@123",
+    "event_type": "6162f9b9be1661cb32a1c450",
+    "offset_x_begin": 40,
+    "offset_x_end": 50,
+    "offset_y_begin": 60,
+    "offset_y_end": 70,
+    "is_set_line": true
+}
+
+
+
+sudo lsof -n -i :27017 | grep LISTEN
+
+
+============Problem=========:
++ Service name and host name => Use file url address of rtsp sender
+    + Tạm thời để dữ liệu test: 
+        + camera_service.js
+        + sfu_rtsp_stream_handler.js (getRecordFile, normalVideoUrl)
++ Event spam
++ Draw line when detection for line crossing
++ Handle update camera stream (cả của grpc client)
++ Fix denied mkdir logger
++ socket => DONE
++ Static file ben AI => DONE (Need to refactor)
+
++ Change datatype to Buffer for image in mongoose, with these models: area, iot_device_type, camera_type
++ Display opencv image in browser
+
+
++ ai event
+
+
+
++ Flow logic (Các logic này đang gỉa sử không có ngoại lệ xảy ra khi communication giữa các service):
+    + Update:
+        + (1 trong username, password, url, status đổi và cú là used) 
+            + Nếu event_type cũ đang có && event_type mới khác event_type cũ
+                + Delete AI
+            + Disconnect rtsp
+
+        + Nếu mới là used và kiểm tra thỏa mã các đk của (username, password, url) 
+            + Connect rtsp
+            + Nếu có event_type
+                + Create bên AI
+
+    + Thêm try...catch cho AI khi 1 stream tự động disconnect
+    + Thêm xử lý ngoại lệ cho các communication giữa các server
+
+    ==> Các logic sẽ đươc thực thi trong middleware của camera_model
++ Camera control
+
+
++ Set timezone logging AI
++ Fix post middleware for updating
+
++ Pre middleware for is_set_line
+
+
++ Trả về lỗi cho user khi các vấn đề liên quan đến stream không đúng info
+
+
+Tasks:
+    + Khi disconnect thì dù k disconnect rtsp trả về lỗi thì vẫn coi như thành công và disconnect tiếp AI
+    + Khi connect thì nếu rtsp connect k được thì k đi tiếp để connect AI
+    + Xóa 2 fields: is_connect_ai và is_connect_rtsp
+    + Gửi các field mới: camera_event_zone và iot_event_zone qua cho AI và thêm logic xử lý các field này bên AI
+    + Set is_set_line thành true khi mà các tọa độ line crossing có đủ
+    + Implement spam policy cho các sự kiện ở message queue
+    + Authen and author
+
+    + Draw line detection
+
+    + Xem lại khi download record file cần https không
+    + Xóa các temp file bên AI
+    + Sửa AI server dã connect hay disconnect vẫn trả về success
+
+    + Tạm thời bên AI, hàm "consume_new_stream" cho time.sleep(2) trong khi chờ rtsp_server tạo ra rtsp stream. Sẽ nghĩ cách khác hay hơn
+    + Kiểm tra lại nguyên nhân CPU ngốn nhìu bên AI khi hem wait stream, coi phải bị lỗi k
+
+    + Tạm thời thiết lập lại event_time trong Event model không còn là time series field nữa
+
+    + Cân nhắc:
+        + Hiện thực retry giữa các connection:
+            + Khi này DB phải lưu các trạng thái: Trạng thái connect hiện tại và trạng thái "ĐÁNG LẼ" phải xảy ra của từng connection (rtsp và AI)
+

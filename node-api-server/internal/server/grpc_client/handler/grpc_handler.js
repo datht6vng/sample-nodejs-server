@@ -4,6 +4,9 @@ const { newProtoLoader } = require("../../../../pkg/grpc/proto/proto_loader");
 const { newToProtobufConverter } = require("../../data_converter/to_protobuf_converter");
 const { newFromProtobufConverter } = require("../../data_converter/from_protobuf_converter");
 
+const { newErrorHandler } = require("../../error/error_handler");
+const { newBaseError } = require("../../entity/error/base_error");
+
 class GrpcHandler {
     constructor(protoFile, serviceName, targetHost, targetPort, protoLoader=newProtoLoader()) {
         this.protoLoader = protoLoader;
@@ -31,6 +34,13 @@ class GrpcHandler {
                 }
             });
         });
+    }
+
+    handleError(err, message) {
+        // const handler = newErrorHandler();
+        err = newBaseError("", message, true);
+        // handler.execute(err);
+        throw err;
     }
 }
 

@@ -96,7 +96,7 @@ class ReportRepository {
             }
         ];
 
-        let pipeline = lookupPipeline.concat(extralookupPipeline, matchPipeline);
+        let pipeline = lookupPipeline;
 
         let doc;
         try {

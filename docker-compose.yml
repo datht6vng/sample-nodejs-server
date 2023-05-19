@@ -95,13 +95,14 @@ services:
       dockerfile: Dockerfile.local
     environment:
       - BROKER_HOST=rabbitmq
+      - CONFIG_PATH=./config/node-api-server.toml
     volumes:
       - ./node-api-server:/usr/app
       - api_node_modules:/usr/app/node_modules
     working_dir: /usr/app
     command: >
       sh -c "npm install && npm run dev"
-    restart: always
+    # restart: always
     ports:
       - "3000:3000"
       - "50051:50051"
@@ -117,15 +118,15 @@ services:
       context: node-api-gateway
       dockerfile: Dockerfile.local
       # dockerfile: TestDockerfile
-    # environment:
-    #   - BROKER_HOST=rabbitmq
+    environment:
+      - CONFIG_PATH=./config/node-api-gateway.toml
     volumes:
       - ./node-api-gateway:/usr/app
-      - gateway_node_modules:/usr/app/node_modules
+      # - gateway_node_modules:/usr/app/node_modules
     working_dir: /usr/app
     command: >
       sh -c "npm run dev"
-    restart: always
+    # restart: always
     ports:
       - "3001:3001"
     # depends_on:

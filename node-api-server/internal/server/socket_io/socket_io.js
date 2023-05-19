@@ -26,6 +26,9 @@ class SocketIO {
     }
 
     emitToAllClients(event, data) {
+
+        console.log("Event emit from socket IO: ", data);
+
         this.io.emit(event, data);
     }
 }

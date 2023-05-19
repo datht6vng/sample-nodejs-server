@@ -4,7 +4,7 @@ const { config } = require("../../../../pkg/config/config");
 
 const targetServer = config.api_server.http;
 
-const wsProxy = createProxyMiddleware({
+const wsProxy = createProxyMiddleware('/socket.io', {
     target: `${targetServer.scheme}://${targetServer.host}:${targetServer.port}`,
     // pathRewrite: {
     //  '^/websocket' : '/socket',        // rewrite path.

@@ -17,8 +17,8 @@ class EventVerifiedCallback extends EventCallback {
 
     parseMessage(message) {
         let jsonMessage = JSON.parse(message);
-        console.log(jsonMessage)
-        return newEventVerifiedMessage(jsonMessage.event_id, jsonMessage.normal_image_url, jsonMessage.detection_image_url, jsonMessage.normal_video_url, jsonMessage.detection_video_url, jsonMessage.true_alarm);
+        console.log("Json message from AI server for verified event: ", jsonMessage)
+        return newEventVerifiedMessage(jsonMessage.event_id, jsonMessage.image_url, jsonMessage.detection_image_url, jsonMessage.video_url, jsonMessage.detection_video_url, jsonMessage.true_alarm);
     }
 
     async execute(message) {
@@ -31,10 +31,14 @@ class EventVerifiedCallback extends EventCallback {
             .setDetectionVideoUrl(eventMessage.detectionVideoUrl)
             .setAiTrueAlarm(eventMessage.trueAlarm)
             .setEventStatus(AI_VERIFIED_STATUS);
+        
+        event = await this.eventService.updateEventById(eventId, event);
 
-        await this.eventService.updateEventById(eventId, event);
-        const notifyMessage = await this.getAllEventRelationDetailsById(eventId);
-        this.notifyVerifiedEventToClients(notifyMessage);
+        console.log("Event verified from AI: ", event)
+
+        // const notifyMessage = await this.getAllEventRelationDetailsById(eventId);
+
+        this.notifyVerifiedEventToClients(this.toProtobufConverter.visit(event));
     }
 
 }

@@ -43,6 +43,12 @@ message CameraDetail {
     optional bool is_set_line = 12;
     optional string username = 13;
     optional string password = 14;
+
+    optional string hostname = 15;
+    optional int32 port = 16;
+    repeated float stream_resolution = 17;
+    repeated float iot_event_zone_coords = 18;
+    repeated float camera_event_zone_coords = 19;
 }
 
 

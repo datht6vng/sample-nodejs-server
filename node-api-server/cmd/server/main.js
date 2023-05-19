@@ -2,6 +2,7 @@ const { newGrpcServer } = require("../../internal/server/interface/grpc/server")
 const { newConsumers } = require("../../internal/server/interface/rabbitmq/consumers");
 const { newMongoDB } = require("../../internal/server/database/mongodb");
 
+
 async function main() {
     const db = newMongoDB();
     const grpcServer = newGrpcServer();
@@ -9,6 +10,12 @@ async function main() {
     db.start();
     grpcServer.start();
     consumers.start();
+
+
+
+    // const { newCameraStreamInfoHandler } = require("../../internal/server/grpc_client/handler/camera_stream_info_handler");
+    // const handler = newCameraStreamInfoHandler();
+    // handler.createCameraStream({})
 }
 
 main();

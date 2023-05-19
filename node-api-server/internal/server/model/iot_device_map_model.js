@@ -74,6 +74,8 @@ iotDeviceMapSchema.pre('findOneAndUpdate', async function(next) {
                 await mongoose.model("IotDevice").findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });
             }
         }
+
+        await mongoose.model("IotDevice").findOneAndUpdate({ _id: updateDoc.connect_iot }, { status: "used" });
     }
 
     next();

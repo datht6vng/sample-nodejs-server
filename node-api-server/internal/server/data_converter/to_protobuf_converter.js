@@ -93,6 +93,14 @@ class ToProtobufConverter {
         this.setDocAttribute(camera, camera.getOffsetXEnd, "offset_x_end", doc);
         this.setDocAttribute(camera, camera.getOffsetYEnd, "offset_y_end", doc);
         this.setDocAttribute(camera, camera.getIsSetLine, "is_set_line", doc);
+        this.setDocAttribute(camera, camera.getConnectToRtspSender, "connect_to_rtsp_sender", doc);
+        this.setDocAttribute(camera, camera.getConnectToAi, "connect_to_ai", doc);
+
+        this.setDocAttribute(camera, camera.getHostname, "hostname", doc);
+        this.setDocAttribute(camera, camera.getPort, "port", doc);
+        this.setDocAttribute(camera, camera.getStreamResolution, "stream_resolution", doc);
+        this.setDocAttribute(camera, camera.getIotEventZoneCoords, "iot_event_zone_coords", doc);
+        this.setDocAttribute(camera, camera.getCameraEventZoneCoords, "camera_event_zone_coords", doc);
 
         return doc;
     }

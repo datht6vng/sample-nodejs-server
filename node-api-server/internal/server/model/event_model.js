@@ -57,9 +57,9 @@ const eventSchema = new Schema (
             createdAt: 'created_at',
             updatedAt: 'updated_at' 
         },
-        timeseries: {
-            timeField: 'event_time'
-        },
+        // timeseries: {
+        //     timeField: 'event_time'
+        // },
     }
 )
 

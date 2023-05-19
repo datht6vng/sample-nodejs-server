@@ -117,14 +117,18 @@ routing_key_prefix = {event_new_camera = "event.new.camera"}
 
 [ai_server]
 [ai_server.http]
-host = "localhost"
-port = "5000"
+host = "ai-server"
+port = "5005"
 scheme = "http"
 [ai_server.grpc]
-host = "localhost"
-port = "5000"
+host = "ai-server"
+port = "50052"
 
 [rtsp_sender_server]
+[rtsp_sender_server.http]
+host = "controller"
+port = "8080"
+scheme = "http"
 [rtsp_sender_server.grpc]
 host = "controller"
 port = "5551"

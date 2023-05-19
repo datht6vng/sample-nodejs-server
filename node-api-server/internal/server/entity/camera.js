@@ -15,6 +15,30 @@ class Camera {
     cameraType = undefined;
     eventType = undefined;
 
+    connectToRtspSender = false;
+    connectToAi = false;
+
+    hostname = undefined;
+    port = undefined;
+    streamResolution = undefined;
+    iotEventZoneCoords = undefined;
+    cameraEventZoneCoords = undefined;
+
+    mergeCopy(camera) {
+        for (let attr in this) {
+            if (key != "connectToRtspSender" && key != "connectToAi") {
+                this.copyIfUndefined(attr, camera);
+            }
+            
+        }
+    }
+
+    copyIfUndefined(attributeName, fromCamera) {
+        if (this[attributeName] == undefined) {
+            this[attributeName] = fromCamera[attributeName];
+        }
+    }
+
 
     accept(visitor, o, env) {
         return visitor.visitCamera(this, o, env);
@@ -76,7 +100,38 @@ class Camera {
         return this.eventType;
     }
     
-    
+    getConnectToRtspSender() {
+        return this.connectToRtspSender;
+    }
+
+    getConnectToAi() {
+        return this.connectToAi;
+    }
+
+
+
+
+
+    getHostname() {
+        return this.hostname;
+    }
+
+    getPort() {
+        return this.port;
+    }
+
+    getStreamResolution() {
+        return this.streamResolution;
+    }
+
+    getIotEventZoneCoords() {
+        return this.iotEventZoneCoords;
+    }
+
+    getCameraEventZoneCoords() {
+        return this.cameraEventZoneCoords;
+    }
+
     
     
     
@@ -153,6 +208,45 @@ class Camera {
         else {
             this.eventType = eventType;
         }
+        return this;
+    }
+
+    setConnectToRtspSender(connectToRtspSender) {
+        this.connectToRtspSender = connectToRtspSender;
+        return this;
+    }
+
+    setConnectToAi(connectToAi) {
+        this.connectToAi = connectToAi;
+        return this;
+    }
+
+
+
+
+    setHostname(hostname) {
+        this.hostname = hostname;
+        return this;
+    }
+
+    setPort(port) {
+        this.port = port;
+        return this;
+    }
+
+
+    setStreamResolution(streamResolution) {
+        this.streamResolution = streamResolution;
+        return this;
+    }
+
+    setIotEventZoneCoords(iotEventZoneCoords) {
+        this.iotEventZoneCoords = iotEventZoneCoords;
+        return this;
+    }
+
+    setCameraEventZoneCoords(cameraEventZoneCoords) {
+        this.cameraEventZoneCoords = cameraEventZoneCoords;
         return this;
     }
 }

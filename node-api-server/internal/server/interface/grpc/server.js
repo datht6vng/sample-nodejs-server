@@ -3,6 +3,7 @@ const { newProtoLoader } = require("../../../../pkg/grpc/proto/proto_loader");
 
 const { socketIO } = require("../../socket_io/socket_io");
 const { config } = require("../../../../pkg/config/config");
+const { logger } = require("../../../../pkg/logger/logger");
 
 const { newAreaHandler } = require("./handler/area_handler");
 const { newCameraMapHandler } = require("./handler/camera_map_handler");
@@ -16,6 +17,7 @@ const { newIotDeviceHandler } = require("./handler/iot_device_handler");
 const { newSystemUtilityHandler } = require("./handler/system_utility_handler");
 
 const { newReportHandler } = require("./handler/report_handler");
+const { newCameraStreamInfoHandler } = require("./handler/camera_stream_info_handler");
 
 class GrpcServer {
     constructor() {
@@ -40,6 +42,7 @@ GrpcServer.prototype.initService = function() {
     this.server.addService(this.protoLoader.getService('system_utility.proto', 'SystemUtilityService'), newSystemUtilityHandler());
 
     this.server.addService(this.protoLoader.getService('report.proto', 'ReportService'), newReportHandler());
+    this.server.addService(this.protoLoader.getService('camera_stream_info.proto', 'CameraStreamInfoService'), newCameraStreamInfoHandler());
 }
 
 GrpcServer.prototype.start = function(host=this.conf.host, port=this.conf.port) {
@@ -48,7 +51,7 @@ GrpcServer.prototype.start = function(host=this.conf.host, port=this.conf.port) 
         grpc.ServerCredentials.createInsecure(),
         (error, port) => {
             this.server.start();
-            console.log(`Grpc server is running at ${host}:${port}`);
+            logger.info(`Grpc server is running at ${host}:${port}`);
         }
     );
 }

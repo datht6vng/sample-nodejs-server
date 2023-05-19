@@ -20,8 +20,15 @@ class BaseError extends Error {
     isOperationalError() {
         return this.isOperational;
     }
+
+    toString() {
+        return this.getDescription();
+    }
 }
 
-
+function newBaseError(name, description, isOperational) {
+    return new BaseError(name, description, isOperational);
+}
 
 module.exports.BaseError = BaseError;
+module.exports.newBaseError = newBaseError;
