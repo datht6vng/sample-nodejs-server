@@ -30,7 +30,7 @@ class IotEventNewCallback extends EventNewCallback {
     }
 
     async execute(message) {
-        const routingKey = routingKey;
+        const routingKey = message.fields.routingKey;
         const routingKeyArr = routingKey.split(".");
         if (routingKeyArr[routingKeyArr.length - 1] != OPEN_EVENT) return;
 

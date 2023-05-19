@@ -534,7 +534,15 @@ Camera
     "iot_event_zone_coords": [5, 5, 540, 540]
 }
 
-
+/api/camera_maps
+{
+    "_id": "6162f9b9be1661cb32a1c461",
+    "camera_name": "DTG Camera map PTZ updated 1",
+    "type": "camera",
+    "connect_camera": "6162f9b9be1661cb32a1c461",
+    "observe_iot": "6162f9b9be1661cb32a1c461",
+    "area": "6162f9b9be1661cb32a1c461"
+}
 
 
 
@@ -626,6 +634,9 @@ Tasks:
     + Kiểm tra lại nguyên nhân CPU ngốn nhìu bên AI khi hem wait stream, coi phải bị lỗi k
 
     + Tạm thời thiết lập lại event_time trong Event model không còn là time series field nữa
+
+    + Xóa camera map thì chuyển lại thành used
+    + Check lại cái event verifed chưa lưu dc vô db
 
     + Cân nhắc:
         + Hiện thực retry giữa các connection:

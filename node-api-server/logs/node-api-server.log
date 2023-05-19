@@ -47,3 +47,6 @@ May-18-2023 17:44:59 - [INFO]: MongoDB is connected on mongodb://root:12345@mong
 May-18-2023 18:27:16 - [INFO]: Http server is running at http://localhost:3000
 May-18-2023 18:27:16 - [INFO]: Grpc server is running at http://localhost:50051
 May-18-2023 18:27:16 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-19-2023 17:35:10 - [INFO]: Http server is running at http://localhost:3000
+May-19-2023 17:35:10 - [INFO]: Grpc server is running at http://localhost:50051
+May-19-2023 17:35:11 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
