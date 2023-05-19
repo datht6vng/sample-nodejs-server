@@ -65,10 +65,12 @@ class CameraController extends Controller {
             port: body.port
         };
         const action = req.query.action;
-
+        console.log(action, body)
         try {
             if (action == "relativeMove") {
-                await this.cameraRotationService.relativeMove(cameraConfig, body.x, body.y, body.z, body.zoom);
+                // Note: Trả về tọa độ hay không? hay handle frontend
+                const connection = await this.cameraRotationService.getConnection(cameraConfig);
+                const newCoord = await this.cameraRotationService.relativeMove(connection, body.x, body.y, body.z, body.zoom);
                 this.success(res)();
             }
             else if (action == "absoluteMove") {
@@ -92,11 +94,12 @@ class CameraController extends Controller {
                 this.success(res)();
             }
             else if (action == "gotoHomePosition") {
-                await this.cameraRotationService.gotoHomePosition(cameraConfig);
-                this.success(res)();
+                const connection = await this.cameraRotationService.getConnection(cameraConfig);
+                const homePosition = await this.cameraRotationService.gotoHomePosition(connection, body.options);
+                this.success(res)(200, "Success", homePosition);
             }
             else if (action == "getStatus") {
-                const status = await this.cameraRotationService.getStatus(cameraConfig);
+                const status = await this.cameraRotationService.getStatus(cameraConfig, body.options);
                 this.success(res)(200, "Success", status);
             }
             else if (action == "getPresets") {

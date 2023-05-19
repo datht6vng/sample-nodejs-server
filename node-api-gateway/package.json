@@ -30,6 +30,8 @@
     "nodemon": "^2.0.20"
   },
   "pkg": {
-    "assets": ["pkg/**/*.proto"]
+    "assets": [
+      "pkg/**/*.proto"
+    ]
   }
 }
