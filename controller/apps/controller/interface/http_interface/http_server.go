@@ -52,7 +52,7 @@ func (s *httpControllerServer) initMiddleware() error {
 }
 
 func (s *httpControllerServer) initRoute() error {
-	s.app.Static("/videos", "./videos", fiber.Static{
+	s.app.Static("/videos", "/videos", fiber.Static{
 		Compress:  true,
 		ByteRange: true,
 		Browse:    true,
@@ -64,7 +64,7 @@ func (s *httpControllerServer) initRoute() error {
 		s.webSocketController.Handle(c)
 	}))
 
-	s.app.Get("/*", func(ctx *fiber.Ctx) error {
+	s.app.Get("/health/*", func(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusOK).JSON(
 			fiber.Map{
 				"from": os.Getenv("HOSTNAME"),
