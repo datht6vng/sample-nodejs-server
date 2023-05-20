@@ -102,6 +102,8 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			break
 		}
 		switch req.Method {
+		case "ping":
+
 		case "join":
 			var join Join
 			err := json.Unmarshal(*req.Params, &join)
