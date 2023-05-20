@@ -92,10 +92,12 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 		var msg []byte
 		var err error
 		if _, msg, err = con.ReadMessage(); err != nil {
+			logger.Infof("Close websocket connection by error: %v", err)
 			break
 		}
 		req := &jsonrpc2.Request{}
 		if err := json.Unmarshal(msg, req); err != nil {
+			logger.Infof("Close websocket connection by error: %v", err)
 			onErr(req, err)
 			break
 		}
@@ -104,12 +106,14 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			var join Join
 			err := json.Unmarshal(*req.Params, &join)
 			if err != nil {
+				logger.Infof("Close websocket connection by error: %v", err)
 				onErr(req, err)
 				break
 			}
-			logger.Infof("%v join socket %v", join.UID, join.SID)
+			logger.Infof("%v send join to %v", join.UID, join.SID)
 			sfuNode, err := c.roomService.SetOrGetSFUNode(join.SID)
 			if err != nil {
+				logger.Infof("Close websocket connection by error: %v", err)
 				onErr(req, err)
 				break
 			}
@@ -118,6 +122,7 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			signaller, err := sfuClient.Signal(ctx)
 			if err != nil {
 				cancel()
+				logger.Infof("Close websocket connection by error: %v", err)
 				onErr(req, err)
 				break
 			}
@@ -166,6 +171,7 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			var negotiation Negotiation
 			err := json.Unmarshal(*req.Params, &negotiation)
 			if err != nil {
+				logger.Infof("Close websocket connection by error: %v", err)
 				onErr(req, err)
 				break
 			}
@@ -194,6 +200,7 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			var negotiation Negotiation
 			err := json.Unmarshal(*req.Params, &negotiation)
 			if err != nil {
+				logger.Infof("Close websocket connection by error: %v", err)
 				onErr(req, err)
 				break
 			}
@@ -212,6 +219,7 @@ func (c *WebSocketController) Handle(con *websocket.Conn) {
 			var trickle Trickle
 			err := json.Unmarshal(*req.Params, &trickle)
 			if err != nil {
+				logger.Infof("Close websocket connection by error: %v", err)
 				onErr(req, err)
 				break
 			}
