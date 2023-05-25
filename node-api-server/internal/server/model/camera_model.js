@@ -123,7 +123,7 @@ async function deleteStreamConnection(doc) {
 
 
 async function updateStreamConnection(updateDoc, updatedDoc) {
-    if (!updatedDoc || updateDoc.connect_to_rtsp_sender != undefined || updateDoc.connect_to_ai != undefined) return;
+    if (!updatedDoc || updateDoc.connect_to_rtsp_sender !== undefined || updateDoc.connect_to_ai !== undefined) return;
     let state = newCamera();
     try {
         updatedDoc = await mongoose.model("Camera").findOne({ _id: updatedDoc._id }).populate("event_type");
