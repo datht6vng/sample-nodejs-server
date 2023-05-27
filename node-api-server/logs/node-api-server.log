@@ -809,3 +809,13 @@ May-19-2023 22:20:29 - [INFO]: Http server is running at http://localhost:3000
 May-19-2023 22:21:32 - [INFO]: Http server is running at http://localhost:3000
 May-19-2023 22:21:32 - [INFO]: Grpc server is running at http://localhost:50051
 May-19-2023 22:21:32 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-26-2023 15:02:23 - [INFO]: Http server is running at http://localhost:3000
+May-26-2023 15:02:35 - [INFO]: Http server is running at http://localhost:3000
+May-26-2023 15:02:35 - [INFO]: Grpc server is running at http://localhost:50051
+May-26-2023 15:02:35 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-26-2023 16:51:28 - [INFO]: Http server is running at http://localhost:3000
+May-27-2023 15:54:25 - [INFO]: Http server is running at http://localhost:3000
+May-27-2023 15:58:52 - [INFO]: Http server is running at http://localhost:3000
+May-27-2023 15:58:52 - [INFO]: Grpc server is running at http://localhost:50051
+May-27-2023 15:58:52 - [INFO]: MongoDB is connected on mongodb://root:12345@mongodb:27017/iot_security_app
+May-27-2023 16:39:58 - [ERROR]: Failed to create new stream in AI server with camera 6467c9f59b5996519b9bc202. Detail: Error: 14 UNAVAILABLE: Name resolution failed for target dns:ai-server:50052

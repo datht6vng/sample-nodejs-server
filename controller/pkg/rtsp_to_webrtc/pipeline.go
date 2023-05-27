@@ -24,7 +24,6 @@ VOID PENDING --> NULL --> READY --> PAUSED --> PLAYING
 type Pipeline2 struct {
 	pipeline                                   *gst.Pipeline
 	main                                       *glib.MainLoop
-	autoCleaner                                *time.Timer
 	ready                                      atomic.Bool
 	videoCodec                                 string
 	onAudioSampleHandler, onVideoSampleHandler atomic.Value
@@ -101,15 +100,8 @@ func (p *Pipeline2) MessageWatch() func(msg *gst.Message) bool {
 			p.main.Quit()
 		}
 		p.pipeline.SetState(gst.StateNull)
-		if p.autoCleaner != nil {
-			p.autoCleaner.Stop()
-		}
 		p.onClose(err)
 	}
-
-	p.autoCleaner = time.AfterFunc(MaxAliveTime, func() {
-		stop(nil)
-	})
 
 	return func(msg *gst.Message) bool {
 		switch msg.Type() {
@@ -120,7 +112,7 @@ func (p *Pipeline2) MessageWatch() func(msg *gst.Message) bool {
 		case gst.MessageError:
 			// handle error if possible, otherwise close and return
 			logger.Errorf("[GST-ERROR]%v", msg)
-			if msg.Source() == SrcName || msg.Source() == SplitMuxSinkName {
+			if msg.Source() == SrcName || msg.Source() == SplitMuxSinkName ||  msg.Source() == rtspClientSinkName {
 				stop(msg.ParseError())
 				return false
 			}

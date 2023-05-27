@@ -43,12 +43,15 @@ singleport = 5000
 #portrange = [5000, 5200]
 # if sfu behind nat, set iceserver
 [[webrtc.iceserver]]
-urls = ["stun:stun.stunprotocol.org:3478"]
+urls = ["stun:stun.l.google.com:19302"]
+[[webrtc.iceserver]]
+urls = ["turn:smartss.click:3478"]
+username = "dathuynh11082001"
+credential = "dathuynh11082001"
 # [[webrtc.iceserver]]
-# urls = ["turn:turn.awsome.org:3478"]
-# username = "awsome"
-# credential = "awsome"
-
+# urls = ["turn:turnserver.trueid.vn:3478?transport=udp"]
+# username = "1693213423:test-turn-server"
+# credential = "8kmeWarEurWpB0EwepSjHeiQhvg="
 # sdp semantics:
 # "unified-plan"
 # "plan-b"
@@ -67,7 +70,7 @@ mdns = true
 # Multiple public IP addresses can be specified as a comma separated list
 # if the sfu is deployed in a DMZ between two 1-1 NAT for internal and
 # external users.
-nat1to1 = ["103.188.244.219"]
+#nat1to1 = ["103.188.244.219"]
 #icelite = true
 
 [webrtc.timeouts]

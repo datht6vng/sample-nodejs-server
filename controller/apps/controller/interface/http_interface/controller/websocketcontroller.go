@@ -308,10 +308,9 @@ func (c *WebSocketController) handleSignalFromSFU(uid string, conn *socketConnec
 			default:
 				reply, err := signaller.Recv()
 				if err != nil {
+					logger.Infof("[%v] signnaler recv err: %v, close send", uid, err)
 					if err := signaller.CloseSend(); err != nil {
 						logger.Errorf("[%v] error sending close: %s", uid, err)
-					} else {
-						logger.Infof("[%v] close send ok")
 					}
 					return
 				}
