@@ -85,16 +85,15 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 	return sfuNodeID, nil
 }
 
-func RemoveRoom(r *redis.Client, roomName string) error {
+func RemoveRoom(r *redis.Client, nodeID, roomName string) error {
 	ctx := context.Background()
 	if r == nil {
 		return errors.New("No Redis connection")
 	}
 	roomKey := BuildRoomKey(roomName)
-	sfuNodeID := r.Get(ctx, roomKey).Val()
 	pipeline := r.Pipeline()
 	pipeline.Del(ctx, roomKey)
-	pipeline.SRem(ctx, sfuNodeID, roomKey)
+	pipeline.SRem(ctx, BuildRoomSetKeyOfService(BuildKeepAliveServiceKey(ServiceSFU, nodeID)), roomKey)
 	pipeline.Exec(ctx)
 	return nil
 }
