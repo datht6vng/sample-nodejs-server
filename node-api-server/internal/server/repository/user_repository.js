@@ -53,6 +53,18 @@ class UserRepository {
         
         return this.fromDatabaseConverter.visit(newUser(), userDoc);
     }
+
+    async findByName(username) {
+        let userDoc;
+        try {
+            userDoc = await UserModel.findOne({ username: username }).exec();
+        }
+        catch(err) {
+            throw newInternalServerError("Database error", err);
+        }
+        
+        return this.fromDatabaseConverter.visit(newUser(), userDoc);
+    }
     
     async findByIdAndUpdate(userId, userEntity) {
         const userDoc = this.toDatabaseConverter.visit(userEntity);

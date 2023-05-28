@@ -17,6 +17,7 @@ const { newIotDeviceHandler } = require("./handler/iot_device_handler");
 const { newSystemUtilityHandler } = require("./handler/system_utility_handler");
 
 const { newReportHandler } = require("./handler/report_handler");
+const { newUserHandler } = require("./handler/user_handler");
 const { newCameraStreamInfoHandler } = require("./handler/camera_stream_info_handler");
 
 const { newStreamConnectionHandler } = require("./handler/stream_connection_handler");
@@ -43,6 +44,7 @@ GrpcServer.prototype.initService = function() {
     this.server.addService(this.protoLoader.getService('iot_device.proto', 'IotDeviceService'), newIotDeviceHandler());
     this.server.addService(this.protoLoader.getService('system_utility.proto', 'SystemUtilityService'), newSystemUtilityHandler());
 
+    this.server.addService(this.protoLoader.getService('user.proto', 'UserService'), newUserHandler());
     this.server.addService(this.protoLoader.getService('report.proto', 'ReportService'), newReportHandler());
     this.server.addService(this.protoLoader.getService('camera_stream_info.proto', 'CameraStreamInfoService'), newCameraStreamInfoHandler());
 

@@ -6,7 +6,7 @@ class User {
     role = undefined;
 
     accept(visitor, o, env) {
-        return visitor.visitIotDevice(this, o, env);
+        return visitor.visitUser(this, o, env);
     }
 
     getId() {

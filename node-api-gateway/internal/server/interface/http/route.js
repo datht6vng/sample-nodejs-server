@@ -68,6 +68,9 @@ Handler.prototype.initRoute = function() {
   this.app.put('/api/users/:id', this.userController.updateUserById);
   this.app.delete('/api/users/:id', this.userController.deleteUserById);
 
+  this.app.post('/api/auth/login', this.userController.login);
+  this.app.post('/api/auth/verify', this.userController.verifyToken);
+
   this.app.put('/api/stream_connections/:id', this.streamConnectionController.handleConnection);
 }
 

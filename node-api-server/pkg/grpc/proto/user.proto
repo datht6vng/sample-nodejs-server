@@ -59,12 +59,26 @@ message DeleteUserByIdResponse {
 }
 
 
+message GetUserByNameRequest {
+    string username = 1;
+}
+
+
+message GetUserByNameResponse {
+    SingleUserResponseData data = 1;
+    string message = 2;
+    string status = 3;
+}
+
+
 service UserService {
     rpc GetAllUsers (Empty) returns (GetAllUsersResponse) {};
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {};
     rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse) {};
     rpc UpdateUserById (UpdateUserByIdRequest) returns (UpdateUserByIdResponse) {};
     rpc DeleteUserById (DeleteUserByIdRequest) returns (DeleteUserByIdResponse) {};
+
+    rpc GetUserByName (GetUserByNameRequest) returns (GetUserByNameResponse) {};
 }
 
 message Empty {}

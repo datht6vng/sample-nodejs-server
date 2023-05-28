@@ -32,6 +32,19 @@ class UserHandler extends GrpcHandler {
     deleteUserById(arg, success, failure) {
         this.clientStuff.deleteUserById(arg, this.handleResponse(success, failure));
     }
+
+    getUserByName(arg) {
+        return new Promise((resolve, reject) => {
+            this.clientStuff.getUserByName(arg, (err, response) => {
+                if (err) {
+                    reject(err);
+                } 
+                else {
+                    resolve(response);
+                }
+            })
+        })
+    }
 }
 
 function newUserHandler() {
