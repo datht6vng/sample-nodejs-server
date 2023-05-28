@@ -72,8 +72,8 @@ Handler.prototype.initMiddleware = function() {
   
   this.app.use(
     limitter.rateLimit({
-      windowMs: 1 , // 1 minutes
-      max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+      windowMs: 10000, // 10 seconds
+      max: 10000, // Limit each IP to 10000 requests per `window` (here, per 10 seconds)
       standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
       legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     })
