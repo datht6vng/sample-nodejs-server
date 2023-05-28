@@ -409,32 +409,53 @@ func (c *Client) createPipelineWithRetry(
 
 	pipeline.OnClose(func(err error) {
 		// Backoff connection if pipeline is stopped by error
-		if err != nil {
-			backoffType := backoff.NewExponentialBackOff()
-			backoffOP := func() error {
-				select {
-				case <-c.closed:
-					return nil
-				default:
-					pipeline, err := c.createPipelineWithRetry(
-						rtspSrc,
-						audioSrc, videoSrc,
-						audioCodec, videoCodec,
-						audioTrack, videoTrack,
-						enableRTSPRelay,
-						rtspRelayAddress,
-						enableRecord,
-						sessionDir,
-					)
-					if err != nil {
-						logger.Errorf("Recreate pipeline error: %v", err)
-						return err
+		select {
+		case <-c.closed:
+			logger.Infof("Client is closed, dismiss error: %v", err)
+			return
+		default:
+			if err != nil {
+				if c.retryTimer != nil {
+					c.retryTimer.Stop()
+				}
+
+				retryCount := c.retryCount.Add(1)
+				sleepTime := time.Duration(retryCount) * time.Second
+				logger.Infof("[Pipeline Error] Pipeline is closed with error: %v, backoff pipeline after: %v", err, sleepTime)
+
+				time.Sleep(sleepTime)
+				backoffType := backoff.NewExponentialBackOff()
+				backoffOP := func() error {
+					select {
+					case <-c.closed:
+						return nil
+					default:
+						pipeline, err := c.createPipelineWithRetry(
+							rtspSrc,
+							audioSrc, videoSrc,
+							audioCodec, videoCodec,
+							audioTrack, videoTrack,
+							enableRTSPRelay,
+							rtspRelayAddress,
+							enableRecord,
+							sessionDir,
+						)
+						if err != nil {
+							logger.Errorf("Recreate pipeline error: %v", err)
+							return err
+						}
+						c.pipeline.Store(pipeline)
+						c.retryTimer = time.AfterFunc(30*time.Second, func() {
+							logger.Infof("Retried connection is stable, restart penalty time")
+							c.retryCount.Store(0)
+						})
+						return nil
 					}
-					c.pipeline.Store(pipeline)
-					return nil
+				}
+				if err := backoff.Retry(backoffOP, backoffType); err != nil {
+					logger.Errorf("[Pipeline Error] Cannot backoff pipeline: %v", err)
 				}
 			}
-			backoff.Retry(backoffOP, backoffType)
 		}
 	})
 	return pipeline, nil
