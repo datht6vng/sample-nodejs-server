@@ -15,14 +15,14 @@ class SfuRtspStreamHandler extends GrpcHandler {
         super(protoFile, serviceName, targetHost, targetPort);
     }
 
-    async connect(camera) {
+    async connect(camera, enableRTSPRelay=false, enableRecord=true) {
         const arg = {
             clientID: camera.getId().getValue(),
             connectClientAddress: camera.getRtspStreamUrl(),
             username: camera.getUsername(),
             password: camera.getPassword(),
-            enableRTSPRelay: true,
-            enableRecord: true
+            enableRTSPRelay: enableRTSPRelay,
+            enableRecord: enableRecord
         }
 
         console.log("Send to controller message: ", arg);

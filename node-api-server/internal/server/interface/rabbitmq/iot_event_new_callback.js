@@ -57,9 +57,13 @@ class IotEventNewCallback extends EventNewCallback {
                     event = await this.eventService.createEvent(event);
                     // const notifyMessage = await this.getAllEventRelationDetailsById(event.getId());
                     this.notifyNewEventToClients(this.toProtobufConverter.visit(event));
-
-                    const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventMessage.eventTime);
-                    this.publishEvent(event, camera, videoRecordingInfo, eventKey);
+                    try {
+                        const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventMessage.eventTime);
+                        this.publishEvent(event, camera, videoRecordingInfo, eventKey);    
+                    }
+                    catch(err) {
+                        this.errorHandler.execute(err);
+                    }
                 }
             }
         }

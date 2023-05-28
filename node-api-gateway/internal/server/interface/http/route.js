@@ -60,6 +60,15 @@ Handler.prototype.initRoute = function() {
   this.app.post('/api/system_utilities', this.systemUtilityController.crudAllMapUtils);
 
   this.app.get('/api/reports', this.reportControlller.getReportByCondition);
+
+
+  this.app.get('/api/users', this.userController.getAllUsers);
+  this.app.get('/api/users/:id', this.userController.getUserById);
+  this.app.post('/api/users', this.userController.createUser);
+  this.app.put('/api/users/:id', this.userController.updateUserById);
+  this.app.delete('/api/users/:id', this.userController.deleteUserById);
+
+  this.app.put('/api/stream_connections/:id', this.streamConnectionController.handleConnection);
 }
 
 

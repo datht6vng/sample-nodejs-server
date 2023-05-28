@@ -19,6 +19,11 @@ class StreamConnectionService {
             || oldCamera.getStatus() != newCamera.getStatus();
     }
 
+    createRelayStreamUrl(rtspStreamUrl, username, password) {
+        const arr = rtspStreamUrl.split("//");
+        return `${arr[0]}//${username}:${password}@${arr[1]}`;
+    }
+
     satisfyRtspStream(camera) {
         return camera.getRtspStreamUrl() && camera.getUsername() && camera.getPassword();
     }
@@ -40,78 +45,86 @@ class StreamConnectionService {
         if (this.satisfyRtspStream(camera) && this.inUsedStatus(camera)) {
 
             const rtspSenderHandler = newSfuRtspStreamHandler();
-            const cameraStreamInfoHandler = newCameraStreamInfoHandler(); 
-            const sfuRtspUrl = await rtspSenderHandler.connect(camera);
+            const cameraStreamInfoHandler = newCameraStreamInfoHandler();
+            try {
+                state.setConnectToRtspSender(true);
+                await rtspSenderHandler.connect(camera);
+            }
+            catch(err) {
+                this.errorHandler.execute(err);
+            } 
+            
 
             // camera.setSfuRtspStreamUrl(sfuRtspUrl);
             // state.setSfuRtspStreamUrl(sfuRtspUrl);
-
-            camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
-            state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
             
-            state.setConnectToRtspSender(true);
+
+            // camera.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+            // state.setSfuRtspStreamUrl("rtsp://admin:Dientoan@123@tris.ddns.net:5564/Streaming/Channels/102?transportmode=unicast&profile=Profile_2");
+
+            const relayStreamUrl = this.createRelayStreamUrl(camera.getRtspStreamUrl(), camera.getUsername(), camera.getPassword());
+            camera.setSfuRtspStreamUrl(relayStreamUrl);
+            state.setSfuRtspStreamUrl(relayStreamUrl);
+
+
+            
             if (camera.getEventType()) {
-                await cameraStreamInfoHandler.createCameraStream(camera);
-                state.setConnectToAi(true);
+                try {
+                    state.setConnectToAi(true);
+                    await cameraStreamInfoHandler.createCameraStream(camera);
+                }
+                catch(err) {
+                    this.errorHandler.execute(err);
+                }
+
             }
         }
         return state;
     }
 
-    // async handleUpdateStream(oldCamera, updateCamera, state=newCamera()) {
-    //     /*
-    //         Pre: updatecamera must contain all information of the camera, not a part of it
-    //     */
-    //     this.setState(oldCamera, state);
-    //     updateCamera.mergeCopy(oldCamera);
-
-    //     if (oldCamera.getConnectToRtspSender() == true) {
-    //         if (this.hasDifferentStreamInfo(oldCamera, updateCamera)) {
-    //             await this.handleDeleteStream(oldCamera, state);
-    //             await this.handleCreateStream(updateCamera, state);
-    //         }
-    //         else {
-    //             const cameraStreamInfoHandler = newCameraStreamInfoHandler();
-    //             if (oldCamera.getConnectToAi()) {
-    //                 await cameraStreamInfoHandler.deleteCameraStreamById(oldCamera.getId()); 
-    //                 state.setConnectToAi(false);
-    //             }
-    //             if (newCamera.getEventType()) {
-    //                 await cameraStreamInfoHandler.createCameraStream(camera);
-    //                 state.setConnectToAi(true);
-    //             }
-    //         }
-    //     }
-    //     else {
-    //         await this.handleCreateStream(updateCamera, state);
-    //     }
-    //     return state;
-    // }
-
     async handleDeleteStream(camera, state=newCamera()) {
         this.setState(camera, state);
         const rtspSenderHandler = newSfuRtspStreamHandler();
         const cameraStreamInfoHandler = newCameraStreamInfoHandler();
-        if (camera.getConnectToAi()) {
-            try {
-                await cameraStreamInfoHandler.deleteCameraStreamById(camera.getId()); 
-                state.setConnectToAi(false);    
-            }
-            catch(err) {
-                this.errorHandler.execute(err);
-            }
-        }
 
 
-        if (camera.getConnectToRtspSender()) {
-            try {
-                await rtspSenderHandler.disconnect(camera);
-                state.setConnectToRtspSender(false); 
-            }
-            catch(err) {
-                this.errorHandler.execute(err);
-            }
+        try {
+            state.setConnectToAi(false);
+            await cameraStreamInfoHandler.deleteCameraStreamById(camera.getId()); 
         }
+        catch(err) {
+            this.errorHandler.execute(err);
+        }
+
+        // if (camera.getConnectToAi()) {
+        //     try {
+        //         state.setConnectToAi(false);
+        //         await cameraStreamInfoHandler.deleteCameraStreamById(camera.getId()); 
+        //     }
+        //     catch(err) {
+        //         this.errorHandler.execute(err);
+        //     }
+        // }
+
+
+        try {
+            state.setConnectToRtspSender(false);
+            await rtspSenderHandler.disconnect(camera);
+        }
+        catch(err) {
+            this.errorHandler.execute(err);
+        }
+
+        // if (camera.getConnectToRtspSender()) {
+        //     try {
+        //         state.setConnectToRtspSender(false);
+        //         await rtspSenderHandler.disconnect(camera);
+        //     }
+        //     catch(err) {
+        //         this.errorHandler.execute(err);
+        //     }
+        // }
+
 
         state.setSfuRtspStreamUrl("");
 

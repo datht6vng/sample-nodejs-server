@@ -19,6 +19,8 @@ const { newSystemUtilityHandler } = require("./handler/system_utility_handler");
 const { newReportHandler } = require("./handler/report_handler");
 const { newCameraStreamInfoHandler } = require("./handler/camera_stream_info_handler");
 
+const { newStreamConnectionHandler } = require("./handler/stream_connection_handler");
+
 class GrpcServer {
     constructor() {
         this.server = new grpc.Server();
@@ -43,6 +45,8 @@ GrpcServer.prototype.initService = function() {
 
     this.server.addService(this.protoLoader.getService('report.proto', 'ReportService'), newReportHandler());
     this.server.addService(this.protoLoader.getService('camera_stream_info.proto', 'CameraStreamInfoService'), newCameraStreamInfoHandler());
+
+    this.server.addService(this.protoLoader.getService('stream_connection.proto', 'StreamConnectionService'), newStreamConnectionHandler());
 }
 
 GrpcServer.prototype.start = function(host=this.conf.host, port=this.conf.port) {

@@ -19,6 +19,11 @@ const { newSystemUtilityController } = require("./controller/system_utility_cont
 
 const { newReportController } = require("./controller/report_controller");
 
+
+const { newUserController } = require("./controller/user_controller");
+
+const { newStreamConnectionController } = require("./controller/stream_connection_controller");
+
 const { createProxyMiddleware } = require('http-proxy-middleware');
 // const { newCameraMapController } = require("./controller/camera_map_controller");
 
@@ -47,6 +52,10 @@ Handler.prototype.initController = function() {
   this.systemUtilityController = newSystemUtilityController();
 
   this.reportControlller = newReportController();
+
+  this.userController = newUserController();
+
+  this.streamConnectionController = newStreamConnectionController();
 }
 
 Handler.prototype.initMiddleware = function() {

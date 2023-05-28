@@ -638,6 +638,12 @@ Tasks:
     + Xóa camera map thì chuyển lại thành used
     + Check lại cái event verifed chưa lưu dc vô db
 
+
+    + Làm forceConnect full flow
+    + Authen, author
+    + Spam 
+
+
     + Cân nhắc:
         + Hiện thực retry giữa các connection:
             + Khi này DB phải lưu các trạng thái: Trạng thái connect hiện tại và trạng thái "ĐÁNG LẼ" phải xảy ra của từng connection (rtsp và AI)
