@@ -3,6 +3,7 @@ package rtsp_client_service
 import (
 	"fmt"
 	"io"
+	"math/rand"
 	"os"
 	"path/filepath"
 	"strings"
@@ -421,6 +422,7 @@ func (c *Client) createPipelineWithRetry(
 
 				retryCount := c.retryCount.Add(1)
 				sleepTime := time.Duration(retryCount) * time.Second
+				sleepTime = time.Duration(rand.Float64()*float64(sleepTime) + float64(sleepTime))
 				logger.Infof("[Pipeline Error] Pipeline is closed with error: %v, backoff pipeline after: %v", err, sleepTime)
 
 				time.Sleep(sleepTime)
