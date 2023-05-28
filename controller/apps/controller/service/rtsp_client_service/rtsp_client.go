@@ -14,6 +14,7 @@ import (
 	"github.com/aler9/gortsplib/v2/pkg/format"
 	"github.com/aler9/gortsplib/v2/pkg/media"
 	"github.com/aler9/gortsplib/v2/pkg/url"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
@@ -171,8 +172,8 @@ func (c *Client) Connect() error {
 		defer wg.Done()
 
 		rtspSrc := fmt.Sprintf("rtspsrc location=\"%v\" user-id=\"%v\" user-pw=\"%v\" name=%v is-live=true add-reference-timestamp-meta=true latency=10000 max-rtcp-rtp-time-diff=-1 ntp-sync=true onvif-mode=true", c.clientAddress, c.username, c.password, gst.SrcName)
-		videoSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
-		audioSrc := fmt.Sprintf(" %v. ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
+		videoSrc := fmt.Sprintf(" %v. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! application/x-rtp ! %v ! %v ! videoconvert ! videoscale ! video/x-raw,format=I420,colorimetry=bt709,chroma-site=mpeg2,pixel-aspect-ratio=1/1,is-live=true ", gst.SrcName, videoDepay, videoDecoder)
+		audioSrc := fmt.Sprintf(" %v. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
 
 		clientDir := filepath.Join("/videos", c.clientID)
 		sessionDir := filepath.Join(clientDir, fmt.Sprintf("%v", time.Now().UnixNano()))
@@ -320,7 +321,9 @@ func (c *Client) close() {
 		c.connector.Close()
 	}
 	if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
-		p.Stop()
+		if p != nil {
+			p.Stop()
+		}
 	}
 	c.onClose()
 }
@@ -391,47 +394,47 @@ func (c *Client) createPipelineWithRetry(
 
 	if enableRecord {
 		pipeline.Connect(gst.SplitMuxSinkName, "format-location", func(mux any, index uint) {
-			currentFile := filepath.Join(sessionDir, fmt.Sprintf("record_%v.mp4", index))
-			c.metadata.PushRecord(
-				currentFile,
-				time.Now(),
-			)
-			c.metadata.Write()
+			go func() {
+				currentFile := filepath.Join(sessionDir, fmt.Sprintf("record_%v.mp4", index))
+				c.metadata.PushRecord(
+					currentFile,
+					time.Now(),
+				)
+				c.metadata.Write()
+			}()
 		})
 	}
 
 	pipeline.Start()
 
 	pipeline.OnClose(func(err error) {
-		if c.retryTimer != nil {
-			c.retryTimer.Stop()
-		}
-
+		// Backoff connection if pipeline is stopped by error
 		if err != nil {
-			retryCount := c.retryCount.Load()
-			if c.retryCount.Load() == maxRetry {
-				logger.Errorf("Pipeline retry count exceeded: %v times, stop retrying", retryCount)
-				c.close()
-				return
+			backoffType := backoff.NewExponentialBackOff()
+			backoffOP := func() error {
+				select {
+				case <-c.closed:
+					return nil
+				default:
+					pipeline, err := c.createPipelineWithRetry(
+						rtspSrc,
+						audioSrc, videoSrc,
+						audioCodec, videoCodec,
+						audioTrack, videoTrack,
+						enableRTSPRelay,
+						rtspRelayAddress,
+						enableRecord,
+						sessionDir,
+					)
+					if err != nil {
+						logger.Errorf("Recreate pipeline error: %v", err)
+						return err
+					}
+					c.pipeline.Store(pipeline)
+					return nil
+				}
 			}
-			sleep := time.Duration(retryCount) * time.Second
-			logger.Errorf("Retry count: %v, sleep: %v and continue to retry", retryCount, sleep)
-			c.retryCount.Add(1)
-			time.Sleep(sleep)
-			c.createPipelineWithRetry(
-				rtspSrc,
-				audioSrc, videoSrc,
-				audioCodec, videoCodec,
-				audioTrack, videoTrack,
-				c.enableRTSPRelay,
-				c.rtspRelayAddress,
-				c.enableRecord,
-				c.clientID,
-			)
-			c.retryTimer = time.AfterFunc(10*time.Second, func() {
-				// If not failed, reset in 10s
-				c.retryCount.Store(0)
-			})
+			backoff.Retry(backoffOP, backoffType)
 		}
 	})
 	return pipeline, nil

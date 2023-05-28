@@ -15,7 +15,7 @@ class Camera {
     cameraType = undefined;
     eventType = undefined;
 
-    connectToRtspSender = false;
+    connectToController = false;
     connectToAi = false;
 
     hostname = undefined;
@@ -26,7 +26,7 @@ class Camera {
 
     mergeCopy(camera) {
         for (let attr in this) {
-            if (key != "connectToRtspSender" && key != "connectToAi") {
+            if (key != "connectToController" && key != "connectToAi") {
                 this.copyIfUndefined(attr, camera);
             }
             
@@ -100,8 +100,8 @@ class Camera {
         return this.eventType;
     }
     
-    getConnectToRtspSender() {
-        return this.connectToRtspSender;
+    getConnectToController() {
+        return this.connectToController;
     }
 
     getConnectToAi() {
@@ -211,8 +211,8 @@ class Camera {
         return this;
     }
 
-    setConnectToRtspSender(connectToRtspSender) {
-        this.connectToRtspSender = connectToRtspSender;
+    setConnectToController(connectToController) {
+        this.connectToController = connectToController;
         return this;
     }
 

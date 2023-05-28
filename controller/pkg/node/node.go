@@ -71,8 +71,13 @@ func (n *Node) StartCleaner(duration time.Duration) {
 						rtspConnectionSet := BuildRTSPConnectionSetKey(connection)
 						rtspConnectionKeys := n.redis.SMembers(ctx, rtspConnectionSet).Val()
 						for _, rtspConnection := range rtspConnectionKeys {
-							logger.Infof("Delete dangling rtsp connection %v", rtspConnection)
-							pipeline.Del(ctx, rtspConnection)
+							rtspConnectionNode := n.redis.Get(ctx, rtspConnection).Val()
+							if rtspConnectionNode == GetNodeID(connection) {
+								logger.Infof("Delete dangling rtsp connection %v", rtspConnection)
+								pipeline.Del(ctx, rtspConnection)
+							} else {
+								logger.Infof("Keep rtsp connection %v, another node is connected: %v", rtspConnection, rtspConnectionNode)
+							}
 						}
 						pipeline.Del(ctx, rtspConnectionSet)
 					}

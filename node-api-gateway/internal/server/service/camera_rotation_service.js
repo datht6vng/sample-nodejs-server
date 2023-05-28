@@ -23,12 +23,6 @@ class CameraRotationService {
             reject(err);
           }
           resolve(this);
-          // connection.getStatus({}, (err, object)=>{
-          //   if (err) {
-          //     reject(err);
-          //   }
-          //   resolve(object);
-          // })
         });
     });
   }

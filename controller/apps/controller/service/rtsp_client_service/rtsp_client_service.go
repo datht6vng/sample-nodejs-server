@@ -14,10 +14,10 @@ import (
 	"time"
 
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/uploader"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
-	gst "github.com/dathuynh1108/hcmut-thesis/controller/pkg/rtsp_to_webrtc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	jujuErr "github.com/juju/errors"
 	"github.com/redis/go-redis/v9"
@@ -31,14 +31,16 @@ const domainCounterKey = "redis_rtsp_relay_domain_counter"
 
 type RTSPClientService struct {
 	sync.RWMutex
-	clients map[string]*Client
-	r       *redis.Client
+	clients  map[string]*Client
+	r        *redis.Client
+	uploader *uploader.GoogleUploader
 }
 
-func NewRTSPClientService(r *redis.Client) (*RTSPClientService, error) {
+func NewRTSPClientService(r *redis.Client, uploader *uploader.GoogleUploader) (*RTSPClientService, error) {
 	return &RTSPClientService{
-		clients: map[string]*Client{},
-		r:       r,
+		clients:  map[string]*Client{},
+		r:        r,
+		uploader: uploader,
 	}, nil
 }
 
@@ -58,18 +60,22 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	rtspRelayAddress := "Disable"
 	if enableRTSPRelay {
 		counter := r.r.Incr(context.Background(), domainCounterKey).Val()
-		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayPort, counter)
+		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayPort, counter)
 	}
 
 	client := NewClient(r.r, clientID, connectClientAddress, rtspRelayAddress, username, password, connectClientAddress, true, enableRTSPRelay, enableRecord)
 
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
+		r.r.Decr(context.Background(), domainCounterKey)
+		node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+		go client.Close()
 		return "", err
 	}
 
 	client.OnClose(func() {
 		// node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+		r.r.Del(context.Background(), node.BuildRTSPConnectionSetKey(node.BuildKeepAliveServiceKey(node.ServiceController, config.Config.NodeID)))
 		r.r.Decr(context.Background(), domainCounterKey)
 	})
 
@@ -113,7 +119,7 @@ func (r *RTSPClientService) InternalDisconnectRTSPClient(clientID, connectClient
 	return nil
 }
 
-func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, int64, int64, error) {
+func (r *RTSPClientService) GetAndUploadRecordFile(clientID string, ts int64) (string, int64, int64, error) {
 	if clientID == "" {
 		return "", 0, 0, fmt.Errorf("clientID is missing")
 	}
@@ -158,6 +164,12 @@ func (r *RTSPClientService) GetRecordFile(clientID string, ts int64) (string, in
 	}
 
 	startTime := metadata.RecordMetadata[index].Timestamp.UnixNano()
-	endTime := metadata.RecordMetadata[index].Timestamp.Add(time.Duration(gst.RecordFileDuration)).UnixNano()
-	return metadata.RecordMetadata[index].RecordFilename, startTime, endTime, nil
+	endTime := metadata.RecordMetadata[index].Timestamp.Add(time.Duration(config.Config.RecorderConfig.RecordFileDuration)).UnixNano()
+
+	address, err := r.uploader.UploadFile(metadata.RecordMetadata[index].RecordFilename, config.Config.UploaderConfig.Destination)
+	if err != nil {
+		return "", 0, 0, nil
+	}
+
+	return address, startTime, endTime, nil
 }

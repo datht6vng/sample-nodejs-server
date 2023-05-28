@@ -6,31 +6,40 @@ import (
 )
 
 type AppConfig struct {
-	RTSPSenderConfig *RTSPSenderConfig `mapstructure:"controller"`
+	ControllerConfig *ControllerConfig `mapstructure:"controller"`
 	LogConfig        *logger.LogConf   `mapstructure:"log"`
 	NetworkConfig    *NetworkConfig    `mapstructure:"network"`
 	RedisConfig      *RedisConfig      `mapstructure:"redis"`
+	UploaderConfig   *UploaderConfig   `mapstructure:"uploader"`
+	RecorderConfig   *RecorderConfig   `mapstructure:"recorder"`
 	NodeID           string            `mapstructure:"node_id"`
 }
 
-type RTSPSenderConfig struct {
-	GRPCConfig      RTSPSenderGRPCConfig      `mapstructure:"grpc"`
-	RTSPRelayConfig RTSPSenderRTSPRelayConfig `mapstructure:"rtsp_relay"`
-	HTTPConfig      RTSPSenderHTTPConfig      `mapstructure:"http"`
+type UploaderConfig struct {
+	Creditials  string `mapstructure:"credentials"`
+	Destination string `mapstructure:"destination"`
 }
 
-type RTSPSenderGRPCConfig struct {
+type RecorderConfig struct {
+	MaxRecordFiles     int `mapstructure:"max_record_files"`
+	RecordFileDuration int `mapstructure:"record_file_duration"`
+}
+type ControllerConfig struct {
+	GRPCConfig      ControllerGRPCConfig      `mapstructure:"grpc"`
+	RTSPRelayConfig ControllerRTSPRelayConfig `mapstructure:"rtsp_relay"`
+	HTTPConfig      ControllerHTTPConfig      `mapstructure:"http"`
+}
+
+type ControllerGRPCConfig struct {
 	Port int `mapstructure:"port"`
 }
-type RTSPSenderHTTPConfig struct {
+type ControllerHTTPConfig struct {
 	Port int `mapstructure:"port"`
 }
 
-type RTSPSenderRTSPRelayConfig struct {
-	RTSPRelayServerPath       string `mapstructure:"rtsp_relay_server_path"`
-	RTSPRelayServerConfigPath string `mapstructure:"rtsp_relay_server_config_path"`
-	RTSPRelayIP               string `mapstructure:"rtsp_relay_ip"`
-	RTSPRelayPort             int    `mapstructure:"rtsp_relay_port"`
+type ControllerRTSPRelayConfig struct {
+	RTSPRelayIP   string `mapstructure:"rtsp_relay_ip"`
+	RTSPRelayPort int    `mapstructure:"rtsp_relay_port"`
 }
 
 type NetworkConfig struct {

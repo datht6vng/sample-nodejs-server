@@ -95,7 +95,7 @@ class ToDatabaseConverter {
         this.setDocAttribute(camera, camera.getOffsetXEnd, "offset_x_end", doc);
         this.setDocAttribute(camera, camera.getOffsetYEnd, "offset_y_end", doc);
         this.setDocAttribute(camera, camera.getIsSetLine, "is_set_line", doc);
-        this.setDocAttribute(camera, camera.getConnectToRtspSender, "connect_to_rtsp_sender", doc);
+        this.setDocAttribute(camera, camera.getConnectToController, "connect_to_controller", doc);
         this.setDocAttribute(camera, camera.getConnectToAi, "connect_to_ai", doc);
 
         this.setDocAttribute(camera, camera.getHostname, "hostname", doc);

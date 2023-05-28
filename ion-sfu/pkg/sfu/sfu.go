@@ -272,7 +272,7 @@ func (s *SFU) newSession(id string) Session {
 			stats.Sessions.Dec()
 		}
 		Logger.Info("Remove room", "room name", id)
-		node.RemoveRoom(s.Redis, id)
+		node.RemoveRoom(s.Redis, s.NodeID, id)
 	})
 
 	s.Lock()

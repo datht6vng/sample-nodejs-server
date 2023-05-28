@@ -22,9 +22,7 @@ services:
       context: .
     volumes:
       - ./controller:/service/controller
-      - ./controller/controller.toml:/configs/controller.toml
-      - ./controller/rtsp-simple-server:/configs/rtsp-simple-server
-      - ./controller/rtsp-simple-server.yml:/configs/rtsp-simple-server.yml
+      - ./controller/configs:/configs
       - ./controller/logs:/logs
       - ./controller/videos:/videos
     working_dir: /service/controller
@@ -76,7 +74,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./event-simulator:/usr/app
-      - event_node_modules:/usr/app/node_modules
+      # - event_node_modules:/usr/app/node_modules
     working_dir: /usr/app
     command: >
       sh -c "npm install && npm run dev"
@@ -98,7 +96,7 @@ services:
       - CONFIG_PATH=./config/node-api-server.toml
     volumes:
       - ./node-api-server:/usr/app
-      - api_node_modules:/usr/app/node_modules
+      # - api_node_modules:/usr/app/node_modules
     working_dir: /usr/app
     command: >
       sh -c "npm install && npm run dev"
@@ -160,9 +158,10 @@ services:
       - 8000-8003:8000-8003 # multicast 
 
 volumes:
-  api_node_modules:
-  gateway_node_modules:
-  event_node_modules:
+  # Lưu node module vô volume bị bug
+  #api_node_modules:
+  #gateway_node_modules:
+  # event_node_modules:
   mongodb_data:
   redis-data:
 

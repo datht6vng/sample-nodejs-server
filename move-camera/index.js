@@ -22,15 +22,7 @@ const connect = (cameraConfig) => {
 // Onvif không có trục z, quay x,y với zoom thôi, để z nếu có kết nối camera thường thì xài được
 // [-1, 1]
 
-const relativeMove = (camera, {
-    x,y,z,zoom 
-}) => {
-    camera.relativeMove({
-        x: x,
-        y: y,
-        zoom: zoom
-    });
-}
+
 
 const absoluteMove = (camera, {
     x,y,z,zoom 
@@ -94,10 +86,36 @@ const gotoHomePosition = (camera, options) => {
     camera.gotoHomePosition({}, (err)=>{});
 };
 
+const relativeMove = (camera, {
+    x,y,z,zoom 
+}) => {
+    camera.relativeMove({
+        x: x,
+        y: y,
+        zoom: zoom
+    }, err=>{
+        console.log(err);
+    });
+}
+
+async function relativeMove2(connection, {x, y, z, zoom}) {
+    return new Promise((resolve, reject) => {
+      connection.relativeMove({
+          x: x,
+          y: y,
+          zoom: zoom,
+        }, (err)=>{
+            console.log(err)
+            if (err) reject(err);
+            resolve(this);
+        });
+    });
+  }
 
 const main = async () => {
     const camera = await connect(cameraConfig);
-    absoluteMove(camera, {x: 0.75, y: 0.5, z:0}) // Bình thường là cái tọa độ này
+    // await relativeMove2(camera, {x: 0.15, y: 0, z:0, zoom: 0}) // Bình thường là cái tọa độ này
+    relativeMove(camera, {x: 0.21, y: 0, z:0, zoom: 0})
     // gotoHomePosition(camera, {});
     // setHomePosition(camera, {});
 };

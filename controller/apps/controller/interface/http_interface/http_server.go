@@ -13,16 +13,16 @@ import (
 	"github.com/gofiber/websocket/v2"
 )
 
-type HTTPRTSPSenderServer interface {
+type HTTPControllerServer interface {
 	Start(address string) error
 	initRoute() error
 	initMiddleware() error
 }
 
-func NewHTTPRTSPSenderServer(
+func NewHTTPControllerServer(
 	roomService service.RoomService,
-) HTTPRTSPSenderServer {
-	h := &httpRTSPSenderServer{
+) HTTPControllerServer {
+	h := &httpControllerServer{
 		app: fiber.New(fiber.Config{
 			JSONEncoder: json.Marshal,
 			JSONDecoder: json.Unmarshal,
@@ -35,24 +35,24 @@ func NewHTTPRTSPSenderServer(
 	return h
 }
 
-type httpRTSPSenderServer struct {
+type httpControllerServer struct {
 	app                 *fiber.App
 	roomController      *controller.RoomController
 	webSocketController *controller.WebSocketController
 }
 
-func (s *httpRTSPSenderServer) Start(address string) error {
+func (s *httpControllerServer) Start(address string) error {
 	return s.app.Listen(address)
 }
 
-func (s *httpRTSPSenderServer) initMiddleware() error {
+func (s *httpControllerServer) initMiddleware() error {
 	s.app.Use(recover.New())
 	s.app.Use(cors.New())
 	return nil
 }
 
-func (s *httpRTSPSenderServer) initRoute() error {
-	s.app.Static("/videos", "./videos", fiber.Static{
+func (s *httpControllerServer) initRoute() error {
+	s.app.Static("/videos", "/videos", fiber.Static{
 		Compress:  true,
 		ByteRange: true,
 		Browse:    true,
@@ -64,7 +64,7 @@ func (s *httpRTSPSenderServer) initRoute() error {
 		s.webSocketController.Handle(c)
 	}))
 
-	s.app.Get("/*", func(ctx *fiber.Ctx) error {
+	s.app.Get("/health/*", func(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusOK).JSON(
 			fiber.Map{
 				"from": os.Getenv("HOSTNAME"),

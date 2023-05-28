@@ -12,6 +12,7 @@ import (
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/interface/http_interface"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/room_service"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/service/rtsp_client_service"
+	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/uploader"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	grpc_pb "github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
@@ -26,9 +27,9 @@ type Handler struct {
 	// NodeID
 	nodeID string
 	// gRPC interface
-	grpcRTSPSenderServer grpc_pb.RTSPSenderServer
+	grpcControllerServer grpc_pb.ControllerServer
 	// HTTP interface
-	httpRTSPSenderServer http_interface.HTTPRTSPSenderServer
+	httpControllerServer http_interface.HTTPControllerServer
 	// RTSP interface
 
 	redis *redis.Client
@@ -60,11 +61,29 @@ func NewHandler(nodeID string) (*Handler, error) {
 
 	handler.redis = r
 	handler.Node = node.NewNode(r, node.ServiceController, handler.nodeID)
+
+	// Flush old data and keep node alive
+	rtspConnectionSetKey := node.BuildRTSPConnectionSetKey(node.BuildKeepAliveServiceKey(node.ServiceController, config.Config.NodeID))
+	rtspConnectionKeys := r.SMembers(context.Background(), rtspConnectionSetKey).Val()
+
+	pipeline := r.Pipeline()
+	for _, rtspConnectionKey := range rtspConnectionKeys {
+		pipeline.Del(context.Background(), rtspConnectionKey)
+	}
+	pipeline.Del(context.Background(), rtspConnectionSetKey)
+	pipeline.Exec(context.Background())
+
 	handler.Node.KeepAlive(3 * time.Second) // Current not neccessary
 	handler.Node.StartCleaner(9 * time.Second)
 
+	// Uploader
+	uploader, err := uploader.NewGoogleUploader(config.Config.UploaderConfig.Creditials)
+	if err != nil {
+		return nil, errors.Annotate(err, "cannot create uploader")
+	}
+
 	// Service
-	rtspClientService, err := rtsp_client_service.NewRTSPClientService(r)
+	rtspClientService, err := rtsp_client_service.NewRTSPClientService(r, uploader)
 	if err != nil {
 		return nil, errors.Annotate(err, "cannot create rtsp client service")
 	}
@@ -75,10 +94,10 @@ func NewHandler(nodeID string) (*Handler, error) {
 	}
 
 	// gRPC Server
-	handler.grpcRTSPSenderServer = grpc_interface.NewGRPCRTSPSenderServer(rtspClientService)
+	handler.grpcControllerServer = grpc_interface.NewGRPCControllerServer(rtspClientService)
 
 	// HTTP Server
-	handler.httpRTSPSenderServer = http_interface.NewHTTPRTSPSenderServer(roomService)
+	handler.httpControllerServer = http_interface.NewHTTPControllerServer(roomService)
 
 	listenForRedisEvents := func() {
 		go func() {
@@ -128,7 +147,7 @@ func (h *Handler) Start() error {
 }
 
 func (h *Handler) ServeGRPC() error {
-	grpcAddress := fmt.Sprintf("0.0.0.0:%d", config.Config.RTSPSenderConfig.GRPCConfig.Port)
+	grpcAddress := fmt.Sprintf("0.0.0.0:%d", config.Config.ControllerConfig.GRPCConfig.Port)
 	grpcListener, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
 		return errors.Annotate(err, fmt.Sprintf("cannot listen on %s", grpcAddress))
@@ -136,7 +155,7 @@ func (h *Handler) ServeGRPC() error {
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	grpc_pb.RegisterRTSPSenderServer(grpcServer, h.grpcRTSPSenderServer)
+	grpc_pb.RegisterControllerServer(grpcServer, h.grpcControllerServer)
 
 	logger.Infof("Serve gRPC on: %v", grpcAddress)
 	go func() {
@@ -148,9 +167,9 @@ func (h *Handler) ServeGRPC() error {
 }
 
 // func (h *Handler) ServeRTSP() error {
-// 	logger.Infof("Serve RTSP with rtsp simple server, config path:%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
-// 	cmd := exec.Command("./rtsp-simple-server", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
-// 	cmd.Dir = fmt.Sprintf("%v", config.Config.RTSPSenderConfig.RTSPRelayConfig.RTSPRelayServerPath)
+// 	logger.Infof("Serve RTSP with rtsp simple server, config path:%v", config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
+// 	cmd := exec.Command("./rtsp-simple-server", config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayServerConfigPath)
+// 	cmd.Dir = fmt.Sprintf("%v", config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayServerPath)
 // 	logger.Infof("Start rtsp-simple-server with command: %v", cmd.String())
 // 	go func() {
 // 		if err := cmd.Run(); err != nil {
@@ -161,10 +180,10 @@ func (h *Handler) ServeGRPC() error {
 // }
 
 func (h *Handler) ServeHTTP() error {
-	address := fmt.Sprintf("0.0.0.0:%v", config.Config.RTSPSenderConfig.HTTPConfig.Port)
+	address := fmt.Sprintf("0.0.0.0:%v", config.Config.ControllerConfig.HTTPConfig.Port)
 	logger.Infof("Serve HTTP on address: %v", address)
 	go func() {
-		if err := h.httpRTSPSenderServer.Start(address); err != nil {
+		if err := h.httpControllerServer.Start(address); err != nil {
 			logger.Errorf("HTTP Server Error: %v", err)
 		}
 	}()
@@ -175,6 +194,6 @@ func (h *Handler) ServeRedisRPC() error {
 	nodeID := config.Config.NodeID
 	logger.Infof("Serve RedisRPC on: %v", nodeID)
 	service := redisrpc.NewServer(h.redis, nodeID, logger.GetLogger())
-	grpc_pb.RegisterRTSPSenderServer(service, h.grpcRTSPSenderServer)
+	grpc_pb.RegisterControllerServer(service, h.grpcControllerServer)
 	return nil
 }

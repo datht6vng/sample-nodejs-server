@@ -3,14 +3,12 @@
 [controller.grpc]
 port = "5551"
 
-[controller.rtsp_relay]
-rtsp_relay_server_path = "/configs"
-rtsp_relay_server_config_path = "/configs/rtsp-simple-server.yml"
-rtsp_relay_ip = "rtsp_server" # Don't use localhost
-rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server_sdk
-
 [controller.http]
 port = "8080"
+
+[controller.rtsp_relay]
+rtsp_relay_ip = "rtsp_server" # Don't use localhost
+rtsp_relay_port = "8554" # Port for RTSP Server is configured in pkg/rtsp_server_sdk
 
 [log]
 level = "info"
@@ -20,7 +18,7 @@ maxBackups=10
 maxAge=28
 
 [network]
-max_bitrate = "2048"
+max_bitrate = "4500"
 min_bitrate = "128"
 twcc_interval = "100" #Miliseconds
 
@@ -31,3 +29,11 @@ address = "redis:6379"
 database = "0"
 is_cluster = "false"
 password = ""
+
+[uploader]
+credentials="/configs/google-service-account.json"
+destination="1ObING3lxYLZRPyi5u7yyKDPUA6rJqq3E"
+
+[recorder]
+max_record_files = "15"
+record_file_duration = "10" # In seconds

@@ -72,7 +72,7 @@ class FromDatabaseConverter {
             .setOffsetXEnd(doc.offset_x_end)
             .setOffsetYBegin(doc.offset_y_begin)
             .setOffsetYEnd(doc.offset_y_end)
-            .setConnectToRtspSender(doc.connect_to_rtsp_sender)
+            .setConnectToController(doc.connect_to_controller)
             .setConnectToAi(doc.connect_to_ai)
             .setIsSetLine(doc.is_set_line)
             .setHostname(doc.hostname)

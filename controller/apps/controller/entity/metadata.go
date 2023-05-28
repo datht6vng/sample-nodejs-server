@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	"github.com/rogpeppe/go-internal/lockedfile"
 )
@@ -27,6 +28,10 @@ func (m *Metadata) Write() error {
 }
 
 func (m *Metadata) PushRecord(recordFilename string, timestamp time.Time) {
+	if len(m.RecordMetadata) == config.Config.RecorderConfig.MaxRecordFiles {
+		m.RecordMetadata = m.RecordMetadata[1:]
+	}
+
 	m.RecordMetadata = util.InsertSorted(
 		m.RecordMetadata,
 		RecordMetadata{

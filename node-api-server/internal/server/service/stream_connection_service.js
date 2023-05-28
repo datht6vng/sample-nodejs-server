@@ -34,7 +34,7 @@ class StreamConnectionService {
 
     setState(camera, state) {
         state.setId(camera.getId())
-            .setConnectToRtspSender(camera.getConnectToRtspSender())
+            .setConnectToController(camera.getConnectToController())
             .setConnectToAi(camera.getConnectToAi())
         return state;
     }
@@ -47,7 +47,7 @@ class StreamConnectionService {
             const rtspSenderHandler = newSfuRtspStreamHandler();
             const cameraStreamInfoHandler = newCameraStreamInfoHandler();
             try {
-                state.setConnectToRtspSender(true);
+                state.setConnectToController(true);
                 await rtspSenderHandler.connect(camera);
             }
             catch(err) {
@@ -108,7 +108,7 @@ class StreamConnectionService {
 
 
         try {
-            state.setConnectToRtspSender(false);
+            state.setConnectToController(false);
             await rtspSenderHandler.disconnect(camera);
         }
         catch(err) {
