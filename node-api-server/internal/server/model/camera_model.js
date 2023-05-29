@@ -72,6 +72,11 @@ const cameraSchema = new Schema (
         camera_event_zone_coords: {
             type: [Number],
             default: []
+        },
+
+        need_update_connection: {
+            type: Boolean,
+            default: false
         }
     }
 )
@@ -124,6 +129,7 @@ async function deleteStreamConnection(doc) {
 
 async function updateStreamConnection(updateDoc, updatedDoc) {
     if (!updatedDoc || updateDoc.connect_to_controller !== undefined || updateDoc.connect_to_ai !== undefined) return;
+    if (updatedDoc.need_update_connection === false) return;
     let state = newCamera();
     try {
         updatedDoc = await mongoose.model("Camera").findOne({ _id: updatedDoc._id }).populate("event_type");
@@ -167,10 +173,17 @@ cameraSchema.post('save', async function(doc, next) {
     createStreamConnection(this);
 })
 
-// cameraSchema.pre('findOneAndUpdate', async function(next) {
-//     updateStreamConnection(this);
-//     next();
-// })
+cameraSchema.pre('findOneAndUpdate', async function(next) {
+    const doc = await this.model.findOne(this.getFilter());
+    const updateDoc = this.getUpdate();
+    if (doc.rtsp_stream_url != updateDoc.rtsp_stream_url && doc.username != updateDoc.username && doc.password != updateDoc.password) {
+        this._update.need_update_connection = true;
+    }
+    else {
+        this._update.need_update_connection = true;
+    }
+    next();
+})
 
 cameraSchema.post('findOneAndUpdate', async function(doc, next) {
     const updateDoc = this.getUpdate().$set;
