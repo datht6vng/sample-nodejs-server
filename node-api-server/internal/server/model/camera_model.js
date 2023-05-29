@@ -180,7 +180,7 @@ cameraSchema.pre('findOneAndUpdate', async function(next) {
         this._update.need_update_connection = true;
     }
     else {
-        this._update.need_update_connection = true;
+        this._update.need_update_connection = false;
     }
     next();
 })
