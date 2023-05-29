@@ -20,8 +20,8 @@ class CameraService {
         return cameraEntity; 
     }
     
-    async findCameraById(cameraId) {
-        const cameraEntity = await this.repository.findById(cameraId);
+    async findCameraById(cameraId, withEventType=false) {
+        const cameraEntity = await this.repository.findById(cameraId, withEventType);
         return cameraEntity;
     }
     

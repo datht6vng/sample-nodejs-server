@@ -20,6 +20,11 @@ class UserService {
         const userEntity = await this.repository.findById(userId);
         return userEntity;
     }
+
+    async findUserByName(username) {
+        const userEntity = await this.repository.findByName(username);
+        return userEntity;
+    }
     
     async updateUserById(userId, userDetail) {
         const userEntity = await this.repository.findByIdAndUpdate(userId, userDetail);

@@ -15,14 +15,14 @@ class SfuRtspStreamHandler extends GrpcHandler {
         super(protoFile, serviceName, targetHost, targetPort);
     }
 
-    async connect(camera) {
+    async connect(camera, enableRTSPRelay=false, enableRecord=true) {
         const arg = {
             clientID: camera.getId().getValue(),
             connectClientAddress: camera.getRtspStreamUrl(),
             username: camera.getUsername(),
             password: camera.getPassword(),
-            enableRTSPRelay: true,
-            enableRecord: true
+            enableRTSPRelay: enableRTSPRelay,
+            enableRecord: enableRecord
         }
 
         console.log("Send to controller message: ", arg);
@@ -79,7 +79,7 @@ class SfuRtspStreamHandler extends GrpcHandler {
         const result = {
             startTime: new Date(response.startTime / 1000000).toISOString(),
             endTime: new Date(response.endTime / 1000000).toISOString(),
-            normalVideoUrl: `${controllerHttp.scheme}://${controllerHttp.host}:${controllerHttp.port}${response.fileAddress}`
+            normalVideoUrl: response.fileAddress
         }
 
         

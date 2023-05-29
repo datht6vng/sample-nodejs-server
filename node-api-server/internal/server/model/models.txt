@@ -106,7 +106,7 @@ GET /api/events/:id
 
 
 
-docker exec -it 871c73b7bcf9 mongosh -u root -p '12345' --authenticationDatabase admin iot_security_app
+docker exec -it 198e8dafccca mongosh -u root -p '12345' --authenticationDatabase admin iot_security_app
 
 
 

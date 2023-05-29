@@ -11,3 +11,6 @@
         scheme = "http"
         host = "node-api-server"
         port = "3000"
+
+[jwt]
+SECRET_KEY = "iot_security_app"

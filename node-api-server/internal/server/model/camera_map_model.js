@@ -74,8 +74,10 @@ cameraMapSchema.pre('findOneAndUpdate', async function(next) {
     const updateDoc = this.getUpdate();
 
     if (doc) {
-        if (updateDoc.connect_camera && doc.connect_camera != updateDoc.connect_camera) {
+
+        if (updateDoc.connect_camera !== undefined && doc.connect_camera != updateDoc.connect_camera) {
             let docs = await this.model.find({ connect_camera: doc.connect_camera });
+
             if (!docs || docs.length < 2) {
                 await mongoose.model("Camera").findOneAndUpdate({ _id: doc.connect_camera }, { status: "free" });
             }
@@ -83,7 +85,7 @@ cameraMapSchema.pre('findOneAndUpdate', async function(next) {
 
         await mongoose.model("Camera").findOneAndUpdate({ _id: updateDoc.connect_camera }, { status: "used" });
 
-        if (updateDoc.observe_iot && doc.observe_iot != updateDoc.observe_iot) {
+        if (updateDoc.observe_iot != undefined && doc.observe_iot != updateDoc.observe_iot) {
             let docs = await this.model.find({ observe_iot: doc.observe_iot });
             if (!docs || docs.length < 2) {
                 await mongoose.model("IotDeviceMap").findOneAndUpdate({ _id: doc.observe_iot }, { observed_status: "free" });

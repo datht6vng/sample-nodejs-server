@@ -68,7 +68,7 @@ iotDeviceMapSchema.pre('findOneAndUpdate', async function(next) {
     const doc = await this.model.findOne(this.getFilter());
     const updateDoc = this.getUpdate();
     if (doc) {
-        if (updateDoc.connect_iot && doc.connect_iot != updateDoc.connect_iot) {
+        if (updateDoc.connect_iot !== undefined && doc.connect_iot != updateDoc.connect_iot) {
             let docs = await this.model.find({ connect_iot: doc.connect_iot });
             if (!docs || docs.length < 2) {
                 await mongoose.model("IotDevice").findOneAndUpdate({ _id: doc.connect_iot }, { status: "free" });

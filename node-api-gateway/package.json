@@ -20,6 +20,7 @@
     "helmet": "^6.0.0",
     "http-proxy-middleware": "^2.0.6",
     "http-status": "^1.5.3",
+    "jsonwebtoken": "^9.0.0",
     "mqtt": "^4.3.7",
     "onvif": "^0.6.8",
     "prom-client": "^14.1.0",

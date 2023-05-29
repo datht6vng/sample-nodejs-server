@@ -57,6 +57,21 @@ class UserHandler extends Handler {
     
     }
 
+    getUserByName(call, callback) {
+        this.service.findUserByName(call.request.username)
+        .then(user => {
+            
+            user = this.toProtobufConverter.visit(user);
+            this.success({
+                user_detail: user
+            }, callback)
+        })
+        .catch(err => {
+            this.failure(err, callback);
+        }) 
+    
+    }
+
     updateUserById(call, callback) {
         let id = this.fromProtobufConverter.visit(newId(), call.request._id);
         let user = this.fromProtobufConverter.visit(newUser(), call.request.user_detail);

@@ -2,6 +2,7 @@ const { socketIO } = require("../../socket_io/socket_io");
 // const { newReportService } = require("../../service/report_service");
 const { config } = require("../../../../pkg/config/config");
 const { newToProtobufConverter } = require("../../data_converter/to_protobuf_converter");
+const { newErrorHandler } = require("../../error/error_handler");
 
 const socketIOConfig = config.socket_io;
 const EVENT_NEW = socketIOConfig.events.event_new;
@@ -12,6 +13,7 @@ class EventCallback {
         this.io = socketIO;
         // this.reportService = newReportService();
         this.toProtobufConverter = newToProtobufConverter();
+        this.errorHandler = newErrorHandler();
     }
 
     // async getAllEventRelationDetailsById(eventId) {

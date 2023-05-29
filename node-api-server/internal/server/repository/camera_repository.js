@@ -41,11 +41,14 @@ class CameraRepository {
         return this.fromDatabaseConverter.visit(newCamera(), newCameraDoc);
     }
     
-    async findById(cameraId) {
+    async findById(cameraId, withEventType=false) {
         let cameraDoc;
         cameraId = cameraId.getValue();
         try {
-            cameraDoc = await CameraModel.findById(cameraId).exec();
+            if (withEventType) {
+                cameraDoc = await CameraModel.findById(cameraId).populate('event_type').exec();
+            }
+            else cameraDoc = await CameraModel.findById(cameraId).exec();
         }
         catch(err) {
             throw newInternalServerError("Database error", err);

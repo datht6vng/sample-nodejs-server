@@ -11,15 +11,15 @@ const consoleTransport = new transports.Console(
     }
 )
 
-const fileTransport = new transports.File(
-    {
-        filename: 'logs/node-api-server.log',
-        format: logFormat
-    }
-)
+// const fileTransport = new transports.File(
+//     {
+//         filename: 'logs/node-api-server.log',
+//         format: logFormat
+//     }
+// )
 
 const logConfiguration = {
-    transports: [consoleTransport, fileTransport]
+    transports: [consoleTransport]
 };
 
 const logger = createLogger(logConfiguration);
