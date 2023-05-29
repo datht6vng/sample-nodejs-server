@@ -31,6 +31,14 @@ type Pipeline2 struct {
 	audioNSPerRTP, videoNSPerRTP               float64
 }
 
+type GSTError struct {
+	Message *gst.Message
+}
+
+func (e *GSTError) Error() string {
+	return e.Message.String()
+}
+
 func CreatePipeline2(pipelineStr string) (*Pipeline2, error) {
 	pipeline, err := gst.NewPipelineFromString(pipelineStr)
 	if err != nil {
@@ -90,6 +98,7 @@ func (p *Pipeline2) Start() {
 		p.pipeline.GetPipelineBus().AddWatch(p.MessageWatch())
 		p.pipeline.SetState(gst.StatePlaying)
 		p.main.Run()
+		p.pipeline.SetState(gst.StateNull)
 	}()
 }
 
@@ -99,21 +108,20 @@ func (p *Pipeline2) MessageWatch() func(msg *gst.Message) bool {
 		if p.main != nil {
 			p.main.Quit()
 		}
-		p.pipeline.SetState(gst.StateNull)
 		p.onClose(err)
 	}
 
 	return func(msg *gst.Message) bool {
 		switch msg.Type() {
 		case gst.MessageEOS:
-			stop(nil)
+			stop(&GSTError{msg})
 			return false
 
 		case gst.MessageError:
 			// handle error if possible, otherwise close and return
 			logger.Errorf("[GST-ERROR]%v", msg)
-			if msg.Source() == SrcName || msg.Source() == SplitMuxSinkName ||  msg.Source() == rtspClientSinkName {
-				stop(msg.ParseError())
+			if msg.Source() == SrcName || msg.Source() == SplitMuxSinkName || msg.Source() == rtspClientSinkName {
+				stop(&GSTError{msg})
 				return false
 			}
 

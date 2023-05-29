@@ -14,16 +14,16 @@ import (
 )
 
 const (
-	MaxAliveTime     = 2 * time.Hour
-	SrcName          = "demux"
-	encoderName      = "encoder"
-	audioSinkName    = "audiosink"
-	videoSinkName    = "videosink"
-	SplitMuxSinkName = "splitmuxsink"
+	MaxAliveTime       = 2 * time.Hour
+	SrcName            = "demux"
+	encoderName        = "encoder"
+	audioSinkName      = "audiosink"
+	videoSinkName      = "videosink"
+	SplitMuxSinkName   = "splitmuxsink"
 	rtspClientSinkName = "rtspclientsink"
-	videoClockRate   = 90000
-	audioClockRate   = 48000
-	pcmClockRate     = 8000
+	videoClockRate     = 90000
+	audioClockRate     = 48000
+	pcmClockRate       = 8000
 )
 
 type Pipeline interface {
@@ -99,6 +99,7 @@ func CreatePipeline(
 				if err != nil {
 					return nil, err
 				}
+				index = index % config.Config.RecorderConfig.MaxRecordFiles
 				videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 ! tee name=video_tee_2 ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! rtspclientsink name=%v location=%v latency=10000 video_tee_2. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, rtspClientSinkName, rtspRelayAddress, parser, SplitMuxSinkName, path, RecordFileDuration, config.Config.RecorderConfig.MaxRecordFiles, index)
 			}
 		} else if enableRecord {
@@ -108,6 +109,7 @@ func CreatePipeline(
 			if err != nil {
 				return nil, err
 			}
+			index = index % config.Config.RecorderConfig.MaxRecordFiles
 			videoSink = fmt.Sprintf(" ! tee name=video_tee ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! appsink name=%v sync=false video_tee. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! %v ! splitmuxsink name=%v muxer-factory=matroskamux muxer=matroskamux location=%v max-size-time=%v max-files=%v start-index=%v async-finalize=true", caps, videoSinkName, parser, SplitMuxSinkName, path, RecordFileDuration, config.Config.RecorderConfig.MaxRecordFiles, index)
 		} else {
 			videoSink = fmt.Sprintf(" ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes = 0 ! %v ! appsink name=%v sync=false", caps, videoSinkName)

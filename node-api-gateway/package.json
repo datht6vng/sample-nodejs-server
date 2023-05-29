@@ -27,9 +27,7 @@
     "request": "^2.88.2",
     "toml": "^3.0.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  },
+  "devDependencies": {},
   "pkg": {
     "assets": [
       "pkg/**/*.proto"
