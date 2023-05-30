@@ -140,7 +140,7 @@ func (r *RTSPClientService) GetAndUploadRecordFile(clientID string, ts int64) (s
 
 	sessionIndex := util.SearchElementOrSmaller(sessionDirs, ts, func(value int64, sessionDir fs.DirEntry) int64 {
 		sesssionTS, _ := strconv.ParseInt(sessionDir.Name(), 10, 64)
-		return ts - sesssionTS
+		return value - sesssionTS
 	})
 
 	if sessionIndex < 0 || sessionIndex >= len(sessionDirs) {
