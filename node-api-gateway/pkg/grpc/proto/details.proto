@@ -49,6 +49,8 @@ message CameraDetail {
     repeated float stream_resolution = 17;
     repeated float iot_event_zone_coords = 18;
     repeated float camera_event_zone_coords = 19;
+
+    repeated float line_crossing_vector = 20;
 }
 
 

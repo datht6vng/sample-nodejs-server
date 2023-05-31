@@ -104,6 +104,8 @@ class ToDatabaseConverter {
         this.setDocAttribute(camera, camera.getIotEventZoneCoords, "iot_event_zone_coords", doc);
         this.setDocAttribute(camera, camera.getCameraEventZoneCoords, "camera_event_zone_coords", doc);
 
+        this.setDocAttribute(camera, camera.getLineCrossingVector, "line_crossing_vector", doc);
+
         return doc;
     }
 

@@ -82,7 +82,7 @@ class StreamConnectionService {
         return state;
     }
 
-    async handleDeleteStream(camera, state=newCamera()) {
+    async handleDeleteStream(camera, state=newCamera(), needDeleteInController=true) {
         this.setState(camera, state);
         const rtspSenderHandler = newSfuRtspStreamHandler();
         const cameraStreamInfoHandler = newCameraStreamInfoHandler();
@@ -106,14 +106,16 @@ class StreamConnectionService {
         //     }
         // }
 
+        if (needDeleteInController) {
+            try {
+                state.setConnectToController(false);
+                await rtspSenderHandler.disconnect(camera);
+            }
+            catch(err) {
+                this.errorHandler.execute(err);
+            }
+        }
 
-        try {
-            state.setConnectToController(false);
-            await rtspSenderHandler.disconnect(camera);
-        }
-        catch(err) {
-            this.errorHandler.execute(err);
-        }
 
         // if (camera.getConnectToRtspSender()) {
         //     try {

@@ -74,6 +74,11 @@ const cameraSchema = new Schema (
             default: []
         },
 
+        line_crossing_vector: {
+            type: [Number],
+            default: []
+        },
+
         need_update_connection: {
             type: Boolean,
             default: false
@@ -129,12 +134,15 @@ async function deleteStreamConnection(doc) {
 
 async function updateStreamConnection(updateDoc, updatedDoc) {
     if (!updatedDoc || updateDoc.connect_to_controller !== undefined || updateDoc.connect_to_ai !== undefined) return;
-    if (updatedDoc.need_update_connection === false) return;
+    // if (updatedDoc.need_update_connection === false) return;
     let state = newCamera();
     try {
         updatedDoc = await mongoose.model("Camera").findOne({ _id: updatedDoc._id }).populate("event_type");
         const updatedCamera = fromDatabaseConverter.visit(newCamera(), updatedDoc);
-        await streamConnectionService.handleDeleteStream(updatedCamera, state);
+
+        const needDeleteInController = updatedDoc.need_update_connection;
+
+        await streamConnectionService.handleDeleteStream(updatedCamera, state, needDeleteInController);
         await streamConnectionService.handleCreateStream(updatedCamera, state);
     }
     catch(err) {
@@ -177,7 +185,8 @@ cameraSchema.pre('findOneAndUpdate', async function(next) {
     const doc = await this.model.findOne(this.getFilter());
     const updateDoc = this.getUpdate();
     if (doc) {
-        if (doc.rtsp_stream_url != updateDoc.rtsp_stream_url && doc.username != updateDoc.username && doc.password != updateDoc.password) {
+
+        if ((updateDoc.rtsp_stream_url !== undefined && doc.rtsp_stream_url != updateDoc.rtsp_stream_url) || (updateDoc.username !== undefined && doc.username != updateDoc.username) || (doc.password != updateDoc.password && updateDoc.password !== undefined) || (updateDoc.status !== undefined && doc.status != updateDoc.status)) {
             this._update.need_update_connection = true;
         }
         else {
