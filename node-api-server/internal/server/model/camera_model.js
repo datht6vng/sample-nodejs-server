@@ -176,11 +176,13 @@ cameraSchema.post('save', async function(doc, next) {
 cameraSchema.pre('findOneAndUpdate', async function(next) {
     const doc = await this.model.findOne(this.getFilter());
     const updateDoc = this.getUpdate();
-    if (doc.rtsp_stream_url != updateDoc.rtsp_stream_url && doc.username != updateDoc.username && doc.password != updateDoc.password) {
-        this._update.need_update_connection = true;
-    }
-    else {
-        this._update.need_update_connection = false;
+    if (doc) {
+        if (doc.rtsp_stream_url != updateDoc.rtsp_stream_url && doc.username != updateDoc.username && doc.password != updateDoc.password) {
+            this._update.need_update_connection = true;
+        }
+        else {
+            this._update.need_update_connection = false;
+        }
     }
     next();
 })
