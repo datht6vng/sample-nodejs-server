@@ -79,7 +79,7 @@ class FromProtobufConverter {
             .setStreamResolution(doc.stream_resolution)
             .setIotEventZoneCoords(doc.iot_event_zone_coords)
             .setCameraEventZoneCoords(doc.camera_event_zone_coords)
-
+            .setLineCrossingVector(doc.line_crossing_vector);
 
         this.setEntityWithRefType(camera, camera.setCameraType, doc.camera_type, newCameraType())
         this.setEntityWithRefType(camera, camera.setEventType, doc.event_type, newEventType());

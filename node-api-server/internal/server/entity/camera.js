@@ -24,6 +24,8 @@ class Camera {
     iotEventZoneCoords = undefined;
     cameraEventZoneCoords = undefined;
 
+    lineCrossingVector = undefined;
+
     mergeCopy(camera) {
         for (let attr in this) {
             if (key != "connectToController" && key != "connectToAi") {
@@ -108,7 +110,9 @@ class Camera {
         return this.connectToAi;
     }
 
-
+    getLineCrossingVector() {
+        return this.lineCrossingVector;
+    }
 
 
 
@@ -247,6 +251,11 @@ class Camera {
 
     setCameraEventZoneCoords(cameraEventZoneCoords) {
         this.cameraEventZoneCoords = cameraEventZoneCoords;
+        return this;
+    }
+
+    setLineCrossingVector(lineCrossingVector) {
+        this.lineCrossingVector = lineCrossingVector;
         return this;
     }
 }
