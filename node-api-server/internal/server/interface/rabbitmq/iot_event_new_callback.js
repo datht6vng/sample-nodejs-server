@@ -23,8 +23,27 @@ class IotEventNewCallback extends EventNewCallback {
         this.eventService = newEventService();
     }
 
+    convertToJson(message) {
+        let firstIdx = message.indexOf(':');
+        let secondIdx = message.indexOf(':', firstIdx + 1);
+        let firstIdxOfComma = message.indexOf(',');
+
+        let zoneVal = message.substring(firstIdx + 1, firstIdxOfComma);
+        let timeVal = message.substring(secondIdx + 1, message.length - 1)
+        let res = {
+            "zone": parseInt(zoneVal),
+            "time": timeVal.trim(),
+        }
+
+        return res;
+    }
+
     parseMessage(message) {
-        let jsonMessage = JSON.parse(message);
+        
+        let res = this.convertToJson(message.toString());
+        console.log("res: ", res)
+        let jsonMessage = res;
+        console.log("jsonMessage: ", jsonMessage)
         if (!jsonMessage.zone || !jsonMessage.time) return false;
         return newIotEventNewMessage(jsonMessage.zone, jsonMessage.time);
     }
@@ -47,7 +66,7 @@ class IotEventNewCallback extends EventNewCallback {
             if (iotDeviceMapId && iotDeviceMap.getObservedStatus() == USED_STATUS) {
                 const cameraMap = await this.cameraMapService.findCameraMapWithCameraByObserveIot(iotDeviceMapId)
                 const cameraMapId = cameraMap.getId();
-                if (cameraMapId && cameraMap.getConnectCamera() && cameraMap.getConnectCamera().getId()) {            
+                if (cameraMapId && cameraMap.getConnectCamera() && cameraMap.getConnectCamera().getId()) {
                     const camera = cameraMap.getConnectCamera();
                     const cameraId = camera.getId();
                     let event = newEvent();
@@ -61,9 +80,9 @@ class IotEventNewCallback extends EventNewCallback {
                     this.notifyNewEventToClients(this.toProtobufConverter.visit(event));
                     try {
                         const videoRecordingInfo = await this.getVideoRecordingInfo(cameraId, eventMessage.eventTime);
-                        this.publishEvent(event, camera, videoRecordingInfo, eventKey);    
+                        this.publishEvent(event, camera, videoRecordingInfo, eventKey);
                     }
-                    catch(err) {
+                    catch (err) {
                         this.errorHandler.execute(err);
                     }
                 }
