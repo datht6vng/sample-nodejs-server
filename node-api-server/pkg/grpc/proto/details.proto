@@ -78,6 +78,9 @@ message EventDetail {
     optional string iot_device_map = 14;
     optional string camera_map = 15;
     optional string comment = 16;
+
+    optional string event_type = 17;
+    optional string event_name = 18;
 }
 
 

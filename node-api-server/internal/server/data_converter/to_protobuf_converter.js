@@ -135,7 +135,10 @@ class ToProtobufConverter {
         this.setDocAttribute(event, event.getCreatedAt, "created_at", doc);
         this.setDocAttribute(event, event.getUpdatedAt, "updated_at", doc);
         this.setDocAttribute(event, event.getComment, "comment", doc);
-        
+
+        this.setDocAttribute(event, event.getEventType, "event_type", doc, true);
+        this.setDocAttribute(event, event.getEventName, "event_name", doc);
+
         return doc;
     }
 

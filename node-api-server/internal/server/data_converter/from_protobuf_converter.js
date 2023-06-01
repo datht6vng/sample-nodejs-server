@@ -110,7 +110,9 @@ class FromProtobufConverter {
             .setCreatedAt(doc.created_at)
             .setUpdatedAt(doc.updated_at)
             .setComment(doc.comment)
+            .setEventName(doc.event_name)
         
+        this.setEntityWithRefType(event, event.setEventType, doc.event_type, newEventType())
         this.setEntityWithRefType(event, event.setIotDevice, doc.iot_device, newIotDevice())
         this.setEntityWithRefType(event, event.setIotDeviceMap, doc.iot_device_map, newIotDeviceMap())
         this.setEntityWithRefType(event, event.setCamera, doc.camera, newCamera())
