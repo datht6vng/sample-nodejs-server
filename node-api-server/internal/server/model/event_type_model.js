@@ -9,7 +9,11 @@ const eventTypeSchema = new Schema (
             required: true
         }, 
         event_name: String,
-        event_description: String
+        event_description: String,
+        device_type: {
+            type: String,
+            enum: ["camera", "iot"]
+        }
     }
 )
 

@@ -149,6 +149,7 @@ class ToProtobufConverter {
         this.setDocAttribute(eventType, eventType.getEventKey, "event_key", doc);
         this.setDocAttribute(eventType, eventType.getEventName, "event_name", doc);
         this.setDocAttribute(eventType, eventType.getEventDescription, "event_description", doc);
+        this.setDocAttribute(eventType, eventType.getDeviceType, "device_type", doc);
 
         return doc;
     }

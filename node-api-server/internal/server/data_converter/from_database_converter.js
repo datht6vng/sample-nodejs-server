@@ -128,6 +128,7 @@ class FromDatabaseConverter {
             .setEventKey(doc.event_key)
             .setEventName(doc.event_name)
             .setEventDescription(doc.event_description)
+            .setDeviceType(doc.device_type)
         
         return eventType;
     }
