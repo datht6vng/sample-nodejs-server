@@ -4,6 +4,7 @@ class EventType {
     eventKey = undefined;
     eventName = undefined;
     eventDescription = undefined;
+    deviceType = undefined;
 
 
 
@@ -27,7 +28,9 @@ class EventType {
         return this.eventDescription;
     }
     
-    
+    getDeviceType() {
+        return this.deviceType;
+    }
     
     
     setId(id) {
@@ -47,6 +50,11 @@ class EventType {
     
     setEventDescription(eventDescription) {
         this.eventDescription = eventDescription;
+        return this;
+    }
+
+    setDeviceType(deviceType) {
+        this.deviceType = deviceType;
         return this;
     }
 }

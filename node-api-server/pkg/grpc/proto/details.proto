@@ -89,6 +89,7 @@ message EventTypeDetail {
     optional string event_key = 2;
     optional string event_name = 3;
     optional string event_description = 4;
+    optional string device_type = 5;
 }
 
 
