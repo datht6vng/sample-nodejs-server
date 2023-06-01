@@ -3,6 +3,7 @@ class Event {
 
     id = undefined;
     eventType = undefined;
+    eventName = undefined;
     iotDevice = undefined;
     camera = undefined;
     iotDeviceMap = undefined;
@@ -30,6 +31,10 @@ class Event {
     
     getEventType() {
         return this.eventType;
+    }
+
+    getEventName() {
+        return this.eventName;
     }
 
     getIotDevice() {
@@ -103,6 +108,11 @@ class Event {
         else {
             this.eventType = eventType;
         }
+        return this;
+    }
+
+    setEventName(eventName) {
+        this.eventName = eventName;
         return this;
     }
     

@@ -35,12 +35,13 @@ class IotEventNewCallback extends EventNewCallback {
         if (routingKeyArr[routingKeyArr.length - 1] != OPEN_EVENT) return;
 
         const eventMessage = this.parseMessage(message.content);
+        console.log("Iot event new message from rabbitmq: ", eventMessage);
         if (!eventMessage) return;
         const iotDevice = await this.iotDeviceService.findIotDeviceByZone(eventMessage.zone);
         const iotDeviceId = iotDevice.getId();
         const eventType = iotDevice.getEventType();
-        const eventKey = eventType.getEventKey();
         if (iotDeviceId && eventType) {
+            const eventKey = eventType.getEventKey();
             const iotDeviceMap = await this.iotDeviceMapService.findIotDeviceMapByConnectIot(iotDevice.getId());
             const iotDeviceMapId = iotDeviceMap.getId();
             if (iotDeviceMapId && iotDeviceMap.getObservedStatus() == USED_STATUS) {
@@ -54,6 +55,7 @@ class IotEventNewCallback extends EventNewCallback {
                         .setIotDevice(iotDeviceId)
                         .setIotDeviceMap(iotDeviceMapId)
                         .setEventTime(eventMessage.eventTime)
+                        .setEventName(eventType.getEventName());
                     event = await this.eventService.createEvent(event);
                     // const notifyMessage = await this.getAllEventRelationDetailsById(event.getId());
                     this.notifyNewEventToClients(this.toProtobufConverter.visit(event));

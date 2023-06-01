@@ -7,6 +7,7 @@ const eventSchema = new Schema (
             type: Schema.Types.ObjectID,
             ref: 'EventType'
         },
+        event_name: String,
         iot_device: {
             type: Schema.Types.ObjectID,
             ref: 'IotDevice'

@@ -4,6 +4,7 @@ const { newId } = require("../../entity/id");
 const { newCameraService } = require("../../service/camera_service");
 const { newCameraMapService } = require("../../service/camera_map_service");
 const { newEventService } = require("../../service/event_service");
+const { newEventTypeService } = require("../../service/event_type_service");
 const { EventNewCallback } = require("./event_new_callback");
 
 
@@ -15,6 +16,7 @@ class CameraEventNewCallback extends EventNewCallback {
         this.cameraService = newCameraService();
         this.cameraMapService = newCameraMapService();
         this.eventService = newEventService();
+        this.eventTypeService = newEventTypeService();
     }
 
     parseMessage(message) {
@@ -34,6 +36,8 @@ class CameraEventNewCallback extends EventNewCallback {
         const eventKey = eventMessage.eventKey;
         const eventType = camera.getEventType();
         if (cameraId && eventType) {
+            const eventTypeEntity = await this.eventTypeService.findEventTypeById(eventType);
+            const eventName = eventTypeEntity.getEventName();
             const cameraMap = await this.cameraMapService.findCameraMapByConnectCamera(cameraId);
             const cameraMapId = cameraMap.getId();
             if (cameraMapId) {
@@ -44,6 +48,7 @@ class CameraEventNewCallback extends EventNewCallback {
                     .setEventType(eventType)
                     .setNormalImageUrl(eventMessage.normalImageUrl)
                     .setDetectionImageUrl(eventMessage.detectionImageUrl)
+                    .setEventName(eventName);
                 event = await this.eventService.createEvent(event);
                 // const notifyMessage = await this.getAllEventRelationDetailsById(event.getId());
                 this.notifyNewEventToClients(this.toProtobufConverter.visit(event));
