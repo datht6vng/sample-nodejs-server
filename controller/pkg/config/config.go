@@ -43,9 +43,10 @@ type ControllerRTSPRelayConfig struct {
 }
 
 type NetworkConfig struct {
-	MaxBitrate   int `mapstructure:"max_bitrate"`
-	MinBitrate   int `mapstructure:"min_bitrate"`
-	TWCCInterval int `mapstructure:"twcc_interval"`
+	EnableCongestionControl bool `mapstructure:"enable_congestion_control"`
+	MaxBitrate              int  `mapstructure:"max_bitrate"`
+	MinBitrate              int  `mapstructure:"min_bitrate"`
+	TWCCInterval            int  `mapstructure:"twcc_interval"`
 }
 
 type RedisConfig struct {

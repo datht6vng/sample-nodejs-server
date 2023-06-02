@@ -17,10 +17,12 @@ import (
 	"github.com/aler9/gortsplib/v2/pkg/url"
 	"github.com/cenkalti/backoff/v4"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
 	gst "github.com/dathuynh1108/hcmut-thesis/controller/pkg/rtsp_to_webrtc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/sdk"
+	"github.com/google/uuid"
 	jujuErr "github.com/juju/errors"
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/webrtc/v3"
@@ -148,7 +150,7 @@ func (c *Client) Connect() error {
 	publishTrack := []webrtc.TrackLocal{}
 
 	// Choose track codec here
-	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", c.clientAddress)
+	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", uuid.NewString())
 	if err != nil {
 		return err
 	}
@@ -156,7 +158,7 @@ func (c *Client) Connect() error {
 
 	var audioTrack *webrtc.TrackLocalStaticSample
 	if !audioOnly {
-		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", c.clientAddress)
+		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", uuid.NewString())
 		if err != nil {
 			return err
 		}
@@ -177,7 +179,7 @@ func (c *Client) Connect() error {
 		audioSrc := fmt.Sprintf(" %v. ! queue max-size-time=0 max-size-buffers=1024 max-size-bytes=0 leaky=2 ! application/x-rtp ! %v ! %v ! audioconvert ! audioresample ! audio/x-raw,is-live=true ", gst.SrcName, audioDepay, audioDecoder)
 
 		clientDir := filepath.Join("/videos", c.clientID)
-		sessionDir := filepath.Join(clientDir, fmt.Sprintf("%v", time.Now().UnixNano()))
+		sessionDir := filepath.Join(clientDir, c.sessionName)
 		if c.enableRecord {
 			os.Mkdir(clientDir, 0777)
 			os.Mkdir(sessionDir, 0777)
@@ -274,7 +276,9 @@ func (c *Client) Connect() error {
 
 	bwe.OnTargetBitrateChange(func(bitrate int) {
 		if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
-			p.ChangeEncoderBitrate(int(bitrate / 2000))
+			if config.Config.NetworkConfig.EnableCongestionControl {
+				p.ChangeEncoderBitrate(int(bitrate / 2000))
+			}
 		}
 	})
 
@@ -372,14 +376,14 @@ func (c *Client) createPipelineWithRetry(
 
 	if audioCodec != "" {
 		pipeline.OnAudioSample(audioTrack.WriteSample)
-		if err := pipeline.EmitAudioSample(); err != nil {
+		if err = pipeline.EmitAudioSample(); err != nil {
 			return nil, err
 		}
 	}
 
 	if videoCodec != "" {
 		pipeline.OnVideoSample(videoTrack.WriteSample)
-		if err := pipeline.EmitVideoSample(); err != nil {
+		if err = pipeline.EmitVideoSample(); err != nil {
 			return nil, err
 		}
 	}
@@ -412,7 +416,10 @@ func (c *Client) createPipelineWithRetry(
 		// Backoff connection if pipeline is stopped by error
 		select {
 		case <-c.closed:
-			logger.Infof("Client is closed, dismiss error: %v", err)
+			logger.Infof("Client is closed, dismiss error and close pipeline: %v", err)
+			if err = os.RemoveAll(sessionDir); err != nil {
+				logger.Errorf("Failed to remove session dir: %v", err)
+			}
 			return
 		default:
 			if err != nil {
@@ -432,7 +439,7 @@ func (c *Client) createPipelineWithRetry(
 					case <-c.closed:
 						return nil
 					default:
-						pipeline, err := c.createPipelineWithRetry(
+						pipeline, err = c.createPipelineWithRetry(
 							rtspSrc,
 							audioSrc, videoSrc,
 							audioCodec, videoCodec,
@@ -454,7 +461,7 @@ func (c *Client) createPipelineWithRetry(
 						return nil
 					}
 				}
-				if err := backoff.Retry(backoffOP, backoffType); err != nil {
+				if err = backoff.Retry(backoffOP, backoffType); err != nil {
 					logger.Errorf("[Pipeline Error] Cannot backoff pipeline: %v", err)
 				}
 			}

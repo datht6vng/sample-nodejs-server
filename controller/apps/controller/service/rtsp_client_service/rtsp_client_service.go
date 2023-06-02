@@ -63,7 +63,8 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 		rtspRelayAddress = fmt.Sprintf("rtsp://%v:%v/%v", config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayIP, config.Config.ControllerConfig.RTSPRelayConfig.RTSPRelayPort, counter)
 	}
 
-	client := NewClient(r.r, clientID, connectClientAddress, rtspRelayAddress, username, password, connectClientAddress, true, enableRTSPRelay, enableRecord)
+	sessionName := fmt.Sprintf("%v", time.Now().UnixNano())
+	client := NewClient(r.r, clientID, connectClientAddress, rtspRelayAddress, username, password, sessionName, true, enableRTSPRelay, enableRecord)
 
 	if err := client.Connect(); err != nil {
 		logger.Errorf("Error when new client: %v", err)
@@ -76,7 +77,9 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	client.OnClose(func() {
 		// node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
 		r.r.Del(context.Background(), node.BuildRTSPConnectionSetKey(node.BuildKeepAliveServiceKey(node.ServiceController, config.Config.NodeID)))
-		r.r.Decr(context.Background(), domainCounterKey)
+		if client.enableRTSPRelay {
+			r.r.Decr(context.Background(), domainCounterKey)
+		}
 	})
 
 	r.clients[connectClientAddress] = client

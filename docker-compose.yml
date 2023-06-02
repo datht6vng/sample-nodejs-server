@@ -12,7 +12,7 @@ services:
       sh -c "cat /configs/sfu.toml && go run ./cmd/signal/allrpc/main.go -c /configs/sfu.toml"
     ports:
       - 5000:5000/udp # ICE mux port
-      - 5000:5000/tcp # ICE mux port
+      - 5001:5001/tcp # ICE mux port
     networks:
       - backend 
     

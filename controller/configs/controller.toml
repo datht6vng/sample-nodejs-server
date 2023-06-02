@@ -18,6 +18,7 @@ maxBackups=10
 maxAge=28
 
 [network]
+enable_congestion_control = "true" 
 max_bitrate = "4500"
 min_bitrate = "128"
 twcc_interval = "100" #Miliseconds
