@@ -182,7 +182,6 @@ func NewRTCWithSignaller(signaller Signaller, config ...RTCConfig) *RTC {
 
 func (r *RTC) start(signaller Signaller) {
 	r.signaller = signaller
-
 	if !r.Connected() {
 		r.Connect()
 	}

@@ -16,11 +16,13 @@ import (
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/uploader"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	jujuErr "github.com/juju/errors"
 	"github.com/redis/go-redis/v9"
+	"google.golang.org/protobuf/proto"
 )
 
 var (
@@ -99,13 +101,16 @@ func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client,
 
 func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress string) error {
 	node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
-	return r.r.Publish(context.Background(), entity.RedisEventChannel, entity.Message{
-		Type: entity.TypeDisconnect,
-		Payload: &entity.DisconnectPayload{
-			ClientID:             clientID,
-			ConnectClientAddress: connectClientAddress,
+	payload := &grpc.EventMessage{
+		Payload: &grpc.EventMessage_DisconnectPayload{
+			DisconnectPayload: &grpc.DisconnectPayload{
+				ClientID:             clientID,
+				ConnectClientAddress: connectClientAddress,
+			},
 		},
-	}).Err()
+	}
+	payloadRaw, _ := proto.Marshal(payload)
+	return r.r.Publish(context.Background(), entity.RedisEventChannel, payloadRaw).Err()
 }
 
 func (r *RTSPClientService) InternalDisconnectRTSPClient(clientID, connectClientAddress string) error {

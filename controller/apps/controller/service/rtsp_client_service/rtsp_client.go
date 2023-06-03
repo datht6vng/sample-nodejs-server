@@ -11,10 +11,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/aler9/gortsplib/v2"
-	"github.com/aler9/gortsplib/v2/pkg/format"
-	"github.com/aler9/gortsplib/v2/pkg/media"
-	"github.com/aler9/gortsplib/v2/pkg/url"
+	"github.com/bluenviron/gortsplib/v3"
+	"github.com/bluenviron/gortsplib/v3/pkg/formats"
+	"github.com/bluenviron/gortsplib/v3/pkg/media"
+	"github.com/bluenviron/gortsplib/v3/pkg/url"
 	"github.com/cenkalti/backoff/v4"
 	"github.com/dathuynh1108/hcmut-thesis/controller/apps/controller/entity"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/config"
@@ -22,10 +22,10 @@ import (
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
 	gst "github.com/dathuynh1108/hcmut-thesis/controller/pkg/rtsp_to_webrtc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/sdk"
-	"github.com/google/uuid"
 	jujuErr "github.com/juju/errors"
 	"github.com/pion/interceptor/pkg/cc"
 	"github.com/pion/webrtc/v3"
+
 	"github.com/redis/go-redis/v9"
 )
 
@@ -47,7 +47,7 @@ type Client struct {
 
 	connector *sdk.Connector
 
-	codecs         []format.Format
+	codecs         []formats.Format
 	pipeline       atomic.Value
 	closed         chan bool
 	onCloseHandler atomic.Value
@@ -130,15 +130,15 @@ func (c *Client) Connect() error {
 
 	for _, codec := range c.codecs {
 		switch codec.(type) {
-		case *format.H264:
+		case *formats.H264:
 			videoCodec = webrtc.MimeTypeH264
 			videoDepay = "rtph264depay"
 			videoDecoder = "avdec_h264"
-		case *format.VP8:
+		case *formats.VP8:
 			videoCodec = webrtc.MimeTypeVP8
 			videoDepay = "rtpvp8depay"
 			videoDecoder = "avdec_vp8"
-		case *format.Opus:
+		case *formats.Opus:
 			audioCodec = webrtc.MimeTypeOpus
 			audioDepay = "rtpopusdepay"
 			audioDecoder = "avdec_opus"
@@ -150,7 +150,7 @@ func (c *Client) Connect() error {
 	publishTrack := []webrtc.TrackLocal{}
 
 	// Choose track codec here
-	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, "video", uuid.NewString())
+	videoTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: videoCodec}, fmt.Sprintf("video-%v", c.sessionName), c.sessionName)
 	if err != nil {
 		return err
 	}
@@ -158,7 +158,7 @@ func (c *Client) Connect() error {
 
 	var audioTrack *webrtc.TrackLocalStaticSample
 	if !audioOnly {
-		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, "audio", uuid.NewString())
+		audioTrack, err := webrtc.NewTrackLocalStaticSample(webrtc.RTPCodecCapability{MimeType: audioCodec}, fmt.Sprintf("audio-%v", c.sessionName), c.sessionName)
 		if err != nil {
 			return err
 		}
@@ -201,7 +201,7 @@ func (c *Client) Connect() error {
 		c.pipeline.Store(pipeline)
 	}()
 
-	var bwe cc.BandwidthEstimator
+	bweChan := make(chan cc.BandwidthEstimator, 1)
 	var rtcErr error
 	wg.Add(1)
 
@@ -219,11 +219,11 @@ func (c *Client) Connect() error {
 					},
 				},
 				OnBWE: func(estimator cc.BandwidthEstimator) {
-					bwe = estimator
+					bweChan <- estimator
 				},
 			},
 		}
-		sfuAddress, err := node.SetOrGetSFUAddressForRoom(c.r, c.sessionName)
+		sfuAddress, err := node.SetOrGetSFUAddressForRoom(c.r, c.clientAddress)
 		if err != nil {
 			rtcErr = err
 			return
@@ -233,18 +233,15 @@ func (c *Client) Connect() error {
 			rtcErr = err
 			return
 		}
-
 		rtc, err := sdk.NewRTC(connector, config)
 		if err != nil {
 			rtcErr = err
 			return
 		}
-
-		if err := rtc.Join(c.sessionName, fmt.Sprintf("camera:%v", c.sessionName), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
+		if err := rtc.Join(c.clientAddress, fmt.Sprintf("camera:%v", c.clientAddress), sdk.NewJoinConfig().SetNoAutoSubscribe()); err != nil {
 			rtcErr = err
 			return
 		}
-
 		rtc.GetPubTransport().GetPeerConnection().OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
 			logger.Infof("ICE connection state changed: %v", state)
 		})
@@ -261,7 +258,6 @@ func (c *Client) Connect() error {
 		}
 		c.connector = connector
 	}()
-
 	wg.Wait()
 
 	if pipelineErr != nil {
@@ -273,22 +269,25 @@ func (c *Client) Connect() error {
 		c.close()
 		return jujuErr.Annotate(rtcErr, "rtc error")
 	}
-
-	bwe.OnTargetBitrateChange(func(bitrate int) {
-		if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
-			if config.Config.NetworkConfig.EnableCongestionControl {
-				p.ChangeEncoderBitrate(int(bitrate / 2000))
+	go func() {
+		bwe := <-bweChan
+		threshold := 1 * time.Second
+		lastBitrateChange := time.Now()
+		bwe.OnTargetBitrateChange(func(bitrate int) {
+			if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
+				if config.Config.NetworkConfig.EnableCongestionControl && time.Until(lastBitrateChange) > threshold {
+					p.ChangeEncoderBitrate(int(bitrate / 2000))
+				}
 			}
-		}
-	})
-
+		})
+	}()
 	return nil
 }
 
 func (c *Client) startRTCPHandler(rtcpReader *webrtc.RTPSender) {
 	go func(rtcpReader *webrtc.RTPSender) {
 		for {
-			rtcpReader.SetReadDeadline(time.Now().Add(5 * time.Second))
+			rtcpReader.SetReadDeadline(time.Now().Add(15 * time.Second))
 			if _, _, err := rtcpReader.ReadRTCP(); err != nil {
 				if err == io.EOF {
 					return

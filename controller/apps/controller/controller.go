@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"net"
 	"time"
@@ -21,6 +20,7 @@ import (
 	"github.com/juju/errors"
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/proto"
 )
 
 type Handler struct {
@@ -104,14 +104,14 @@ func NewHandler(nodeID string) (*Handler, error) {
 			pubsub := r.Subscribe(context.Background(), entity.RedisEventChannel)
 			for msg := range pubsub.Channel() {
 				go func(msg *redis.Message) {
-					message := &entity.Message{}
-					err := json.Unmarshal([]byte(msg.Payload), &message)
+					message := &grpc_pb.EventMessage{}
+					err := proto.Unmarshal([]byte(msg.Payload), message)
 					if err != nil {
 						logger.Errorf("Unmarshal error: %v", err)
 					}
-					switch message.Type {
-					case entity.TypeDisconnect:
-						payload := message.Payload.(*entity.DisconnectPayload)
+					switch message.Payload.(type) {
+					case *grpc_pb.EventMessage_DisconnectPayload:
+						payload := message.GetDisconnectPayload()
 						rtspClientService.InternalDisconnectRTSPClient(payload.ClientID, payload.ConnectClientAddress)
 					}
 				}(msg)

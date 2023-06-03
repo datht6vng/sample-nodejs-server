@@ -1,4 +1,4 @@
-FROM rabbitmq:3.8-management-alpine
+FROM rabbitmq:management-alpine
 
 RUN rabbitmq-plugins enable rabbitmq_management
 RUN rabbitmq-plugins enable rabbitmq_mqtt

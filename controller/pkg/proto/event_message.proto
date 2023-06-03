@@ -1,0 +1,13 @@
+syntax = "proto3";
+option go_package = "github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc";
+
+message DisconnectPayload {
+    string clientID = 1;
+    string connectClientAddress = 2;
+}
+
+message EventMessage {
+    oneof payload {
+        DisconnectPayload disconnectPayload = 1;
+    }
+}
