@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/util"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/drive/v3"
 	"google.golang.org/api/option"
@@ -38,18 +39,39 @@ func NewGoogleUploader(serviceAccountFile string) (*GoogleUploader, error) {
 }
 
 func (g *GoogleUploader) UploadFile(filePath, destination string) (string, error) {
-	videoFile, err := os.Open(filePath)
+	// Make a copy of the file
+	originalFile, err := os.Open(filePath)
+	if err != nil {
+		originalFile.Close()
+		return "", err
+	}
+
+	copyFilePath := util.FileNameWithoutExt(filePath) + "_upload" + filepath.Ext(filePath)
+	copyFile, err := os.Create(copyFilePath)
 	if err != nil {
 		return "", err
 	}
-	defer videoFile.Close()
+
+	copyFile.ReadFrom(originalFile)
+	originalFile.Close()
+	copyFile.Sync()
+	copyFile.Close()
+
+	copyFile, err = os.Open(filePath)
+	defer func() {
+		copyFile.Close()
+		os.RemoveAll(copyFilePath)
+	}()
+	if err != nil {
+		return "", err
+	}
 
 	videoMetadata := &drive.File{
-		Name:    filepath.Base(filePath), // Tên tệp video trên Google Drive
+		Name:    filepath.Base(copyFilePath), // Tên tệp video trên Google Drive
 		Parents: []string{destination},
 	}
 
-	uploadedFile, err := g.service.Files.Create(videoMetadata).Media(videoFile).Do()
+	uploadedFile, err := g.service.Files.Create(videoMetadata).Media(copyFile).Do()
 	if err != nil {
 		return "", err
 	}

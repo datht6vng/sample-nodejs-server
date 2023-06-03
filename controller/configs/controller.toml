@@ -36,5 +36,5 @@ credentials="/configs/google-service-account.json"
 destination="1ObING3lxYLZRPyi5u7yyKDPUA6rJqq3E"
 
 [recorder]
-max_record_files = "15"
+max_record_files = "20"
 record_file_duration = "10" # In seconds
