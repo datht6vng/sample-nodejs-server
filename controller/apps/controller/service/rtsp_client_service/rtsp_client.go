@@ -275,7 +275,8 @@ func (c *Client) Connect() error {
 		lastBitrateChange := time.Now()
 		bwe.OnTargetBitrateChange(func(bitrate int) {
 			if p, ok := c.pipeline.Load().(gst.Pipeline); ok {
-				if config.Config.NetworkConfig.EnableCongestionControl && time.Until(lastBitrateChange) > threshold {
+				if config.Config.NetworkConfig.EnableCongestionControl && time.Now().Sub(lastBitrateChange) > threshold {
+					lastBitrateChange = time.Now()
 					p.ChangeEncoderBitrate(int(bitrate / 2000))
 				}
 			}

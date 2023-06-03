@@ -153,7 +153,7 @@ func ConfigureGoogleCongestionControl(mediaEngine *webrtc.MediaEngine, intercept
 	}
 	gccInterceptor, err := cc.NewInterceptor(func() (cc.BandwidthEstimator, error) {
 		return gcc.NewSendSideBWE(
-			gcc.SendSideBWEInitialBitrate((minBitrate+maxBitrate)/2),
+			gcc.SendSideBWEInitialBitrate(maxBitrate),
 			gcc.SendSideBWEMaxBitrate(maxBitrate),
 			gcc.SendSideBWEMinBitrate(minBitrate),
 			gcc.SendSideBWEPacer(gcc.NewNoOpPacer()), // Send engine
