@@ -105,6 +105,7 @@ type SFU struct {
 func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 	se := webrtc.SettingEngine{}
 	se.DisableMediaEngineCopy(true)
+	networkType := []webrtc.NetworkType{}
 
 	if c.WebRTC.ICESinglePort != 0 {
 		Logger.Info("UDP listening on ", "single-port", c.WebRTC.ICESinglePort)
@@ -117,6 +118,10 @@ func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 			panic(err)
 		}
 		se.SetICEUDPMux(udpMux)
+		networkType = append(networkType, []webrtc.NetworkType{
+			webrtc.NetworkTypeUDP4,
+			webrtc.NetworkTypeUDP6,
+		}...)
 	} else {
 		var icePortStart, icePortEnd uint16
 
@@ -152,8 +157,15 @@ func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 				WriteBufferSize: 4 * 1024 * 1024,
 			})
 			se.SetICETCPMux(tcpMux)
+			networkType = append(networkType, []webrtc.NetworkType{
+				webrtc.NetworkTypeTCP4,
+				webrtc.NetworkTypeTCP6,
+			}...)
 		}
 	}
+
+	se.SetNetworkTypes(networkType)
+	se.DisableMediaEngineCopy(true)
 
 	var iceServers []webrtc.ICEServer
 	if c.WebRTC.Candidates.IceLite {
