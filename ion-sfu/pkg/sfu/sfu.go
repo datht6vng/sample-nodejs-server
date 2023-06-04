@@ -52,13 +52,15 @@ type WebRTCTimeoutsConfig struct {
 
 // WebRTCConfig defines parameters for ice
 type WebRTCConfig struct {
-	ICESinglePort int                  `mapstructure:"singleport"`
-	ICEPortRange  []uint16             `mapstructure:"portrange"`
-	ICEServers    []ICEServerConfig    `mapstructure:"iceserver"`
-	Candidates    Candidates           `mapstructure:"candidates"`
-	SDPSemantics  string               `mapstructure:"sdpsemantics"`
-	MDNS          bool                 `mapstructure:"mdns"`
-	Timeouts      WebRTCTimeoutsConfig `mapstructure:"timeouts"`
+	ICESinglePort    int                  `mapstructure:"singleport"`
+	ICEPortRange     []uint16             `mapstructure:"portrange"`
+	TCPICESinglePort int                  `mapstructure:"tcp_singleport"`
+	TCPICEPortRange  []uint16             `mapstructure:"tcp_portrange"`
+	ICEServers       []ICEServerConfig    `mapstructure:"iceserver"`
+	Candidates       Candidates           `mapstructure:"candidates"`
+	SDPSemantics     string               `mapstructure:"sdpsemantics"`
+	MDNS             bool                 `mapstructure:"mdns"`
+	Timeouts         WebRTCTimeoutsConfig `mapstructure:"timeouts"`
 }
 
 // Config for base SFU
@@ -103,9 +105,10 @@ type SFU struct {
 func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 	se := webrtc.SettingEngine{}
 	se.DisableMediaEngineCopy(true)
+	networkType := []webrtc.NetworkType{}
 
 	if c.WebRTC.ICESinglePort != 0 {
-		Logger.Info("Listen on ", "single-port", c.WebRTC.ICESinglePort)
+		Logger.Info("UDP listening on ", "single-port", c.WebRTC.ICESinglePort)
 		opts := []ice.UDPMuxFromPortOption{
 			ice.UDPMuxFromPortWithReadBufferSize(16777216),
 			ice.UDPMuxFromPortWithWriteBufferSize(16777216),
@@ -115,6 +118,10 @@ func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 			panic(err)
 		}
 		se.SetICEUDPMux(udpMux)
+		networkType = append(networkType, []webrtc.NetworkType{
+			webrtc.NetworkTypeUDP4,
+			webrtc.NetworkTypeUDP6,
+		}...)
 	} else {
 		var icePortStart, icePortEnd uint16
 
@@ -126,11 +133,39 @@ func NewWebRTCTransportConfig(c Config) WebRTCTransportConfig {
 			icePortEnd = c.WebRTC.ICEPortRange[1]
 		}
 		if icePortStart != 0 || icePortEnd != 0 {
+			Logger.Info("UDP listening on range", "port start", icePortStart, "port end", icePortEnd)
 			if err := se.SetEphemeralUDPPortRange(icePortStart, icePortEnd); err != nil {
 				panic(err)
 			}
 		}
 	}
+
+	if c.WebRTC.TCPICESinglePort != 0 {
+		tcpAddr := &net.TCPAddr{
+			IP:   net.ParseIP("0.0.0.0"),
+			Port: c.WebRTC.TCPICESinglePort,
+			Zone: "",
+		}
+		tcpListener, err := net.ListenTCP("tcp", tcpAddr)
+		if err != nil {
+			Logger.Error(err, "Start TCP listener")
+		} else {
+			Logger.Info("TCP listen on ", "single-port", c.WebRTC.TCPICESinglePort)
+			tcpMux := ice.NewTCPMuxDefault(ice.TCPMuxParams{
+				Listener:        tcpListener,
+				ReadBufferSize:  50,
+				WriteBufferSize: 4 * 1024 * 1024,
+			})
+			se.SetICETCPMux(tcpMux)
+			networkType = append(networkType, []webrtc.NetworkType{
+				webrtc.NetworkTypeTCP4,
+				webrtc.NetworkTypeTCP6,
+			}...)
+		}
+	}
+
+	se.SetNetworkTypes(networkType)
+	se.DisableMediaEngineCopy(true)
 
 	var iceServers []webrtc.ICEServer
 	if c.WebRTC.Candidates.IceLite {
