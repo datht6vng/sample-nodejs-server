@@ -39,20 +39,23 @@ class StreamConnectionService {
         return state;
     }
 
-    async handleCreateStream(camera, state=newCamera()) {
+    async handleCreateStream(camera, state=newCamera(), needCreateInController=true) {
         // this.setState(camera, state);
         state.setId(camera.getId());
         if (this.satisfyRtspStream(camera) && this.inUsedStatus(camera)) {
 
             const rtspSenderHandler = newSfuRtspStreamHandler();
             const cameraStreamInfoHandler = newCameraStreamInfoHandler();
-            try {
-                state.setConnectToController(true);
-                await rtspSenderHandler.connect(camera);
+            if (needCreateInController) {
+                try {
+                    state.setConnectToController(true);
+                    await rtspSenderHandler.connect(camera);
+                }
+                catch(err) {
+                    this.errorHandler.execute(err);
+                }
             }
-            catch(err) {
-                this.errorHandler.execute(err);
-            } 
+ 
             
 
             // camera.setSfuRtspStreamUrl(sfuRtspUrl);

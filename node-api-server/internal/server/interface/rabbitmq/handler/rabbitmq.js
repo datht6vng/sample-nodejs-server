@@ -16,9 +16,9 @@ class RabbitMQ {
     }
 
     async initQueue(exchangeName, queueName, bindingKeys, queueParams) {
-        await this.channel.assertQueue(queueName, queueParams);
+        const q = await this.channel.assertQueue(queueName, queueParams);
         for (const key of bindingKeys) {
-            await this.channel.bindQueue(queueName, exchangeName, key);
+            await this.channel.bindQueue(q.queue, exchangeName, key);
         }
 
     }

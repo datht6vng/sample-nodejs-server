@@ -1,6 +1,7 @@
 const { newIotEventNewCallback } = require("./iot_event_new_callback");
 const { newCameraEventNewCallback } = require("./camera_event_new_callback");
 const { newEventVerifiedCallback } = require("./event_verified_callback");
+const { newEventNotificationCallback } = require("./event_notification_callback");
 
 class CallbackContext {
 
@@ -12,7 +13,10 @@ class CallbackContext {
             return newEventVerifiedCallback();
         }
         if (exchangeName == "stream_processsing" && queueName == "camera_event_new") {
-            return newCameraEventNewCallback()
+            return newCameraEventNewCallback();
+        }
+        if (exchangeName == "event_notification") {
+            return newEventNotificationCallback();
         }
         return null;
     }
