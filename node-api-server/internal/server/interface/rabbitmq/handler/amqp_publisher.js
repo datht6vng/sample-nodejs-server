@@ -11,7 +11,7 @@ class AMQPPublisher extends RabbitMQ {
         await this.initConnection();
         await this.initChannel();
         await this.initExchange(this.exchange.name, this.exchange.typ, this.exchange.params);
-        await this.initQueue(this.exchange.name, this.queue.name, this.queue.bindingKeys, this.queue.params);
+        // await this.initQueue(this.exchange.name, this.queue.name, this.queue.bindingKeys, this.queue.params);
 
         this.channel.publish(this.exchange.name, routingKey, body);
     }
