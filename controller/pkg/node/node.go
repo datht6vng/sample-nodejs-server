@@ -9,12 +9,12 @@ import (
 )
 
 type Node struct {
-	redis   *redis.Client
+	redis   redis.UniversalClient
 	nodeID  string
 	service string
 }
 
-func NewNode(redis *redis.Client, service, nodeID string) *Node {
+func NewNode(redis redis.UniversalClient, service, nodeID string) *Node {
 	return &Node{
 		redis:   redis,
 		service: service,

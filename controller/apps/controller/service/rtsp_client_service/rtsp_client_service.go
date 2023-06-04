@@ -34,11 +34,11 @@ const domainCounterKey = "redis_rtsp_relay_domain_counter"
 type RTSPClientService struct {
 	sync.RWMutex
 	clients  map[string]*Client
-	r        *redis.Client
+	r        redis.UniversalClient
 	uploader *uploader.GoogleUploader
 }
 
-func NewRTSPClientService(r *redis.Client, uploader *uploader.GoogleUploader) (*RTSPClientService, error) {
+func NewRTSPClientService(r redis.UniversalClient, uploader *uploader.GoogleUploader) (*RTSPClientService, error) {
 	return &RTSPClientService{
 		clients:  map[string]*Client{},
 		r:        r,

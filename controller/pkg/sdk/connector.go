@@ -49,7 +49,7 @@ type Connector struct {
 }
 
 // NewConnector create a ion connector
-func NewConnector(redis *redis.Client, addr string, cfg ...ConnectorConfig) (*Connector, error) {
+func NewConnector(redis redis.UniversalClient, addr string, cfg ...ConnectorConfig) (*Connector, error) {
 	c := &Connector{
 		services: make(map[string]Service),
 		Metadata: make(metadata.MD),

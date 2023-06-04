@@ -2,7 +2,7 @@ const socketIO = require("socket.io");
 const { httpServer } = require("../http/http_server");
 
 const defaultOptions = { 
-    cors: { origin: "*" } 
+    cors: { origin: "*" }
 };
 
 class SocketIO {

@@ -6,7 +6,7 @@ require (
 	github.com/aler9/gortsplib/v2 v2.2.2
 	github.com/bluenviron/gortsplib/v3 v3.7.0
 	github.com/cenkalti/backoff/v4 v4.2.1
-	github.com/dathuynh1108/redisrpc v0.1.2
+	github.com/dathuynh1108/redisrpc v0.1.3
 	github.com/evalphobia/logrus_sentry v0.8.2
 	github.com/gofiber/fiber/v2 v2.46.0
 	github.com/gofiber/websocket/v2 v2.2.1

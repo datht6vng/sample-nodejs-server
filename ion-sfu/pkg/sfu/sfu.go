@@ -1,7 +1,6 @@
 package sfu
 
 import (
-	"context"
 	"fmt"
 	"math/rand"
 	"net"
@@ -15,6 +14,7 @@ import (
 	"github.com/pion/ice/v2"
 	"github.com/pion/ion-sfu/pkg/buffer"
 	"github.com/pion/ion-sfu/pkg/node"
+	"github.com/pion/ion-sfu/pkg/rediswrapper"
 	"github.com/pion/ion-sfu/pkg/stats"
 	"github.com/pion/turn/v2"
 	"github.com/pion/webrtc/v3"
@@ -96,7 +96,7 @@ type SFU struct {
 	sessions     map[string]Session
 	datachannels []*Datachannel
 	withStats    bool
-	Redis        *redis.Client
+	Redis        redis.UniversalClient
 	NodeID       string
 	Node         *node.Node
 }
@@ -266,19 +266,19 @@ func NewSFU(c Config) *SFU {
 		}
 		sfu.turn = ts
 	}
-	r := redis.NewClient(
-		&redis.Options{
-			Addr:         c.Redis.Addrs[0], // use default Addr
-			Password:     "",               // no password set
-			DB:           0,                // use default DB
-			DialTimeout:  3 * time.Second,
-			ReadTimeout:  5 * time.Second,
-			WriteTimeout: 5 * time.Second,
-		})
-	_, err := r.Ping(context.Background()).Result()
+	r, err := rediswrapper.NewUniversalClient(
+		&rediswrapper.Config{
+			Address:   c.Redis.Addrs,
+			Password:  c.Redis.Pwd,
+			Database:  c.Redis.DB,
+			IsCluster: c.Redis.IsCluster,
+		},
+	)
 	if err != nil {
-		panic(fmt.Errorf("Cannot connect to redis: %v", err))
+		panic(fmt.Errorf("Cannot create redis client: %v", err))
 	}
+
+	Logger.Info("Redis client conneced", "addrs", c.Redis.Addrs)
 	hostname := os.Getenv("HOSTNAME")
 	if hostname == "" {
 		hostname = uuid.NewString()

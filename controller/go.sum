@@ -165,6 +165,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.0/go.mod h1:maD7wRr/U5Z6m/iR4s+kqSMx2CaBsr
 github.com/creack/pty v1.1.7/go.mod h1:lj5s0c3V2DBrqTV7llrYr5NG6My20zk30Fl46Y7DoTY=
 github.com/dathuynh1108/redisrpc v0.1.2 h1:ZjRFbHD6x0ivWt8tExk5p7sDbyf6RP03lm5Zm0bnVOI=
 github.com/dathuynh1108/redisrpc v0.1.2/go.mod h1:cDjoaasKI9vN4Px2R0N9Bbr6dqt96xoJaMBY55Os1co=
+github.com/dathuynh1108/redisrpc v0.1.3 h1:xf1M0i8iCTTSziJzyaEGRGb92r+hvm6oEw9PQXwOhq4=
+github.com/dathuynh1108/redisrpc v0.1.3/go.mod h1:cDjoaasKI9vN4Px2R0N9Bbr6dqt96xoJaMBY55Os1co=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

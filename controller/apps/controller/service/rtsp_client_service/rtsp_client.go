@@ -55,10 +55,10 @@ type Client struct {
 	retryCount atomic.Int32
 	retryTimer *time.Timer
 	metadata   *entity.Metadata
-	r          *redis.Client
+	r          redis.UniversalClient
 }
 
-func NewClient(r *redis.Client, clientID, clientAddress, rtspRelayAddress, username, password, sessionName string, enableAudio bool, enableRTSPRelay bool, enableRecord bool) *Client {
+func NewClient(r redis.UniversalClient, clientID, clientAddress, rtspRelayAddress, username, password, sessionName string, enableAudio bool, enableRTSPRelay bool, enableRecord bool) *Client {
 	return &Client{
 		r:                r,
 		clientID:         clientID,

@@ -2,19 +2,18 @@ package node
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/redis/go-redis/v9"
 )
 
 type Node struct {
-	redis   *redis.Client
+	redis   redis.UniversalClient
 	nodeID  string
 	service string
 }
 
-func NewNode(redis *redis.Client, service, nodeID string) *Node {
+func NewNode(redis redis.UniversalClient, service, nodeID string) *Node {
 	return &Node{
 		redis:   redis,
 		service: service,
@@ -47,23 +46,34 @@ func (n *Node) StartCleaner(duration time.Duration) {
 		for {
 			select {
 			case <-ticker.C:
-				connectionSets := n.redis.SMembers(ctx, connectionSetKey).Val()
+				connectionSet := n.redis.SMembers(ctx, connectionSetKey).Val()
 				pipeline := n.redis.Pipeline()
-				for _, connection := range connectionSets {
+				for _, connection := range connectionSet {
 					if n.redis.TTL(ctx, connection).Val() > 0 {
 						continue
 					}
-					logger.Info(fmt.Sprintf("Node: %v is dead", connection))
 					// Check if this node is a SFU node
 					if IsServiceNode(ServiceSFU, connection) {
 						// Clean dangling room address
 						roomOfServiceKey := BuildRoomSetKeyOfService(connection)
 						roomKeys := n.redis.SMembers(ctx, roomOfServiceKey).Val()
 						for _, roomKey := range roomKeys {
-							logger.Info(fmt.Sprintf("Deleta dangling room: %v", roomKey))
 							pipeline.Del(ctx, roomKey)
 						}
 						pipeline.Del(ctx, roomOfServiceKey)
+					}
+					// Check if this node is a Controller node
+					if IsServiceNode(ServiceController, connection) {
+						// Clean dangling rtsp connection address
+						rtspConnectionSet := BuildRTSPConnectionSetKey(connection)
+						rtspConnectionKeys := n.redis.SMembers(ctx, rtspConnectionSet).Val()
+						for _, rtspConnection := range rtspConnectionKeys {
+							rtspConnectionNode := n.redis.Get(ctx, rtspConnection).Val()
+							if rtspConnectionNode == GetNodeID(connection) {
+								pipeline.Del(ctx, rtspConnection)
+							}
+						}
+						pipeline.Del(ctx, rtspConnectionSet)
 					}
 					// Clean dead node
 					pipeline.SRem(ctx, connectionSetKey, connection)

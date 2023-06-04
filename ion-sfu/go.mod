@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/bep/debounce v1.2.1
-	github.com/dathuynh1108/redisrpc v0.1.2
+	github.com/dathuynh1108/redisrpc v0.1.3
 	github.com/gammazero/deque v0.2.1
 	github.com/gammazero/workerpool v1.1.3
 	github.com/go-logr/logr v1.2.4

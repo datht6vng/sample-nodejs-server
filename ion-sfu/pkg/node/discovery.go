@@ -7,17 +7,20 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/pion/ion-sfu/pkg/logger"
 	"github.com/redis/go-redis/v9"
 )
 
-var logger = log.New()
-
 const keepAliveServicePrefix = "redis_service_keep_alive"
 const keepAliveRoomPrefix = "redis_service_room_alive"
+
 const connectionSetKey = "redis_service_connection_set"
+
 const roomPrefix = "redis_sfu_room"
 const roomSetPrefix = "redis_sfu_room_set"
+
+const rtspConnectionPrefix = "redis_rtsp_connection"
+const rtspConnectionSetPrefix = "redis_rtsp_connection_set"
+
 const seperator = ":"
 
 func BuildKeepAliveServiceKey(service, nodeID string) string {
@@ -48,7 +51,7 @@ func BuildRoomKey(roomName string) string {
 	return roomPrefix + seperator + roomName
 }
 
-func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error) {
+func SetOrGetSFUAddressForRoom(r redis.UniversalClient, roomName string) (string, error) {
 	ctx := context.Background()
 	if r == nil {
 		return "", errors.New("No Redis connection")
@@ -56,9 +59,8 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 	roomKey := BuildRoomKey(roomName)
 	sfuNodeID := r.Get(ctx, roomKey).Val()
 	if sfuNodeID == "" {
-		currentSFUIDs := r.SMembers(ctx, connectionSetKey).Val()
+		currentSFUIDs := GetNodesOfService(r, ServiceSFU)
 		if len(currentSFUIDs) == 0 {
-			logger.Error(errors.New("No SFU node found"), "No SFU node found")
 			return "", errors.New("No SFU node found")
 		}
 
@@ -74,7 +76,7 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 
 		sfuNodeID = GetNodeID(connectionID)
 
-		ok := r.SetNX(ctx, roomKey, sfuNodeID, 24*time.Hour).Val()
+		ok := r.SetNX(ctx, roomKey, sfuNodeID, 15*time.Minute).Val()
 
 		if !ok {
 			sfuNodeID = r.Get(ctx, roomKey).Val()
@@ -85,7 +87,7 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 	return sfuNodeID, nil
 }
 
-func RemoveRoom(r *redis.Client, nodeID, roomName string) error {
+func RemoveRoom(r redis.UniversalClient, nodeID, roomName string) error {
 	ctx := context.Background()
 	if r == nil {
 		return errors.New("No Redis connection")
@@ -96,4 +98,45 @@ func RemoveRoom(r *redis.Client, nodeID, roomName string) error {
 	pipeline.SRem(ctx, BuildRoomSetKeyOfService(BuildKeepAliveServiceKey(ServiceSFU, nodeID)), roomKey)
 	pipeline.Exec(ctx)
 	return nil
+}
+
+func GetNodesOfService(r redis.UniversalClient, service string) []string {
+	connectionSet := r.SMembers(context.Background(), connectionSetKey).Val()
+	currentNodeIDs := []string{}
+	for _, connectionID := range connectionSet {
+		if IsServiceNode(service, connectionID) {
+			// Clean dangling room address
+			currentNodeIDs = append(currentNodeIDs, connectionID)
+		}
+	}
+	return currentNodeIDs
+}
+
+func BuildRTSPConnectionSetKey(postFix string) string {
+	return rtspConnectionSetPrefix + seperator + postFix
+}
+
+func BuildRTSPConnectionKey(connectionURL string) string {
+	return rtspConnectionPrefix + seperator + connectionURL
+}
+
+func SetRTSPConnection(r redis.UniversalClient, connectionURL string, nodeID string) bool {
+	rtspConnectionKey := BuildRTSPConnectionKey(connectionURL)
+	ok := r.SetNX(context.Background(), rtspConnectionKey, nodeID, 0).Val()
+	if ok {
+		go func() {
+			connectionID := BuildKeepAliveServiceKey(ServiceController, nodeID)
+			rtspConenctionSetKey := BuildRTSPConnectionSetKey(connectionID)
+			r.SAdd(context.Background(), rtspConenctionSetKey, rtspConnectionKey)
+		}()
+	}
+	return ok
+}
+
+func DeleteRTSPConnection(r redis.UniversalClient, connectionURL string) error {
+	return r.Del(context.Background(), BuildRTSPConnectionKey(connectionURL)).Err()
+}
+
+func GetRTSPConnectionNodeID(r redis.UniversalClient, connectionURL string) string {
+	return r.Get(context.Background(), BuildRTSPConnectionKey(connectionURL)).Val()
 }

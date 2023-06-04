@@ -13,14 +13,14 @@ type RoomService interface {
 	MakeRedisRPCClientStream(svcid string, nid string) rtc.RTCClient
 }
 
-func NewRoomService(r *redis.Client) (RoomService, error) {
+func NewRoomService(r redis.UniversalClient) (RoomService, error) {
 	return &service{
 		r: r,
 	}, nil
 }
 
 type service struct {
-	r *redis.Client
+	r redis.UniversalClient
 }
 
 func (s *service) SetOrGetSFUNode(roomName string) (string, error) {

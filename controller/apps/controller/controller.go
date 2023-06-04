@@ -16,6 +16,7 @@ import (
 	grpc_pb "github.com/dathuynh1108/hcmut-thesis/controller/pkg/grpc"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/logger"
 	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/node"
+	"github.com/dathuynh1108/hcmut-thesis/controller/pkg/rediswrapper"
 	"github.com/dathuynh1108/redisrpc"
 	"github.com/juju/errors"
 	"github.com/redis/go-redis/v9"
@@ -32,7 +33,7 @@ type Handler struct {
 	httpControllerServer http_interface.HTTPControllerServer
 	// RTSP interface
 
-	redis *redis.Client
+	redis redis.UniversalClient
 
 	// Repository
 	Node *node.Node
@@ -42,22 +43,19 @@ func NewHandler(nodeID string) (*Handler, error) {
 	handler := Handler{}
 	handler.nodeID = nodeID
 
-	ctx := context.Background()
-	r := redis.NewClient(
-		&redis.Options{
-			Addr:         config.Config.RedisConfig.Address[0], // use default Addr
-			Password:     config.Config.RedisConfig.Password,   // no password set
-			DB:           config.Config.RedisConfig.Database,   // use default DB
-			DialTimeout:  3 * time.Second,
-			ReadTimeout:  5 * time.Second,
-			WriteTimeout: 5 * time.Second,
-		})
-	_, err := r.Ping(ctx).Result()
+	r, err := rediswrapper.NewUniversalClient(
+		&rediswrapper.Config{
+			Address:   config.Config.RedisConfig.Address,
+			Password:  config.Config.RedisConfig.Password,
+			Database:  config.Config.RedisConfig.Database,
+			IsCluster: config.Config.RedisConfig.IsCluster,
+		},
+	)
 	if err != nil {
-		return nil, fmt.Errorf("Cannot connect to redis: %v", err)
+		return nil, fmt.Errorf("Cannot create redis client: %v", err)
 	}
 
-	logger.Infof("Redis conneced on: %v", config.Config.RedisConfig.Address[0])
+	logger.Infof("Redis client conneced on: %v", config.Config.RedisConfig.Address)
 
 	handler.redis = r
 	handler.Node = node.NewNode(r, node.ServiceController, handler.nodeID)

@@ -51,7 +51,7 @@ func BuildRoomKey(roomName string) string {
 	return roomPrefix + seperator + roomName
 }
 
-func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error) {
+func SetOrGetSFUAddressForRoom(r redis.UniversalClient, roomName string) (string, error) {
 	ctx := context.Background()
 	if r == nil {
 		return "", errors.New("No Redis connection")
@@ -87,7 +87,7 @@ func SetOrGetSFUAddressForRoom(r *redis.Client, roomName string) (string, error)
 	return sfuNodeID, nil
 }
 
-func RemoveRoom(r *redis.Client, nodeID, roomName string) error {
+func RemoveRoom(r redis.UniversalClient, nodeID, roomName string) error {
 	ctx := context.Background()
 	if r == nil {
 		return errors.New("No Redis connection")
@@ -100,7 +100,7 @@ func RemoveRoom(r *redis.Client, nodeID, roomName string) error {
 	return nil
 }
 
-func GetNodesOfService(r *redis.Client, service string) []string {
+func GetNodesOfService(r redis.UniversalClient, service string) []string {
 	connectionSet := r.SMembers(context.Background(), connectionSetKey).Val()
 	currentNodeIDs := []string{}
 	for _, connectionID := range connectionSet {
@@ -120,7 +120,7 @@ func BuildRTSPConnectionKey(connectionURL string) string {
 	return rtspConnectionPrefix + seperator + connectionURL
 }
 
-func SetRTSPConnection(r *redis.Client, connectionURL string, nodeID string) bool {
+func SetRTSPConnection(r redis.UniversalClient, connectionURL string, nodeID string) bool {
 	rtspConnectionKey := BuildRTSPConnectionKey(connectionURL)
 	ok := r.SetNX(context.Background(), rtspConnectionKey, nodeID, 0).Val()
 	if ok {
@@ -133,10 +133,10 @@ func SetRTSPConnection(r *redis.Client, connectionURL string, nodeID string) boo
 	return ok
 }
 
-func DeleteRTSPConnection(r *redis.Client, connectionURL string) error {
+func DeleteRTSPConnection(r redis.UniversalClient, connectionURL string) error {
 	return r.Del(context.Background(), BuildRTSPConnectionKey(connectionURL)).Err()
 }
 
-func GetRTSPConnectionNodeID(r *redis.Client, connectionURL string) string {
+func GetRTSPConnectionNodeID(r redis.UniversalClient, connectionURL string) string {
 	return r.Get(context.Background(), BuildRTSPConnectionKey(connectionURL)).Val()
 }
