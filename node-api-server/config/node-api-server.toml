@@ -81,6 +81,19 @@ binding_keys = ["event.new.camera.*"] # not have event.new.iot because iot event
 routing_key_prefix = {event_new_camera = "event.new.camera"}
 
 
+[rabbitmq.exchanges.event_notification]
+name = "event_notification"
+type = "topic"
+
+[rabbitmq.exchanges.event_notification.queues]
+[rabbitmq.exchanges.event_notification.queues.new]
+name = ""
+binding_keys = ["event.new.*"]
+
+[rabbitmq.exchanges.event_notification.queues.verified]
+name = ""
+binding_keys = ["event.verified.*"]
+
 
 
 

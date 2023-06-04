@@ -141,9 +141,10 @@ async function updateStreamConnection(updateDoc, updatedDoc) {
         const updatedCamera = fromDatabaseConverter.visit(newCamera(), updatedDoc);
 
         const needDeleteInController = updatedDoc.need_update_connection;
+        const needCreateInController = updatedDoc.need_update_connection;
 
         await streamConnectionService.handleDeleteStream(updatedCamera, state, needDeleteInController);
-        await streamConnectionService.handleCreateStream(updatedCamera, state);
+        await streamConnectionService.handleCreateStream(updatedCamera, state, needCreateInController);
     }
     catch(err) {
         errorHandler.execute(err);

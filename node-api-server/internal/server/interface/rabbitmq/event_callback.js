@@ -1,32 +1,40 @@
-const { socketIO } = require("../../socket_io/socket_io");
+const { newProducer } = require("./producer");
+const { newExchange } = require("./handler/exchange");
+const { newQueue } = require("./handler/queue");
 // const { newReportService } = require("../../service/report_service");
-const { config } = require("../../../../pkg/config/config");
 const { newToProtobufConverter } = require("../../data_converter/to_protobuf_converter");
 const { newErrorHandler } = require("../../error/error_handler");
 
-const socketIOConfig = config.socket_io;
-const EVENT_NEW = socketIOConfig.events.event_new;
-const EVENT_VERIFIED = socketIOConfig.events.event_verified;
-
 class EventCallback {
     constructor() {
-        this.io = socketIO;
         // this.reportService = newReportService();
         this.toProtobufConverter = newToProtobufConverter();
         this.errorHandler = newErrorHandler();
+
+        this.notifyNewEventToClients = this.notifyNewEventToClients.bind(this);
+        this.notifyVerifiedEventToClients = this.notifyVerifiedEventToClients.bind(this);
     }
 
     // async getAllEventRelationDetailsById(eventId) {
     //     const detail = await this.reportService.getAllEventRelationDetailsById(eventId);
     //     return detail;
     // }
+    getProducer() {
+        const argExchange = newExchange("event_notification");
+        const argQueue = newQueue("");
+        const producer = newProducer(argExchange, argQueue);
+        return producer;
+    }
 
     notifyNewEventToClients(eventMessage) {
-        this.io.emitToAllClients(EVENT_NEW, JSON.stringify(eventMessage));
+        const producer = this.getProducer();
+        producer.produceMessage("event.new.random", Buffer.from(JSON.stringify(eventMessage)));
     }
 
     notifyVerifiedEventToClients(eventMessage) {
-        this.io.emitToAllClients(EVENT_VERIFIED, JSON.stringify(eventMessage));
+        const producer = this.getProducer();
+        producer.produceMessage("event.verified.random", Buffer.from(JSON.stringify(eventMessage)));
+
     }
 
 }

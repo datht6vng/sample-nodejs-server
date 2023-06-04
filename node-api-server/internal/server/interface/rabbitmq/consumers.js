@@ -3,6 +3,7 @@ const { newAMQPConsumer } = require("./handler/amqp_consumer");
 const { newCallbackContext } = require("./callback_context");
 const { newExchange } = require("./handler/exchange");
 const { newQueue } = require("./handler/queue");
+const { newQueueParams } = require("./handler/queue_params");
 
 const brokerConfig = config.rabbitmq;
 const defaultExchanges = brokerConfig.exchanges;
@@ -19,8 +20,14 @@ class Consumers {
             Object.values(exchange.queues).forEach(queue => {
                 const callbackObj = callbackContext.getEventCallback(exchange.name, queue.name);
                 if (callbackObj) {
+                    let queueParams = newQueueParams();
+                    if (exchange.name == "event_notification") {
+                        queueParams.setExclusive(true);
+                        queueParams.setDurable(false);
+                        queueParams.setAutoDelete(true);
+                    }
                     const argExchange = newExchange(exchange.name);
-                    const argQueue = newQueue(queue.name, queue.binding_keys);
+                    const argQueue = newQueue(queue.name, queue.binding_keys, queueParams);
                     const consumer = newAMQPConsumer(argExchange, argQueue, callbackObj.execute);
                     this.consumers.push(consumer);
                     consumer.start();
