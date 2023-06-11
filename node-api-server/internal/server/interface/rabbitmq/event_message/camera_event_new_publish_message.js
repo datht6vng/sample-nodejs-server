@@ -1,6 +1,6 @@
 
 class CameraEventNewPublishMessage {
-    constructor(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords=null) {
+    constructor(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords=null, lineCrossingVector=null) {
         this.eventId = eventId;
         this.eventKey = eventKey;
         this.eventTime = eventTime;
@@ -11,6 +11,7 @@ class CameraEventNewPublishMessage {
         this.detectionImageUrl = detectionImageUrl;
         this.cameraEventZoneCoords = cameraEventZoneCoords;
         this.lineCoords = lineCoords;
+        this.lineCrossingVector = lineCrossingVector;
     }
 
     toJson() {
@@ -26,12 +27,13 @@ class CameraEventNewPublishMessage {
             camera_event_zone_coords: this.cameraEventZoneCoords
         }
         if (this.lineCoords) message.line_coords = this.lineCoords;
+        if (this.lineCrossingVector) message.line_crossing_vector = this.lineCrossingVector;
         return JSON.stringify(message);
     }
 }
 
-function newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords=null) {
-    return new CameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords);
+function newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords=null, lineCrossingVector=null) {
+    return new CameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords, lineCrossingVector);
 }
 
 module.exports.newCameraEventNewPublishMessage = newCameraEventNewPublishMessage;

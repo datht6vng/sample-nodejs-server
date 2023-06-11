@@ -53,9 +53,12 @@ class EventNewCallback extends EventCallback {
         let lineCoords = [cameraDevice.getOffsetXBegin(), cameraDevice.getOffsetYBegin(), cameraDevice.getOffsetXEnd(), cameraDevice.getOffsetYEnd()];
         lineCoords = isCamera && lineCoords.every(e => e != null && e != undefined) ? lineCoords : null;
 
+        const lineCrossingVector = cameraDevice.getLineCrossingVector();
+
+
         let publishMessage = null;
         if (isCamera) {
-            publishMessage = newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords);
+            publishMessage = newCameraEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, normalImageUrl, detectionImageUrl, cameraEventZoneCoords, lineCoords, lineCrossingVector);
         }
         else {
             publishMessage = newIotEventNewPublishMessage(eventId, eventKey, eventTime, normalVideoUrl, startTime, endTime, iotEventZoneCoords);
