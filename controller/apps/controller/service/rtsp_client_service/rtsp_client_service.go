@@ -100,7 +100,7 @@ func (r *RTSPClientService) GetRTSPClient(clientID string) (*Client, error) {
 }
 
 func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress string) error {
-	node.DeleteRTSPConnection(r.r, connectClientAddress) // Release connection lock
+	node.DeleteRTSPConnection(r.r, clientID) // Release connection lock
 	payload := &grpc.EventMessage{
 		Payload: &grpc.EventMessage_DisconnectPayload{
 			DisconnectPayload: &grpc.DisconnectPayload{
