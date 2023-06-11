@@ -52,7 +52,7 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 	// 	client.Close()
 	// }
 	// Check for previous connection and get lock
-	if !node.SetRTSPConnection(r.r, connectClientAddress, config.Config.NodeID) {
+	if !node.SetRTSPConnection(r.r, clientID, config.Config.NodeID) {
 		return "Client is connected on another controller node", nil
 	}
 
@@ -84,16 +84,16 @@ func (r *RTSPClientService) ConnectRTSPClient(clientID, connectClientAddress, us
 		}
 	})
 
-	r.clients[connectClientAddress] = client
+	r.clients[clientID] = client
 
 	return rtspRelayAddress, nil
 }
 
-func (r *RTSPClientService) GetRTSPClient(connectClientAddress string) (*Client, error) {
+func (r *RTSPClientService) GetRTSPClient(clientID string) (*Client, error) {
 	r.RLock()
 	defer r.RUnlock()
 
-	if client, ok := r.clients[connectClientAddress]; ok {
+	if client, ok := r.clients[clientID]; ok {
 		return client, nil
 	}
 	return nil, jujuErr.Annotate(ErrNotFound, "cannot get rtsp client")
@@ -115,13 +115,13 @@ func (r *RTSPClientService) DisconnectRTSPClient(clientID, connectClientAddress 
 
 func (r *RTSPClientService) InternalDisconnectRTSPClient(clientID, connectClientAddress string) error {
 	logger.Infof("Disconnecting from rtsp client %s", connectClientAddress)
-	if _, err := r.GetRTSPClient(connectClientAddress); err != nil {
+	if _, err := r.GetRTSPClient(clientID); err != nil {
 		return err
 	}
-	r.clients[connectClientAddress].Close()
+	r.clients[clientID].Close()
 
 	r.Lock()
-	delete(r.clients, connectClientAddress)
+	delete(r.clients, clientID)
 	r.Unlock()
 
 	return nil
